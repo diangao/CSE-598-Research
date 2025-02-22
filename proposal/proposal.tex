@@ -1,0 +1,95 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{url}
+\usepackage[margin=1in]{geometry}
+\usepackage{lmodern}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+
+% Debug package for layout visualization
+%\usepackage{showframe}
+
+% Configure section headers
+\titleformat{\section}{\large\bfseries\scshape}{\thesection}{1em}{}
+\titleformat{\subsection}{\bfseries}{\thesubsection}{1em}{}
+
+% Add header/footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{CSE 598 Research Proposal}
+\lhead{\thepage}
+
+\title{CSE 598 Research Proposal: [Research Title]}
+\author{\{anishcha, diangao, linglong\}@umich.edu \\ University of Michigan, Ann Arbor}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% Debugging note: Remember to update abstract last
+\begin{abstract}
+\noindent This proposal outlines [brief description of research focus]. The research aims to [state main objectives]. Using [methodology], we will investigate [key questions]. Expected outcomes include [list outcomes]. [Add significance statement].
+\end{abstract}
+
+\section{Introduction and Motivation}
+% Debug: Start with broad context then narrow down
+Recent developments in [your field] have highlighted [key problem]. Current approaches such as [cite examples] suffer from [limitations]. This research addresses [specific gap] through [your approach].
+
+\section{Research Objectives}
+\begin{itemize}
+    \item Objective 1: [Formulate first objective]
+    \item Objective 2: [Develop solution/method]
+    \item Objective 3: [Validate through experiments]
+\end{itemize}
+
+\section{Methodology}
+\subsection{Data Collection}
+% Debug: Specify data sources and preprocessing steps
+[Describe data sources] will be collected using [tools/methods]. Preprocessing will include [steps].
+
+\subsection{Analytical Approach}
+We propose the following model framework:
+\begin{equation}
+    f(x) = \sum_{i=1}^n \alpha_i \phi(x_i) + \epsilon
+\end{equation}
+where $\phi$ represents [feature mapping] and $\epsilon$ is [error term].
+
+\section{Expected Outcomes}
+% Debug: Connect outcomes to objectives
+\begin{enumerate}
+    \item Outcome 1: [Direct result of Objective 1]
+    \item Outcome 2: [Validation metric for Objective 2]
+    \item Outcome 3: [Theoretical contribution]
+\end{enumerate}
+
+\section{Timeline}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Timeline} & \textbf{Task} \\ 
+\midrule
+Weeks 1-2 & Literature review and problem formulation \\
+Weeks 3-4 & Data collection framework setup \\
+Weeks 5-8 & Model development and validation \\
+Weeks 9-10 & Experimental analysis \\
+Weeks 11-12 & Paper drafting and final submission \\
+\bottomrule
+\end{tabular}
+
+\section*{References}
+% Debug: Use proper citation format
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{references}
+
+% Add to document preamble after hyperref
+\hypersetup{
+    linkcolor=blue,
+    citecolor=red,
+    urlcolor=magenta
+}
+
+\end{document} 
