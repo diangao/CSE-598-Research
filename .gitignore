@@ -1,0 +1,18 @@
+# LaTeX temporary files
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# Generated PDF (optional, 根据团队需求决定是否包含PDF)
+*.pdf
+
+# LaTeX build directory
+build/
+
+# Editor backup files
+*~
+*.bak
+.DS_Store 
