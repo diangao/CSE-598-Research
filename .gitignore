@@ -6,7 +6,7 @@
 *.fdb_latexmk
 *.fls
 
-# Generated PDF (optional, 根据团队需求决定是否包含PDF)
+# Generated PDF (optional)
 *.pdf
 
 # LaTeX build directory
