@@ -39,7 +39,7 @@
 
 % Debugging note: Remember to update abstract last
 \begin{abstract}
-\noindent This research provides a systematic comparison of state representation architectures in multi-agent systems, analyzing GraphDB's relational modeling, VectorDB's continuous embeddings, and Semantic Memory's hybrid approach. Through controlled experiments in Tic-Tac-Toe variants and their latent-space extensions, we establish a framework for evaluating: (1) planning depth through τ-bench metrics, (2) cross-domain adaptability via representation similarity analysis, and (3) memory optimization through parameter-efficient fine-tuning. Our methodology combines theoretical analysis of representation spaces with empirical validation, offering practical guidelines for architecture selection in real-time coordination systems and adaptive AI applications.
+\noindent This research provides a systematic comparison of state representation architectures in multi-agent systems, analyzing GraphDB's relational modeling, VectorDB's continuous embeddings, and Semantic Memory's hybrid approach. Through controlled experiments in Tic-Tac-Toe variants and their latent-space extensions, we establish a framework for evaluating: (1) planning depth through $\tau$-bench metrics, (2) cross-domain adaptability via representation similarity analysis, and (3) memory optimization through parameter-efficient fine-tuning. Our methodology combines theoretical analysis of representation spaces with empirical validation, offering practical guidelines for architecture selection in real-time coordination systems and adaptive AI applications.
 \end{abstract}
 
 \section{Introduction and Motivation}
@@ -85,6 +85,7 @@ Our investigation establishes three principal research objectives that systemati
     This objective focuses on quantifying how different memory architectures influence strategic decision-making in structured environments. Through controlled multi-agent Tic-Tac-Toe experiments, we will:
     
     \begin{itemize}
+        \item Evaluate multi-step planning efficiency through $\tau$-bench metrics
         \item Compare the planning horizon supported by GraphDB's explicit game tree representations versus VectorDB's continuous embedding strategies
         \item Measure coordination efficiency differentials through win rate analysis across grid sizes (3×3 to 4×4)
         \item Evaluate the effectiveness of Semantic Memory's RAG mechanism in reducing redundant moves through move sequence entropy calculations
@@ -138,6 +139,16 @@ The first option is to develop some form of TicTacToe as a continuous task (i.e.
 
 However, if it isn't possible to construct some form of continuous TicTacToe, then a potential backup alternative is the benchmark test HotpotQA. This benchmark tests the ability for a model to perform information recall. This may not be the same as the the previous discrete task but it still allows the authors to extrapolate information about the hypothesis.
 
+\section{Experimental Design}
+\subsection{Benchmarking}
+Inspired by $\tau$-bench \& ReAct:
+\begin{itemize}
+    \item $\tau$-style Task Success Rate: Win percentage across multiple games
+    \item State Retrieval Latency: How fast can the agent retrieve relevant past moves?
+    \item Move Efficiency: Reduction in redundant moves over time
+    \item Generalization Score: Can the agent adapt to 4×4 tic-tac-toe or connect-4?
+\end{itemize}
+
 \section{Expected Outcomes}
 % Debug: Connect outcomes to objectives
 \begin{enumerate}
@@ -173,7 +184,7 @@ arXiv preprint arXiv:2210.03629.
 
 \bibitem{tau2024}
 Yao, S., Yu, D., Zhao, J., Shafran, I., Griffiths, T., Wu, Y., ... \& Yang, Y. (2024).
-\textit{τ-bench: Measuring LLM-Agent Reasoning with Stateful Benchmarks}.
+\textit{$\tau$-bench: Measuring LLM-Agent Reasoning with Stateful Benchmarks}.
 arXiv preprint arXiv:2406.12045.
 
 \bibitem{coala2023}
