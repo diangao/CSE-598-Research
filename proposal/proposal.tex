@@ -115,12 +115,33 @@ Our investigation establishes three principal research objectives that systemati
 These objectives are systematically explored through our experimental framework, incorporating both discrete and continuous decision-making scenarios in Tic-Tac-Toe variants.
 
 \section{Methodology}
-\subsection{Data Collection}
-% Debug: Specify data sources and preprocessing steps
-[Describe data sources] will be collected using [tools/methods]. Preprocessing will include [steps].
+\subsection{Agent Architecture}
+Our implementation follows the CoALA framework, structuring each agent with three core components:
 
-\subsection{Experiments}
-There are two primary experiments this paper is targeting to investigate.
+\begin{itemize}
+    \item \textbf{Memory Module}: Implements three distinct state representation approaches:
+    \begin{itemize}
+        \item \textit{GraphDB}: Stores game states as nodes with legal move edges
+        \item \textit{VectorDB}: Encodes states as $\mathbb{R}^d$ embeddings
+        \item \textit{Semantic Memory}: Combines symbolic rules with LLM abstractions
+    \end{itemize}
+    
+    \item \textbf{Retrieval Module}: Manages state access through:
+    \begin{itemize}
+        \item GraphDB: Pathfinding in game trees
+        \item VectorDB: $k$-NN search in embedding space
+        \item Semantic: RAG-based contextual retrieval
+    \end{itemize}
+    
+    \item \textbf{Reasoning Module}: Processes states via:
+    \begin{itemize}
+        \item GraphDB: Minimax algorithm with depth-$n$ pruning
+        \item VectorDB: Similarity-weighted move selection
+        \item Semantic: LLM chain-of-thought reasoning
+    \end{itemize}
+\end{itemize}
+
+\subsection{Experimental Framework}
 \subsubsection{Discrete Task}
 The goal of the discrete task experiment is to determine what form of memory storage is most ideal for performing well on a discrete task. In other words, what form of representation of the state space is best for the task performance.
 
@@ -163,13 +184,15 @@ Inspired by $\tau$-bench \& ReAct:
 \section{Timeline}
 \begin{tabular}{@{}ll@{}}
 \toprule
-\textbf{Timeline} & \textbf{Task} \\ 
+\textbf{Dates} & \textbf{Milestones} \\ 
 \midrule
-Weeks 1-2 & Literature review and problem formulation \\
-Weeks 3-4 & Data collection framework setup \\
-Weeks 5-8 & Model development and validation \\
-Weeks 9-10 & Experimental analysis \\
-Weeks 11-12 & Paper drafting and final submission \\
+Feb 23 - Mar 1 & Literature review completion \\
+Mar 2 - Mar 8 & Experimental framework setup \\
+Mar 9 - Mar 22 & Discrete task implementation \\
+Mar 23 - Apr 5 & Continuous task development \\
+Apr 6 - Apr 12 & Cross-environment analysis \\
+Apr 13 - Apr 19 & Post-training optimization \\
+Apr 20 - Apr 26 & Final report preparation \\
 \bottomrule
 \end{tabular}
 
