@@ -1,21 +1,28 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage[colorlinks=true]{hyperref}
 \usepackage{url}
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.9in]{geometry}
 \usepackage{lmodern}
 \usepackage{titlesec}
 \usepackage{booktabs}
 \usepackage{microtype}
 \usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{enumitem}
+\setlist{nosep}
+\titlespacing{\section}{0pt}{1.5ex}{0.5ex}
+\setlength{\parskip}{0.5em}
 
 % Debug package for layout visualization
 %\usepackage{showframe}
 
 % Configure section headers
-\titleformat{\section}{\large\bfseries\scshape}{\thesection}{1em}{}
-\titleformat{\subsection}{\bfseries}{\thesubsection}{1em}{}
+\titleformat{\section}{\normalsize\bfseries\scshape}{\thesection}{0.5em}{}
+\titlespacing{\section}{0pt}{2ex}{1ex}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+\titlespacing{\subsection}{0pt}{1.5ex}{0.5ex}
 
 % Add header/footer
 \pagestyle{fancy}
@@ -23,8 +30,8 @@
 \rhead{CSE 598 Research Proposal}
 \lhead{\thepage}
 
-\title{CSE 598 Research Proposal: [Research Title]}
-\author{\{anishcha, diangao, linglong\}@umich.edu \\ University of Michigan, Ann Arbor}
+\title{CSE 598 Research Proposal: State Representation Learning for Long-Term Multi-Agent Interactions}
+\author{\{diangao, anishcha, linglong\}@umich.edu \\ University of Michigan, Ann Arbor}
 \date{\today}
 
 \begin{document}
@@ -32,19 +39,79 @@
 
 % Debugging note: Remember to update abstract last
 \begin{abstract}
-\noindent This proposal outlines [brief description of research focus]. The research aims to [state main objectives]. Using [methodology], we will investigate [key questions]. Expected outcomes include [list outcomes]. [Add significance statement].
+\noindent This research provides a systematic comparison of state representation architectures in multi-agent systems, analyzing GraphDB's relational modeling, VectorDB's continuous embeddings, and Semantic Memory's hybrid approach. Through controlled experiments in Tic-Tac-Toe variants and their latent-space extensions, we establish a framework for evaluating: (1) planning depth through τ-bench metrics, (2) cross-domain adaptability via representation similarity analysis, and (3) memory optimization through parameter-efficient fine-tuning. Our methodology combines theoretical analysis of representation spaces with empirical validation, offering practical guidelines for architecture selection in real-time coordination systems and adaptive AI applications.
 \end{abstract}
 
 \section{Introduction and Motivation}
-% Debug: Start with broad context then narrow down
-Recent developments in [your field] have highlighted [key problem]. Current approaches such as [cite examples] suffer from [limitations]. This research addresses [specific gap] through [your approach].
+The effectiveness of state representation learning constitutes a fundamental challenge in developing robust multi-agent systems, particularly for applications requiring long-term interaction and cross-environment adaptability. While current LLM-based agents demonstrate proficiency in isolated decision-making tasks, three critical gaps persist:
+
+\begin{itemize}
+    \item \textbf{Representation-Environment Mismatch}: Fixed memory architectures struggle to adapt between discrete symbolic reasoning (e.g., game rules) and continuous latent-space decision-making
+    
+    \item \textbf{Multi-Horizon Coordination}: Existing systems lack mechanisms for maintaining coherent state representations across varying interaction timescales in multi-agent scenarios
+    
+    \item \textbf{Post-Training Instability}: Learned representations often degrade when deployed in environments differing from their training regimes
+\end{itemize}
+
+Our work addresses these challenges through a structured investigation of three state representation paradigms in Cognitive Language Agents:
+
+\begin{itemize}
+    \item \textbf{GraphDB}: Explicit relational modeling for strategic game trees
+    \item \textbf{VectorDB}: Continuous embedding spaces for probabilistic reasoning
+    \item \textbf{Semantic Memory}: Hybrid neuro-symbolic representations via LLM abstraction
+\end{itemize}
+
+Using Tic-Tac-Toe variants as our experimental testbed, we establish a controlled environment to analyze:
+
+\begin{itemize}
+    \item Discrete-to-continuous representation transitions through latent space projections
+    \item Multi-agent coordination dynamics under constrained memory budgets
+    \item Post-training optimization via parameter-efficient fine-tuning
+\end{itemize}
+
+This research delivers crucial insights for:
+\begin{itemize}
+    \item \textit{Architecture Designers}: Empirical guidelines for memory system selection based on environment characteristics
+    \item \textit{Agent Practitioners}: Strategies for maintaining representation consistency in real-world deployments
+    \item \textit{Theoreticians}: Quantitative framework for analyzing representation learning dynamics
+\end{itemize}
 
 \section{Research Objectives}
-\begin{itemize}
-    \item Objective 1: [Formulate first objective]
-    \item Objective 2: [Develop solution/method]
-    \item Objective 3: [Validate through experiments]
-\end{itemize}
+Our investigation establishes three principal research objectives that systematically address the core challenges in state representation learning for multi-agent systems:
+
+\begin{enumerate}
+    \item \textbf{Architecture-Specific Reasoning Capacity Analysis (Experiment 1)}
+    
+    This objective focuses on quantifying how different memory architectures influence strategic decision-making in structured environments. Through controlled multi-agent Tic-Tac-Toe experiments, we will:
+    
+    \begin{itemize}
+        \item Compare the planning horizon supported by GraphDB's explicit game tree representations versus VectorDB's continuous embedding strategies
+        \item Measure coordination efficiency differentials through win rate analysis across grid sizes (3×3 to 4×4)
+        \item Evaluate the effectiveness of Semantic Memory's RAG mechanism in reducing redundant moves through move sequence entropy calculations
+    \end{itemize}
+
+    \item \textbf{Cross-Environment Representation Transfer Assessment (Experiment 2)}
+    
+    This objective examines the adaptability of learned state representations across decision-making regimes. Using our continuous Tic-Tac-Toe variants, we will:
+    
+    \begin{itemize}
+        \item Develop quantitative transferability metrics comparing discrete-to-smoothed and discrete-to-latent transitions
+        \item Analyze strategy consistency through KL divergence measurements between original and projected decision distributions
+        \item Validate failure recovery mechanisms by introducing controlled perturbations in continuous state spaces
+    \end{itemize}
+
+    \item \textbf{Post-Training Optimization Framework Validation (Experiment 3) (Tentative)}
+    
+    This tentative objective evaluates enhancement strategies for learned representations. Building on Experiments 1-2, we will:
+    
+    \begin{itemize}
+        \item Assess LoRA fine-tuning's capacity to preserve memory stability across extended interaction horizons (100+ game iterations)
+        \item Quantify COCONUT-style contrastive learning's impact on cross-architecture knowledge transfer
+        \item Establish adaptation speed benchmarks for novel task variations (Connect-4 rule adaptations)
+    \end{itemize}
+\end{enumerate}
+
+These objectives are systematically explored through our experimental framework, incorporating both discrete and continuous decision-making scenarios in Tic-Tac-Toe variants.
 
 \section{Methodology}
 \subsection{Data Collection}
