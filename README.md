@@ -1,9 +1,14 @@
-# CSE 598: Science of LLMs Research Project
+# CSE 598 - Science of LLMs Research Proposal: State Representation Learning for Long-Term Multi-Agent Interactions
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
-Systematic comparison of state representation architectures for multi-agent systems, analyzing GraphDB, VectorDB, and Semantic Memory approaches.
+A research project exploring different memory architectures for multi-agent systems, comparing GraphDB, VectorDB, and Semantic Memory approaches in both discrete and continuous environments.
+
+## 🎯 Research Focus
+- Investigating optimal state representation methods for LLM-powered agents
+- Comparing different memory architectures in multi-agent interactions
+- Evaluating cross-domain knowledge transfer capabilities
 
 ## 📂 Project Structure
 
@@ -43,8 +48,12 @@ TBD
 | Continuous Adaptation | Evaluate latent-space projections | KL Divergence, Recovery Rate |
 | Cross-Arch Transfer | Test knowledge transfer between memory systems | Adaptation Speed, Stability Index |
 
-## 📊 Expected Outcomes
+## 🛠 Technologies
+- Memory Systems: GraphDB, VectorDB, Semantic Memory
+- Evaluation Framework: τ-bench inspired metrics
+- Architecture: CoALA-based agent design
 
+## 📊 Expected Outcomes
 - Comparative analysis of memory architectures
 - Cross-environment generalization metrics
 - Parameter-efficient optimization benchmarks
