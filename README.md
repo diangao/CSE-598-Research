@@ -6,6 +6,8 @@
 Systematic comparison of state representation architectures for multi-agent systems, analyzing GraphDB, VectorDB, and Semantic Memory approaches.
 
 ## 📂 Project Structure
+
+```
 CSE-598-Research/
 ├── proposal/                  # LaTeX research proposal
 │   ├── proposal.tex          # Main document
@@ -19,6 +21,7 @@ CSE-598-Research/
 ├── data/                     # Preprocessed datasets
 ├── docs/                     # Documentation
 └── requirements.txt          # Python dependencies
+```
 
 ## 🚀 Quick Start
 
