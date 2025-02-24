@@ -51,19 +51,35 @@ Recent developments in [your field] have highlighted [key problem]. Current appr
 % Debug: Specify data sources and preprocessing steps
 [Describe data sources] will be collected using [tools/methods]. Preprocessing will include [steps].
 
-\subsection{Analytical Approach}
-We propose the following model framework:
-\begin{equation}
-    f(x) = \sum_{i=1}^n \alpha_i \phi(x_i) + \epsilon
-\end{equation}
-where $\phi$ represents [feature mapping] and $\epsilon$ is [error term].
+\subsection{Experiments}
+There are two primary experiments this paper is targeting to investigate.
+\subsubsection{Discrete Task}
+The goal of the discrete task experiment is to determine what form of memory storage is most ideal for performing well on a discrete task. In other words, what form of representation of the state space is best for the task performance.
+
+The discrete state space is quite trivial: represent a given state via some matrix or vector. For example, TicTacToe can be represented via a matrix filled with 1s, $-1$s, and 0s, representing Xs, Os, and blanks, respectively.
+
+However, the continuous state space is slightly more convoluted. The way this paper will implement this space is via a variational autoencoder. The autoencoder will be trained on representing a state in a lower dimensional continuous space which creates a latent representation of the state space. This latent representation should be continuous and will create an alternative method of comprehending the task state.
+
+Finally, the semantic state representation is quite simple. Develop a word embedding for every possible state in the discrete task, and use that as memory.
+
+With these state representation formats, it will be tested which form is most optimal for this discrete task. As for the task itself, this paper will implement and investigate TicTacToe.
+
+\subsubsection{Continuous Task}
+Similarly, this experiment uses the same forms of representation (i.e. discrete, continuous, semantic), however, now on a new continuous task. This task is something that the authors are still determining what is the best to follow, however, is boiled down to two potential options.
+
+The first option is to develop some form of TicTacToe as a continuous task (i.e. introduce probabilities into the game). This would be ideal as it keeps the task relatively similar to the discrete task, and allows the authors to extract more accurately whether the type of memory storage impacts the performance on the respective types of tasks.
+
+However, if it isn't possible to construct some form of continuous TicTacToe, then a potential backup alternative is the benchmark test HotpotQA. This benchmark tests the ability for a model to perform information recall. This may not be the same as the the previous discrete task but it still allows the authors to extrapolate information about the hypothesis.
 
 \section{Expected Outcomes}
 % Debug: Connect outcomes to objectives
 \begin{enumerate}
-    \item Outcome 1: [Direct result of Objective 1]
-    \item Outcome 2: [Validation metric for Objective 2]
-    \item Outcome 3: [Theoretical contribution]
+    \item Discrete Memory Performs better on both Continuous and Discrete Tasks
+    \subitem If this is the case, then it must be the case that the agent prefers having a discrete understanding of its current state. Moreso, the agent prefers to have steps laid out for it when it is conducting its task.
+    \item Continuous Memory Performs better on both Continuous and Discrete Tasks
+    \subitem If this is the case, then it must be that the agent prefers to have freedom in its decision space. In other words, the agent requires the freedom to decide its final action after reasoning.
+    \item Respective Memory Type Performs better on its Respective Task
+    \subitem If this is the case, then its likely the memory model should reflect the type of task being performed. In this case, researchers should evaluate the task type and implement the respective memory.
 \end{enumerate}
 
 \section{Timeline}
