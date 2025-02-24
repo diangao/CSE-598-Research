@@ -7,18 +7,18 @@ Systematic comparison of state representation architectures for multi-agent syst
 
 ## 📂 Project Structure
 CSE-598-Research/
-├── proposal/ # LaTeX research proposal
-│ ├── proposal.tex # Main document
-│ ├── proposal.pdf # PDF version
-├── experiments/ # Core implementation
-│ ├── discrete_env/ # 3x3 Tic-Tac-Toe experiments
-│ │ ├── agents/ # Agent implementations
-│ │ └── analysis/ # Performance metrics
-│ ├── continuous_env/ # Latent-space experiments
-│ └── utils/ # Common utilities
-├── data/ # Preprocessed datasets
-├── docs/ # Documentation
-└── requirements.txt # Python dependencies
+├── proposal/                  # LaTeX research proposal
+│   ├── proposal.tex          # Main document
+│   └── proposal.pdf          # PDF version
+├── experiments/              # Core implementation
+│   ├── discrete_env/         # 3x3 Tic-Tac-Toe experiments
+│   │   ├── agents/          # Agent implementations
+│   │   └── analysis/        # Performance metrics
+│   ├── continuous_env/       # Latent-space experiments
+│   └── utils/               # Common utilities
+├── data/                     # Preprocessed datasets
+├── docs/                     # Documentation
+└── requirements.txt          # Python dependencies
 
 ## 🚀 Quick Start
 
