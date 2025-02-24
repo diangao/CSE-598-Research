@@ -1,4 +1,4 @@
-# CSE 598 - Science of LLMs Research Proposal: State Representation Learning for Long-Term Multi-Agent Interactions
+# CSE 598 - Science of LLMs Research: State Representation Learning for Long-Term Multi-Agent Interactions
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
