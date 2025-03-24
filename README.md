@@ -201,7 +201,7 @@ Results are stored in the `results/tictactoe_experiment` directory:
 - `logs/`: Contains detailed logs for each experiment run
 - `summaries/`: Contains summary statistics in JSON format
 
-## �� Expected Outcomes
+## 📊 Expected Outcomes
 - Comparative analysis of memory architectures
 - Cross-environment generalization metrics
 - Parameter-efficient optimization benchmarks
