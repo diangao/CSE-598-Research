@@ -5,7 +5,7 @@
 
 A research project exploring different memory architectures for multi-agent systems, comparing GraphDB, VectorDB, and Semantic Memory approaches in both discrete and continuous environments.
 
-## 🆕 Latest Progress
+## Latest Progress
 
 ### Tic-Tac-Toe Memory Architecture Experiment
 We've successfully implemented our first experiment: comparing different memory architectures in 3x3 Tic-Tac-Toe games through integration with τ-Bench framework.
@@ -33,12 +33,12 @@ python run_tictactoe_experiment.py --model gpt-3.5-turbo --model-provider openai
 
 Results are saved in `results/tictactoe_experiment/` with detailed logs and summary statistics.
 
-## 🎯 Research Focus
+## Research Focus
 - Investigating optimal state representation methods for LLM-powered agents
 - Comparing different memory architectures in multi-agent interactions
 - Evaluating cross-domain knowledge transfer capabilities
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 CSE-598-Research/
@@ -63,7 +63,7 @@ CSE-598-Research/
 └── requirements.txt          # Python dependencies
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 1. **Install dependencies**:
 ```bash
@@ -86,7 +86,7 @@ Results are saved in `integration/tau-bench/results/tictactoe_experiment/` inclu
 - Performance metrics and statistics
 - Memory usage patterns
 
-## 🔬 Key Experiments
+## Key Experiments
 
 | Experiment | Description | Metrics | Status |
 |------------|-------------|---------|--------|
@@ -94,13 +94,13 @@ Results are saved in `integration/tau-bench/results/tictactoe_experiment/` inclu
 | Continuous Adaptation | Evaluate latent-space projections | KL Divergence, Recovery Rate | 🔄 Planned |
 | Cross-Arch Transfer | Test knowledge transfer between memory systems | Adaptation Speed, Stability Index | 🔄 Planned |
 
-## 🛠 Technologies
+## Technologies
 - Memory Systems: GraphDB, VectorDB, Semantic Memory
 - LLM Integration: OpenAI GPT-3.5/GPT-4, DeepSeek
 - Evaluation Framework: τ-bench based metrics
 - Architecture: ReAct reasoning framework with memory augmentation
 
-## 💻 Environment Setup Guide
+## Environment Setup Guide
 
 ### Setting Up the Environment
 
@@ -162,7 +162,7 @@ On Windows, use:
 set OPENAI_API_KEY=your-openai-api-key-here
 ```
 
-## 🧪 Running Experiments
+##  Running Experiments
 
 ### Tic-Tac-Toe Memory Experiments
 
@@ -201,18 +201,84 @@ Results are stored in the `results/tictactoe_experiment` directory:
 - `logs/`: Contains detailed logs for each experiment run
 - `summaries/`: Contains summary statistics in JSON format
 
-## 📊 Expected Outcomes
+### Interpreting Results
+
+Our experimental results capture multiple dimensions of memory system performance:
+
+#### 1. Win Rate Analysis
+Win rates directly measure decision quality influenced by memory:
+- **High win rate (>60%)**: Indicates effective memory retrieval and utilization
+- **Similar win rates across memory types**: Suggests the task may not sufficiently differentiate memory architectures
+- **Win rate differences >10%**: Statistically significant indicator of memory architecture advantages
+
+#### 2. Memory Performance Metrics
+Each result contains detailed memory performance statistics:
+```json
+"memory_stats": {
+  "retrieval_times": [0.00031, 0.00029, ...],
+  "storage_count": 27
+}
+```
+
+Key interpretation points:
+- **Retrieval times**: Lower average retrieval time indicates more efficient memory architecture
+  - GraphMemory: Typically fastest for small state spaces
+  - VectorMemory: Balance of speed and semantic richness
+  - SemanticMemory: Slowest but potentially most contextually relevant
+
+- **Storage count**: Higher numbers indicate more state exploration
+  - Low storage (<10 per game): May indicate repetitive play patterns
+  - High variance between games: Shows exploration inconsistency
+
+#### 3. Move Analysis
+Examine game traces to understand memory influence on decision quality:
+- Look for repeated mistakes despite similar board positions in memory
+- Identify instances where memory retrieval improved decisions
+- Check for memory utilization increases across successive games
+
+#### 4. Visualizing Comparisons
+For comparative analysis across memory types:
+```bash
+# Example Python snippet for visualizing results
+import json
+import matplotlib.pyplot as plt
+
+# Load summary files
+with open('results/tictactoe_experiment/summaries/experiment_summary.json', 'r') as f:
+    data = json.load(f)
+
+# Extract win rates
+memory_types = ['graph', 'vector', 'semantic']
+win_rates = [sum(1 for r in data['results'][m] if r['reward'] > 0.5)/len(data['results'][m]) 
+             for m in memory_types]
+
+# Plot comparison
+plt.bar(memory_types, win_rates)
+plt.title('Win Rate by Memory Architecture')
+plt.ylabel('Win Rate')
+plt.savefig('memory_comparison.png')
+```
+
+#### 5. Common Patterns to Look For
+- **Graph memory advantages**: Typically shows strengths in highly structured games with clear state transitions
+- **Vector memory balance**: Often provides best compromise between retrieval speed and representation quality
+- **Semantic memory context**: May perform better when game state has complex semantic meaning
+- **Memory evolution**: Performance should improve as more games are played and memory builds up
+
+For detailed analysis tutorials, see the Jupyter notebooks in `experiments/discrete_env/analysis/`.
+
+## Expected Outcomes
 - Comparative analysis of memory architectures
 - Cross-environment generalization metrics
 - Parameter-efficient optimization benchmarks
 
-## 📅 Development Timeline
+## Development Timeline
 
 - **Mar 1-15**: Discrete task implementation ✅
 - **Mar 16-31**: Continuous environment setup 🔄
 - **Apr 1-15**: Cross-architecture analysis 🔄
 - **Apr 16-30**: Final report preparation 🔄
 
-## 📜 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
