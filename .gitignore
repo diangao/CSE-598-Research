@@ -15,4 +15,4 @@ build/
 # Editor backup files
 *~
 *.bak
-.DS_Store 
+.DS_Store venv/
