@@ -1,0 +1,96 @@
+\section{Introduction}
+\subsection{Background and Motivation}
+The effectiveness of state representation learning constitutes a fundamental challenge in developing robust multi-agent systems, particularly for applications requiring long-term interaction and cross-environment adaptability. While current LLM-based agents demonstrate proficiency in isolated decision-making tasks, three critical gaps persist:
+
+\begin{itemize}
+    \item \textbf{Representation-Environment Mismatch}: Fixed memory architectures struggle to adapt between discrete symbolic reasoning (e.g., game rules) and continuous latent-space decision-making
+    
+    \item \textbf{Multi-Horizon Coordination}: Existing systems lack mechanisms for maintaining coherent state representations across varying interaction timescales in multi-agent scenarios
+    
+    \item \textbf{Post-Training Instability}: Learned representations often degrade when deployed in environments differing from their training regimes
+\end{itemize}
+
+Our work addresses these challenges through a structured investigation of three state representation paradigms in Cognitive Language Agents:
+
+\begin{itemize}
+    \item \textbf{GraphDB}: Explicit relational modeling for strategic game trees
+    \item \textbf{VectorDB}: Continuous embedding spaces for probabilistic reasoning
+    \item \textbf{Semantic Memory}: Hybrid neuro-symbolic representations via LLM abstraction
+\end{itemize}
+
+\subsection{Research Objectives}
+Our investigation establishes three principal research objectives that systematically address the core challenges in state representation learning for multi-agent systems:
+
+\begin{enumerate}
+    \item \textbf{Architecture-Specific Reasoning Capacity Analysis}
+    
+    This objective focuses on quantifying how different memory architectures influence strategic decision-making in structured environments. Through controlled multi-agent Tic-Tac-Toe experiments, we evaluate:
+    
+    \begin{itemize}
+        \item Multi-step planning efficiency through $\tau$-bench metrics
+        \item Planning horizon supported by different memory architectures
+        \item Coordination efficiency differentials through win rate analysis
+        \item Effectiveness of memory mechanisms in reducing redundant moves
+    \end{itemize}
+
+    \item \textbf{Cross-Environment Representation Transfer Assessment}
+    
+    This objective examines the adaptability of learned state representations across decision-making regimes. Using our continuous Tic-Tac-Toe variants, we analyze:
+    
+    \begin{itemize}
+        \item Quantitative transferability metrics between discrete and continuous spaces
+        \item Strategy consistency through decision distribution analysis
+        \item Failure recovery mechanisms in continuous state spaces
+    \end{itemize}
+
+    \item \textbf{Post-Training Optimization Framework Validation}
+    
+    This objective evaluates enhancement strategies for learned representations:
+    
+    \begin{itemize}
+        \item Memory stability across extended interaction horizons
+        \item Cross-architecture knowledge transfer effectiveness
+        \item Adaptation speed for novel task variations
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Experimental Design}
+Our experimental framework is built upon the $\tau$-bench framework, which provides a standardized environment for evaluating LLM-based agents. The framework consists of:
+
+\begin{itemize}
+    \item \textbf{Environment}: A Tic-Tac-Toe implementation that supports both discrete and continuous state representations
+    \item \textbf{Memory Architectures}: Three distinct memory implementations:
+    \begin{itemize}
+        \item GraphDB: Stores game states as nodes with legal move edges
+        \item VectorDB: Encodes states as $\mathbb{R}^d$ embeddings
+        \item Semantic Memory: Combines symbolic rules with LLM abstractions
+    \end{itemize}
+    \item \textbf{Evaluation Metrics}: 
+    \begin{itemize}
+        \item $\tau$-style Task Success Rate: Win percentage across multiple games
+        \item State Retrieval Latency: Memory access efficiency
+        \item Move Efficiency: Reduction in redundant moves
+        \item Generalization Score: Adaptation to novel game variants
+    \end{itemize}
+\end{itemize}
+
+\subsection{Preliminary Results and Findings}
+Our initial experiments with the Tic-Tac-Toe environment have revealed several key insights:
+
+\begin{itemize}
+    \item \textbf{Memory Performance}: Different memory architectures show varying levels of effectiveness in terms of:
+    \begin{itemize}
+        \item Retrieval times (GraphDB typically fastest, Semantic Memory slowest)
+        \item Storage efficiency (VectorDB most compact, GraphDB most explicit)
+        \item Decision quality (preliminary results suggest GraphDB may have advantages in strategic planning)
+    \end{itemize}
+    
+    \item \textbf{Behavioral Patterns}: Analysis of agent behavior reveals:
+    \begin{itemize}
+        \item Memory utilization patterns across different game phases
+        \item Decision-making strategies influenced by memory architecture
+        \item Potential trade-offs between memory efficiency and decision quality
+    \end{itemize}
+\end{itemize}
+
+These findings provide a foundation for our ongoing investigation into the relationship between memory architecture and agent performance in multi-agent systems. 

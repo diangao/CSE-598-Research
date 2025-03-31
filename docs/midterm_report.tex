@@ -1,0 +1,127 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[margin=1in]{geometry} 
+\usepackage{setspace} 
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+
+
+\setstretch{1.15}
+
+
+\setlength{\parskip}{0.5em}
+
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{1em}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{1.25em}{0.75em}
+
+\title{\Large\textbf{Midterm Report}}
+\author{Anish Chandra, Diyan Gao, Linglong Meng}
+\date{March 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Our research investigates the emergent behaviors of large language model (LLM) agents as they learn to strategically utilize external memory systems through explicitly defined function calls. This represents a significant evolution from our initial proposal, which focused primarily on comparative analysis of pre-defined memory architectures. Instead, we have pivoted toward examining how agents autonomously develop memory utilization strategies when given access to multiple memory systems simultaneously.
+
+\subsection{Evolution from Proposal to Current Approach}
+
+While our proposal focused on comparing different memory architectures through controlled experiments with fixed memory retrieval patterns, our current work explores a fundamentally different question: How do LLM agents develop agency in memory management? Initial explorations with $\tau$-bench revealed that the pre-determined memory access patterns constrained our ability to observe emergent behaviors. This led us to reconceptualize our approach, shifting from researcher-determined memory access to agent-directed memory interaction.
+
+This paradigm shift required us to develop a novel experimental framework centered on fine-tuning LLM agents with function-calling capabilities. Rather than embedding agents within fixed memory architectures, we now equip them with explicit memory management functions, allowing them to develop increasingly sophisticated memory utilization strategies through experience. This approach enables us to trace the emergence of memory-aware metacognition in increasingly complex problem-solving scenarios.
+
+The reconceptualized experimental design positions us to address more ambitious research questions about how artificial agents develop and refine cognitive strategies when equipped with externalized memory systems. By observing how agents navigate the trade-offs between different memory systems across varying task complexities, we gain insight into the fundamental relationship between memory architecture and problem-solving capability in artificial intelligence systems.
+
+\subsection{Memory Systems Design}
+
+Our current implementation provides agents with access to two distinct memory systems, each representing fundamentally different approaches to knowledge organization and retrieval:
+
+The discrete memory space implements a graph-based representation where game states are encoded as nodes and possible transitions as edges. This architectural choice creates an explicit spatial representation of the problem space, allowing for precise path-based retrieval and deterministic traversal of state transitions. The implementation leverages graph database principles for efficient state tracking and relationship modeling, enabling the agent to construct explicit models of action consequences.
+
+In contrast, the continuous memory space operates through a vector-based representation where experiences are encoded as dense embeddings within a high-dimensional semantic space. This approach facilitates approximate matching and similarity-based retrieval, allowing the agent to identify relevant experiences based on structural or semantic proximity rather than exact matching. This memory system excels at identifying broad patterns and generalizing across similar but non-identical situations.
+
+The agent interacts with these memory systems through four distinct function calls: discrete memory storage, discrete memory retrieval, continuous memory storage, and continuous memory retrieval. These functions are implemented as explicit API endpoints that the agent can invoke at any point during its decision-making process. This design gives the agent complete autonomy in determining when and how to leverage different memory systems, creating a unique window into emergent memory utilization strategies.
+
+\subsection{Experimental Framework}
+
+Our experimental framework centers on a progressively challenging series of Tic-Tac-Toe games, where board dimensions increase incrementally from the standard 3×3 configuration to substantially more complex 60×60 boards. This progression creates a controlled complexity gradient that allows us to observe how memory utilization patterns evolve as computational and cognitive demands increase. The agent consistently plays against a randomly-moving opponent, creating a stable baseline for measuring performance improvements attributed to memory utilization rather than opponent modeling.
+
+A critical innovation in our experimental methodology is the implementation of comprehensive memory snapshots. After each memory operation, we capture the complete state of both memory systems, creating a high-resolution timeline of memory evolution throughout the learning process. These snapshots allow us to trace the agent's developing understanding of the problem space and identify critical learning moments where significant strategic insights emerge. Complementing these snapshots, we maintain detailed logs of function call patterns, recording not only when different memory systems are accessed but also the context and apparent purpose of each interaction.
+
+Performance metrics focus on both immediate and cumulative outcomes. We track per-game win rates to measure immediate performance, while cumulative win rates across the complexity gradient reveal broader learning trajectories. By correlating these performance metrics with memory utilization patterns, we can identify which memory strategies contribute most effectively to performance improvements at different complexity levels.
+
+\subsection{Research Questions}
+
+This experimental framework positions us to address several fundamental questions about memory utilization in artificial intelligence systems:
+
+How does an agent's preference for different memory architectures evolve as task complexity increases? Initial observations suggest that discrete memory systems may dominate in simpler problem spaces, while continuous systems become increasingly valuable as complexity grows. However, the most sophisticated agents appear to develop hybrid approaches that leverage the complementary strengths of both systems.
+
+What patterns emerge in memory storage and retrieval operations across different game phases? We hypothesize that agents will develop distinct memory utilization strategies for opening phases, midgame scenarios, and endgame positions. The transition points between these phases may represent particularly valuable indicators of strategic development.
+
+How do memory utilization strategies correlate with performance improvements? By analyzing the relationship between function call patterns and win rate trajectories, we can identify which memory strategies most effectively contribute to performance gains. This analysis may reveal critical thresholds where certain memory operations become essential for continued improvement.
+
+Can we identify critical learning moments through memory snapshot analysis? The most significant strategic insights may manifest as sudden shifts in memory content or organization. By closely examining memory snapshots before and after significant performance improvements, we may be able to isolate specific knowledge structures that enable higher-level strategy formation.
+
+\section{Methods}
+At this point in time, we have determined and planned most of our methodology. The goal of the primary experiment will be to determine the role of the type of external memory in an LLM Agent. To explain this experiment, we must first discuss the terminology that will be used here.
+
+\subsection{LLM Agent Composition}
+The agent is a commonly defined entity in reinforcement learning. At a fundamental level, the idea is that an agent is typically placed within an environment and its goal is to optimize its future actions to maximize reward. The reward is formally defined as a numerical value that determines whether 
+
+\subsection{The Discrete Task: TicTacToe \& Training Process}
+
+\subsection{Evaluation Metrics \& Interpretation}
+
+\section{Results so Far}
+
+\subsection{Preliminary Validation of Architecture-Specific Reasoning}
+Preliminary experimental data indicate that both GraphDB and VectorDB are operable within our multi-agent Tic-Tac-Toe testbed. In particular, GraphDB employs explicit relational modeling to construct strategic game trees, providing a clear structural representation for discrete decision-making. Conversely, VectorDB leverages continuous embedding spaces to capture subtle similarities between states, thereby supporting probabilistic reasoning.
+
+\subsection{Observations on GraphDB}
+Our early tests using GraphDB have demonstrated its feasibility in state retrieval and strategy generation. By explicitly modeling game states as nodes interconnected by legal move edges, the method shows promising performance in terms of retrieval latency, structural consistency, and responsiveness to state changes—thereby establishing a strong foundation for discrete task reasoning.
+
+\subsection{Observations on VectorDB}
+Parallel implementation of the VectorDB module has provided initial evidence of its capability to capture the latent distribution of states. Early evaluations reveal that the k-nearest neighbor search in the continuous embedding space effectively uncovers inter-state similarities and supports probability-based decision-making. This method has exhibited robust consistency and resilience in early tests.
+
+\subsection{Overall Framework Feasibility and Future Directions}
+Although full quantitative assessments are forthcoming, the preliminary data suggest:
+\begin{itemize}
+    \item Both methods are implementable within our experimental environment, and they offer viable paths for measuring key metrics such as $\tau$-bench success rate, reduction in redundant moves, and win rate comparisons across different grid sizes (e.g., 3$\times$3 vs. 4$\times$4).
+    \item The experimental platform supports a simultaneous evaluation of explicit (GraphDB) and continuous (VectorDB) state representations, providing a practical basis for in-depth analysis of their respective strengths and limitations.
+\end{itemize}
+Future work will focus on refining module implementations, detailing quantitative metrics, and conducting larger-scale experiments to systematically compare the performance of the two methods in strategic reasoning tasks.
+
+
+
+\section{Conclusion}
+Overall, so far we demonstrates significant progress in developing and validating a memory-augmented agent system integrated with the $\tau$-bench framework. Our implementation of three distinct memory architectures—GraphMemory, VectorMemory, and SemanticMemory—has enabled us to explore complementary approaches for state representation and strategic reasoning in a discrete Tic-Tac-Toe environment.
+
+Preliminary results validate the feasibility of our framework. Although complete quantitative assessments are still underway, the early data confirm that both methods function effectively within our experimental setup, and they offer promising avenues for further exploration.
+
+Moving forward, our efforts will focus on refining module implementations and conducting extensive evaluations across varying grid sizes and game conditions. Future experiments will aim to quantify key performance metrics such as $\tau$-bench success rate, retrieval latency, and decision quality, thereby deepening our understanding of the trade-offs between explicit and continuous state representations. 
+
+
+
+
+\end{document}
