@@ -15,6 +15,11 @@ build/
 # Editor backup files
 *~
 *.bak
-.DS_Store venv/
-venv/
+.DS_Store
+
+# Environment variables - ignore in all directories
+**/.env
 .env
+
+# Python virtual environment
+venv/
