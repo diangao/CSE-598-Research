@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv(Path("experiments/.env"))
 
-# 从环境变量获取延迟设置，如果不存在则使用默认值
+# Get delay settings from environment variables, use default values if not found
 TURN_DELAY = float(os.getenv("TURN_DELAY", "1.0"))
 GAME_DELAY = float(os.getenv("GAME_DELAY", "5.0"))
 

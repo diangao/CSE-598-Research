@@ -17,3 +17,4 @@ build/
 *.bak
 .DS_Store venv/
 venv/
+.env

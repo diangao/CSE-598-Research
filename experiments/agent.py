@@ -12,14 +12,14 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv(Path("experiments/.env"))
 
-# 从环境变量获取重试延迟设置
+# Get retry delay setting from environment variables
 RETRY_INIT_DELAY = float(os.getenv("RETRY_INIT_DELAY", "2.0"))
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# 验证API密钥是否已设置
+# Verify if API key is set
 if not os.getenv("OPENAI_API_KEY"):
     logger.warning("OPENAI_API_KEY not found in environment variables or .env file")
 else:
@@ -232,9 +232,9 @@ class TicTacToeAgent:
                     else:
                         raise  # Re-raise if we've exhausted our retries
                 except openai.InsufficientQuotaError as e:
-                    logger.error(f"API额度不足错误: 您的OpenAI API额度已用完。请检查您的账单和计划详情。")
-                    logger.error(f"详细错误信息: {str(e)}")
-                    # 返回一个随机移动，让游戏继续
+                    logger.error(f"API quota insufficient error: Your OpenAI API quota has been depleted. Please check your billing and plan details.")
+                    logger.error(f"Detailed error message: {str(e)}")
+                    # Return a random move to let the game continue
                     move = None
                     return move, {
                         "tokens_used": 0,
