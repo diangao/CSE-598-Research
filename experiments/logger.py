@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 import logging
+import time
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -18,11 +19,16 @@ class GameLogger:
         self.current_game = None
         self.current_turn = None
         
+        # Generate a unique run ID based on timestamp
+        self.run_id = int(time.time())
+        
         logger.info(f"GameLogger initialized with logs directory: {logs_dir}")
+        logger.info(f"Run ID for this session: {self.run_id}")
     
     def start_game(self, game_id, agent_a_objective, agent_b_objective, board_size=3):
         """Start a new game log"""
         self.current_game = {
+            "run_id": self.run_id,
             "game_id": game_id,
             "timestamp": datetime.now().isoformat(),
             "board_size": f"{board_size}x{board_size}",
@@ -150,7 +156,8 @@ class GameLogger:
         game_id = self.current_game["game_id"]
         board_size = self.current_game["board_size"]
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        log_filename = f"game_{game_id}_{board_size}_{timestamp}.json"
+        run_id = self.current_game["run_id"]
+        log_filename = f"run_{run_id}_game_{game_id}_{board_size}_{timestamp}.json"
         log_filepath = self.logs_dir / log_filename
         
         with open(log_filepath, 'w') as f:

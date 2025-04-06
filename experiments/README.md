@@ -14,7 +14,7 @@ Both agents have access to three memory types:
 
 The experiment tracks how agents learn to use memory strategically through multiple games, including which types of memory they prefer, when they choose to store vs. retrieve information, and how they structure their memories.
 
-## 🧠 Task Complexity Progression (Board Size Scaling)
+## Task Complexity Progression (Board Size Scaling)
 
 To test how different memory architectures support generalization and adaptability under increasing task complexity, we implement a complexity gradient by progressively enlarging the TicTacToe board:
 
@@ -25,16 +25,16 @@ To test how different memory architectures support generalization and adaptabili
 
 Each size introduces exponentially more possible states and longer action sequences, creating increasing pressure on the agent's memory retrieval and schema organization capabilities.
 
-## 🎯 Experimental Goals at Each Complexity Level
+## Experimental Goals at Each Complexity Level
 
 At each board size, we measure:
 
-- 🧠 Win rate
-- 🧠 Token efficiency
-- 🧠 Memory usage frequency and diversity (which memory modules are accessed)
-- 🧠 Retrieval usefulness (whether retrieved memory affected decisions)
-- 🧠 Schema update frequency (did the agent adapt memory structure?)
-- 🧠 Retrieval reuse (does prior memory transfer between tasks?)
+- Win rate
+- Token efficiency
+- Memory usage frequency and diversity (which memory modules are accessed)
+- Retrieval usefulness (whether retrieved memory affected decisions)
+- Schema update frequency (did the agent adapt memory structure?)
+- Retrieval reuse (does prior memory transfer between tasks?)
 
 This setup allows us to test both robustness (can agents reuse the same schema across tasks?) and adaptation (do agents restructure memory to suit the harder task?).
 

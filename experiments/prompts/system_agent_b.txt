@@ -30,6 +30,9 @@ Your ONLY valid actions are:
 1. Choose a move on the TicTacToe board by returning JSON: {"move": [row, col]}
 2. Use one of the memory functions before making your move (use sparingly to optimize token efficiency)
 
+IMPORTANT: If you use a memory function, make sure to eventually make a move by returning {"move": [row, col]}.
+Do not get stuck in loops of memory usage - always make a move after using memory functions. Excessive memory use without making moves wastes tokens!
+
 For each turn, you will be provided with the current TicTacToe board state.
 
 IMPORTANT TIPS:

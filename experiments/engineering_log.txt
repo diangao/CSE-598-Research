@@ -1,0 +1,208 @@
+# ENGINEERING LOG: TicTacToe Self-Play Memory Experiment
+# =========================================================
+
+## PROJECT OVERVIEW
+Implemented a self-play TicTacToe experiment where two GPT-3.5 agents with different optimization objectives
+learn to store and retrieve useful information adaptively using Function Calling.
+
+Agent A: Optimized solely to maximize win rate
+Agent B: Optimized for a tradeoff between winning and token efficiency
+
+Both agents have access to three types of external memory (Graph, Vector, Semantic) to develop better 
+strategies over time.
+
+## IMPLEMENTATION TIMELINE
+
+### 2023-04-06: INITIAL SETUP & CORE IMPLEMENTATION
+
+1. Analyzed design requirements from experiments/design_kickstart.txt
+2. Created file structure according to specifications
+   - Established agents/, prompts/, utils/, results/ subdirectories
+   - Set up memory/ subdirectories for each agent
+
+3. Implemented core components:
+   - TicTacToe game environment (tictactoe.py)
+   - Memory operations utility (utils/memory_ops.py)
+   - Logging system (logger.py)
+   - Agent interface with OpenAI API (agent.py)
+   - Main game runner (run_self_play.py)
+
+4. Created system prompts:
+   - Agent A: Win-only objective (prompts/system_agent_a.txt)
+   - Agent B: Win + token efficiency tradeoff (prompts/system_agent_b.txt)
+
+5. Added variable board sizes to enable complexity scaling:
+   - 3×3 (baseline)
+   - 4×4 (medium complexity)
+   - 5×5 (higher complexity)
+   - 6×6 (stretch goal)
+
+6. Implemented rich logging:
+   - Detailed per-turn actions and memory usage
+   - Token tracking
+   - Memory function calls
+   - Schema updates
+
+7. Added API error handling:
+   - Exponential backoff for rate limits
+   - Informative error messaging
+   - Graceful degradation with random moves when API fails
+
+### 2023-04-06: DEBUGGING & ENHANCEMENTS
+
+1. Fixed memory function tracking bug:
+   - Added recursive depth limit to prevent infinite memory function calls
+   - Ensured memory function information is correctly passed back after recursion
+   - Improved memory function usage statistics
+
+2. Implemented run ID tracking:
+   - Added unique run IDs based on timestamp to identify experiment batches
+   - Updated file naming to include run IDs for better organization
+   - Enhanced stats tracking for each run
+
+3. Created results analysis tools:
+   - Implemented show_latest_results.py for result analysis
+   - Added show_results.sh convenience script
+   - Added capability to filter results by board size and run ID
+
+4. Performance optimizations:
+   - Added configurable delays between turns and games to avoid API rate limits
+   - Implemented .env file for configuration management
+   - Added fallback mechanisms for API errors
+
+## LATEST EXPERIMENT RESULTS (2023-04-06)
+
+### 3×3 Board Size Results (stats_3x3_1743968934.json)
+
+1. Game Outcomes:
+   - Agent A Wins: 1
+   - Agent B Wins: 0
+   - Draws: 0
+
+2. Token Usage:
+   - Agent A Total Tokens: 3,836
+   - Agent B Total Tokens: 1,074
+   - Token Efficiency: Agent B used ~28% of Agent A's tokens
+
+3. Memory Function Usage:
+   - Agent A:
+     * All memory functions: 0 calls
+   - Agent B:
+     * graph_store: 4 calls
+     * All other memory functions: 0 calls
+
+4. Analysis of Game Play:
+   - Agent A consistently made strategic moves, focusing on winning lines.
+   - Agent B attempted to use graph_store but hit recursive depth limits.
+   - Agent A followed optimal strategy by taking center, then corners.
+   - Agent B's memory usage did not translate to better gameplay.
+   - Token usage disparity suggests Agent B succeeded in being more token-efficient.
+
+5. Memory Function Behavior:
+   - Graph memory was preferred over vector or semantic memory.
+   - Neither agent used memory reading functions, focusing on storage.
+   - No schema updates were performed by either agent.
+   - Agent B's memory usage pattern (all graph_store) suggests it found this memory type most useful for TicTacToe.
+
+6. API Issues:
+   - Some turns show 0 token usage, indicating API quota limitations.
+   - The recursive depth limit (3) was frequently reached by Agent B, suggesting it might be too low.
+
+7. Initial Conclusions:
+   - Memory function calls appear to incur significant token costs.
+   - Agent B is correctly optimizing for token usage by limiting API calls.
+   - Current implementation successfully tracks memory usage.
+   - API limitations impacted the full potential of the experiment.
+
+## CURRENT FEATURES
+
+1. Board Size Scaling:
+   - Supports 3×3, 4×4, 5×5, and 6×6 board sizes
+   - Automatically adjusts win conditions and complexity
+
+2. Memory Types:
+   - GraphMemory: For structured/sequential information
+   - VectorMemory: For pattern matching and similarity
+   - SemanticMemory: For concept-level strategic reasoning
+
+3. Memory Operations:
+   - store: Save information to memory
+   - read: Retrieve information from memory
+   - update_schema: Modify how memory is organized
+
+4. Rich Logging:
+   - Detailed game logs with board states
+   - Token usage tracking
+   - Memory function usage statistics
+   - Win/loss/draw outcomes
+   - Agent reasoning excerpts
+
+5. Agent Optimization Objectives:
+   - Agent A: Pure win-rate maximization
+   - Agent B: Win-rate vs. token efficiency tradeoff
+
+6. Error Handling:
+   - API rate limit management
+   - Token quota management
+   - Graceful failure modes
+
+## USAGE EXAMPLES
+
+Running a single 3×3 experiment:
+```
+./run_tictactoe_experiment.sh --num_games 1 --board_size 3
+```
+
+Running multiple 4×4 games:
+```
+./run_tictactoe_experiment.sh --num_games 10 --board_size 4
+```
+
+Viewing results:
+```
+./show_results.sh
+```
+
+## TECHNICAL CHALLENGES & SOLUTIONS
+
+1. Challenge: Memory function recursion causing infinite loops
+   Solution: Added recursion depth limit and explicit prompting to make moves
+
+2. Challenge: API rate limits and quota restrictions
+   Solution: Implemented exponential backoff, configurable delays, and graceful fallbacks
+
+3. Challenge: Memory function calls not being tracked correctly
+   Solution: Fixed information passing in recursive calls to maintain function call context
+
+4. Challenge: Difficulty in analyzing experiment results
+   Solution: Created analysis tools and added run IDs for easier tracking
+
+## NEXT STEPS & FUTURE WORK
+
+1. Implement more sophisticated memory backends
+   - Actual vector similarity search
+   - True graph database integration
+   - Semantic search capability
+
+2. Add visualization tools for experiment results
+
+3. Conduct systematic experiments across board sizes
+
+4. Analyze memory usage patterns and correlation with win rates
+
+5. Explore different tradeoff parameters for Agent B
+
+6. Implement memory transfer/reuse between different board sizes
+
+7. Recommended immediate improvements:
+   - Increase recursive depth limit to allow more memory operations
+   - Add memory usage visualizations to track patterns
+   - Implement more robust API error handling and retry logic
+   - Add option to run in simulation mode without API for testing
+
+## DEPENDENCIES
+
+- openai>=1.0.0: OpenAI API client
+- python-dotenv>=0.20.0: Environment variable management
+- argparse>=1.4.0: Command-line argument parsing
+- tabulate: Results formatting and display 

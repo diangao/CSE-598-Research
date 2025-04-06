@@ -187,8 +187,31 @@ class TicTacToeAgent:
         self.message_history = [{"role": "system", "content": self.system_prompt}]
         logger.info(f"Reset agent {self.agent_id} for a new game")
     
-    def get_move(self, board_state) -> Tuple[Optional[Tuple[int, int]], Dict[str, Any]]:
+    def get_move(self, board_state, depth=0) -> Tuple[Optional[Tuple[int, int]], Dict[str, Any]]:
         """Get the next move from the agent, allowing for memory function calls first"""
+        # Add recursion depth limit to prevent infinite loops
+        MAX_DEPTH = 3
+        if depth >= MAX_DEPTH:
+            logger.warning(f"Maximum memory function call depth reached ({MAX_DEPTH}), forcing move decision")
+            
+            # Get the content of the last user-added message to determine the last memory function used
+            last_function_name = None
+            for msg in reversed(self.message_history):
+                if msg.get("role") == "function":
+                    last_function_name = msg.get("name")
+                    break
+            
+            # Force return a move instead of continuing recursion
+            return None, {
+                "tokens_used": 0,
+                "memory_function": last_function_name, # Pass the name of the last memory function used
+                "memory_content": None,
+                "memory_query": None,
+                "schema_update": None,
+                "schema_description": None,
+                "raw_response": "Maximum recursion depth reached, need to make a move"
+            }
+            
         # Add board state to message history
         self.message_history.append({
             "role": "user", 
@@ -234,17 +257,24 @@ class TicTacToeAgent:
                 except openai.InsufficientQuotaError as e:
                     logger.error(f"API quota insufficient error: Your OpenAI API quota has been depleted. Please check your billing and plan details.")
                     logger.error(f"Detailed error message: {str(e)}")
+                    
+                    # Get the content of the last user-added message to determine the last memory function used
+                    last_function_name = None
+                    for msg in reversed(self.message_history):
+                        if msg.get("role") == "function":
+                            last_function_name = msg.get("name")
+                            break
+                            
                     # Return a random move to let the game continue
                     move = None
-                    return move, {
-                        "tokens_used": 0,
-                        "memory_function": None,
-                        "memory_content": None,
-                        "memory_query": None,
-                        "schema_update": None,
-                        "schema_description": None,
-                        "raw_response": None
-                    }
+                    raw_response = "Quota insufficient error - API call failed"
+                    memory_function_used = last_function_name
+                    # Continue with the code below to fall back to a random move
+                except Exception as e:
+                    logger.error(f"Error getting move from agent {self.agent_id}: {e}")
+                    move = None
+                    raw_response = f"API error: {str(e)}"
+                    # Continue with the code below to fall back to a random move
             
             # Track token usage
             tokens_used = response.usage.total_tokens
@@ -324,8 +354,29 @@ class TicTacToeAgent:
                     "content": str(result)
                 })
                 
-                # Now get the actual move after using memory function
-                return self.get_move(board_state)
+                # Add an explicit instruction to provide a move after using memory
+                self.message_history.append({
+                    "role": "user",
+                    "content": f"You've used the memory function: {function_name}. Now please make a specific move decision based on the current board state.\nPlease return your next move directly in the format: {{\"move\": [row, col]}}. Do not use memory functions again."
+                })
+                
+                # Now get the actual move after using memory function, incrementing depth
+                logger.info(f"Agent {self.agent_id} used memory function {function_name}, now requesting actual move (depth {depth+1})")
+                next_move, next_info = self.get_move(board_state, depth + 1)
+                
+                if next_move is not None:
+                    next_info["memory_function"] = function_name
+                    if function_name.endswith("_store"):
+                        next_info["memory_content"] = function_args.get("content", "")
+                    elif function_name.endswith("_read"):
+                        next_info["memory_query"] = function_args.get("query", "")
+                    elif "schema" in function_name:
+                        next_info["schema_update"] = function_name
+                        next_info["schema_description"] = function_args.get("new_schema_description", "")
+                    
+                    return next_move, next_info
+                
+                return next_move, next_info
             
             else:
                 # Extract move from response content

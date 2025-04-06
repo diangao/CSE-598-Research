@@ -158,6 +158,9 @@ def main():
                     stats['agent_a_memory_calls'][memory_function] += 1
                 else:
                     stats['agent_b_memory_calls'][memory_function] += 1
+                    
+                # 确保记忆功能被正确记录到日志
+                logger.info(f"Recorded memory function call: {current_agent} used {memory_function}")
             
             # Log turn information
             rationale = None
@@ -188,9 +191,13 @@ def main():
                 if valid_moves:
                     fallback_move = random.choice(valid_moves)
                     game.make_move(fallback_move[0], fallback_move[1])
-                    logger.warning(f"Game {game_id}, Turn {turn_number}: {current_agent} made invalid move, using random move {fallback_move} instead")
+                    if move is None:
+                        logger.warning(f"Game {game_id}, Turn {turn_number}: {current_agent} returned None move (may be stuck in memory functions), using random move {fallback_move} instead")
+                    else:
+                        logger.warning(f"Game {game_id}, Turn {turn_number}: {current_agent} made invalid move {move}, using random move {fallback_move} instead")
                 else:
                     # No valid moves left
+                    logger.info(f"Game {game_id}, Turn {turn_number}: No valid moves left, game ending")
                     break
             
             # Switch player
@@ -234,7 +241,9 @@ def main():
         time.sleep(GAME_DELAY)
     
     # Save overall statistics
-    stats_file = output_dir / f"stats_{args.board_size}x{args.board_size}_{int(time.time())}.json"
+    run_id = game_logger.run_id
+    stats['run_id'] = run_id
+    stats_file = output_dir / f"run_{run_id}_stats_{args.board_size}x{args.board_size}_{int(time.time())}.json"
     with open(stats_file, 'w') as f:
         json.dump(stats, f, indent=2)
     

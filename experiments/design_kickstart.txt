@@ -178,13 +178,13 @@ experiments/
 
 ---
 
-## Logging Schema （每局对局完整 JSON）
+## Logging Schema (Complete JSON for each game)
 
-请在 logger.py 中添加：
+Please add the following to logger.py:
 
-- `schema_updates`: 作为 JSON list，每次调用 `update_*_schema` 时 append 一项
-- 对每局的 `memory_usage_summary` 做统计（function name → 次数）
-- 如果可能，从 prompt 中 extract rationale 或 comment（例如 reason for schema rewrite）
+- `schema_updates`: as a JSON list, append an item each time `update_*_schema` is called
+- Track statistics for `memory_usage_summary` for each game (function name → count)
+- If possible, extract rationale or comments from prompt (e.g., reason for schema rewrite)
 
 ```flow
 {
@@ -250,4 +250,4 @@ experiments/
 
 ### 4. **Isolate memory states**
 
-- Ensure each agent’s memory is sandboxed (no shared lookup)
+- Ensure each agent's memory is sandboxed (no shared lookup)
