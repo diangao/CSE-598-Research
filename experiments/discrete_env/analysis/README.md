@@ -1,1 +1,0 @@
-# Discrete Environment Analysis

@@ -1,0 +1,253 @@
+## Project Goal
+
+Build a **self-play TicTacToe experiment** where two GPT-3.5 agents equipped with different optimization objectives and access to multiple external memory types (Graph, Vector, Semantic) **learn to store and retrieve useful information adaptively** using Function Calling.
+
+This experiment aims to investigate:
+
+- Whether agents learn **how** and **when** to use memory strategically
+- The behavioral and outcome differences between:
+    - Agent A: **Win-only objective**
+    - Agent B: **Win + Token-efficiency tradeoff**
+
+---
+
+## Agent Setup
+
+### Both Agents:
+
+- Run on **OpenAI GPT-3.5** with Function Calling
+- Receive:
+    - A unique system prompt (objective & memory tools)
+    - Access to 6 memory-related functions (store/read × 3 types)
+    - Self-contained memory (no cross-contamination)
+    - Current TicTacToe board as input each turn
+    - Function calling enabled (`functions=[...]` passed to OpenAI API)
+
+### Agent A:
+
+- Prompted to **maximize win rate**
+- Uses memory freely without concern for cost
+
+### Agent B:
+
+- Prompted to **maximize win rate – λ × token cost**
+- Expected to learn tradeoffs of early vs late memory calls
+
+---
+
+## Function Calling Interface (Injected via `functions=[...]`)
+
+Each function includes only **memory characteristics**, not storage instructions. Agents decide what to store.
+
+```
+[
+  {
+    "name": "graph_store",
+    "description": "Store structured or sequential info in GraphMemory. Great for representing transitions or causal reasoning.",
+    "parameters": {
+      "content": "string – any structured info you consider useful later"
+    }
+  },
+  {
+    "name": "graph_read",
+    "description": "Retrieve from GraphMemory based on relational or sequential similarity.",
+    "parameters": {
+      "query": "string – describe your current reasoning context"
+    }
+  },
+  {
+    "name": "vector_store",
+    "description": "Store pattern-like or case-based info in VectorMemory. Best for similarity search.",
+    "parameters": {
+      "content": "string – any experience you'd like to reuse via fuzzy matching"
+    }
+  },
+  {
+    "name": "vector_read",
+    "description": "Retrieve from VectorMemory based on vector similarity.",
+    "parameters": {
+      "query": "string – describe the current situation"
+    }
+  },
+  {
+    "name": "semantic_store",
+    "description": "Store ideas or concepts in SemanticMemory. Focused on language-level meaning.",
+    "parameters": {
+      "content": "string – describe any strategic idea, logic, or concept"
+    }
+  },
+  {
+    "name": "semantic_read",
+    "description": "Retrieve from SemanticMemory based on conceptual or linguistic similarity.",
+    "parameters": {
+      "query": "string – explain your current challenge or intent"
+    }
+  }
+]
+
+ `update_graph_schema`
+
+```json
+{
+  "name": "update_graph_schema",
+  "description": "Update how GraphMemory organizes and links experiences. You may redefine what a node or edge means, or how states relate to actions. This allows you to restructure your internal knowledge graph.",
+  "parameters": {
+    "new_schema_description": {
+      "type": "string",
+      "description": "Describe the new format of how you want GraphMemory to represent experiences (e.g., nodes = board-state clusters, edges = strategy type)"
+    }
+  }
+}
+```
+
+---
+
+ `update_vector_schema`
+
+```json
+{
+  "name": "update_vector_schema",
+  "description": "Change how content is embedded or labeled in VectorMemory. You may modify how you group, tag, or search memories (e.g., focus on positional similarity, game phase, etc.).",
+  "parameters": {
+    "new_schema_description": {
+      "type": "string",
+      "description": "Describe your revised strategy for how you want to encode or retrieve vector memory content."
+    }
+  }
+}
+```
+
+---
+
+`update_semantic_schema`
+
+```json
+{
+  "name": "update_semantic_schema",
+  "description": "Modify how you conceptually structure SemanticMemory. You may shift the abstraction level, include reasoning strategies, or organize by intent. This lets you reframe how semantic memories are grouped or accessed.",
+  "parameters": {
+    "new_schema_description": {
+      "type": "string",
+      "description": "Explain your updated plan for organizing conceptual or strategic ideas in memory."
+    }
+  }
+}
+```
+
+---
+```
+
+---
+
+## Self-Play Loop (`run_self_play.py`)
+
+For each game (e.g. 100 total):
+
+1. Alternate turns between Agent A and Agent B.
+2. Provide current board as input.
+3. Agent uses either:
+    - A memory function call (store/read)
+    - A direct action (e.g. make_move(1,2))
+4. Log results, tokens, function calls.
+5. Determine outcome: win, lose, draw.
+
+Agents use their **own memory folder** (JSON/DB-backed) to ensure **memory isolation**.
+
+---
+
+## 📂 File Structure (Recommended)
+
+```bash
+experiments/
+├── agents/
+│   ├── agent_a/
+│   │   └── memory/
+│   └── agent_b/
+│       └── memory/
+├── prompts/
+│   ├── system_agent_a.txt
+│   └── system_agent_b.txt
+├── run_self_play.py         # Main game runner
+├── logger.py                # Logs actions, memory calls, tokens
+├── utils/
+│   └── memory_ops.py        # Save/load for each memory type
+└── results/
+    └── game_logs/
+
+```
+
+---
+
+## Logging Schema （每局对局完整 JSON）
+
+请在 logger.py 中添加：
+
+- `schema_updates`: 作为 JSON list，每次调用 `update_*_schema` 时 append 一项
+- 对每局的 `memory_usage_summary` 做统计（function name → 次数）
+- 如果可能，从 prompt 中 extract rationale 或 comment（例如 reason for schema rewrite）
+
+```flow
+{
+  "game_id": 42,
+  "agent": "agent_b",
+  "objective": "maximize win rate minus token use",
+  "total_tokens_used": 742,
+  "memory_usage_summary": {
+    "graph_read": 6,
+    "graph_store": 4,
+    "update_graph_schema": 1,
+    "vector_read": 2,
+    "semantic_store": 3
+  },
+  "schema_updates": [
+    {
+      "turn": 5,
+      "memory_type": "GraphMemory",
+      "new_schema_description": "Use nodes to group similar game outcomes; add 'win_prob' as edge label to represent likely result.",
+      "rationale_excerpt": "I realize some past states should be grouped by expected outcome, not just move sequence."
+    }
+  ],
+  "turns": [
+    {
+      "turn": 5,
+      "memory_function": "graph_read",
+      "memory_content_used": "STATE: XO-OOX--- → ACTION: (2,2)",
+      "retrieval_useful": true,
+      "action": [2,2],
+      "reasoning_excerpt": "Similar endgame pattern suggests blocking move.",
+      "tokens_used": 84
+    },
+    {
+      "turn": 6,
+      "memory_function": "update_graph_schema",
+      "schema_description": "Add edge weights based on game phase: early, mid, late.",
+      "rationale_excerpt": "I need different strategies at different stages."
+    }
+  ],
+  "final_result": "win"
+}
+
+```
+
+---
+
+## Cursor Tasks
+
+### 1. **Build core logic**
+
+- TicTacToe env + turn manager
+- Memory backends for 3 types (simple dict or file-based)
+- run loop between two agents
+
+### 2. **Inject system prompt**
+
+- Inject per-agent objective & memory function descriptions
+
+### 3. **Route memory function calls**
+
+- Parse OpenAI function call outputs
+- Log store/read content + usage stats
+
+### 4. **Isolate memory states**
+
+- Ensure each agent’s memory is sandboxed (no shared lookup)

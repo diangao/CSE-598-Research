@@ -1,0 +1,156 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[margin=1in]{geometry} 
+\usepackage{setspace} 
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+
+
+\setstretch{1.15}
+
+
+\setlength{\parskip}{0.5em}
+
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{1em}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{1.25em}{0.75em}
+
+\title{\Large\textbf{Midterm Report}}
+\author{Anish Chandra, Diyan Gao, Linglong Meng}
+\date{March 2025}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Introduction}
+
+Our research investigates the emergent behaviors of large language model (LLM) agents as they learn to strategically utilize external memory systems through explicitly defined function calls. This represents a significant evolution from our initial proposal, which focused primarily on comparative analysis of pre-defined memory architectures. Instead, we have pivoted toward examining how agents autonomously develop memory utilization strategies when given access to multiple memory systems simultaneously.
+
+\subsection{Evolution from Proposal to Current Approach}
+
+While our proposal focused on comparing different memory architectures through controlled experiments with fixed memory retrieval patterns, our current work explores a fundamentally different question: How do LLM agents develop agency in memory management? Initial explorations with $\tau$-bench revealed that the pre-determined memory access patterns constrained our ability to observe emergent behaviors. This led us to reconceptualize our approach, shifting from researcher-determined memory access to agent-directed memory interaction.
+
+This paradigm shift required us to develop a novel experimental framework centered on fine-tuning LLM agents with function-calling capabilities. Rather than embedding agents within fixed memory architectures, we now equip them with explicit memory management functions, allowing them to develop increasingly sophisticated memory utilization strategies through experience. This approach enables us to trace the emergence of memory-aware metacognition in increasingly complex problem-solving scenarios.
+
+The reconceptualized experimental design positions us to address more ambitious research questions about how artificial agents develop and refine cognitive strategies when equipped with externalized memory systems. By observing how agents navigate the trade-offs between different memory systems across varying task complexities, we gain insight into the fundamental relationship between memory architecture and problem-solving capability in artificial intelligence systems.
+
+\subsection{Memory Systems Design}
+
+Our current implementation examines two distinct memory systems, each representing fundamentally different approaches to knowledge organization and retrieval. In our experimental design, we conduct separate trials where the agent is constrained to use only one memory system at a time, allowing us to isolate and analyze the specific impact of each memory architecture on agent performance.
+
+The discrete memory space implements a graph-based representation where game states are encoded as nodes and possible transitions as edges. This architectural choice creates an explicit spatial representation of the problem space, allowing for precise path-based retrieval and deterministic traversal of state transitions. The implementation leverages graph database principles for efficient state tracking and relationship modeling, enabling the agent to construct explicit models of action consequences.
+
+In contrast, the continuous memory space operates through a vector-based representation where experiences are encoded as dense embeddings within a high-dimensional semantic space. This approach facilitates approximate matching and similarity-based retrieval, allowing the agent to identify relevant experiences based on structural or semantic proximity rather than exact matching. This memory system excels at identifying broad patterns and generalizing across similar but non-identical situations.
+
+The agent interacts with these memory systems through specific function calls: discrete memory storage and retrieval in one experimental condition, and continuous memory storage and retrieval in another condition. By constraining the agent to a single memory type per experimental condition, we can directly observe how each memory architecture influences the agent's learning trajectory and strategy development across increasing levels of task complexity.
+
+% \subsection{Experimental Framework}
+
+% Our experimental framework centers on a progressively challenging series of Tic-Tac-Toe games, where board dimensions increase incrementally from the standard 3×3 configuration to substantially more complex 60×60 boards. This progression creates a controlled complexity gradient that allows us to observe how different memory architectures perform as computational and cognitive demands increase. For each board size, we conduct separate experimental trials with agents constrained to use either the discrete (graph-based) or continuous (vector-based) memory system, creating a comparative analysis across the complexity spectrum.
+
+% In each trial, the agent consistently plays against a randomly-moving opponent, creating a stable baseline for measuring performance improvements attributed solely to the memory architecture rather than opponent modeling. This controlled opponent strategy ensures that performance differences can be directly attributed to the memory system's influence on learning and decision-making.
+
+% A critical innovation in our experimental methodology is the implementation of comprehensive memory snapshots. After each memory operation, we capture the complete state of the memory system, creating a high-resolution timeline of memory evolution throughout the learning process. These snapshots allow us to trace the agent's developing understanding of the problem space and identify critical learning moments where significant strategic insights emerge. Complementing these snapshots, we maintain detailed logs of function call patterns, recording not only when memory systems are accessed but also the context and apparent purpose of each interaction.
+
+% Performance metrics focus on both immediate and cumulative outcomes. We track per-game win rates to measure immediate performance, while cumulative win rates across the complexity gradient reveal broader learning trajectories. By comparing these metrics between discrete and continuous memory conditions, we can identify the relative strengths and limitations of each memory architecture at different complexity levels.
+
+\subsection{Research Questions}
+
+This experimental framework positions us to address several fundamental questions about memory utilization in artificial intelligence systems:
+
+How do different memory architectures affect an agent's learning and performance as task complexity increases? By comparing the performance trajectories of agents using discrete versus continuous memory systems across increasing board sizes, we can identify the relative strengths and limitations of each architecture at different complexity levels. Initial observations suggest that discrete memory systems may provide advantages in simpler problem spaces, while continuous systems might offer benefits as complexity grows.
+
+What patterns emerge in memory storage and retrieval operations across different game phases when the agent is restricted to a specific memory type? We hypothesize that agents will develop memory utilization strategies optimized for their assigned memory architecture, with potentially distinct approaches for opening phases, midgame scenarios, and endgame positions. The transition points between these phases may reveal important insights about how different memory architectures shape strategic thinking.
+
+How does memory architecture influence an agent's ability to learn from experience over time? By analyzing win rate trajectories for each memory condition, we can determine how different memory architectures affect the rate and extent of learning. This analysis may reveal critical thresholds where certain memory architectures provide decisive advantages or limitations.
+
+Can we identify characteristic patterns of memory utilization through snapshot analysis? By examining memory snapshots before and after significant performance improvements, we may be able to identify specific knowledge structures that emerge within each memory architecture and enable higher-level strategy formation. These patterns could provide insights into how different memory systems organize and leverage experiential knowledge.
+
+
+\section{Methods}
+At this point, we have determined and planned most of our methodology. Recall that the goal of this study is first to determine which memory form allows the model to perform better on a certain game (and scale). Then, the more interesting follow-up is: Why is this outcome the case?
+
+Currently, not much research has been done about how an LLM may want to store/retrieve and process information from external memory; however, there are experiments studying the usage of formatting the retrieved data into the prompt. We will be borrowing some parts of the design from these experiments.
+
+\subsection{LLM Agent Composition}
+The agent is a commonly defined entity in reinforcement learning (RL). At a fundamental level, the idea is that an agent is typically placed within an environment and its goal is to optimize future actions to maximize reward. The reward is formally defined as a numerical value that determines whether the agent was productive or unproductive during its action. Let us define these for our experiment.
+
+For this study, the agent will be composed of two main components. The Large Language model (LLM) based ``brain'' and an external memory module. The LLM will be a fine-tuned model trained to use two functions: \verb|store| and \verb|retrieve|. Through what the model decides is most important to store, we can determine what it may decide is most important to remember. In a higher level understanding, we're using this memory module as a means of understanding the decision process for a model when provided a task.
+
+\subsection{The Discrete Task: TicTacToe \& Training Process}
+Since we are developing an agent, it must be clear what environment it interacts with. This study focuses primarily on discrete tasks, as that allows us to deterministically test the agent on its capability (e.g. win rate). However, there must be some defined requirements for this environment to be able to expose the underlying agent.
+
+The requirements for the discrete task are quite simple: determine one whose strategy space can be easily simplified or complicated. This is important as there is potential for a more complicated space to require higher dimensions to operate in (provided by the continuous space) despite the finite states. Under this simple requirement, TicTacToe fits perfectly as it is an easy game to start, and can be complicated without adding many rules (e.g. adding more spaces/pieces to win).
+
+From here, we focus on the gaming process. Recall that most RL environment designs incorporate a form of reward function. Formally,
+$$R(a, s)=\text{ reward for action $a$ from state $s$}$$
+Since TicTacToe is quite simple, we can define this function easily:
+\[R_{\text{final}} = \begin{cases} 
+      -1 & \text{if agent lost,} \\
+      1 & \text{if agent won or tied} \\
+   \end{cases}
+\]
+Note that each move in the middle of a game doesn't exactly have a reward of 1. It is likely a real number between $-1$ and 1, until the last move, which is deterministic. For this paper let's suppose we had access to an accurate black box model, $\sigma$, that given a board, it returns a fractional reward (representing who's most likely to win).
+$$R(a,s) = \sigma(a, s) \in [-1, 1]$$
+The intuition is that given a current board, the model should be able to learn the reward function defined above during inference time, or in other words, learn the best move given any board.
+
+From here, we would increase the size of the board (thereby increasing sophistication in strategy) and determine if any trends arise as a result.
+
+\subsection{Evaluation Metrics \& Interpretation}
+The most simple metric to learn is the average reward for game boards provided to the model. This metric informs us directly: is this memory form helping the agent succeed more? Note that during the inference-time evaluations of boards, we will be taking snapshots of the memory and recording logs of all the prompts. We'll be able to evaluate the snapshots of the memory of the agent, and determine if there are any apparent trends in the information being stored.
+
+Since we're dealing with storing information in digital spaces, this problem can be described and interpreted via some aspects of the Information Theory. However, this is still being fleshed out and determined on how it may be used.
+
+\section{Current Progress and Next Steps}
+
+\subsection{Completed Work}
+
+Prior to our paradigm shift, we had successfully implemented and validated three distinct memory architectures (graph-based, vector-based, and semantic), establishing a comprehensive foundation for our research. The memory-augmented agent framework we developed extends the $\tau$-bench environment with sophisticated memory capabilities, enabling controlled experimentation in strategic reasoning tasks. Our custom Tic-Tac-Toe environment serves as an ideal testbed for memory evaluation, providing a well-understood problem space with clear success criteria. Additionally, we have implemented comprehensive data collection mechanisms that capture detailed memory performance metrics, including retrieval times, storage patterns, and win rates.
+
+Our codebase includes robust implementations of base memory classes with clearly defined interfaces for storage and retrieval operations. These interfaces establish a consistent interaction pattern for all memory types, ensuring fair comparison across architectures. The memory-augmented agent classes we developed integrate seamlessly with the ReAct reasoning framework, allowing memory contents to influence decision-making while maintaining the core reasoning process. The experimental runners we created enable systematic evaluation through controlled parameterization, supporting reproducible experimentation and detailed result analysis.
+
+We expect to be able to reuse some of this code to perform our shifted direction.
+
+\subsection{Current Limitations}
+
+Our initial approach, while technically sound, revealed several limitations that motivated our pivot to a new research direction. The fixed memory retrieval pattern we initially implemented constrains the agent's ability to develop novel memory strategies, limiting our observation of emergent behaviors. This predetermined approach to memory access restricts the agent's agency and potentially masks more sophisticated memory utilization patterns that might develop under less constrained conditions. Additionally, the standard 3×3 Tic-Tac-Toe environment, while providing a clear and controlled testbed, may be too simple to fully demonstrate the benefits of different memory architectures. The limited state space and strategic depth may not sufficiently challenge memory systems to reveal their distinctive strengths and limitations. Furthermore, our pre-defined memory architectures, while theoretically grounded, restrict agent autonomy in memory management, potentially overlooking more effective hybrid approaches that an agent might develop if given greater flexibility in memory utilization.
+
+\subsection{Next Steps}
+
+For our new research direction, our immediate next steps involve implementing a sophisticated function-calling interface for memory operations. This interface will allow agents to explicitly invoke memory storage and retrieval functions, creating a transparent mechanism for studying memory utilization patterns. We will develop scalable Tic-Tac-Toe environments with incrementally increasing board sizes, creating a complexity gradient that systematically challenges memory systems under progressively more demanding conditions. Alongside these technical developments, we will create comprehensive snapshot mechanisms to capture memory system states throughout the learning process, enabling high-resolution analysis of memory evolution. Finally, we will design nuanced metrics to evaluate memory utilization patterns and strategy development, focusing on both quantitative performance indicators and qualitative assessments of strategic sophistication.
+
+We anticipate that this new direction will yield deeper insights into how artificial agents develop and refine memory-based cognitive strategies in progressive learning scenarios. By studying memory utilization across a complexity gradient, we hope to identify critical thresholds where different memory architectures provide distinct advantages, potentially informing the design of more adaptive and contextually appropriate memory systems for artificial intelligence.
+
+\section{Conclusion}
+Overall, so far we have demonstrated significant progress in developing and validating a novel memory-augmented agent system integrated with the $\tau$-bench framework. Our approach has evolved from comparing fixed, pre-defined memory architectures to exploring emergent memory management strategies, enabling LLM agents to autonomously determine when and how to access external memory.
+
+Specifically, by equipping agents with explicit function calls for both discrete (graph-based) and continuous (vector-based) memory storage and retrieval, our system allows the agents to leverage the complementary strengths of structured, path-based reasoning and flexible, similarity-driven decision-making. The experimental framework—centered on a progressively challenging series of Tic-Tac-Toe games, which ranges from 3×3 to 60×60 boards, providing a controlled complexity gradient, while comprehensive memory snapshots and detailed function call logs offer valuable insights into the evolving memory utilization strategies.
+
+Preliminary results validate the feasibility of our framework. Although complete quantitative assessments are still underway, the early data confirm that both methods function effectively within our experimental setup, and they offer promising avenues for further exploration.
+
+Moving forward, our efforts will focus on refining module integration and conducting extensive experiments to quantify key performance metrics such as $\tau$-bench success rate, retrieval latency, and decision quality. Future experiments will aim to quantify key performance metrics such as $\tau$-bench success rate, retrieval latency, and decision quality. These efforts aim to deepen our understanding of the trade-offs between explicit and continuous memory representations, thereby informing the design of more sophisticated, memory-aware LLM agents.
+
+
+
+
+\end{document}

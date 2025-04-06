@@ -1,0 +1,1 @@
+{"graph_schema": "Default graph schema: nodes represent board states, edges represent moves", "vector_schema": "Default vector schema: memories stored as board state + action pairs", "semantic_schema": "Default semantic schema: conceptual strategies organized by game phase"}
