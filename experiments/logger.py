@@ -28,13 +28,13 @@ class GameLogger:
         logger.info(f"GameLogger initialized with logs directory: {logs_dir}")
         logger.info(f"Run ID for this session: {self.run_id}")
     
-    def start_game(self, game_id, agent_a_objective, agent_b_objective, board_size=3):
-        """Start a new game log"""
+    def start_game(self, game_num, agent_a_objective, agent_b_objective, board_size=3):
+        """Start logging a new game"""
         self.current_game = {
             "run_id": self.run_id,
-            "game_id": game_id,
-            "timestamp": datetime.now().isoformat(),
-            "board_size": f"{board_size}x{board_size}",
+            "game_id": game_num,
+            "timestamp": self._get_timestamp(),
+            "board_size": board_size,
             "agent_a": {
                 "objective": agent_a_objective,
                 "total_tokens_used": 0,
@@ -72,7 +72,7 @@ class GameLogger:
             "final_result": None
         }
         
-        logger.info(f"Started new game log for game ID: {game_id} with board size {board_size}x{board_size}")
+        logger.info(f"Started new game log for game ID: {game_num} with board size {board_size}x{board_size}")
     
     def log_turn(self, turn_number, agent_id, board_state, action=None, 
                  memory_function=None, memory_content=None, memory_query=None,
@@ -144,7 +144,7 @@ class GameLogger:
         logger.info(f"Logged turn {turn_number} for agent {agent_id}")
         return True
     
-    def end_game(self, result, winner=None):
+    def end_game(self, result, winner=None, memory_constraint_a="none", memory_constraint_b="none", model="unknown", board_size=3):
         """End the current game and save the log"""
         if self.current_game is None:
             logger.error("Cannot end game: No active game")
@@ -157,16 +157,19 @@ class GameLogger:
         
         # Save game log to file
         game_id = self.current_game["game_id"]
-        board_size = self.current_game["board_size"]
+        board_size_str = self.current_game["board_size"]
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         run_id = self.current_game["run_id"]
-        log_filename = f"run_{run_id}_game_{game_id}_{board_size}_{timestamp}.json"
+        
+        # Create a more descriptive filename
+        model_name = model.replace("-", "_").replace("/", "_")
+        log_filename = f"game_run{run_id}_id{game_id}_size{board_size}_memA{memory_constraint_a}_memB{memory_constraint_b}_{model_name}_{timestamp}.json"
         log_filepath = self.logs_dir / log_filename
         
         with open(log_filepath, 'w') as f:
             json.dump(self.current_game, f, indent=2)
         
-        logger.info(f"Game {game_id} ({board_size}) ended with result: {result}. Log saved to {log_filepath}")
+        logger.info(f"Game {game_id} ({board_size_str}) ended with result: {result}. Log saved to {log_filepath}")
         
         # Clear current game
         self.current_game = None
@@ -195,4 +198,8 @@ class GameLogger:
         }
         
         logger.info(f"Stored move info for agent {agent_id}: {move}")
-        return True 
+        return True
+
+    def _get_timestamp(self):
+        """Get current timestamp in ISO format"""
+        return datetime.now().isoformat() 
