@@ -18,10 +18,17 @@ def analyze_memory_call_frequency(df=None, save_path='experiments/results/analys
     
     os.makedirs(save_path, exist_ok=True)
     
-    # Create memory call frequency analysis charts
-    plt.figure(figsize=(15, 12))
+    # Set consistent style for all plots
+    plt.style.use('seaborn-v0_8-whitegrid')
     
-    # 1. Total memory call frequency comparison (A vs B)
+    # Create memory call frequency analysis charts with improved aesthetics
+    plt.figure(figsize=(16, 14))
+    
+    # Define consistent colors for better visualization
+    agent_colors = {'Agent A': '#1f77b4', 'Agent B': '#ff7f0e'}
+    memory_colors = {'Graph': '#2ca02c', 'Vector': '#d62728', 'Semantic': '#9467bd'}
+    
+    # 1. Total memory call frequency comparison (A vs B) - Enhanced visualization
     plt.subplot(2, 2, 1)
     memory_calls_data = []
     
@@ -40,12 +47,31 @@ def analyze_memory_call_frequency(df=None, save_path='experiments/results/analys
         })
     
     memory_df = pd.DataFrame(memory_calls_data)
-    sns.barplot(data=memory_df, x='memory_constraint', y='total_memory_calls', hue='agent')
-    plt.title('Total Memory Calls by Memory Architecture and Agent')
-    plt.xlabel('Memory Architecture')
-    plt.ylabel('Total Memory Calls')
     
-    # 2. Memory calls by type (Agent A)
+    # Create more informative barplot
+    ax1 = sns.barplot(data=memory_df, x='memory_constraint', y='total_memory_calls', hue='agent', palette=agent_colors)
+    
+    # Add value labels on top of each bar
+    for p in ax1.patches:
+        height = p.get_height()
+        if height > 0:  # Only add label if there's a visible bar
+            ax1.text(p.get_x() + p.get_width()/2., height + 0.3,
+                    f'{int(height)}',
+                    ha="center", fontsize=10)
+    
+    # Improve labels and title
+    plt.title('Total Memory Calls by Memory Architecture and Agent', fontsize=14, fontweight='bold')
+    plt.xlabel('Memory Architecture', fontsize=12)
+    plt.ylabel('Total Memory Calls', fontsize=12)
+    
+    # Rename x-axis labels for clarity
+    plt.xticks([0, 1], ['Graph Memory Only', 'Vector Memory Only'], fontsize=11)
+    
+    # Add annotation explaining the implication
+    plt.text(0.5, 1, "Finding: Agent A (win-rate optimizer) makes significantly more memory calls",
+             ha='center', fontsize=10, style='italic', color='darkblue')
+    
+    # 2. Memory calls by type (Agent A) - Enhanced visualization
     plt.subplot(2, 2, 2)
     memory_types_a = []
     
@@ -70,12 +96,31 @@ def analyze_memory_call_frequency(df=None, save_path='experiments/results/analys
         })
     
     memory_types_a_df = pd.DataFrame(memory_types_a)
-    sns.barplot(data=memory_types_a_df, x='memory_constraint', y='calls', hue='memory_type')
-    plt.title('Agent A: Memory Calls by Type')
-    plt.xlabel('Memory Architecture')
-    plt.ylabel('Number of Calls')
     
-    # 3. Memory calls by type (Agent B)
+    # Create more informative barplot
+    ax2 = sns.barplot(data=memory_types_a_df, x='memory_constraint', y='calls', hue='memory_type', palette=memory_colors)
+    
+    # Add value labels on top of each bar
+    for p in ax2.patches:
+        height = p.get_height()
+        if height > 0:  # Only add label if there's a visible bar
+            ax2.text(p.get_x() + p.get_width()/2., height + 0.3,
+                    f'{int(height)}',
+                    ha="center", fontsize=10)
+    
+    # Improve labels and title
+    plt.title('Agent A: Memory Calls by Type', fontsize=14, fontweight='bold')
+    plt.xlabel('Memory Architecture', fontsize=12)
+    plt.ylabel('Number of Calls', fontsize=12)
+    
+    # Rename x-axis labels for clarity
+    plt.xticks([0, 1], ['Graph Memory Only', 'Vector Memory Only'], fontsize=11)
+    
+    # Add annotation explaining the implication
+    plt.text(0.5, 1, "Hypothesis: Agents adapt to the available memory type",
+             ha='center', fontsize=10, style='italic', color='darkblue')
+    
+    # 3. Memory calls by type (Agent B) - Enhanced visualization
     plt.subplot(2, 2, 3)
     memory_types_b = []
     
@@ -100,35 +145,101 @@ def analyze_memory_call_frequency(df=None, save_path='experiments/results/analys
         })
     
     memory_types_b_df = pd.DataFrame(memory_types_b)
-    sns.barplot(data=memory_types_b_df, x='memory_constraint', y='calls', hue='memory_type')
-    plt.title('Agent B: Memory Calls by Type')
-    plt.xlabel('Memory Architecture')
-    plt.ylabel('Number of Calls')
     
-    # 4. Memory calls across board sizes
+    # Create more informative barplot
+    ax3 = sns.barplot(data=memory_types_b_df, x='memory_constraint', y='calls', hue='memory_type', palette=memory_colors)
+    
+    # Add value labels on top of each bar
+    for p in ax3.patches:
+        height = p.get_height()
+        if height > 0:  # Only add label if there's a visible bar
+            ax3.text(p.get_x() + p.get_width()/2., height + 0.1,
+                    f'{int(height)}',
+                    ha="center", fontsize=10)
+    
+    # Improve labels and title
+    plt.title('Agent B: Memory Calls by Type', fontsize=14, fontweight='bold')
+    plt.xlabel('Memory Architecture', fontsize=12)
+    plt.ylabel('Number of Calls', fontsize=12)
+    
+    # Rename x-axis labels for clarity
+    plt.xticks([0, 1], ['Graph Memory Only', 'Vector Memory Only'], fontsize=11)
+    
+    # Add annotation explaining the implication
+    plt.text(0.5, 0.5, "Finding: Agent B (token-efficient) makes fewer memory calls",
+             ha='center', fontsize=10, style='italic', color='darkblue')
+    
+    # 4. Memory calls across board sizes - Enhanced visualization
     plt.subplot(2, 2, 4)
     board_memory_impact = df.groupby(['memory_constraint_a', 'board_size']).agg({
         'agent_a_total_memory_calls': 'mean',
         'agent_b_total_memory_calls': 'mean'
     }).reset_index()
     
-    for agent, marker in [('agent_a_total_memory_calls', 'o'), ('agent_b_total_memory_calls', 's')]:
+    # Create a more informative and clear line plot
+    plt.figure(4)  # Create a separate figure for this plot for better control
+    
+    # Define line styles and markers for clarity
+    styles = {
+        'graph_only': '-',
+        'vector_only': '--'
+    }
+    
+    # Plot with clearer labels and styles
+    for agent, marker, color, agent_label in [
+        ('agent_a_total_memory_calls', 'o', '#1f77b4', 'Agent A'),
+        ('agent_b_total_memory_calls', 's', '#ff7f0e', 'Agent B')
+    ]:
         for constraint in sorted(board_memory_impact['memory_constraint_a'].unique()):
             data = board_memory_impact[board_memory_impact['memory_constraint_a'] == constraint]
-            plt.plot(data['board_size'], data[agent], 
-                     marker=marker, 
-                     label=f"{agent.split('_')[0].title()} ({constraint})",
-                     linestyle='-' if 'a' in agent else '--')
+            
+            # Convert board size to numeric for proper plotting
+            data['board_size_num'] = data['board_size'].str.extract('(\d+)').astype(int)
+            data = data.sort_values('board_size_num')
+            
+            # Plot the line
+            line = plt.plot(
+                data['board_size'], 
+                data[agent],
+                marker=marker,
+                label=f"{agent_label} ({constraint.replace('_only', ' Memory')})",
+                linestyle=styles[constraint],
+                linewidth=2.5,
+                markersize=8,
+                color=color if 'agent_a' in agent else color
+            )
+            
+            # Add data labels at each point
+            for i, row in data.iterrows():
+                plt.text(row['board_size'], row[agent] + 0.5, 
+                         f"{int(row[agent])}", 
+                         ha='center', va='bottom', 
+                         fontsize=9,
+                         color=line[0].get_color())
     
-    plt.title('Memory Calls by Board Size and Memory Architecture')
-    plt.xlabel('Board Size')
-    plt.ylabel('Average Memory Calls')
-    plt.legend()
+    # Improve chart appearance
+    plt.title('Memory Calls by Board Size and Memory Architecture', fontsize=14, fontweight='bold')
+    plt.xlabel('Board Size', fontsize=12)
+    plt.ylabel('Average Memory Calls', fontsize=12)
+    plt.legend(loc='upper left', frameon=True)
     plt.grid(True, linestyle='--', alpha=0.7)
     
+    # Add annotation explaining the key findings
+    plt.text('6', 5, "Finding: Vector memory usage increases with board complexity\nwhile Graph memory peaks at medium complexity",
+             ha='center', fontsize=10, style='italic', color='darkblue')
+    
+    # Ensure proper spacing and layout
     plt.tight_layout()
-    plt.savefig(os.path.join(save_path, 'memory_call_frequency.png'))
+    
+    # Save the board size analysis as a separate, high-quality image
+    plt.savefig(os.path.join(save_path, 'memory_calls_by_board_size.png'), dpi=300, bbox_inches='tight')
+    
+    # Return to the main figure and save it
+    plt.figure(1)
+    plt.tight_layout()
+    plt.savefig(os.path.join(save_path, 'memory_call_frequency.png'), dpi=300, bbox_inches='tight')
     print(f"Memory call frequency analysis plot saved to {os.path.join(save_path, 'memory_call_frequency.png')}")
+    print(f"Memory calls by board size analysis saved to {os.path.join(save_path, 'memory_calls_by_board_size.png')}")
     
     # Generate detailed memory call statistics table
     memory_stats = df.groupby(['memory_constraint_a', 'board_size']).agg({

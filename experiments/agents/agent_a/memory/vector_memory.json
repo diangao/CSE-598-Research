@@ -94,6 +94,132 @@
       "id": 18,
       "content": "I chose the top right corner position on the board",
       "timestamp": "2025-04-12T21:19:00.666403"
+    },
+    {
+      "id": 19,
+      "content": "Opponent placed O in (2, 0); I need to block the next move to prevent losing.",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:13:12.019730"
+    },
+    {
+      "id": 20,
+      "content": "Current board state: O-X, XX-, OOX. The opponent is at risk of winning next turn, so I need to block at (1, 0) to prevent their victory.",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:13:53.110140"
+    },
+    {
+      "id": 21,
+      "content": "Board state: OOX\nOpponent has two in a row on the second row\nNext move to block: (1, 0)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:24:13.304439"
+    },
+    {
+      "id": 22,
+      "content": "Board state: OOX\nOpponent's move: XXO\nNext move to block: (0, 2)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:24:18.621198"
+    },
+    {
+      "id": 23,
+      "content": "Board state: OOX\nOpponent's move: XXO\nNext move to block: (2, 0)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:24:26.082670"
+    },
+    {
+      "id": 24,
+      "content": "Board state: OOX\nOpponent's move: X at (5, 2)\nNext move to block: (4, 1)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:24:32.745939"
+    },
+    {
+      "id": 25,
+      "content": "Board state: OOX\nOpponent's move: X at (4, 1)\nNext move to block: (5, 1)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:24:41.667092"
+    },
+    {
+      "id": 26,
+      "content": "Board state: OOX\nOpponent's move: X at (5, 2)\nNext move to block: (5, 0)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:24:48.632773"
+    },
+    {
+      "id": 27,
+      "content": "Board state: OOX\nOpponent's move: X at (5, 2)\nNext move to block: (6, 2)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:24:55.013193"
+    },
+    {
+      "id": 28,
+      "content": "Board state: OOX\nOpponent's move: X at (5, 2)\nNext move to block: (7, 2)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:24:59.990971"
+    },
+    {
+      "id": 29,
+      "content": "Board state: OOX\nOpponent's move: O at (6, 2)\nNext move to block: (8, 2)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:25:05.212830"
+    },
+    {
+      "id": 30,
+      "content": "Board state: OOX\nOpponent's move: O at (7, 1)\nNext move to block: (6, 0)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:25:11.880540"
+    },
+    {
+      "id": 31,
+      "content": "Board state: OOX\nOpponent's move: O at (8, 1)\nNext move to block: (7, 1)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:25:18.450332"
+    },
+    {
+      "id": 32,
+      "content": "Board state: OOX\nOpponent's move: O at (8, 1)\nNext move to block: (7, 1)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:25:26.427085"
+    },
+    {
+      "id": 33,
+      "content": "Board state: OOX\nOpponent's move: O at (8, 1)\nNext move to block: (6, 0)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:25:35.191079"
+    },
+    {
+      "id": 34,
+      "content": "Board state: OOX\nOpponent's move: O at (5, 1)\nNext move to block: (3, 2)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:25:43.084848"
+    },
+    {
+      "id": 35,
+      "content": "Board state: OOX\nOpponent's move: O at (3, 0)\nNext move to block: (3, 1)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:25:47.781094"
+    },
+    {
+      "id": 36,
+      "content": "Board state: OOX\nOpponent's move: O at (4, 1)\nNext move to block: (5, 2)",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-13T14:25:57.871104"
     }
   ]
 }

@@ -6,19 +6,22 @@ import numpy as np
 from datetime import datetime
 import glob
 
+# 获取项目根目录的绝对路径
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
+
 def get_all_experiment_files():
     """Get paths to all experiment summary files"""
     files = []
     
     # Get experiment files from dian's directory (constrained memory experiments)
-    dian_path = "../from_dian/"
+    dian_path = os.path.join(PROJECT_ROOT, "experiments/results/from_dian")
     if os.path.exists(dian_path):
         for file in os.listdir(dian_path):
             if file.endswith(".json") and file.startswith("exp_memA"):
                 files.append(os.path.join(dian_path, file))
     
     # Get experiment files from anish's directory (adaptive memory experiments)
-    anish_path = "../from_anish/"
+    anish_path = os.path.join(PROJECT_ROOT, "experiments/results/from_anish")
     if os.path.exists(anish_path):
         for file in os.listdir(anish_path):
             if file.endswith(".json") and file.startswith("exp_memA"):
@@ -31,14 +34,14 @@ def get_all_game_log_files():
     logs = []
     
     # Get game logs from dian's directory (constrained memory experiments)
-    dian_logs = "../from_dian/game_logs/"
+    dian_logs = os.path.join(PROJECT_ROOT, "experiments/results/from_dian/game_logs")
     if os.path.exists(dian_logs):
         for file in os.listdir(dian_logs):
             if file.endswith(".json") and file.startswith("game_run"):
                 logs.append(os.path.join(dian_logs, file))
     
     # Get game logs from anish's directory (adaptive memory experiments)
-    anish_logs = "../from_anish/game_logs/"
+    anish_logs = os.path.join(PROJECT_ROOT, "experiments/results/from_anish/game_logs")
     if os.path.exists(anish_logs):
         for file in os.listdir(anish_logs):
             if file.endswith(".json") and file.startswith("game_run"):
@@ -183,9 +186,9 @@ def load_experiment_data(results_dir=None, experiment_type=None):
         search_dirs.append(results_dir)
     else:
         if experiment_type == 'constrained' or experiment_type is None:
-            search_dirs.append("../from_dian")
+            search_dirs.append(os.path.join(PROJECT_ROOT, "experiments/results/from_dian"))
         if experiment_type == 'adaptive' or experiment_type is None:
-            search_dirs.append("../from_anish")
+            search_dirs.append(os.path.join(PROJECT_ROOT, "experiments/results/from_anish"))
     
     # Find all experiment JSON files across specified directories
     json_files = []
@@ -305,9 +308,9 @@ def process_game_logs(logs_dir=None, experiment_type=None):
         search_dirs.append(logs_dir)
     else:
         if experiment_type == 'constrained' or experiment_type is None:
-            search_dirs.append("../from_dian/game_logs")
+            search_dirs.append(os.path.join(PROJECT_ROOT, "experiments/results/from_dian/game_logs"))
         if experiment_type == 'adaptive' or experiment_type is None:
-            search_dirs.append("../from_anish/game_logs")
+            search_dirs.append(os.path.join(PROJECT_ROOT, "experiments/results/from_anish/game_logs"))
     
     # Find all game log JSON files across specified directories
     log_files = []

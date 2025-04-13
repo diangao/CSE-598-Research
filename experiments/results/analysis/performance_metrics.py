@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from data_loader import load_experiment_data
+from experiments.results.analysis.data_loader import load_experiment_data
 
 def analyze_win_rates(df=None, save_path='experiments/results/analysis/figures'):
     """
@@ -18,10 +18,16 @@ def analyze_win_rates(df=None, save_path='experiments/results/analysis/figures')
     
     os.makedirs(save_path, exist_ok=True)
     
-    # Create win rate analysis charts
-    plt.figure(figsize=(15, 12))
+    # Set a consistent style for all plots
+    plt.style.use('seaborn-v0_8-whitegrid')
     
-    # 1. Win rates by memory architecture
+    # Create win rate analysis charts with improved aesthetics
+    plt.figure(figsize=(16, 14))
+    
+    # Define consistent colors for better visualization
+    colors = {'Agent A': '#1f77b4', 'Agent B': '#ff7f0e'}
+    
+    # 1. Win rates by memory architecture - Enhanced visualization
     plt.subplot(2, 2, 1)
     win_data = []
     
@@ -40,12 +46,38 @@ def analyze_win_rates(df=None, save_path='experiments/results/analysis/figures')
         })
     
     win_df = pd.DataFrame(win_data)
-    sns.barplot(data=win_df, x='memory_constraint', y='win_rate', hue='agent')
-    plt.title('Win Rates by Memory Architecture and Agent')
-    plt.xlabel('Memory Architecture')
-    plt.ylabel('Win Rate (%)')
     
-    # 2. Win rates by board size
+    # 移除图表中多余的0.0%标签 - 清除当前子图
+    plt.clf()
+    plt.subplot(2, 2, 1)
+    
+    # Create more informative barplot
+    ax1 = sns.barplot(data=win_df, x='memory_constraint', y='win_rate', hue='agent', palette=colors)
+    
+    # Add value labels on top of each bar
+    for p in ax1.patches:
+        height = p.get_height()
+        if height > 0.5:  # 只为有意义的高度添加标签
+            ax1.text(p.get_x() + p.get_width()/2., height + 1,
+                    f'{height:.1f}%',
+                    ha="center", fontsize=10)
+    
+    # Improve labels and title
+    plt.title('Win Rates by Memory Architecture and Agent', fontsize=14, fontweight='bold')
+    plt.xlabel('Memory Architecture', fontsize=12)
+    plt.ylabel('Win Rate (%)', fontsize=12)
+    
+    # Rename x-axis labels for clarity
+    plt.xticks([0, 1], ['Graph Memory Only', 'Vector Memory Only'], fontsize=11)
+    
+    # Add a horizontal line at 50% to show baseline
+    plt.axhline(y=50, color='gray', linestyle='--', alpha=0.7)
+    
+    # Add annotation explaining the implication
+    plt.text(0.5, 5, "Hypothesis: Vector memory provides advantage on complex board states",
+             ha='center', fontsize=10, style='italic', color='darkblue')
+    
+    # 2. Win rates by board size - Enhanced visualization
     plt.subplot(2, 2, 2)
     size_data = []
     
@@ -64,12 +96,38 @@ def analyze_win_rates(df=None, save_path='experiments/results/analysis/figures')
         })
     
     size_df = pd.DataFrame(size_data)
-    sns.barplot(data=size_df, x='board_size', y='win_rate', hue='agent')
-    plt.title('Win Rates by Board Size')
-    plt.xlabel('Board Size')
-    plt.ylabel('Win Rate (%)')
     
-    # 3. Draw rates by memory architecture and board size
+    # 确保按照棋盘大小的正确顺序(从小到大)排序
+    board_size_order = sorted(size_df['board_size'].unique())
+    
+    # 移除图表中多余的0.0%标签 - 清除当前子图
+    plt.clf()
+    plt.subplot(2, 2, 2)
+    
+    # Create more informative barplot with correct board size order
+    ax2 = sns.barplot(data=size_df, x='board_size', y='win_rate', hue='agent', palette=colors, order=board_size_order)
+    
+    # Add value labels on top of each bar
+    for p in ax2.patches:
+        height = p.get_height()
+        if height > 0.5:  # 只为有意义的高度添加标签
+            ax2.text(p.get_x() + p.get_width()/2., height + 1,
+                    f'{height:.1f}%',
+                    ha="center", fontsize=10)
+    
+    # Improve labels and title
+    plt.title('Win Rates by Board Size', fontsize=14, fontweight='bold')
+    plt.xlabel('Board Size', fontsize=12)
+    plt.ylabel('Win Rate (%)', fontsize=12)
+    
+    # Add a horizontal line at 50% to show balance point
+    plt.axhline(y=50, color='gray', linestyle='--', alpha=0.7)
+    
+    # Add annotation explaining the implication
+    plt.text(1, 5, "Hypothesis: Board size affects relative agent performance",
+             ha='center', fontsize=10, style='italic', color='darkblue')
+    
+    # 3. Draw rates by memory architecture and board size - Enhanced visualization
     plt.subplot(2, 2, 3)
     draw_data = []
     
@@ -81,12 +139,38 @@ def analyze_win_rates(df=None, save_path='experiments/results/analysis/figures')
         })
     
     draw_df = pd.DataFrame(draw_data)
-    sns.barplot(data=draw_df, x='memory_constraint', y='draw_rate', hue='board_size')
-    plt.title('Draw Rates by Memory Architecture and Board Size')
-    plt.xlabel('Memory Architecture')
-    plt.ylabel('Draw Rate (%)')
     
-    # 4. First-player advantage by memory architecture and board size
+    # 确保按照棋盘大小的正确顺序(从小到大)排序
+    board_size_order = sorted(draw_df['board_size'].unique())
+    
+    # 移除图表中多余的0.0%标签 - 清除当前子图
+    plt.clf()
+    plt.subplot(2, 2, 3)
+    
+    # Create more informative barplot with better colors and correct board size order
+    ax3 = sns.barplot(data=draw_df, x='memory_constraint', y='draw_rate', hue='board_size', palette='viridis', hue_order=board_size_order)
+    
+    # Add value labels on top of each bar
+    for p in ax3.patches:
+        height = p.get_height()
+        if height > 0.5:  # 只为有意义的高度添加标签
+            ax3.text(p.get_x() + p.get_width()/2., height + 0.5,
+                    f'{height:.1f}%',
+                    ha="center", fontsize=10)
+    
+    # Improve labels and title
+    plt.title('Draw Rates by Memory Architecture and Board Size', fontsize=14, fontweight='bold')
+    plt.xlabel('Memory Architecture', fontsize=12)
+    plt.ylabel('Draw Rate (%)', fontsize=12)
+    
+    # Rename x-axis labels for clarity
+    plt.xticks([0, 1], ['Graph Memory Only', 'Vector Memory Only'], fontsize=11)
+    
+    # Add annotation explaining the implication
+    plt.text(0.5, 5, "Finding: Draw rates decrease with increasing board complexity",
+             ha='center', fontsize=10, style='italic', color='darkblue')
+    
+    # 4. First-player advantage by memory architecture and board size - Enhanced visualization
     plt.subplot(2, 2, 4)
     advantage_data = []
     
@@ -100,17 +184,44 @@ def analyze_win_rates(df=None, save_path='experiments/results/analysis/figures')
     
     if advantage_data:
         advantage_df = pd.DataFrame(advantage_data)
-        sns.barplot(data=advantage_df, x='memory_constraint', y='first_player_advantage', hue='board_size')
-        plt.title('First-Player Advantage by Memory Architecture and Board Size')
-        plt.xlabel('Memory Architecture')
-        plt.ylabel('First-Player Advantage (deviation from 50%)')
+        
+        # 确保按照棋盘大小的正确顺序(从小到大)排序
+        board_size_order = sorted(advantage_df['board_size'].unique())
+        
+        # 移除图表中多余的0.0%标签 - 清除当前子图
+        plt.clf()
+        plt.subplot(2, 2, 4)
+        
+        ax4 = sns.barplot(data=advantage_df, x='memory_constraint', y='first_player_advantage', hue='board_size', palette='viridis', hue_order=board_size_order)
+        
+        # Add value labels on top of each bar
+        for p in ax4.patches:
+            height = p.get_height()
+            if abs(height) > 1:  # Only add label if there's a significant advantage
+                ax4.text(p.get_x() + p.get_width()/2., height + (1 if height > 0 else -3),
+                        f'{height:.1f}%',
+                        ha="center", fontsize=10)
+        
+        # Improve labels and title
+        plt.title('First-Player Advantage by Memory Architecture and Board Size', fontsize=14, fontweight='bold')
+        plt.xlabel('Memory Architecture', fontsize=12)
+        plt.ylabel('First-Player Advantage (deviation from 50%)', fontsize=12)
+        
+        # Rename x-axis labels for clarity
+        plt.xticks([0, 1], ['Graph Memory Only', 'Vector Memory Only'], fontsize=11)
+        
+        # Add a horizontal line at 0 to show baseline (no advantage)
         plt.axhline(y=0, color='red', linestyle='--')
+        
+        # Add annotation explaining the implication
+        plt.text(0.5, -15, "Finding: First-player advantage increases with board size",
+                 ha='center', fontsize=10, style='italic', color='darkblue')
     else:
         plt.text(0.5, 0.5, 'No first-player advantage data available', 
                  horizontalalignment='center', verticalalignment='center')
     
     plt.tight_layout()
-    plt.savefig(os.path.join(save_path, 'win_rate_analysis.png'))
+    plt.savefig(os.path.join(save_path, 'win_rate_analysis.png'), dpi=300, bbox_inches='tight')
     print(f"Win rate analysis plot saved to {os.path.join(save_path, 'win_rate_analysis.png')}")
     
     # Generate win rate statistics table
@@ -169,10 +280,25 @@ def analyze_token_efficiency(df=None, save_path='experiments/results/analysis/fi
     
     if token_data:
         token_df = pd.DataFrame(token_data)
-        sns.barplot(data=token_df, x='memory_constraint', y='tokens_per_game', hue='agent')
+        
+        # 移除图表中多余的0.0%标签 - 清除当前子图
+        plt.clf()
+        plt.subplot(2, 2, 1)
+        
+        ax = sns.barplot(data=token_df, x='memory_constraint', y='tokens_per_game', hue='agent')
+        
+        # 为图表添加数值标签
+        for p in ax.patches:
+            height = p.get_height()
+            if height > 100:  # 只为有意义的数值添加标签
+                ax.text(p.get_x() + p.get_width()/2., height + 1000,
+                        f'{int(height):,}',
+                        ha="center", fontsize=9)
+        
         plt.title('Average Token Usage per Game by Memory Architecture')
         plt.xlabel('Memory Architecture')
         plt.ylabel('Tokens per Game')
+        plt.xticks([0, 1], ['Graph Memory Only', 'Vector Memory Only'], fontsize=11)
     else:
         plt.text(0.5, 0.5, 'No token usage data available', 
                  horizontalalignment='center', verticalalignment='center')
@@ -181,7 +307,23 @@ def analyze_token_efficiency(df=None, save_path='experiments/results/analysis/fi
     plt.subplot(2, 2, 2)
     
     if token_data:
-        sns.barplot(data=token_df, x='board_size', y='tokens_per_game', hue='agent')
+        # 确保按照棋盘大小的正确顺序(从小到大)排序
+        board_size_order = sorted(token_df['board_size'].unique())
+        
+        # 移除图表中多余的0.0%标签 - 清除当前子图
+        plt.clf()
+        plt.subplot(2, 2, 2)
+        
+        ax = sns.barplot(data=token_df, x='board_size', y='tokens_per_game', hue='agent', order=board_size_order)
+        
+        # 为图表添加数值标签
+        for p in ax.patches:
+            height = p.get_height()
+            if height > 100:  # 只为有意义的数值添加标签
+                ax.text(p.get_x() + p.get_width()/2., height + 1000,
+                        f'{int(height):,}',
+                        ha="center", fontsize=9)
+        
         plt.title('Average Token Usage per Game by Board Size')
         plt.xlabel('Board Size')
         plt.ylabel('Tokens per Game')
@@ -211,10 +353,25 @@ def analyze_token_efficiency(df=None, save_path='experiments/results/analysis/fi
     
     if ratio_data:
         ratio_df = pd.DataFrame(ratio_data)
-        sns.barplot(data=ratio_df, x='memory_constraint', y='win_token_ratio', hue='agent')
+        
+        # 移除图表中多余的0.0%标签 - 清除当前子图
+        plt.clf()
+        plt.subplot(2, 2, 3)
+        
+        ax = sns.barplot(data=ratio_df, x='memory_constraint', y='win_token_ratio', hue='agent')
+        
+        # 为图表添加数值标签
+        for p in ax.patches:
+            height = p.get_height()
+            if height > 0.01:  # 只为有意义的数值添加标签
+                ax.text(p.get_x() + p.get_width()/2., height + 0.02,
+                        f'{height:.2f}',
+                        ha="center", fontsize=9)
+        
         plt.title('Win-Rate to Token Ratio by Memory Architecture (higher is better)')
         plt.xlabel('Memory Architecture')
         plt.ylabel('Win Rate * 10000 / Tokens per Game')
+        plt.xticks([0, 1], ['Graph Memory Only', 'Vector Memory Only'], fontsize=11)
     else:
         plt.text(0.5, 0.5, 'No token ratio data available', 
                  horizontalalignment='center', verticalalignment='center')
@@ -223,7 +380,23 @@ def analyze_token_efficiency(df=None, save_path='experiments/results/analysis/fi
     plt.subplot(2, 2, 4)
     
     if ratio_data:
-        sns.barplot(data=ratio_df, x='board_size', y='win_token_ratio', hue='agent')
+        # 确保按照棋盘大小的正确顺序(从小到大)排序
+        board_size_order = sorted(ratio_df['board_size'].unique())
+        
+        # 移除图表中多余的0.0%标签 - 清除当前子图
+        plt.clf()
+        plt.subplot(2, 2, 4)
+        
+        ax = sns.barplot(data=ratio_df, x='board_size', y='win_token_ratio', hue='agent', order=board_size_order)
+        
+        # 为图表添加数值标签
+        for p in ax.patches:
+            height = p.get_height()
+            if height > 0.01:  # 只为有意义的数值添加标签
+                ax.text(p.get_x() + p.get_width()/2., height + 0.02,
+                        f'{height:.2f}',
+                        ha="center", fontsize=9)
+        
         plt.title('Win-Rate to Token Ratio by Board Size (higher is better)')
         plt.xlabel('Board Size')
         plt.ylabel('Win Rate * 10000 / Tokens per Game')
@@ -289,8 +462,12 @@ def analyze_performance_retention(df=None, save_path='experiments/results/analys
     
     retention_df_a = pd.DataFrame(retention_data_a)
     
+    # 确保按照棋盘大小的正确顺序(从小到大)排序
+    board_size_order = sorted(retention_df_a['board_size'].unique())
+    
     for constraint in sorted(retention_df_a['memory_constraint'].unique()):
         data = retention_df_a[retention_df_a['memory_constraint'] == constraint]
+        data = data.sort_values(by='board_size')  # 确保数据按棋盘大小排序
         plt.plot(data['board_size'], data['retention_rate'], marker='o', label=f"{constraint}")
     
     plt.axhline(y=100, color='gray', linestyle='--')
@@ -298,7 +475,8 @@ def analyze_performance_retention(df=None, save_path='experiments/results/analys
     plt.xlabel('Board Size')
     plt.ylabel('Performance Retention (% of 3x3 baseline)')
     plt.grid(True, linestyle='--', alpha=0.7)
-    plt.legend()
+    plt.legend(labels=['graph_only', 'vector_only'])
+    plt.xticks(board_size_order)  # 确保X轴刻度按正确顺序显示
     
     # 2. Performance retention by board size and memory architecture (Agent B)
     plt.subplot(2, 2, 2)
@@ -314,8 +492,12 @@ def analyze_performance_retention(df=None, save_path='experiments/results/analys
     
     retention_df_b = pd.DataFrame(retention_data_b)
     
+    # 确保按照棋盘大小的正确顺序(从小到大)排序
+    board_size_order = sorted(retention_df_b['board_size'].unique())
+    
     for constraint in sorted(retention_df_b['memory_constraint'].unique()):
         data = retention_df_b[retention_df_b['memory_constraint'] == constraint]
+        data = data.sort_values(by='board_size')  # 确保数据按棋盘大小排序
         plt.plot(data['board_size'], data['retention_rate'], marker='o', label=f"{constraint}")
     
     plt.axhline(y=100, color='gray', linestyle='--')
@@ -323,7 +505,8 @@ def analyze_performance_retention(df=None, save_path='experiments/results/analys
     plt.xlabel('Board Size')
     plt.ylabel('Performance Retention (% of 3x3 baseline)')
     plt.grid(True, linestyle='--', alpha=0.7)
-    plt.legend()
+    plt.legend(labels=['graph_only', 'vector_only'])
+    plt.xticks(board_size_order)  # 确保X轴刻度按正确顺序显示
     
     # 3. Comparative retention performance (Agent A vs B)
     plt.subplot(2, 2, 3)
@@ -349,7 +532,9 @@ def analyze_performance_retention(df=None, save_path='experiments/results/analys
     
     if combined_data:
         combined_df = pd.DataFrame(combined_data)
-        sns.barplot(data=combined_df, x='board_size', y='retention_rate', hue='agent')
+        # 确保按照棋盘大小的正确顺序(从小到大)排序
+        board_size_order = sorted(combined_df['board_size'].unique())
+        sns.barplot(data=combined_df, x='board_size', y='retention_rate', hue='agent', order=board_size_order)
         plt.axhline(y=100, color='gray', linestyle='--')
         plt.title('Performance Retention Comparison between Agents')
         plt.xlabel('Board Size')
@@ -381,7 +566,9 @@ def analyze_performance_retention(df=None, save_path='experiments/results/analys
     
     if arch_comparison:
         arch_df = pd.DataFrame(arch_comparison)
-        sns.barplot(data=arch_df, x='memory_constraint', y='avg_retention', hue='board_size')
+        # 确保按照棋盘大小的正确顺序(从小到大)排序
+        board_size_order = sorted(arch_df['board_size'].unique())
+        sns.barplot(data=arch_df, x='memory_constraint', y='avg_retention', hue='board_size', hue_order=board_size_order)
         plt.axhline(y=100, color='gray', linestyle='--')
         plt.title('Performance Retention by Memory Architecture')
         plt.xlabel('Memory Architecture')
@@ -411,6 +598,125 @@ def analyze_performance_retention(df=None, save_path='experiments/results/analys
     
     return retention_stats
 
+def analyze_memory_calls(df=None, save_path='experiments/results/analysis/figures'):
+    """
+    Analyze memory call patterns across different board sizes and memory architectures
+    
+    Args:
+        df: Experiment data DataFrame, loaded if None
+        save_path: Path to save figures
+    """
+    if df is None:
+        df = load_experiment_data(experiment_type='constrained')
+    
+    os.makedirs(save_path, exist_ok=True)
+    
+    # 这里不需要两个figure，去掉第一个
+    # plt.figure(figsize=(10, 8))
+    # plt.suptitle('Memory Calls by Board Size and Memory Architecture', fontsize=16, fontweight='bold')
+    
+    # Prepare data for memory calls chart
+    memory_data = []
+    
+    for _, row in df.iterrows():
+        # Agent A memory calls
+        if 'agent_a_graph_calls' in row:
+            memory_data.append({
+                'board_size': row['board_size'],
+                'agent': 'Agent A',
+                'memory_type': 'graph_only',
+                'calls': row['agent_a_graph_calls'] if row['memory_constraint_a'] == 'graph_only' else 0
+            })
+        if 'agent_a_vector_calls' in row:
+            memory_data.append({
+                'board_size': row['board_size'],
+                'agent': 'Agent A',
+                'memory_type': 'vector_only',
+                'calls': row['agent_a_vector_calls'] if row['memory_constraint_a'] == 'vector_only' else 0
+            })
+            
+        # Agent B memory calls
+        if 'agent_b_graph_calls' in row:
+            memory_data.append({
+                'board_size': row['board_size'],
+                'agent': 'Agent B',
+                'memory_type': 'graph_only',
+                'calls': row['agent_b_graph_calls'] if row['memory_constraint_a'] == 'graph_only' else 0
+            })
+        if 'agent_b_vector_calls' in row:
+            memory_data.append({
+                'board_size': row['board_size'],
+                'agent': 'Agent B',
+                'memory_type': 'vector_only',
+                'calls': row['agent_b_vector_calls'] if row['memory_constraint_a'] == 'vector_only' else 0
+            })
+    
+    # Create DataFrame
+    memory_df = pd.DataFrame(memory_data)
+    
+    # Filter out zero values
+    memory_df = memory_df[memory_df['calls'] > 0]
+    
+    # Group by agent, board_size, and memory_type to get average calls
+    memory_summary = memory_df.groupby(['agent', 'board_size', 'memory_type'])['calls'].mean().reset_index()
+    
+    # Create the plot
+    plt.figure(figsize=(12, 6))
+    
+    # 确保按照棋盘大小的正确顺序(从小到大)排序
+    board_size_order = sorted(memory_summary['board_size'].unique())
+    
+    # 清除图表和轴标签中任何可能的0.0%
+    plt.clf()
+    
+    # Plot lines with different colors for each agent and memory type combination
+    colors = {'Agent A': {'graph_only': '#1f77b4', 'vector_only': '#ff7f0e'}, 
+              'Agent B': {'graph_only': '#2ca02c', 'vector_only': '#d62728'}}
+    
+    for agent in memory_summary['agent'].unique():
+        for memory_type in memory_summary['memory_type'].unique():
+            data = memory_summary[(memory_summary['agent'] == agent) & (memory_summary['memory_type'] == memory_type)]
+            data = data.sort_values(by='board_size')  # Ensure data is sorted by board size
+            if not data.empty:
+                plt.plot(data['board_size'], data['calls'], marker='o', 
+                         label=f"{agent} ({memory_type})",
+                         linewidth=2,
+                         color=colors[agent][memory_type])
+    
+    # 添加数据标签
+    for agent in memory_summary['agent'].unique():
+        for memory_type in memory_summary['memory_type'].unique():
+            data = memory_summary[(memory_summary['agent'] == agent) & (memory_summary['memory_type'] == memory_type)]
+            data = data.sort_values(by='board_size')  # Ensure data is sorted by board size
+            if not data.empty:
+                for i, row in data.iterrows():
+                    plt.text(row['board_size'], row['calls'] + 0.5, 
+                             f"{int(row['calls'])}", 
+                             ha='center', 
+                             fontsize=9)
+    
+    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.title('Memory Calls by Board Size and Memory Architecture', fontsize=14, fontweight='bold')
+    plt.xlabel('Board Size', fontsize=12)
+    plt.ylabel('Average Memory Calls', fontsize=12)
+    plt.xticks(board_size_order)  # 确保X轴刻度按正确顺序显示
+    plt.legend()
+    plt.tight_layout()
+    
+    plt.savefig(os.path.join(save_path, 'memory_calls_by_board_size.png'), dpi=300, bbox_inches='tight')
+    print(f"Memory calls analysis plot saved to {os.path.join(save_path, 'memory_calls_by_board_size.png')}")
+    
+    # Generate memory call statistics
+    memory_stats = memory_summary.pivot_table(index=['agent', 'memory_type'], 
+                                             columns='board_size', 
+                                             values='calls').reset_index()
+    
+    # Save statistics to CSV
+    memory_stats.to_csv(os.path.join(save_path, 'memory_call_statistics.csv'))
+    print(f"Memory call statistics saved to {os.path.join(save_path, 'memory_call_statistics.csv')}")
+    
+    return memory_stats
+
 if __name__ == "__main__":
     # Create directory for saving figures
     os.makedirs('experiments/results/analysis/figures', exist_ok=True)
@@ -422,5 +728,6 @@ if __name__ == "__main__":
     analyze_win_rates(df)
     analyze_token_efficiency(df)
     analyze_performance_retention(df)
+    analyze_memory_calls(df)
     
     print("Performance metrics analysis completed.") 
