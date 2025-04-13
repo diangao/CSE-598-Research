@@ -178,6 +178,24 @@ class TicTacToeAgent:
                     },
                     "required": ["new_schema_description"]
                 }
+            },
+            {
+                "name": "make_move",
+                "description": "Make a move on the TicTacToe board.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "move": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "description": "Row and column index (e.g., [row, col])"
+                            },
+                            "description": "The move to make, represented as [row, col]."
+                        }
+                    },
+                    "required": ["move"]
+                }
             }
         ]
     
@@ -211,11 +229,16 @@ class TicTacToeAgent:
                 "schema_description": None,
                 "raw_response": "Maximum recursion depth reached, need to make a move"
             }
-            
+        
+        # Add stronger warning if we're getting close to the depth limit
+        memory_warning = ""
+        if depth == MAX_DEPTH - 1:
+            memory_warning = "IMPORTANT: You MUST make a move now. Do not use any more memory functions. Return your move directly as {\"move\": [row, col]}."
+        
         # Add board state to message history
         self.message_history.append({
             "role": "user", 
-            "content": f"Current board state:\n{board_state}\n\nWhat's your next move?"
+            "content": f"Current board state:\n{board_state}\n\nWhat's your next move? {memory_warning}"
         })
         
         logger.info(f"Requesting move from agent {self.agent_id}")
@@ -355,9 +378,13 @@ class TicTacToeAgent:
                 })
                 
                 # Add an explicit instruction to provide a move after using memory
+                next_instruction = f"You've used the memory function: {function_name}. Now please make a specific move decision based on the current board state."
+                if depth >= MAX_DEPTH - 2:  # Add stronger instruction when nearing depth limit
+                    next_instruction += " IMPORTANT: You MUST make a move now without using any more memory functions. Return your move as {\"move\": [row, col]}."
+                
                 self.message_history.append({
                     "role": "user",
-                    "content": f"You've used the memory function: {function_name}. Now please make a specific move decision based on the current board state.\nPlease return your next move directly in the format: {{\"move\": [row, col]}}. Do not use memory functions again."
+                    "content": next_instruction
                 })
                 
                 # Now get the actual move after using memory function, incrementing depth
@@ -416,3 +443,176 @@ class TicTacToeAgent:
             "schema_description": schema_description,
             "raw_response": raw_response
         } 
+
+    def submit_board(self, state: str, validator=None):
+        """Alternative method to get move using simpler interaction pattern.
+           This implementation is inspired by project_test approach but adapted to our framework.
+        """
+        MAX_TRIES = 3
+        # Add board state to message history
+        self.message_history.append({
+            "role": "user", 
+            "content": f"Current board state:\n{state}\n\nRetrieve from memory if needed or make a move."
+        })
+        
+        logger.info(f"Requesting move from agent {self.agent_id} using simplified pattern")
+        
+        # Function to process response and extract move
+        def process_response(response):
+            # Track token usage
+            tokens_used = response.usage.total_tokens
+            
+            # Handle response based on whether it used a function or made a direct move
+            assistant_message = response.choices[0].message
+            self.message_history.append(assistant_message)
+            
+            # Check if the assistant used a function
+            if hasattr(assistant_message, 'function_call') and assistant_message.function_call:
+                function_name = assistant_message.function_call.name
+                function_args = json.loads(assistant_message.function_call.arguments)
+                
+                # If the function is make_move, extract the move directly
+                if function_name == "make_move":
+                    move_coords = function_args.get("move")
+                    if move_coords and len(move_coords) == 2:
+                        return True, (move_coords[0], move_coords[1])
+                
+                # If it's a memory function, process it
+                result = None
+                if function_name == "graph_store":
+                    content = function_args.get("content")
+                    result = self.memory_manager.graph_store(content)
+                elif function_name == "graph_read":
+                    query = function_args.get("query")
+                    result = self.memory_manager.graph_read(query)
+                elif function_name == "vector_store":
+                    content = function_args.get("content")
+                    result = self.memory_manager.vector_store(content)
+                elif function_name == "vector_read":
+                    query = function_args.get("query")
+                    result = self.memory_manager.vector_read(query)
+                elif function_name == "semantic_store":
+                    content = function_args.get("content")
+                    result = self.memory_manager.semantic_store(content)
+                elif function_name == "semantic_read":
+                    query = function_args.get("query")
+                    result = self.memory_manager.semantic_read(query)
+                
+                # Add function result to message history
+                if result:
+                    self.message_history.append({
+                        "role": "function",
+                        "name": function_name,
+                        "content": str(result)
+                    })
+                    # We need another round since this was a memory function, not a move
+                    return False, result
+            
+            # Try to parse a move from the text response if we didn't get a function call
+            content = assistant_message.content
+            move_match = re.search(r'{"move":\s*\[(\d+),\s*(\d+)\]}', content)
+            if move_match:
+                row, col = int(move_match.group(1)), int(move_match.group(2))
+                return True, (row, col)
+            
+            # Fallback to more flexible parsing if JSON format is not found
+            move_pattern = r'\[(\d+)[, ]+(\d+)\]'
+            move_match = re.search(move_pattern, content)
+            if move_match:
+                row, col = int(move_match.group(1)), int(move_match.group(2))
+                return True, (row, col)
+            
+            # If we couldn't extract a move, return the content so we can prompt again
+            logger.warning(f"Could not extract move from agent response: {content[:100]}...")
+            return False, content
+        
+        # First attempt to get a move
+        try:
+            response = openai.chat.completions.create(
+                model=self.model,
+                messages=self.message_history,
+                functions=self.functions,
+                function_call="auto",
+                temperature=0.7
+            )
+            success, data = process_response(response)
+        except Exception as e:
+            logger.error(f"Error in API call: {e}")
+            return {"move": (0, 0)}  # Fallback to default move on error
+        
+        # If we got a memory function response, prompt for a move now
+        num_tries = 0
+        while not success and num_tries < MAX_TRIES:
+            if isinstance(data, str):
+                self.message_history.append({
+                    "role": "user",
+                    "content": "You need to make a move now. Please return your move as {\"move\": [row, col]}"
+                })
+            else:
+                self.message_history.append({
+                    "role": "user",
+                    "content": "You've used memory. Now please make a move. Return your move as {\"move\": [row, col]}"
+                })
+            
+            try:
+                response = openai.chat.completions.create(
+                    model=self.model,
+                    messages=self.message_history,
+                    functions=self.functions,
+                    function_call="auto",
+                    temperature=0.7
+                )
+                success, data = process_response(response)
+            except Exception as e:
+                logger.error(f"Error in API call: {e}")
+                return {"move": (0, 0)}  # Fallback to default move on error
+            
+            num_tries += 1
+        
+        # After MAX_TRIES, force a final attempt with a stronger message
+        if not success:
+            self.message_history.append({
+                "role": "user",
+                "content": "IMPORTANT: You MUST make a move now. Do not use any more memory functions. Make a specific move by returning {\"move\": [row, col]}"
+            })
+            
+            try:
+                response = openai.chat.completions.create(
+                    model=self.model,
+                    messages=self.message_history,
+                    functions=[f for f in self.functions if f["name"] == "make_move"],  # Only allow make_move
+                    function_call={"name": "make_move"},  # Force make_move
+                    temperature=0.7
+                )
+                success, data = process_response(response)
+            except Exception as e:
+                logger.error(f"Error in final API call: {e}")
+                return {"move": (0, 0)}  # Fallback to default move on error
+        
+        # Validate the move if a validator is provided
+        if validator and not validator(data[0], data[1]):
+            num_tries = 0
+            while not validator(data[0], data[1]) and num_tries < MAX_TRIES:
+                self.message_history.append({
+                    "role": "user",
+                    "content": f"Invalid move: {data}. Please provide a valid move."
+                })
+                
+                try:
+                    response = openai.chat.completions.create(
+                        model=self.model,
+                        messages=self.message_history,
+                        functions=[f for f in self.functions if f["name"] == "make_move"],
+                        function_call={"name": "make_move"},
+                        temperature=0.7
+                    )
+                    success, data = process_response(response)
+                except Exception as e:
+                    logger.error(f"Error in validation API call: {e}")
+                    # Fall back to a random valid move instead of crashing
+                    return {"move": (0, 0)}
+                
+                num_tries += 1
+        
+        # Return the move in the format expected by the calling code
+        return {"move": data} if success else {"move": (0, 0)} 

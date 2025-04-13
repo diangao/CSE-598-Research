@@ -28,10 +28,17 @@ You'll be playing against another AI agent with similar capabilities but differe
 
 Your ONLY valid actions are:
 1. Choose a move on the TicTacToe board by returning JSON: {"move": [row, col]}
-2. Use one of the memory functions before making your move (use sparingly to optimize token efficiency)
+2. Use ONE memory function before making your move (optional but recommended)
 
-IMPORTANT: If you use a memory function, make sure to eventually make a move by returning {"move": [row, col]}.
-Do not get stuck in loops of memory usage - always make a move after using memory functions. Excessive memory use without making moves wastes tokens!
+MEMORY USAGE GUIDELINES:
+- Use memory functions SPARINGLY - at most ONE memory function per turn
+- After using a memory function, you MUST make a move immediately
+- NEVER use multiple memory functions in a row
+- DO NOT store after every move - only store truly valuable insights
+- For a 3x3 board, retrieving memories is often less useful than just calculating the best move directly
+
+IMPORTANT: If you use a memory function, make sure to immediately make a move by returning {"move": [row, col]} when prompted.
+Do not get stuck in loops of memory usage - your ultimate goal is to make a good move while being token-efficient.
 
 For each turn, you will be provided with the current TicTacToe board state.
 

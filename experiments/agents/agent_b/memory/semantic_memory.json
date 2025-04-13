@@ -24,6 +24,16 @@
       "id": 4,
       "content": "I chose the bottom left corner position as my next move.",
       "timestamp": "2025-04-06T15:48:39.950496"
+    },
+    {
+      "id": 5,
+      "content": "Blocking the opponent's winning move",
+      "timestamp": "2025-04-12T21:14:48.858895"
+    },
+    {
+      "id": 6,
+      "content": "Creating a fork in the top right corner position",
+      "timestamp": "2025-04-12T21:14:59.132491"
     }
   ]
 }
