@@ -1,0 +1,45 @@
+[
+    {
+        "name": "retrieve",
+        "description": "Retrieve from memory based on relational or sequential similarity.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "state": {"type": "string", "description": "The current board state in 2D array form."}
+            },
+            "required": ["state"]
+        }
+    },
+    {
+        "name": "store",
+        "description": "Triggers storage of current state with model's metadata (thoughts).",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "metadata": {
+                    "type": "string",
+                    "description": "Any description to attach to this state."
+                }
+            },
+            "required" : ["metadata"]
+        }
+    },
+    {
+        "name": "make_move",
+        "description": "Make a move on the TicTacToe board.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "move": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "description": "Row and column index (e.g., [row, col])"
+                    },
+                    "description": "The move to make, represented as [row, col]."
+                }
+            },
+            "required": ["move"]
+        }
+    }
+]

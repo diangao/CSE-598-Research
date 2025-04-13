@@ -1,0 +1,155 @@
+--------------------
+---
+---
+---
+--------------------
+Model called function:
+--------------
+retrieve(
+        {
+  "state": "---------"
+}
+)
+--------------
+Retrieved transitions: []
+Model called function:
+--------------
+make_move(
+        {
+  "move": [
+    1,
+    1
+  ]
+}
+)
+--------------
+Model made a move: {'move': [1, 1]}
+1 1
+Model Storage Thought: None
+--------------
+store(
+        {
+  "metadata": "Starting state of the game. The strategy is to create opportunities to win by placing 'X' in a way that can lead to a three-in-a-row in subsequent moves. Prioritize the center position and corners."
+}
+)
+--------------
+Storing Prev State: ---------
+--------------------
+---
+-X-
+---
+--------------------
+Human (R C): 0 0
+0 0
+--------------------
+O--
+-X-
+---
+--------------------
+Model called function:
+--------------
+retrieve(
+        {
+  "state": "O--X---"
+}
+)
+--------------
+Model called function:
+--------------
+make_move(
+        {
+  "move": [
+    2,
+    0
+  ]
+}
+)
+--------------
+Model made a move: {'move': [2, 0]}
+2 0
+Model Storage Thought: None
+--------------
+store(
+        {
+  "metadata": "Current board state is O---X----. The strategy here is to look for opportunities to block O from winning and to position X to create a winning line."
+}
+)
+--------------
+Storing Prev State: O---X----
+--------------------
+O--
+-X-
+X--
+--------------------
+Human (R C): 1 0
+1 0
+--------------------
+O--
+OX-
+X--
+--------------------
+Model called function:
+--------------
+retrieve(
+        {
+  "state": "O--OX-X--"
+}
+)
+--------------
+Retrieved transitions: ['Current board state is O---X----. The strategy here is to look for opportunities to block O from winning and to position X to create a winning line.', "Starting state of the game. The strategy is to create opportunities to win by placing 'X' in a way that can lead to a three-in-a-row in subsequent moves. Prioritize the center position and corners."]
+Model called function:
+--------------
+make_move(
+        {
+  "move": [
+    2,
+    0
+  ]
+}
+)
+--------------
+Model made a move: {'move': [2, 0]}
+2 0
+--------------------
+O--
+OX-
+X--
+--------------------
+Model called function:
+--------------
+retrieve(
+        {
+  "state": "O--OX-X--"
+}
+)
+--------------
+Retrieved transitions: ['Current board state is O---X----. The strategy here is to look for opportunities to block O from winning and to position X to create a winning line.', "Starting state of the game. The strategy is to create opportunities to win by placing 'X' in a way that can lead to a three-in-a-row in subsequent moves. Prioritize the center position and corners."]
+Model called function:
+--------------
+make_move(
+        {
+  "move": [
+    0,
+    2
+  ]
+}
+)
+--------------
+Model made a move: {'move': [0, 2]}
+0 2
+Model Storage Thought: None
+--------------
+store(
+        {
+  "metadata": "Current board state is O--OX-X--. The strategy is to look for opportunities to block O from winning and also create a winning opportunity for X."
+}
+)
+--------------
+Storing Prev State: O--OX-X--
+----------------------------------------
+--------------------
+O-X
+OX-
+X--
+--------------------
+The winner is: X

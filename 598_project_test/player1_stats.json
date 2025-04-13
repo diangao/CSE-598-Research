@@ -1,0 +1,14 @@
+{
+  "memory_accesses": 3,
+  "memory_node_counts": [
+    1,
+    2,
+    3
+  ],
+  "game_results": [
+    {
+      "winner": "X",
+      "final_board": "O-X\nOX-\nX--"
+    }
+  ]
+}
