@@ -6,8 +6,8 @@ class TicTacToe:
             board_size: Size of the board (e.g., 3 for 3x3, 4 for 4x4, etc.)
         """
         # Validate board size
-        if board_size not in [3, 4, 5, 6]:
-            raise ValueError("Board size must be 3, 4, 5, or 6")
+        if board_size not in [3, 4, 5, 6, 9]:
+            raise ValueError("Board size must be 3, 4, 5, 6, or 9")
         
         self.board_size = board_size
         # Initialize empty board
@@ -18,8 +18,13 @@ class TicTacToe:
         self.winner = None
         
         # For win condition: number of marks in a line needed to win
-        # For 3x3, need 3; for 4x4 and larger, need 4
-        self.win_length = min(board_size, 4)
+        # For 3x3, need 3; for 4x4-6x6, need 4; for 9x9, need 5
+        if board_size <= 3:
+            self.win_length = 3
+        elif board_size <= 6:
+            self.win_length = 4
+        else:  # 9x9
+            self.win_length = 5
     
     def reset(self):
         """Reset the game to initial state"""
