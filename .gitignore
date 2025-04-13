@@ -28,7 +28,7 @@ venv_*/
 .env/
 .venv/
 
-# Python编译文件
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -50,11 +50,11 @@ wheels/
 .installed.cfg
 *.egg
 
-# 日志文件
+# Cython debug symbols
 *.log
 logs/
 
-# 测试覆盖率报告
+# Coverage and testing
 .coverage
 htmlcov/
 .tox/
@@ -68,14 +68,14 @@ coverage.xml
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# 环境配置
+# Environment configuration
 .env
 .venv
 env/
 venv/
 ENV/
 
-# IDE相关文件
+# IDE related files
 .idea/
 .vscode/
 *.swp
@@ -86,15 +86,55 @@ ENV/
 .ropeproject
 /site
 
-# 实验结果和缓存
+# Experiment results and cache
 experiments/results/*
 !experiments/results/.gitkeep
 .cache/
 experiments/.env
 
-# 大型模型文件
+# Large model files
 *.pt
 *.pth
 *.h5
 *.model
 *.bin
+
+# Python virtual environment
+venv*/
+tictactoe_env/
+*venv*/
+env/
+.env/
+
+# Coverage and testing
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Installation logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Other common IDE and editor files
+# VS Code
+.vscode/
+.history/
+# PyCharm
+.idea/
+# Jupyter Notebook
+.ipynb_checkpoints
+# macOS
+.DS_Store
+
+# Log files
+*.log
+
+# Local configuration files
+.env
+.envrc
