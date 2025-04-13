@@ -457,13 +457,25 @@ class TicTacToeAgent:
         
         logger.info(f"Requesting move from agent {self.agent_id} using simplified pattern")
         
+
+        memory_function_used = None
+        memory_content = None
+        memory_query = None
+        schema_update = None
+        schema_description = None
+        tokens_used = 0
+        raw_response = None
+        
         # Function to process response and extract move
         def process_response(response):
-            # Track token usage
-            tokens_used = response.usage.total_tokens
+            nonlocal memory_function_used, memory_content, memory_query, tokens_used, raw_response
             
-            # Handle response based on whether it used a function or made a direct move
+            # Track token usage
+            tokens_used += response.usage.total_tokens
+            
+            # Store raw response for logging
             assistant_message = response.choices[0].message
+            raw_response = assistant_message.content
             self.message_history.append(assistant_message)
             
             # Check if the assistant used a function
@@ -482,21 +494,33 @@ class TicTacToeAgent:
                 if function_name == "graph_store":
                     content = function_args.get("content")
                     result = self.memory_manager.graph_store(content)
+                    memory_function_used = "graph_store"
+                    memory_content = content
                 elif function_name == "graph_read":
                     query = function_args.get("query")
                     result = self.memory_manager.graph_read(query)
+                    memory_function_used = "graph_read"
+                    memory_query = query
                 elif function_name == "vector_store":
                     content = function_args.get("content")
                     result = self.memory_manager.vector_store(content)
+                    memory_function_used = "vector_store"
+                    memory_content = content
                 elif function_name == "vector_read":
                     query = function_args.get("query")
                     result = self.memory_manager.vector_read(query)
+                    memory_function_used = "vector_read"
+                    memory_query = query
                 elif function_name == "semantic_store":
                     content = function_args.get("content")
                     result = self.memory_manager.semantic_store(content)
+                    memory_function_used = "semantic_store"
+                    memory_content = content
                 elif function_name == "semantic_read":
                     query = function_args.get("query")
                     result = self.memory_manager.semantic_read(query)
+                    memory_function_used = "semantic_read"
+                    memory_query = query
                 
                 # Add function result to message history
                 if result:
@@ -538,7 +562,16 @@ class TicTacToeAgent:
             success, data = process_response(response)
         except Exception as e:
             logger.error(f"Error in API call: {e}")
-            return {"move": (0, 0)}  # Fallback to default move on error
+            return (None, {
+                "tokens_used": tokens_used,
+                "memory_function": memory_function_used,
+                "memory_content": memory_content,
+                "memory_query": memory_query,
+                "schema_update": schema_update,
+                "schema_description": schema_description,
+                "raw_response": raw_response,
+                "error": str(e)
+            })
         
         # If we got a memory function response, prompt for a move now
         num_tries = 0
@@ -565,7 +598,16 @@ class TicTacToeAgent:
                 success, data = process_response(response)
             except Exception as e:
                 logger.error(f"Error in API call: {e}")
-                return {"move": (0, 0)}  # Fallback to default move on error
+                return (None, {
+                    "tokens_used": tokens_used,
+                    "memory_function": memory_function_used,
+                    "memory_content": memory_content,
+                    "memory_query": memory_query,
+                    "schema_update": schema_update,
+                    "schema_description": schema_description,
+                    "raw_response": raw_response,
+                    "error": str(e)
+                })
             
             num_tries += 1
         
@@ -587,10 +629,19 @@ class TicTacToeAgent:
                 success, data = process_response(response)
             except Exception as e:
                 logger.error(f"Error in final API call: {e}")
-                return {"move": (0, 0)}  # Fallback to default move on error
+                return (None, {
+                    "tokens_used": tokens_used,
+                    "memory_function": memory_function_used,
+                    "memory_content": memory_content,
+                    "memory_query": memory_query,
+                    "schema_update": schema_update,
+                    "schema_description": schema_description,
+                    "raw_response": raw_response,
+                    "error": str(e)
+                })
         
         # Validate the move if a validator is provided
-        if validator and not validator(data[0], data[1]):
+        if validator and success and not validator(data[0], data[1]):
             num_tries = 0
             while not validator(data[0], data[1]) and num_tries < MAX_TRIES:
                 self.message_history.append({
@@ -610,9 +661,38 @@ class TicTacToeAgent:
                 except Exception as e:
                     logger.error(f"Error in validation API call: {e}")
                     # Fall back to a random valid move instead of crashing
-                    return {"move": (0, 0)}
+                    return (None, {
+                        "tokens_used": tokens_used,
+                        "memory_function": memory_function_used,
+                        "memory_content": memory_content,
+                        "memory_query": memory_query,
+                        "schema_update": schema_update,
+                        "schema_description": schema_description,
+                        "raw_response": raw_response,
+                        "error": str(e)
+                    })
                 
                 num_tries += 1
+                # 如果尝试多次后仍无法获取有效移动，success会被设置为False
         
-        # Return the move in the format expected by the calling code
-        return {"move": data} if success else {"move": (0, 0)} 
+        # 返回与get_move相同格式的结果
+        if success:
+            return (data, {
+                "tokens_used": tokens_used,
+                "memory_function": memory_function_used,
+                "memory_content": memory_content,
+                "memory_query": memory_query,
+                "schema_update": schema_update,
+                "schema_description": schema_description,
+                "raw_response": raw_response
+            })
+        else:
+            return (None, {
+                "tokens_used": tokens_used,
+                "memory_function": memory_function_used,
+                "memory_content": memory_content,
+                "memory_query": memory_query,
+                "schema_update": schema_update,
+                "schema_description": schema_description,
+                "raw_response": raw_response
+            }) 

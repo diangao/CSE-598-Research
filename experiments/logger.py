@@ -22,6 +22,9 @@ class GameLogger:
         # Generate a unique run ID based on timestamp
         self.run_id = int(time.time())
         
+        # Store move information temporarily
+        self.last_move_info = {}
+        
         logger.info(f"GameLogger initialized with logs directory: {logs_dir}")
         logger.info(f"Run ID for this session: {self.run_id}")
     
@@ -178,4 +181,18 @@ class GameLogger:
             # Take the first portion as a simple heuristic
             excerpt_length = min(200, len(agent_response))
             return agent_response[:excerpt_length]
-        return None 
+        return None
+
+    def log_move(self, agent_id, move, move_info):
+        """Log a move made by an agent, storing information for later use in log_turn"""
+        if move_info is None:
+            move_info = {}
+        
+        # Store the move info for this agent
+        self.last_move_info[agent_id] = {
+            "move": move,
+            "move_info": move_info
+        }
+        
+        logger.info(f"Stored move info for agent {agent_id}: {move}")
+        return True 

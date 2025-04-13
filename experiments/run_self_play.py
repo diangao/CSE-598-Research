@@ -177,10 +177,7 @@ def main():
             else:
                 # Use simplified submit_board method
                 validator = lambda r, c: game.is_valid_move(r, c)
-                move_result = current_agent.submit_board(board_state, validator)
-                move = move_result.get("move")
-                # Log a simplified version of move info
-                move_info = {"submit_board_mode": True, "move": move}
+                move, move_info = current_agent.submit_board(board_state, validator)
                 game_logger.log_move(agent_id, move, move_info)
             
             # Track tokens used
