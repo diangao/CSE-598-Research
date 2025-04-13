@@ -48,14 +48,22 @@ def parse_args():
                         help='Delay between turns in seconds (default: use from .env)')
     parser.add_argument('--game_delay', type=float, default=None,
                         help='Delay between games in seconds (default: use from .env)')
-    parser.add_argument('--model', type=str, default=None,
-                        help='OpenAI model to use (default: use from .env)')
+    parser.add_argument('--model', type=str, default="gpt-4o-mini",
+                        help='OpenAI model to use (default: gpt-4o-mini)')
     parser.add_argument('--train_autoencoder', action='store_true',
                         help='Train autoencoder on collected board states after each game')
     parser.add_argument('--autoencoder_epochs', type=int, default=200,
                         help='Number of epochs for autoencoder training (default: 200)')
     parser.add_argument('--agent_mode', type=str, choices=['get_move', 'submit_board'], default='get_move',
                         help='Method to use for agent moves: get_move (original) or submit_board (simplified)')
+    parser.add_argument('--memory_constraint_a', type=str, choices=['none', 'graph_only', 'vector_only'], default='none',
+                        help='Constrain memory types available to Agent A (default: none)')
+    parser.add_argument('--memory_constraint_b', type=str, choices=['none', 'graph_only', 'vector_only'], default='none',
+                        help='Constrain memory types available to Agent B (default: none)')
+    parser.add_argument('--use_pretrained_autoencoder', action='store_true',
+                        help='Use pretrained autoencoder model instead of training a new one')
+    parser.add_argument('--pretrained_autoencoder_path', type=str, default='autoencoder.model',
+                        help='Path to pretrained autoencoder model file')
     return parser.parse_args()
 
 def main():
@@ -77,13 +85,35 @@ def main():
     game = TicTacToe(board_size=args.board_size)
     game_logger = GameLogger()
     
-    # Initialize memory managers for each agent
-    memory_manager_a = MemoryManager('agent_a')
-    memory_manager_b = MemoryManager('agent_b')
+    # Initialize memory managers for each agent with constraints
+    memory_manager_a = MemoryManager(
+        'agent_a', 
+        memory_constraint=args.memory_constraint_a,
+        use_pretrained_autoencoder=args.use_pretrained_autoencoder,
+        pretrained_autoencoder_path=args.pretrained_autoencoder_path
+    )
+    memory_manager_b = MemoryManager(
+        'agent_b', 
+        memory_constraint=args.memory_constraint_b,
+        use_pretrained_autoencoder=args.use_pretrained_autoencoder,
+        pretrained_autoencoder_path=args.pretrained_autoencoder_path
+    )
     
     # Initialize agents
     agent_a = TicTacToeAgent('agent_a', memory_manager_a)
     agent_b = TicTacToeAgent('agent_b', memory_manager_b)
+    
+    # Set model for both agents
+    if args.model:
+        agent_a.model = args.model
+        agent_b.model = args.model
+        logger.info(f"Using model: {args.model}")
+    
+    # Reset memories if experiment-level reset is specified
+    if args.memory_reset == 'experiment':
+        memory_manager_a.clear_all_memory()
+        memory_manager_b.clear_all_memory()
+        logger.info("Cleared memories for both agents at experiment start")
     
     # Track statistics
     stats = {
@@ -108,14 +138,18 @@ def main():
             'update_graph_schema': 0, 'update_vector_schema': 0, 'update_semantic_schema': 0
         },
         'agent_a_total_wins': 0,
-        'agent_b_total_wins': 0
+        'agent_b_total_wins': 0,
+        'memory_constraint_a': args.memory_constraint_a,
+        'memory_constraint_b': args.memory_constraint_b
     }
     
     # Define agent objectives (for logging)
-    agent_a_objective = "maximize win rate"
-    agent_b_objective = "maximize win rate while minimizing token use"
+    agent_a_objective = "maximize win rate while minimizing token use"  # Modified to match the screenshot
+    agent_b_objective = "maximize win rate while minimizing token use"  # Both agents use win-token tradeoff
     
     logger.info(f"Starting experiment with board size {args.board_size}x{args.board_size}")
+    logger.info(f"Agent A memory constraint: {args.memory_constraint_a}")
+    logger.info(f"Agent B memory constraint: {args.memory_constraint_b}")
     
     # Main experiment loop
     for game_num in range(1, args.num_games + 1):
@@ -135,7 +169,7 @@ def main():
             logger.info("Cleared memories for both agents for new game")
         
         # Set agent objectives
-        agent_a_objective = "maximize win rate"
+        agent_a_objective = "maximize win rate while minimizing token use"
         agent_b_objective = "maximize win rate while minimizing token use"
         
         # Determine first player
@@ -272,14 +306,23 @@ def main():
             stats['draws'] += 1
         
         # End game logging
-        log_file = game_logger.end_game(result, winner_id)
+        log_file = game_logger.end_game(
+            result, 
+            winner_id,
+            memory_constraint_a=args.memory_constraint_a,
+            memory_constraint_b=args.memory_constraint_b,
+            model=args.model,
+            board_size=args.board_size
+        )
         logger.info(f"Game {game_num} ended: {result}, winner: {winner_id}. Log saved to {log_file}")
         
-        # Train autoencoder if specified
-        if args.train_autoencoder and game_num % 2 == 0:  # Train every 2 games
+        # Train autoencoder if specified and not using pretrained
+        if args.train_autoencoder and not args.use_pretrained_autoencoder and game_num % 2 == 0:
             logger.info("Training autoencoder on collected board states")
             memory_manager_a.train_autoencoder_on_memory(epochs=args.autoencoder_epochs)
             memory_manager_b.train_autoencoder_on_memory(epochs=args.autoencoder_epochs)
+        elif args.use_pretrained_autoencoder:
+            logger.info("Skipping autoencoder training as pretrained model is being used")
         
         # Delay between games
         if game_num < args.num_games:
@@ -288,7 +331,15 @@ def main():
     # Save overall statistics
     run_id = game_logger.run_id
     stats['run_id'] = run_id
-    stats_file = output_dir / f"run_{run_id}_stats_{args.board_size}x{args.board_size}_{int(time.time())}.json"
+    
+    # Create a more descriptive file name with experiment conditions
+    memory_constraints = f"memA_{args.memory_constraint_a}_memB_{args.memory_constraint_b}"
+    model_name = args.model.replace("-", "_").replace("/", "_")  # 替换可能在文件名中产生问题的字符
+    timestamp = int(time.time())
+    
+    # 构造实验描述的文件名
+    stats_file = output_dir / f"exp_{memory_constraints}_{args.board_size}x{args.board_size}_{model_name}_{args.num_games}games_{timestamp}.json"
+    
     with open(stats_file, 'w') as f:
         json.dump(stats, f, indent=2)
     
@@ -307,6 +358,17 @@ def main():
     logger.info(f"Agent A memory calls: {sum(stats['agent_a_memory_calls'].values())}")
     logger.info(f"Agent B memory calls: {sum(stats['agent_b_memory_calls'].values())}")
     logger.info(f"Agent Mode: {args.agent_mode}")
+    logger.info(f"Memory constraint A: {args.memory_constraint_a}")
+    logger.info(f"Memory constraint B: {args.memory_constraint_b}")
+    logger.info(f"Model: {args.model}")
+    
+    # Report autoencoder info
+    if args.use_pretrained_autoencoder:
+        logger.info(f"Used pretrained autoencoder from: {args.pretrained_autoencoder_path}")
+    elif args.train_autoencoder:
+        logger.info(f"Trained autoencoder during experiment with {args.autoencoder_epochs} epochs")
+    else:
+        logger.info("No autoencoder training performed")
 
     # Report first player advantage
     first_player_wins = stats['agent_a_wins_as_first'] + stats['agent_b_wins_as_first']

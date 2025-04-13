@@ -29,39 +29,51 @@ else:
 
 class TicTacToeAgent:
     def __init__(self, agent_id, memory_manager):
-        """Initialize TicTacToe agent with OpenAI API integration and memory manager"""
-        self.agent_id = agent_id  # 'agent_a' or 'agent_b'
+        """Initialize agent with its ID and memory manager"""
+        self.agent_id = agent_id
         self.memory_manager = memory_manager
-        self.model = "gpt-3.5-turbo-16k"  # Changed to 16k version for higher context limit and lower cost
         
-        # Load system prompt
-        prompt_path = Path(f"experiments/prompts/system_{agent_id}.txt")
-        if not prompt_path.exists():
-            raise FileNotFoundError(f"System prompt file not found: {prompt_path}")
+        # Load the appropriate system prompt
+        if agent_id == "agent_a":
+            system_prompt_file = "experiments/prompts/system_agent_a.txt"
+        else:
+            system_prompt_file = "experiments/prompts/system_agent_b.txt"
         
-        with open(prompt_path, 'r') as f:
-            self.system_prompt = f.read()
+        with open(system_prompt_file, "r") as f:
+            system_prompt = f.read()
+            
+        # Save original system prompt
+        self.system_prompt = system_prompt
+            
+        # Add memory constraint information to the system prompt if applicable
+        memory_constraint = memory_manager.memory_constraint
+        if memory_constraint != "none":
+            # Prepare constraint message based on the type
+            if memory_constraint == "graph_only":
+                constraint_msg = "\n\nIMPORTANT: For this game, you are ONLY allowed to use GraphMemory functions (graph_store, graph_read, update_graph_schema).\nVectorMemory and SemanticMemory are disabled and any attempt to use them will fail."
+            elif memory_constraint == "vector_only":
+                constraint_msg = "\n\nIMPORTANT: For this game, you are ONLY allowed to use VectorMemory functions (vector_store, vector_read, update_vector_schema).\nGraphMemory and SemanticMemory are disabled and any attempt to use them will fail."
+            else:
+                constraint_msg = f"\n\nNOTE: Memory constraint '{memory_constraint}' is in effect for this game."
+            
+            # Add the constraint message to the system prompt
+            system_prompt += constraint_msg
+            logging.info(f"Added memory constraint info to {agent_id} prompt: {memory_constraint}")
+            
+        # Set up OpenAI API
+        self.model = os.getenv('OPENAI_MODEL', "gpt-4o")
         
-        # Set up function definitions for the agent
-        self.functions = self._setup_functions()
-        
-        # Message history for the agent
-        self.message_history = [{"role": "system", "content": self.system_prompt}]
-        
-        logger.info(f"TicTacToe agent '{agent_id}' initialized")
-    
-    def _setup_functions(self) -> List[Dict[str, Any]]:
-        """Set up function definitions for OpenAI API"""
-        return [
+        # Define memory-related functions the agent can use
+        self.functions = [
             {
                 "name": "graph_store",
-                "description": "Store structured or sequential info in GraphMemory. Great for representing transitions or causal reasoning.",
+                "description": "Store information in graph memory for future reference",
                 "parameters": {
                     "type": "object",
                     "properties": {
                         "content": {
                             "type": "string",
-                            "description": "any structured info you consider useful later"
+                            "description": "Content to store in graph memory (e.g., board state, move, outcome)"
                         }
                     },
                     "required": ["content"]
@@ -198,6 +210,11 @@ class TicTacToeAgent:
                 }
             }
         ]
+        
+        # Message history for the agent
+        self.message_history = [{"role": "system", "content": system_prompt}]
+        
+        logger.info(f"TicTacToe agent '{agent_id}' initialized")
     
     def reset(self):
         """Reset agent state for a new game"""

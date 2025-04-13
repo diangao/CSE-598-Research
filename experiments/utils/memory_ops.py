@@ -15,10 +15,14 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class MemoryManager:
-    def __init__(self, agent_id, memory_base_dir="experiments/agents"):
+    def __init__(self, agent_id, memory_base_dir="experiments/agents", memory_constraint="none", use_pretrained_autoencoder=False, pretrained_autoencoder_path=None):
         """Initialize memory manager for an agent"""
         self.agent_id = agent_id
         self.memory_dir = Path(f"{memory_base_dir}/{agent_id}/memory")
+        
+        # Set memory constraints
+        self.memory_constraint = memory_constraint
+        logger.info(f"Memory constraint for agent {agent_id}: {memory_constraint}")
         
         # Create memory files if they don't exist
         self.memory_dir.mkdir(parents=True, exist_ok=True)
@@ -33,7 +37,22 @@ class MemoryManager:
         
         # Initialize autoencoder for vector embeddings
         self.autoencoder = AutoEncoder()
-        self.load_or_init_autoencoder()
+        
+        # Handle pretrained autoencoder if specified
+        self.use_pretrained_autoencoder = use_pretrained_autoencoder
+        self.pretrained_autoencoder_path = Path(pretrained_autoencoder_path) if pretrained_autoencoder_path else None
+        
+        if use_pretrained_autoencoder and pretrained_autoencoder_path and Path(pretrained_autoencoder_path).exists():
+            try:
+                self.autoencoder.load_state_dict(torch.load(pretrained_autoencoder_path))
+                logger.info(f"Loaded pretrained autoencoder model from {pretrained_autoencoder_path}")
+            except Exception as e:
+                logger.error(f"Error loading pretrained autoencoder: {e}")
+                logger.info("Falling back to standard autoencoder initialization")
+                self.load_or_init_autoencoder()
+        else:
+            # Standard initialization
+            self.load_or_init_autoencoder()
         
         # Initialize GraphMemory for direct graph operations
         self.graph_memory = GraphMemory(storage=str(self.graph_pickle_path))
@@ -195,39 +214,47 @@ class MemoryManager:
     
     def graph_store(self, content):
         """Store content in graph memory (both JSON and GraphMemory object)"""
-        # Find board state and action in content (if possible)
+        # Check if constrained to vector-only memory
+        if self.memory_constraint == "vector_only":
+            logger.info(f"Agent {self.agent_id} attempted to use graph_store but is constrained to vector_only memory")
+            return "Graph memory is disabled due to vector_only constraint."
+                
+        # Extract board state from content if possible
         board_state = None
         next_state = None
         action = None
         
-        # Simple parsing - this would be more robust in a real implementation
+        # Simple parsing to find board state, action, and next state
         lines = content.split("\n")
         for i, line in enumerate(lines):
-            if "current board" in line.lower() or "board state" in line.lower():
-                if i+1 < len(lines):
-                    board_state_txt = lines[i+1].strip()
-                    if len(board_state_txt.replace(" ", "").replace("\n", "")) == 9:
-                        board_state = board_state_txt.replace(" ", "").replace("\n", "")
+            # Find board state
+            cleaned = line.replace(" ", "").replace("\n", "")
+            if len(cleaned) == 9 and all(c in "XO-" for c in cleaned):
+                if board_state is None:
+                    board_state = cleaned
+                elif next_state is None:
+                    next_state = cleaned
             
-            if "chose position" in line.lower() or "moved to" in line.lower():
-                # Extract coordinates like (1, 2) or position mentions
+            # Try to find action in text
+            if "move" in line.lower() or "position" in line.lower():
                 import re
-                pos_match = re.search(r'\((\d+),\s*(\d+)\)', line)
-                if pos_match:
-                    row, col = int(pos_match.group(1)), int(pos_match.group(2))
+                # Look for patterns like [0, 1] or (1, 2)
+                coord_match = re.search(r'[\[\(](\d+)[,\s]+(\d+)[\]\)]', line)
+                if coord_match:
+                    row, col = int(coord_match.group(1)), int(coord_match.group(2))
                     action = (row, col)
-            
-            if "resulting board" in line.lower() or "new board" in line.lower():
-                if i+1 < len(lines):
-                    next_state_txt = lines[i+1].strip()
-                    if len(next_state_txt.replace(" ", "").replace("\n", "")) == 9:
-                        next_state = next_state_txt.replace(" ", "").replace("\n", "")
         
         # Store in the GraphMemory object if we have enough info
-        if board_state and next_state and action:
+        if board_state:
+            # If we don't have all info, just store the board state with empty values
+            if action is None:
+                action = (-1, -1)  # Placeholder
+            if next_state is None:
+                next_state = board_state  # Just store same state
+                
             self.graph_memory.store(board_state, action, next_state, metadata={"description": content})
             self.graph_memory.export_graph()  # Persist to disk
-            logger.info(f"Stored complete transition in GraphMemory: {board_state} -> {action} -> {next_state}")
+            logger.info(f"Stored transition in GraphMemory with state: {board_state}")
         
         # Also store in the JSON format for backward compatibility
         with open(self.graph_memory_path, 'r') as f:
@@ -247,6 +274,11 @@ class MemoryManager:
     
     def graph_read(self, query):
         """Read from graph memory based on query (using both JSON and GraphMemory)"""
+        # Check if constrained to vector-only memory
+        if self.memory_constraint == "vector_only":
+            logger.info(f"Agent {self.agent_id} attempted to use graph_read but is constrained to vector_only memory")
+            return "Graph memory is disabled due to vector_only constraint."
+            
         # Try to extract board state from query
         board_state = None
         for line in query.split("\n"):
@@ -305,20 +337,26 @@ class MemoryManager:
         logger.info(f"Read from graph memory with query: {query[:30]}...")
         return result
     
-    def vector_store(self, content):
-        """Store content in vector memory using autoencoder embeddings"""
+    def vector_store(self, content, board_state=None):
+        """Store content in vector memory with optional explicit board state"""
+        # Check if constrained to graph-only memory
+        if self.memory_constraint == "graph_only":
+            logger.info(f"Agent {self.agent_id} attempted to use vector_store but is constrained to graph_only memory")
+            return "Vector memory is disabled due to graph_only constraint."
+            
         # Try to extract board state from content
-        board_state = None
-        for line in content.split("\n"):
-            if len(line.replace(" ", "").replace("\n", "")) == 9 and all(c in "XO-" for c in line.replace(" ", "").replace("\n", "")):
-                board_state = line.replace(" ", "").replace("\n", "")
-                break
+        if board_state is None:
+            for line in content.split("\n"):
+                if len(line.replace(" ", "").replace("\n", "")) == 9 and all(c in "XO-" for c in line.replace(" ", "").replace("\n", "")):
+                    board_state = line.replace(" ", "").replace("\n", "")
+                    break
         
         # Store in VectorizedMemory if we found a board state
         if board_state:
             try:
-                self.vector_memory.store(board_state, metadata={"content": content})
-                logger.info(f"Stored board state in VectorizedMemory: {board_state}")
+                embedding = encode_board(self.autoencoder, board_state).tolist()
+                self.vector_memory.store(board_state, content, embedding)
+                logger.info(f"Stored in VectorizedMemory with board state: {board_state}")
             except Exception as e:
                 logger.error(f"Error storing in VectorizedMemory: {e}")
         
@@ -326,25 +364,13 @@ class MemoryManager:
         with open(self.vector_memory_path, 'r') as f:
             memory = json.load(f)
         
-        # Add to entries
-        entry = {
+        memory["entries"].append({
             "id": len(memory["entries"]),
             "content": content,
+            "board_state": board_state,
+            "embedding": embedding if board_state else None,
             "timestamp": self._get_timestamp()
-        }
-        
-        # If a valid board state was found, add its embedding
-        if board_state:
-            try:
-                # Get the embedding
-                embedding = encode_board(self.autoencoder, board_state).tolist()
-                entry["board_state"] = board_state
-                entry["embedding"] = embedding
-                logger.info(f"Added embedding for board state: {board_state}")
-            except Exception as e:
-                logger.error(f"Error generating embedding: {e}")
-        
-        memory["entries"].append(entry)
+        })
         
         with open(self.vector_memory_path, 'w') as f:
             json.dump(memory, f, indent=2)
@@ -354,6 +380,11 @@ class MemoryManager:
     
     def vector_read(self, query):
         """Read from vector memory based on query, using autoencoder for similarity search"""
+        # Check if constrained to graph-only memory
+        if self.memory_constraint == "graph_only":
+            logger.info(f"Agent {self.agent_id} attempted to use vector_read but is constrained to graph_only memory")
+            return "Vector memory is disabled due to graph_only constraint."
+            
         # Try to extract board state from query for similarity search
         board_state = None
         for line in query.split("\n"):
@@ -447,6 +478,11 @@ class MemoryManager:
     
     def semantic_store(self, content):
         """Store content in semantic memory"""
+        # Both graph_only and vector_only constraints disallow semantic memory
+        if self.memory_constraint in ["graph_only", "vector_only"]:
+            logger.info(f"Agent {self.agent_id} attempted to use semantic_store but is constrained to {self.memory_constraint}")
+            return "Semantic memory is disabled due to memory constraints."
+            
         with open(self.semantic_memory_path, 'r') as f:
             memory = json.load(f)
         
@@ -465,6 +501,11 @@ class MemoryManager:
     
     def semantic_read(self, query):
         """Read from semantic memory based on query"""
+        # Both graph_only and vector_only constraints disallow semantic memory
+        if self.memory_constraint in ["graph_only", "vector_only"]:
+            logger.info(f"Agent {self.agent_id} attempted to use semantic_read but is constrained to {self.memory_constraint}")
+            return "Semantic memory is disabled due to memory constraints."
+            
         with open(self.semantic_memory_path, 'r') as f:
             memory = json.load(f)
         
