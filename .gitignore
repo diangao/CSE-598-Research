@@ -1,10 +1,15 @@
 # LaTeX temporary files
 *.aux
+*.bbl
+*.blg
 *.log
 *.out
-*.synctex.gz
+*.toc
+*.lof
+*.lot
 *.fdb_latexmk
 *.fls
+*.synctex.gz
 
 # Generated PDF (optional)
 *.pdf
@@ -138,3 +143,31 @@ pip-delete-this-directory.txt
 # Local configuration files
 .env
 .envrc
+
+# Virtual Environment
+venv/
+tictactoe_env/
+env/
+ENV/
+.env
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logging
+*.log
+logs/
+log/
+experiments/results/
+*.npy
+*.pkl
+
+# Data
+data/
+*.csv
+*.json
+output/
