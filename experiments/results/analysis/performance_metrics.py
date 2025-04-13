@@ -395,10 +395,15 @@ def analyze_performance_retention(df=None, save_path='experiments/results/analys
     print(f"Performance retention analysis plot saved to {os.path.join(save_path, 'performance_retention_analysis.png')}")
     
     # Generate performance retention statistics
-    retention_stats = pd.DataFrame({
-        'agent_a_retention': retention_df_a.pivot(index='memory_constraint', columns='board_size', values='retention_rate'),
-        'agent_b_retention': retention_df_b.pivot(index='memory_constraint', columns='board_size', values='retention_rate')
-    })
+    a_retention_pivot = retention_df_a.pivot(index='memory_constraint', columns='board_size', values='retention_rate')
+    b_retention_pivot = retention_df_b.pivot(index='memory_constraint', columns='board_size', values='retention_rate')
+    
+    # Combine the two pivoted dataframes
+    retention_stats = pd.DataFrame()
+    for col in a_retention_pivot.columns:
+        retention_stats[f'agent_a_retention_{col}'] = a_retention_pivot[col]
+    for col in b_retention_pivot.columns:
+        retention_stats[f'agent_b_retention_{col}'] = b_retention_pivot[col]
     
     # Save statistics to CSV
     retention_stats.to_csv(os.path.join(save_path, 'performance_retention_statistics.csv'))

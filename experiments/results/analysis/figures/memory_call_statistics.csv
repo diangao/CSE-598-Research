@@ -1,0 +1,8 @@
+,memory_constraint_a,board_size,agent_a_graph_calls,agent_a_graph_calls,agent_a_graph_calls,agent_a_vector_calls,agent_a_vector_calls,agent_a_vector_calls,agent_a_semantic_calls,agent_a_semantic_calls,agent_a_semantic_calls,agent_a_total_memory_calls,agent_a_total_memory_calls,agent_a_total_memory_calls,agent_b_graph_calls,agent_b_graph_calls,agent_b_graph_calls,agent_b_vector_calls,agent_b_vector_calls,agent_b_vector_calls,agent_b_semantic_calls,agent_b_semantic_calls,agent_b_semantic_calls,agent_b_total_memory_calls,agent_b_total_memory_calls,agent_b_total_memory_calls
+,,,mean,std,sum,mean,std,sum,mean,std,sum,mean,std,sum,mean,std,sum,mean,std,sum,mean,std,sum,mean,std,sum
+0,graph_only,3x3,6.0,,6,1.0,,1,0.0,,0,7.0,,7,2.0,,2,0.0,,0,0.0,,0,2.0,,2
+1,graph_only,6x6,21.0,,21,0.0,,0,0.0,,0,21.0,,21,3.0,,3,0.0,,0,0.0,,0,3.0,,3
+2,graph_only,9x9,12.0,,12,0.0,,0,0.0,,0,12.0,,12,4.0,,4,0.0,,0,0.0,,0,4.0,,4
+3,vector_only,3x3,2.0,,2,2.0,,2,0.0,,0,4.0,,4,1.0,,1,1.0,,1,0.0,,0,2.0,,2
+4,vector_only,6x6,5.0,,5,12.0,,12,0.0,,0,17.0,,17,1.0,,1,4.0,,4,0.0,,0,5.0,,5
+5,vector_only,9x9,4.0,,4,16.0,,16,0.0,,0,20.0,,20,2.0,,2,5.0,,5,0.0,,0,7.0,,7

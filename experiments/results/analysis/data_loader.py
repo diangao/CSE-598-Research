@@ -11,14 +11,14 @@ def get_all_experiment_files():
     files = []
     
     # Get experiment files from dian's directory (constrained memory experiments)
-    dian_path = "experiments/results/from_dian/"
+    dian_path = "../from_dian/"
     if os.path.exists(dian_path):
         for file in os.listdir(dian_path):
             if file.endswith(".json") and file.startswith("exp_memA"):
                 files.append(os.path.join(dian_path, file))
     
     # Get experiment files from anish's directory (adaptive memory experiments)
-    anish_path = "experiments/results/from_anish/"
+    anish_path = "../from_anish/"
     if os.path.exists(anish_path):
         for file in os.listdir(anish_path):
             if file.endswith(".json") and file.startswith("exp_memA"):
@@ -31,14 +31,14 @@ def get_all_game_log_files():
     logs = []
     
     # Get game logs from dian's directory (constrained memory experiments)
-    dian_logs = "experiments/results/from_dian/game_logs/"
+    dian_logs = "../from_dian/game_logs/"
     if os.path.exists(dian_logs):
         for file in os.listdir(dian_logs):
             if file.endswith(".json") and file.startswith("game_run"):
                 logs.append(os.path.join(dian_logs, file))
     
     # Get game logs from anish's directory (adaptive memory experiments)
-    anish_logs = "experiments/results/from_anish/game_logs/"
+    anish_logs = "../from_anish/game_logs/"
     if os.path.exists(anish_logs):
         for file in os.listdir(anish_logs):
             if file.endswith(".json") and file.startswith("game_run"):
@@ -183,9 +183,9 @@ def load_experiment_data(results_dir=None, experiment_type=None):
         search_dirs.append(results_dir)
     else:
         if experiment_type == 'constrained' or experiment_type is None:
-            search_dirs.append("experiments/results/from_dian")
+            search_dirs.append("../from_dian")
         if experiment_type == 'adaptive' or experiment_type is None:
-            search_dirs.append("experiments/results/from_anish")
+            search_dirs.append("../from_anish")
     
     # Find all experiment JSON files across specified directories
     json_files = []
@@ -194,8 +194,10 @@ def load_experiment_data(results_dir=None, experiment_type=None):
             json_files.extend(glob.glob(f"{directory}/exp_*.json"))
     
     if not json_files:
-        print(f"No experiment files found in specified directories")
+        print(f"No experiment files found in specified directories: {search_dirs}")
         return pd.DataFrame()
+    
+    print(f"Found {len(json_files)} experiment files")
     
     data = []
     
@@ -203,39 +205,47 @@ def load_experiment_data(results_dir=None, experiment_type=None):
         try:
             with open(json_file, 'r') as f:
                 exp_data = json.load(f)
-                
-            # Extract experiment parameters from filename
-            filename = os.path.basename(json_file)
-            match = re.search(r'exp_memA_(.+)_memB_(.+)_(\d+)x\d+_(.+)_(\d+)games_(\d+)\.json', filename)
             
-            if match:
-                memory_constraint_a = match.group(1)
-                memory_constraint_b = match.group(2)
-                board_size = int(match.group(3))
-                model = match.group(4).replace('_', '-')
-                num_games = int(match.group(5))
-                run_id = match.group(6)
-                
-                # Determine experiment source and type
-                source = 'dian' if 'from_dian' in json_file else 'anish'
-                exp_type = 'constrained' if source == 'dian' else 'adaptive'
-                
-                # Add to data list
-                exp_data.update({
-                    'memory_constraint_a': memory_constraint_a,
-                    'memory_constraint_b': memory_constraint_b,
-                    'board_size': board_size,
-                    'model': model,
-                    'num_games': num_games,
-                    'run_id': run_id,
-                    'filename': filename,
-                    'source': source,
-                    'experiment_type': exp_type
-                })
-                
-                data.append(exp_data)
+            # Get basic info from filename
+            filename = os.path.basename(json_file)
+            
+            # Extract some info from filename if not present in the JSON
+            if 'filename' not in exp_data:
+                exp_data['filename'] = filename
+            
+            # Determine experiment source and type
+            if 'from_dian' in json_file:
+                exp_data['source'] = 'dian'
+                exp_data['experiment_type'] = 'constrained'
+            elif 'from_anish' in json_file:
+                exp_data['source'] = 'anish'
+                exp_data['experiment_type'] = 'adaptive'
             else:
-                print(f"Couldn't parse filename: {filename}")
+                exp_data['source'] = 'unknown'
+                exp_data['experiment_type'] = 'unknown'
+            
+            # Clean up the agent memory call data
+            if 'agent_a_memory_calls' in exp_data:
+                agent_a_calls = exp_data['agent_a_memory_calls']
+                exp_data['agent_a_graph_calls'] = agent_a_calls.get('graph_store', 0) + agent_a_calls.get('graph_read', 0) + agent_a_calls.get('update_graph_schema', 0)
+                exp_data['agent_a_vector_calls'] = agent_a_calls.get('vector_store', 0) + agent_a_calls.get('vector_read', 0) + agent_a_calls.get('update_vector_schema', 0)
+                exp_data['agent_a_semantic_calls'] = agent_a_calls.get('semantic_store', 0) + agent_a_calls.get('semantic_read', 0) + agent_a_calls.get('update_semantic_schema', 0)
+                exp_data['agent_a_total_memory_calls'] = exp_data['agent_a_graph_calls'] + exp_data['agent_a_vector_calls'] + exp_data['agent_a_semantic_calls']
+            
+            if 'agent_b_memory_calls' in exp_data:
+                agent_b_calls = exp_data['agent_b_memory_calls']
+                exp_data['agent_b_graph_calls'] = agent_b_calls.get('graph_store', 0) + agent_b_calls.get('graph_read', 0) + agent_b_calls.get('update_graph_schema', 0)
+                exp_data['agent_b_vector_calls'] = agent_b_calls.get('vector_store', 0) + agent_b_calls.get('vector_read', 0) + agent_b_calls.get('update_vector_schema', 0)
+                exp_data['agent_b_semantic_calls'] = agent_b_calls.get('semantic_store', 0) + agent_b_calls.get('semantic_read', 0) + agent_b_calls.get('update_semantic_schema', 0)
+                exp_data['agent_b_total_memory_calls'] = exp_data['agent_b_graph_calls'] + exp_data['agent_b_vector_calls'] + exp_data['agent_b_semantic_calls']
+            
+            # Compute total games
+            total_games = 0
+            if 'agent_a_total_wins' in exp_data and 'agent_b_total_wins' in exp_data and 'draws' in exp_data:
+                total_games = exp_data['agent_a_total_wins'] + exp_data['agent_b_total_wins'] + exp_data['draws']
+                exp_data['total_games'] = total_games
+            
+            data.append(exp_data)
         except Exception as e:
             print(f"Error loading {json_file}: {e}")
     
@@ -247,38 +257,47 @@ def load_experiment_data(results_dir=None, experiment_type=None):
     df = pd.DataFrame(data)
     
     # Calculate additional metrics
-    df['agent_a_win_rate'] = df['agent_a_wins'] / df['total_games']
-    df['agent_b_win_rate'] = df['agent_b_wins'] / df['total_games'] 
-    df['draw_rate'] = df['draws'] / df['total_games']
+    if 'agent_a_total_wins' in df.columns and 'total_games' in df.columns:
+        df['agent_a_win_rate'] = df['agent_a_total_wins'] / df['total_games']
+    if 'agent_b_total_wins' in df.columns and 'total_games' in df.columns:
+        df['agent_b_win_rate'] = df['agent_b_total_wins'] / df['total_games']
+    if 'draws' in df.columns and 'total_games' in df.columns:
+        df['draw_rate'] = df['draws'] / df['total_games']
     
-    # Calculate memory usage statistics if available
-    if 'agent_a_graph_calls' in df.columns:
-        df['agent_a_total_memory_calls'] = df['agent_a_graph_calls'] + df['agent_a_vector_calls'] + df['agent_a_semantic_calls']
-        df['agent_b_total_memory_calls'] = df['agent_b_graph_calls'] + df['agent_b_vector_calls'] + df['agent_b_semantic_calls']
+    # Calculate first-player advantage
+    if all(col in df.columns for col in ['agent_a_wins_as_first', 'agent_b_wins_as_first', 'total_games']):
+        df['first_player_wins'] = df['agent_a_wins_as_first'] + df['agent_b_wins_as_first'] 
+        df['first_player_win_rate'] = df['first_player_wins'] / df['total_games']
+        df['first_player_advantage'] = df['first_player_win_rate'] - 0.5
     
-    # Calculate win-token efficiency if token data available
-    if 'agent_a_total_tokens' in df.columns and 'agent_b_total_tokens' in df.columns:
-        # Avoid division by zero
-        df['agent_a_tokens_per_game'] = df['agent_a_total_tokens'] / df['total_games']
-        df['agent_b_tokens_per_game'] = df['agent_b_total_tokens'] / df['total_games']
-        
-        # Calculate win-token ratio - higher is better (more wins per token)
-        df['agent_a_win_token_ratio'] = df['agent_a_win_rate'] / (df['agent_a_tokens_per_game'] / 10000)
-        df['agent_b_win_token_ratio'] = df['agent_b_win_rate'] / (df['agent_b_tokens_per_game'] / 10000)
+    # Calculate tokens per game
+    for agent in ['a', 'b']:
+        token_col = f'agent_{agent}_total_tokens'
+        if token_col in df.columns and 'total_games' in df.columns:
+            df[f'agent_{agent}_tokens_per_game'] = df[token_col] / df['total_games']
+            
+            # Calculate win/token efficiency ratio
+            win_col = f'agent_{agent}_win_rate'
+            if win_col in df.columns:
+                df[f'agent_{agent}_win_token_ratio'] = (df[win_col] * 10000) / df[f'agent_{agent}_tokens_per_game']
+    
+    # Filter by experiment type if specified
+    if experiment_type:
+        df = df[df['experiment_type'] == experiment_type]
     
     print(f"Loaded {len(df)} experiment results")
     return df
 
 def process_game_logs(logs_dir=None, experiment_type=None):
     """
-    Process detailed game logs to extract memory usage patterns
+    Process all game log files to extract memory usage information
     
     Args:
-        logs_dir: Directory containing game log files (None for both directories)
-        experiment_type: Type of experiment to process ('constrained', 'adaptive', or None for both)
+        logs_dir: Directory containing game logs (None for both directories)
+        experiment_type: Type of experiment to load ('constrained', 'adaptive', or None for both)
         
     Returns:
-        DataFrame with per-memory-operation data
+        DataFrame containing memory usage data
     """
     # Determine which directories to search
     search_dirs = []
@@ -286,118 +305,107 @@ def process_game_logs(logs_dir=None, experiment_type=None):
         search_dirs.append(logs_dir)
     else:
         if experiment_type == 'constrained' or experiment_type is None:
-            search_dirs.append("experiments/results/from_dian/game_logs")
+            search_dirs.append("../from_dian/game_logs")
         if experiment_type == 'adaptive' or experiment_type is None:
-            search_dirs.append("experiments/results/from_anish/game_logs")
+            search_dirs.append("../from_anish/game_logs")
     
     # Find all game log JSON files across specified directories
-    json_files = []
+    log_files = []
     for directory in search_dirs:
         if os.path.exists(directory):
-            json_files.extend(glob.glob(f"{directory}/game_run*.json"))
+            log_files.extend(glob.glob(f"{directory}/game_run*.json"))
     
-    if not json_files:
+    if not log_files:
         print(f"No game log files found in specified directories")
         return pd.DataFrame()
     
-    memory_usage_data = []
+    memory_data = []
     
-    for json_file in json_files:
+    for log_file in log_files:
         try:
-            with open(json_file, 'r') as f:
+            with open(log_file, 'r') as f:
                 game_data = json.load(f)
             
-            # Extract run ID and game info from filename
-            filename = os.path.basename(json_file)
-            match = re.search(r'game_run(\d+)_id(\d+)_size(\d+)_memA(.+)_memB(.+)_(.+)_(\d+)\.json', filename)
+            # Extract game parameters from filename
+            filename = os.path.basename(log_file)
+            file_params = parse_game_log_filename(log_file)
             
-            if not match:
+            # Skip if not the requested experiment type
+            if experiment_type and file_params['experiment_type'] != experiment_type:
                 continue
+            
+            # Process turns for memory usage
+            if 'turns' in game_data and isinstance(game_data['turns'], list):
+                total_turns = len(game_data['turns'])
                 
-            run_id = match.group(1)
-            game_id = match.group(2)
-            board_size = int(match.group(3))
-            memory_constraint_a = match.group(4)
-            memory_constraint_b = match.group(5)
-            model = match.group(6).replace('_', '-')
-            
-            # Determine experiment source and type
-            source = 'dian' if 'from_dian' in json_file else 'anish'
-            exp_type = 'constrained' if source == 'dian' else 'adaptive'
-            
-            # Process memory operations
-            if 'turns' in game_data:
-                for turn in game_data['turns']:
-                    if 'memory_function' in turn and turn['memory_function']:
-                        # Parse memory function name to get type and operation
-                        mem_func = turn['memory_function']
+                for turn_idx, turn in enumerate(game_data['turns']):
+                    # Determine game phase
+                    if turn_idx < total_turns / 3:
+                        phase = 'early'
+                    elif turn_idx < 2 * total_turns / 3:
+                        phase = 'mid'
+                    else:
+                        phase = 'late'
+                    
+                    # Get memory function calls
+                    memory_func = turn.get('memory_function', None)
+                    if memory_func:
+                        # Determine memory type and operation
+                        if memory_func.startswith('graph'):
+                            memory_type = 'graph'
+                        elif memory_func.startswith('vector'):
+                            memory_type = 'vector'
+                        elif memory_func.startswith('semantic'):
+                            memory_type = 'semantic'
+                        else:
+                            memory_type = 'unknown'
+                            
+                        if '_store' in memory_func:
+                            operation = 'store'
+                        elif '_read' in memory_func:
+                            operation = 'read'
+                        elif 'update_' in memory_func and '_schema' in memory_func:
+                            operation = 'schema'
+                        else:
+                            operation = 'unknown'
                         
-                        # Skip if not a memory function
-                        if not any(x in mem_func for x in ['graph', 'vector', 'semantic']):
-                            continue
-                            
-                        parts = mem_func.split('_')
-                        if len(parts) >= 2:
-                            memory_type = parts[0].capitalize()
-                            operation = parts[1]
-                            
-                            # Determine game phase based on turn number
-                            # This is an approximation - could be made more sophisticated
-                            total_turns = len(game_data['turns'])
-                            turn_num = turn.get('turn', 0)
-                            
-                            if turn_num <= total_turns * 0.3:
-                                phase = 'early'
-                            elif turn_num <= total_turns * 0.7:
-                                phase = 'mid'
-                            else:
-                                phase = 'late'
-                            
-                            # Determine the agent who made this memory call
-                            agent_id = turn.get('agent', 'unknown')
-                            
-                            # Check if this agent won the game
-                            agent_won = False
-                            if 'final_result' in game_data:
-                                if agent_id == 'agent_a' and game_data['final_result'] == 'agent_a_win':
-                                    agent_won = True
-                                elif agent_id == 'agent_b' and game_data['final_result'] == 'agent_b_win':
-                                    agent_won = True
-                            
-                            memory_usage_data.append({
-                                'run_id': run_id,
-                                'game_id': game_id,
-                                'board_size': board_size,
-                                'memory_constraint_a': memory_constraint_a,
-                                'memory_constraint_b': memory_constraint_b,
-                                'model': model,
-                                'agent_id': agent_id,
-                                'turn': turn_num,
-                                'memory_type': memory_type,
-                                'operation': operation,
-                                'phase': phase,
-                                'agent_won': agent_won,
-                                'tokens_used': turn.get('tokens_used', 0),
-                                'source': source,
-                                'experiment_type': exp_type
-                            })
+                        # Agent info
+                        agent_id = turn.get('agent', 'unknown')
+                        agent_won = 'final_result' in game_data and game_data['final_result'] == agent_id
+                        
+                        memory_data.append({
+                            'run_id': file_params['run_id'],
+                            'game_id': file_params['game_id'],
+                            'board_size': file_params['board_size'],
+                            'memory_constraint_a': file_params['memory_constraint_a'],
+                            'memory_constraint_b': file_params['memory_constraint_b'],
+                            'model': file_params['model'],
+                            'experiment_type': file_params['experiment_type'],
+                            'agent_id': agent_id,
+                            'turn': turn_idx,
+                            'phase': phase,
+                            'memory_function': memory_func,
+                            'memory_type': memory_type,
+                            'operation': operation,
+                            'agent_won': agent_won
+                        })
         except Exception as e:
-            print(f"Error processing {json_file}: {e}")
+            print(f"Error processing {log_file}: {e}")
     
-    if not memory_usage_data:
-        print("No memory usage data found in game logs")
+    if not memory_data:
+        print("No memory usage data found in logs")
         return pd.DataFrame()
     
-    # Convert to DataFrame
-    df = pd.DataFrame(memory_usage_data)
-    print(f"Processed {len(df)} memory operations from game logs")
-    return df
+    return pd.DataFrame(memory_data)
 
 if __name__ == "__main__":
-    # Test data loading
+    # Test loading experiment data
     print("Loading constrained experiment data (Dian):")
     df_constrained = load_experiment_data(experiment_type='constrained')
-    print(df_constrained[['board_size', 'memory_constraint_a', 'memory_constraint_b', 'agent_a_wins', 'agent_b_wins']].head())
+    if not df_constrained.empty:
+        print(df_constrained[['board_size', 'memory_constraint_a', 'memory_constraint_b', 'agent_a_wins', 'agent_b_wins']].head())
+    else:
+        print("No constrained experiment data found")
     
     print("\nLoading adaptive experiment data (Anish):")
     df_adaptive = load_experiment_data(experiment_type='adaptive')

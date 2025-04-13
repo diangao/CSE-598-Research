@@ -1,0 +1,8 @@
+,memory_constraint_a,board_size,agent_a_win_rate,agent_a_win_rate,agent_b_win_rate,agent_b_win_rate,draw_rate,draw_rate
+,,,mean,std,mean,std,mean,std
+0,graph_only,3x3,0.6,,0.2,,0.2,
+1,graph_only,6x6,0.4666666666666667,,0.5333333333333333,,0.0,
+2,graph_only,9x9,0.26666666666666666,,0.7333333333333333,,0.0,
+3,vector_only,3x3,0.6666666666666666,,0.06666666666666667,,0.26666666666666666,
+4,vector_only,6x6,0.6,,0.4,,0.0,
+5,vector_only,9x9,0.5333333333333333,,0.4666666666666667,,0.0,
