@@ -1,0 +1,130 @@
+{
+  "run_id": 1744566681,
+  "game_id": 15,
+  "timestamp": "2025-04-13T13:56:13.537462",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 4771,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1549,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "XO-\n-X-\n---",
+        "tokens_used": 1030,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "XOX\n-X-\nO--",
+        "tokens_used": 1074,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "XOX\nOX-\nOX-",
+        "tokens_used": 1118,
+        "action": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 6352,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1062,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "The board is currently empty, which means there are no immediate strategic insights to retrieve. I will make a strategic move by occupying the center position, which is the most valuable starting poin"
+      },
+      {
+        "turn": 3,
+        "board_state": "-O-\n-X-\n---",
+        "tokens_used": 1161,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "The current board state is as follows:\n```\n - O - \n - X - \n - - - \n```\nI can see that I need to block my opponent's potential winning move by placing my mark in the top-left corner (0, 0). This preven"
+      },
+      {
+        "turn": 5,
+        "board_state": "XO-\n-X-\nO--",
+        "tokens_used": 1254,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "The current board state is as follows:\n```\n X O - \n - X - \n O - - \n```\nI notice that I have a winning opportunity by placing my mark in the top-right corner (0, 2), which will give me three in a row.\n"
+      },
+      {
+        "turn": 7,
+        "board_state": "XOX\nOX-\nO--",
+        "tokens_used": 1373,
+        "action": [
+          2,
+          1
+        ],
+        "reasoning_excerpt": "The current board state is as follows:\n```\n X O X\n O X -\n O - -\n```\nI need to block my opponent from winning. They have two O's in the first column and could win by placing an O in the middle cell of "
+      },
+      {
+        "turn": 9,
+        "board_state": "XOX\nOX-\nOXO",
+        "tokens_used": 1502,
+        "action": [
+          1,
+          2
+        ],
+        "reasoning_excerpt": "The current board state is as follows:\n```\n X O X\n O X - \n O X O\n```\nMy opponent has three O's in the second column, which means they have already won. There is no move I can make to change the outcom"
+      }
+    ]
+  },
+  "final_result": "draw",
+  "winner": "draw"
+}

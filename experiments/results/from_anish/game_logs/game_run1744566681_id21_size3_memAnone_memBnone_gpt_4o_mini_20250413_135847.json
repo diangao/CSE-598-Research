@@ -1,0 +1,91 @@
+{
+  "run_id": 1744566681,
+  "game_id": 21,
+  "timestamp": "2025-04-13T13:58:41.095982",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2975,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "---\n-X-\nO--",
+        "tokens_used": 991,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "X-O\n-X-\nO--",
+        "tokens_used": 1035,
+        "action": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2257,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1079,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "In this situation, the center position is already occupied by \"X\", so my best move is to take one of the corners to maximize my chances of winning. \n\nI will make the move to the bottom-left corner, wh"
+      },
+      {
+        "turn": 4,
+        "board_state": "X--\n-X-\nO--",
+        "tokens_used": 1178,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "The current board state shows that I need to block my opponent from winning. The opponent has \"X\" in the first row and could win by placing \"X\" in the top-right corner [0, 2]. \n\nI will block this move"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

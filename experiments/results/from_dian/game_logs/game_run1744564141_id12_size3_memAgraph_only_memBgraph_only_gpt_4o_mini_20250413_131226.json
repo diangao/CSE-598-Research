@@ -1,0 +1,115 @@
+{
+  "run_id": 1744564141,
+  "game_id": 12,
+  "timestamp": "2025-04-13T13:12:17.634059",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 6795,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1631,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-X-\n--O",
+        "tokens_used": 1074,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "O-X\nOX-\n-XO",
+        "tokens_used": 3141,
+        "action": [
+          0,
+          1
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "O-X, OX-, -XO -> Game ended in draw."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 7002,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 2,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1026,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "{\"move\": [0, 0]}"
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 3188,
+        "action": [
+          2,
+          2
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "Current board state is O-X, -X-, --. Need to determine the best move to block the opponent and maximize winning chances."
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\n-X-\n-XO",
+        "tokens_used": 2788,
+        "action": [
+          1,
+          0
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "Current board state is O-X, -X-, -XO. Need to determine the best move to block the opponent from winning.",
+        "reasoning_excerpt": "{\"move\": [1, 0]}"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

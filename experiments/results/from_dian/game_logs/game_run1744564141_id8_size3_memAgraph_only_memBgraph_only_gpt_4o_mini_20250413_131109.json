@@ -1,0 +1,109 @@
+{
+  "run_id": 1744564141,
+  "game_id": 8,
+  "timestamp": "2025-04-13T13:11:00.322261",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 4374,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1549,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "XO-\n-X-\n---",
+        "tokens_used": 1030,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "XO-\n-X-\nOX-",
+        "tokens_used": 1795,
+        "action": [
+          1,
+          0
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 6557,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1047,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Since the board is currently empty, the best move is to take the center position, which is strategically valuable.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "-O-\n-X-\n---",
+        "tokens_used": 1136,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "The current board state has an 'O' in the top row and an 'X' in the middle, which means I should consider blocking 'O' from winning in the next turn. The best move is to place 'X' in the top-left corn"
+      },
+      {
+        "turn": 5,
+        "board_state": "XO-\n-X-\nO--",
+        "tokens_used": 2063,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "XO-\nOX-\nOX-",
+        "tokens_used": 2311,
+        "action": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

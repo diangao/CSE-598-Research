@@ -1,0 +1,136 @@
+{
+  "run_id": 1744566681,
+  "game_id": 18,
+  "timestamp": "2025-04-13T13:57:20.606191",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 12151,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 2,
+      "vector_store": 0,
+      "vector_read": 2,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 2919,
+        "action": [
+          0,
+          0
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "current board state is -X-"
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 2629,
+        "action": [
+          2,
+          0
+        ],
+        "memory_function": "vector_read",
+        "memory_query": "current board state is O-X--X--"
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\n-X-\nOX-",
+        "tokens_used": 3076,
+        "action": [
+          1,
+          2
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "current board state is O-X--X--OX-"
+      },
+      {
+        "turn": 8,
+        "board_state": "O-X\nXXO\nOX-",
+        "tokens_used": 3527,
+        "action": [
+          2,
+          2
+        ],
+        "memory_function": "vector_read",
+        "memory_query": "current board state is O-X--XXO--OX-"
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 12971,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1051,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Since the board is completely empty, I will not use memory functions. I will take the center position, which is strategically valuable.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1136,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "In this situation, I see an opportunity to block my opponent (O) from winning in the next move by placing my mark (X) in the top right corner.\n\nI will make the move to block at position [0, 2].\n\n{\"mov"
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-X-\nO--",
+        "tokens_used": 1234,
+        "action": [
+          2,
+          1
+        ],
+        "reasoning_excerpt": "I need to block my opponent from winning in the next move. If I do not place my mark (X) at position [2, 1], the opponent (O) can win on their next turn.\n\nTherefore, I will make the move to block at p"
+      },
+      {
+        "turn": 7,
+        "board_state": "O-X\n-XO\nOX-",
+        "tokens_used": 4333,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "O-X\nXXO\nOXO",
+        "tokens_used": 5217,
+        "action": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

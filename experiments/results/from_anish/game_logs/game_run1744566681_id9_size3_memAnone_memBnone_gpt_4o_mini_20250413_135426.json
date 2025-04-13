@@ -1,0 +1,92 @@
+{
+  "run_id": 1744566681,
+  "game_id": 9,
+  "timestamp": "2025-04-13T13:54:18.059614",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2579,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1549,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "OX-\n-X-\n---",
+        "tokens_used": 1030,
+        "action": [
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3403,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1053,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "In this initial state, I will make a strategic move without the need for memory retrieval, as the center position is the most valuable. \n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1137,
+        "action": [
+          0,
+          1
+        ],
+        "reasoning_excerpt": "In this state, I need to block my opponent from winning on the next turn. The opponent has 'O' in the top row and is one move away from winning. I will place my 'X' in the top center position.\n\n{\"move"
+      },
+      {
+        "turn": 5,
+        "board_state": "OXO\n-X-\n---",
+        "tokens_used": 1213,
+        "action": [
+          2,
+          1
+        ],
+        "reasoning_excerpt": "In this state, I need to block the opponent from winning in the first row by placing my 'X' in the bottom center position. This will also set me up for potential future moves.\n\n{\"move\": [2, 1]}"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

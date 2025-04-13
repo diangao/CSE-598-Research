@@ -1,0 +1,91 @@
+{
+  "run_id": 1744566681,
+  "game_id": 27,
+  "timestamp": "2025-04-13T14:00:41.874351",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3659,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "---\n-X-\nO--",
+        "tokens_used": 991,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "X-O\n-X-\nO--",
+        "tokens_used": 1719,
+        "action": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2345,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1108,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\n- | X | -\n---------\n- | - | -\n---------\n- | - | -\n```\n\nThe center position is already occupied by 'X'. Therefore, a strategic move would be to place 'O' in one of t"
+      },
+      {
+        "turn": 4,
+        "board_state": "X--\n-X-\nO--",
+        "tokens_used": 1237,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\nX | - | -\n---------\n- | X | -\n---------\nO | - | -\n```\n\nThe opponent ('X') is about to win on their next turn if they place their mark in the top right corner (row 0"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

@@ -1,0 +1,276 @@
+{
+  "run_id": 1744570194,
+  "game_id": 29,
+  "timestamp": "2025-04-13T15:19:07.002829",
+  "board_size": 9,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 28476,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---------\n---------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 955,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1655,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "OOX------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1090,
+        "action": [
+          1,
+          2
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "OOX------\nOXX------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1140,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "OOX------\nOXX------\nO-X------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1192,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 11,
+        "board_state": "OOX------\nOXX------\nOXX------\nO--------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 3071,
+        "action": [
+          3,
+          1
+        ]
+      },
+      {
+        "turn": 13,
+        "board_state": "OOX------\nOXX------\nOXX------\nOXO------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2399,
+        "action": [
+          4,
+          0
+        ]
+      },
+      {
+        "turn": 15,
+        "board_state": "OOX------\nOXX------\nOXX------\nOXO------\nX-O------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1469,
+        "action": [
+          4,
+          1
+        ]
+      },
+      {
+        "turn": 17,
+        "board_state": "OOX------\nOXX------\nOXX------\nOXO------\nXXO------\n--O------\n---------\n---------\n---------",
+        "tokens_used": 1527,
+        "action": [
+          5,
+          0
+        ]
+      },
+      {
+        "turn": 19,
+        "board_state": "OOX------\nOXX------\nOXX------\nOXO------\nXXO------\nXOO------\n---------\n---------\n---------",
+        "tokens_used": 4091,
+        "action": [
+          6,
+          0
+        ]
+      },
+      {
+        "turn": 21,
+        "board_state": "OOX------\nOXX------\nOXX------\nOXO------\nXXO------\nXOO------\nXO-------\n---------\n---------",
+        "tokens_used": 3089,
+        "action": [
+          6,
+          2
+        ]
+      },
+      {
+        "turn": 23,
+        "board_state": "OOX------\nOXX------\nOXX------\nOXO------\nXXO------\nXOO------\nXOX------\n-O-------\n---------",
+        "tokens_used": 1819,
+        "action": [
+          7,
+          0
+        ]
+      },
+      {
+        "turn": 25,
+        "board_state": "OOX------\nOXX------\nOXX------\nOXO------\nXXO------\nXOO------\nXOX------\nXOO------\n---------",
+        "tokens_used": 4979,
+        "action": [
+          8,
+          0
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 29933,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1831,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1229,
+        "action": [
+          0,
+          1
+        ],
+        "reasoning_excerpt": "In the current board state, I need to block my opponent from winning. The opponent has a potential winning move at (0, 1) and (1, 1) in the next turn.\n\nTo block them, I will place my mark at (0, 1).\n\n"
+      },
+      {
+        "turn": 6,
+        "board_state": "OOX------\n-XX------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1336,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state, I see that I need to block my opponent from winning on the next turn. They have two 'X's in the first column and could win by placing an 'X' at (1, 0).\n\nI will block them b"
+      },
+      {
+        "turn": 8,
+        "board_state": "OOX------\nOXX------\n--X------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1430,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state, I have a winning move available. I can place my mark at (2, 0) to create a vertical line of 'O's.\n\nI will make the winning move at (2, 0).\n\n{\"move\": [2, 0]}"
+      },
+      {
+        "turn": 10,
+        "board_state": "OOX------\nOXX------\nOXX------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 4333,
+        "action": [
+          3,
+          0
+        ]
+      },
+      {
+        "turn": 12,
+        "board_state": "OOX------\nOXX------\nOXX------\nOX-------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 3083,
+        "action": [
+          3,
+          2
+        ]
+      },
+      {
+        "turn": 14,
+        "board_state": "OOX------\nOXX------\nOXX------\nOXO------\nX--------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1859,
+        "action": [
+          4,
+          2
+        ],
+        "reasoning_excerpt": "In the current board state, I see that my opponent has a potential winning move at (4, 2). I need to block them to prevent them from winning on their next turn.\n\nI will place my mark at (4, 2) to bloc"
+      },
+      {
+        "turn": 16,
+        "board_state": "OOX------\nOXX------\nOXX------\nOXO------\nXXO------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1965,
+        "action": [
+          5,
+          2
+        ],
+        "reasoning_excerpt": "In the current board state, I need to block my opponent from winning. They have two 'X's in the last row and could win by placing an 'X' at (5, 2).\n\nI will block them by placing my mark at (5, 2).\n\n{\""
+      },
+      {
+        "turn": 18,
+        "board_state": "OOX------\nOXX------\nOXX------\nOXO------\nXXO------\nX-O------\n---------\n---------\n---------",
+        "tokens_used": 2067,
+        "action": [
+          5,
+          1
+        ],
+        "reasoning_excerpt": "In the current board state, I see that I have an opportunity to win by placing my mark at (5, 1). This will create a vertical line of 'O's.\n\nI will make the winning move at (5, 1).\n\n{\"move\": [5, 1]}"
+      },
+      {
+        "turn": 20,
+        "board_state": "OOX------\nOXX------\nOXX------\nOXO------\nXXO------\nXOO------\nX--------\n---------\n---------",
+        "tokens_used": 3983,
+        "action": [
+          6,
+          1
+        ]
+      },
+      {
+        "turn": 22,
+        "board_state": "OOX------\nOXX------\nOXX------\nOXO------\nXXO------\nXOO------\nXOX------\n---------\n---------",
+        "tokens_used": 2318,
+        "action": [
+          7,
+          1
+        ],
+        "reasoning_excerpt": "In the current board state, I see that I need to block my opponent from winning. They have two 'X's in the last row and could win by placing an 'X' at (7, 1).\n\nI will block them by placing my mark at "
+      },
+      {
+        "turn": 24,
+        "board_state": "OOX------\nOXX------\nOXX------\nOXO------\nXXO------\nXOO------\nXOX------\nXO-------\n---------",
+        "tokens_used": 4499,
+        "action": [
+          7,
+          2
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

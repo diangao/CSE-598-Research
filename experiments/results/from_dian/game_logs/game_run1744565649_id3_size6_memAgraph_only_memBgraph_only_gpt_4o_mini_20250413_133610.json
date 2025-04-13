@@ -1,0 +1,141 @@
+{
+  "run_id": 1744565649,
+  "game_id": 3,
+  "timestamp": "2025-04-13T13:35:53.002069",
+  "board_size": 6,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 8695,
+    "memory_usage_summary": {
+      "graph_store": 2,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "------\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1555,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "-OX---\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1037,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "OOX---\n-X----\n-X----\n------\n------\n------",
+        "tokens_used": 2283,
+        "action": [
+          1,
+          0
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: OOXX--. O is winning; X needs to block at (1, 0) or (2, 0) to prevent own loss."
+      },
+      {
+        "turn": 8,
+        "board_state": "OOX---\nOXX---\n-X----\n------\n------\n------",
+        "tokens_used": 1215,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 10,
+        "board_state": "OOX---\nOXX---\nOXX---\n------\n------\n------",
+        "tokens_used": 2605,
+        "action": [
+          3,
+          0
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: OOX--X--. O has won the game."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 9462,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "------\n------\n------\n------\n------\n------",
+        "tokens_used": 1054,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Given that the board is completely empty, the best strategic move is to take the center position. I will proceed with that move.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "-O----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1158,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "The current board state shows that I have an 'X' in the center and my opponent has an 'O' in the top left corner. My best move is to take the top right corner to maximize my chances of winning while a"
+      },
+      {
+        "turn": 5,
+        "board_state": "OOX---\n-X----\n------\n------\n------\n------",
+        "tokens_used": 3092,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "OOX---\nOX----\n-X----\n------\n------\n------",
+        "tokens_used": 1429,
+        "action": [
+          1,
+          2
+        ],
+        "reasoning_excerpt": "The current board state shows that my opponent has two 'O's in the top row and one in the middle left. I need to block my opponent's potential win in the next turn. The best move is to place my 'X' in"
+      },
+      {
+        "turn": 9,
+        "board_state": "OOX---\nOXX---\nOX----\n------\n------\n------",
+        "tokens_used": 2729,
+        "action": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

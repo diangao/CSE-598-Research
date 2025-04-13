@@ -94,6 +94,10 @@ ENV/
 # Experiment results and cache
 experiments/results/*
 !experiments/results/.gitkeep
+# Allow organized results and analysis directories
+!experiments/results/from_dian/
+!experiments/results/from_anish/
+!experiments/results/analysis/
 .cache/
 experiments/.env
 
@@ -162,12 +166,22 @@ ENV/
 *.log
 logs/
 log/
-experiments/results/
+
+# Modify experiments/results to allow organized directories
+experiments/results/*
+!experiments/results/from_dian/
+!experiments/results/from_anish/
+!experiments/results/analysis/
+!experiments/results/.gitkeep
+
 *.npy
 *.pkl
 
 # Data
 data/
 *.csv
-*.json
+# Allow json files in the organized directories
+!experiments/results/from_dian/**/*.json
+!experiments/results/from_anish/**/*.json
+!experiments/results/analysis/**/*.json
 output/

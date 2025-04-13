@@ -1,0 +1,105 @@
+{
+  "run_id": 1744566681,
+  "game_id": 12,
+  "timestamp": "2025-04-13T13:55:11.594792",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 6994,
+    "memory_usage_summary": {
+      "graph_store": 2,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 2781,
+        "action": [
+          0,
+          2
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: O--\n-X-\n---\nI made a move to the center."
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-X-\nO--",
+        "tokens_used": 3264,
+        "action": [
+          2,
+          1
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: O-X\n-X-\nO--\nI made a move at (0, 2) which is a corner position."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3654,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1090,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state where I have an X in the center, I don't need to use memory right now as I can make a strategic move directly. The center position is already occupied, and I should focus"
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1212,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state, there is an O in the top-left and center positions, and I have an X in the center and middle left positions. My priority should be to block my opponent from winning while a"
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\n-X-\nOX-",
+        "tokens_used": 1352,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state, I have the following positions:\n- O in (0, 0), (1, 2), and (2, 1)\n- X in (1, 1) and (2, 0)\n\nIt's crucial to block my opponent from winning on their next turn. They can win "
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

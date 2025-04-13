@@ -1,0 +1,90 @@
+{
+  "run_id": 1744506875,
+  "game_id": 5,
+  "timestamp": "2025-04-12T21:18:16.620748",
+  "board_size": "3x3",
+  "agent_a": {
+    "objective": "maximize win rate",
+    "total_tokens_used": 0,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 4,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 0,
+        "memory_function": "vector_store",
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      },
+      {
+        "turn": 3,
+        "board_state": "---\nO--\n--X",
+        "tokens_used": 0,
+        "memory_function": "vector_store",
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      },
+      {
+        "turn": 5,
+        "board_state": "-OX\nO--\n--X",
+        "tokens_used": 0,
+        "memory_function": "vector_store",
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      },
+      {
+        "turn": 7,
+        "board_state": "-OX\nOO-\nX-X",
+        "tokens_used": 0,
+        "memory_function": "vector_store",
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate minus token use",
+    "total_tokens_used": 3154,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n---\n--X",
+        "tokens_used": 957,
+        "reasoning_excerpt": "ChatCompletionMessage(content='Based on the current board state, I will make my move by placing my token in the bottom-left corner.\\n\\nMy next move: {\"move\": [2, 0]}', refusal=None, role='assistant', "
+      },
+      {
+        "turn": 4,
+        "board_state": "--X\nO--\n--X",
+        "tokens_used": 1050,
+        "reasoning_excerpt": "ChatCompletionMessage(content='Based on the current board state, I can see that I have a winning move available. I will place my token in the top-right corner to complete a vertical line.\\n\\nMy next m"
+      },
+      {
+        "turn": 6,
+        "board_state": "-OX\nO--\nX-X",
+        "tokens_used": 1147,
+        "reasoning_excerpt": "ChatCompletionMessage(content='Based on the current board state, I can see that there are no immediate winning moves available. However, I can block my opponent from winning by placing my token in the"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

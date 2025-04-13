@@ -1,0 +1,110 @@
+{
+  "run_id": 1744566681,
+  "game_id": 11,
+  "timestamp": "2025-04-13T13:54:49.704229",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 6856,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "-O-\n-X-\n---",
+        "tokens_used": 991,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "XO-\n-X-\n--O",
+        "tokens_used": 1035,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "XO-\nOX-\nX-O",
+        "tokens_used": 3881,
+        "action": [
+          0,
+          2
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Winning move: Placing X at (2,0) leads to a win by completing the first column."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 5159,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1781,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "XO-\n-X-\n---",
+        "tokens_used": 2043,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "XO-\n-X-\nX-O",
+        "tokens_used": 1335,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state, the opponent (X) is one move away from winning by placing an 'X' in the left column (1, 0). I must block this move.\n\nI will place my 'O' in the middle left position (1, 0) "
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

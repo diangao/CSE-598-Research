@@ -1,0 +1,205 @@
+{
+  "run_id": 1744568077,
+  "game_id": 8,
+  "timestamp": "2025-04-13T14:23:27.181422",
+  "board_size": 9,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 11928,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---------\n---------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 955,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "-O-------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1003,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "XO-------\n-X-------\nO--------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1753,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "XO-------\n-X-------\nOOX------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1140,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "XO-------\nXXO------\nOOX------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2031,
+        "action": [
+          3,
+          3
+        ]
+      },
+      {
+        "turn": 11,
+        "board_state": "XO-------\nXXO------\nOOX------\nO--X-----\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1283,
+        "action": [
+          4,
+          2
+        ]
+      },
+      {
+        "turn": 13,
+        "board_state": "XO-------\nXXO------\nOOX------\nO--X-----\nO-X------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2327,
+        "action": [
+          5,
+          5
+        ]
+      },
+      {
+        "turn": 15,
+        "board_state": "XO-------\nXXO------\nOOX------\nO--X-----\nO-X------\nO----X---\n---------\n---------\n---------",
+        "tokens_used": 1436,
+        "action": [
+          6,
+          6
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 25919,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 0,
+      "vector_store": 5,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1787,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "XO-------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1191,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state, I need to block my opponent from winning, as they have a potential threat in the left column. The best move is to take the bottom left corner to block their winning opportu"
+      },
+      {
+        "turn": 6,
+        "board_state": "XO-------\n-X-------\nO-X------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2607,
+        "action": [
+          2,
+          1
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: \nXO-------\n-X-------\nO-X------\n\nNext move: I will take position (2, 1) to create a potential fork.",
+        "reasoning_excerpt": "{\"move\": [2, 1]}"
+      },
+      {
+        "turn": 8,
+        "board_state": "XO-------\nXX-------\nOOX------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 3984,
+        "action": [
+          1,
+          2
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Current board state: \nXO-------\nXX-------\nOOX------\n\nNext move: I will take position (2, 2) to win the game."
+      },
+      {
+        "turn": 10,
+        "board_state": "XO-------\nXXO------\nOOX------\n---X-----\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 4527,
+        "action": [
+          3,
+          0
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Current board state: \nXO-------\nXXO------\nOOX------\n---X-----\n\nNext move: I will take position (0, 0) to block and set up for potential win."
+      },
+      {
+        "turn": 12,
+        "board_state": "XO-------\nXXO------\nOOX------\nO--X-----\n--X------\n---------\n---------\n---------\n---------",
+        "tokens_used": 3617,
+        "action": [
+          4,
+          0
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Current board state: \nXO-------\nXXO------\nOOX------\nO--X-----\n--X------\n\nNext move: I will take position (4, 0) to block and create potential for future wins.",
+        "reasoning_excerpt": "{\"move\": [4, 0]}"
+      },
+      {
+        "turn": 14,
+        "board_state": "XO-------\nXXO------\nOOX------\nO--X-----\nO-X------\n-----X---\n---------\n---------\n---------",
+        "tokens_used": 3935,
+        "action": [
+          5,
+          0
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Current board state: \nXO-------\nXXO------\nOOX------\nO--X-----\nO-X------\n-----X---\n\nNext move: I will take position (5, 0) to block and create potential for future wins.",
+        "reasoning_excerpt": "{\"move\": [5, 0]}"
+      },
+      {
+        "turn": 16,
+        "board_state": "XO-------\nXXO------\nOOX------\nO--X-----\nO-X------\nO----X---\n------X--\n---------\n---------",
+        "tokens_used": 4271,
+        "action": [
+          6,
+          0
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Current board state: \nXO-------\nXXO------\nOOX------\nO--X-----\nO-X------\nO----X---\n------X--\n\nNext move: I will take position (6, 0) to block and create potential for future wins.",
+        "reasoning_excerpt": "{\"move\": [6, 0]}"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

@@ -1,0 +1,156 @@
+{
+  "run_id": 1744568432,
+  "game_id": 26,
+  "timestamp": "2025-04-13T14:41:39.603169",
+  "board_size": 6,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 8093,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "------\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1555,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "-OX---\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1037,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "-OX---\n-X----\nO-X---\n------\n------\n------",
+        "tokens_used": 1085,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "-OX---\nOX----\nOXX---\n------\n------\n------",
+        "tokens_used": 1133,
+        "action": [
+          3,
+          0
+        ]
+      },
+      {
+        "turn": 10,
+        "board_state": "XOX---\nOX----\nOXX---\nO-----\n------\n------",
+        "tokens_used": 2013,
+        "action": [
+          3,
+          1
+        ]
+      },
+      {
+        "turn": 12,
+        "board_state": "XOX---\nOXX---\nOXX---\nOO----\n------\n------",
+        "tokens_used": 1270,
+        "action": [
+          4,
+          0
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 11412,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "------\n------\n------\n------\n------\n------",
+        "tokens_used": 1069,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "The board is completely empty. In this case, it's strategically best to take the center position, as it provides the most opportunities for winning. \n\nI will proceed to make my move in the center posi"
+      },
+      {
+        "turn": 3,
+        "board_state": "-O----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1163,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "The current board state shows that I have an \"X\" in the center and \"O\" has taken the top-left corner. I need to block \"O\" from potentially winning by taking the top-right corner. \n\nI will make my move"
+      },
+      {
+        "turn": 5,
+        "board_state": "-OX---\n-X----\nO-----\n------\n------\n------",
+        "tokens_used": 2181,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "-OX---\nOX----\nO-X---\n------\n------\n------",
+        "tokens_used": 1410,
+        "action": [
+          2,
+          1
+        ],
+        "reasoning_excerpt": "The current board state shows that I have \"X\" in the center, the top-right corner, and the middle-left cell. \"O\" has occupied the top-left, bottom-left, and middle-right cells. \n\nI am one move away fr"
+      },
+      {
+        "turn": 9,
+        "board_state": "-OX---\nOX----\nOXX---\nO-----\n------\n------",
+        "tokens_used": 3887,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 11,
+        "board_state": "XOX---\nOX----\nOXX---\nOO----\n------\n------",
+        "tokens_used": 1702,
+        "action": [
+          1,
+          2
+        ],
+        "reasoning_excerpt": "The current board state shows that I have \"X\" in the top-left, top-right corner, and bottom-center. \"O\" has occupied the middle-left, middle-right, bottom-left, and bottom-middle cells.\n\nTo block \"O\" "
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

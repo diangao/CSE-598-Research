@@ -1,0 +1,128 @@
+{
+  "run_id": 1744566681,
+  "game_id": 29,
+  "timestamp": "2025-04-13T14:01:20.668234",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 8175,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 1,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "-O-\n-X-\n---",
+        "tokens_used": 991,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "XO-\n-X-\nO--",
+        "tokens_used": 2161,
+        "action": [
+          0,
+          2
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "If I have a chance to win by placing 'X' in the top right corner, I should prioritize this move."
+      },
+      {
+        "turn": 7,
+        "board_state": "XOX\nOX-\nO--",
+        "tokens_used": 1150,
+        "action": [
+          1,
+          2
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "XOX\nOXX\nO-O",
+        "tokens_used": 2924,
+        "action": [
+          2,
+          1
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 5413,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1793,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "XO-\n-X-\n---",
+        "tokens_used": 1152,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "XOX\n-X-\nO--",
+        "tokens_used": 1196,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "XOX\nOXX\nO--",
+        "tokens_used": 1272,
+        "action": [
+          2,
+          2
+        ],
+        "reasoning_excerpt": "The current board state indicates that I need to block my opponent's winning move by placing my mark in the bottom-right corner (2, 2).\n\nI will make the move now.\n\n{\"move\": [2, 2]}"
+      }
+    ]
+  },
+  "final_result": "draw",
+  "winner": "draw"
+}

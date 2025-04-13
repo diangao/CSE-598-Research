@@ -1,0 +1,127 @@
+{
+  "run_id": 1744566681,
+  "game_id": 2,
+  "timestamp": "2025-04-13T13:51:42.383765",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 8026,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1631,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "O--\n-X-\nXO-",
+        "tokens_used": 1072,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "O-O\nXX-\nXO-",
+        "tokens_used": 1881,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "O-O\nXXO\nXOX",
+        "tokens_used": 2493,
+        "action": [
+          0,
+          1
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Final board state is a loss: O-O, XXO, XOX. Opponent won in the last move."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 5990,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1701,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O--\n-X-\nX--",
+        "tokens_used": 1107,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "O--\nXX-\nXO-",
+        "tokens_used": 1949,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "O-O\nXX-\nXOX",
+        "tokens_used": 1233,
+        "action": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  "final_result": "draw",
+  "winner": "draw"
+}

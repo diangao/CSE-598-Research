@@ -1,0 +1,110 @@
+{
+  "run_id": 1744566681,
+  "game_id": 25,
+  "timestamp": "2025-04-13T13:59:49.638487",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3655,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1549,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1031,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\nXX-\nO--",
+        "tokens_used": 1075,
+        "action": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 5719,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1054,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Given that the board is empty, I will proceed with my first move, which is to take the center position, as it is strategically valuable.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1965,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-X-\nO--",
+        "tokens_used": 1304,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "Analyzing the current board state:\n\n```\nO | - | X\n---------\n- | X | -\n---------\nO | - | -\n```\n\nI need to block my opponent (X) from winning on their next turn, as they currently have two X's in the mi"
+      },
+      {
+        "turn": 7,
+        "board_state": "O-X\nXX-\nO-O",
+        "tokens_used": 1396,
+        "action": [
+          1,
+          2
+        ],
+        "reasoning_excerpt": "The current board state is:\n\n```\nO | - | X\n---------\nX | X | -\n---------\nO | O | -\n```\n\nIn this situation, I need to make a move immediately. I can win by placing my O in the middle-right position.\n\n{"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

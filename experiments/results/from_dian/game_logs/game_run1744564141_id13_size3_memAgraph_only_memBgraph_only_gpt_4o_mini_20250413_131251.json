@@ -1,0 +1,135 @@
+{
+  "run_id": 1744564141,
+  "game_id": 13,
+  "timestamp": "2025-04-13T13:12:34.736023",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 13237,
+    "memory_usage_summary": {
+      "graph_store": 3,
+      "graph_read": 0,
+      "vector_store": 1,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 2113,
+        "action": [
+          0,
+          2
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Opponent has played at (1, 1) and (0, 0). I have played at (1, 0). It's important to block potential winning moves and take strategic positions."
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-X-\nO--",
+        "tokens_used": 2387,
+        "action": [
+          2,
+          1
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: O-X, -X-, O--. I need to block the opponent's potential winning move at (2, 1) by placing an O at (2, 1)."
+      },
+      {
+        "turn": 7,
+        "board_state": "O-X\n-X-\nOXO",
+        "tokens_used": 3639,
+        "action": [
+          1,
+          0
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: O-X, -X-, OXO. I have won the game by completing the third column with O. This game should be recorded as a victory."
+      },
+      {
+        "turn": 9,
+        "board_state": "OOX\nXX-\nOXO",
+        "tokens_used": 4149,
+        "action": [
+          1,
+          2
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: OOX, XX-, OXO. I need to block the opponent's winning move at (1, 1) by placing an O at (1, 1)."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 9637,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1057,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state with \"X\" in the center position, the best move is to take a corner. I'll go for the top left corner.\n\n{\"move\": [0, 0]}"
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1124,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state, I need to block the opponent's winning move in the bottom left corner. I will place my \"X\" there.\n\n{\"move\": [2, 0]}"
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\n-X-\nOX-",
+        "tokens_used": 2975,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "O-X\nXX-\nOXO",
+        "tokens_used": 4481,
+        "action": [
+          2,
+          0
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

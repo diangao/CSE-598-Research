@@ -1,0 +1,184 @@
+{
+  "run_id": 1744568432,
+  "game_id": 11,
+  "timestamp": "2025-04-13T14:29:12.317812",
+  "board_size": 6,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 11521,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "------\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1573,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "-O----\n-X----\n--X---\n------\n------\n------",
+        "tokens_used": 1047,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "-O----\n-XX---\nO-X---\n------\n------\n------",
+        "tokens_used": 1095,
+        "action": [
+          3,
+          0
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "XO----\n-XX---\nO-X---\nO-----\n------\n------",
+        "tokens_used": 1937,
+        "action": [
+          3,
+          1
+        ]
+      },
+      {
+        "turn": 10,
+        "board_state": "XO----\n-XX---\nOXX---\nOO----\n------\n------",
+        "tokens_used": 1231,
+        "action": [
+          4,
+          0
+        ]
+      },
+      {
+        "turn": 12,
+        "board_state": "XO----\n-XX---\nOXX---\nOOX---\nO-----\n------",
+        "tokens_used": 1282,
+        "action": [
+          4,
+          1
+        ]
+      },
+      {
+        "turn": 14,
+        "board_state": "XO----\nXXX---\nOXX---\nOOX---\nOO----\n------",
+        "tokens_used": 3356,
+        "action": [
+          4,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 24286,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "------\n------\n------\n------\n------\n------",
+        "tokens_used": 1054,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Since the board is completely empty, I will make a strategic move by taking the center position, which is the most valuable spot.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "-O----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1144,
+        "action": [
+          2,
+          2
+        ],
+        "reasoning_excerpt": "I'll analyze the current board state. The opponent has marked the center and I have marked the top left. The best move is to take a corner position to maximize my chances of creating a fork. \n\nI will "
+      },
+      {
+        "turn": 5,
+        "board_state": "-O----\n-X----\nO-X---\n------\n------\n------",
+        "tokens_used": 1238,
+        "action": [
+          1,
+          2
+        ],
+        "reasoning_excerpt": "In the current board state, I see that I have opportunities for both offense and defense. The opponent could win with their next move if they place their mark in the center right position. Therefore, "
+      },
+      {
+        "turn": 7,
+        "board_state": "-O----\n-XX---\nO-X---\nO-----\n------\n------",
+        "tokens_used": 2297,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "XO----\n-XX---\nO-X---\nOO----\n------\n------",
+        "tokens_used": 4845,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 11,
+        "board_state": "XO----\n-XX---\nOXX---\nOO----\nO-----\n------",
+        "tokens_used": 2933,
+        "action": [
+          3,
+          2
+        ]
+      },
+      {
+        "turn": 13,
+        "board_state": "XO----\n-XX---\nOXX---\nOOX---\nOO----\n------",
+        "tokens_used": 4595,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 15,
+        "board_state": "XO----\nXXX---\nOXX---\nOOX---\nOOO---\n------",
+        "tokens_used": 6180,
+        "action": [
+          0,
+          2
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Lost game with board state: XO----, XXX---, OXX---, OOX---, OOO---"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}
