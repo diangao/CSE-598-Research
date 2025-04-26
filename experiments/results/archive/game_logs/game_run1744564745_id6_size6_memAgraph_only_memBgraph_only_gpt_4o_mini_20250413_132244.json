@@ -1,0 +1,147 @@
+{
+  "run_id": 1744564745,
+  "game_id": 6,
+  "timestamp": "2025-04-13T13:22:29.571803",
+  "board_size": 6,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 9488,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "------\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1555,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "OX----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1721,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "OX----\nOX----\nX-----\n------\n------\n------",
+        "tokens_used": 1120,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "OXO---\nOX----\nXX----\n------\n------\n------",
+        "tokens_used": 1167,
+        "action": [
+          1,
+          2
+        ]
+      },
+      {
+        "turn": 10,
+        "board_state": "OXO---\nOXO---\nXX----\nX-----\n------\n------",
+        "tokens_used": 3925,
+        "action": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 9821,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "------\n------\n------\n------\n------\n------",
+        "tokens_used": 1061,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Since the board is completely empty, I will directly make a strategic move by placing my marker (X) in the center position, which is the most valuable spot.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "O-----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1150,
+        "action": [
+          0,
+          1
+        ],
+        "reasoning_excerpt": "I need to block my opponent (O) from winning. The opponent has an O in the top left and is trying to create a winning line. I will place my marker (X) in the top center position to block that potentia"
+      },
+      {
+        "turn": 5,
+        "board_state": "OX----\nOX----\n------\n------\n------\n------",
+        "tokens_used": 1232,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "I need to block my opponent from winning on the left column. The opponent has two O's in the left column. I will place my marker (X) in the bottom left position to block that winning move.\n\n{\"move\": ["
+      },
+      {
+        "turn": 7,
+        "board_state": "OXO---\nOX----\nX-----\n------\n------\n------",
+        "tokens_used": 1304,
+        "action": [
+          2,
+          1
+        ],
+        "reasoning_excerpt": "I can win the game by placing my marker (X) in the bottom center position (2, 1), creating a vertical line of X's.\n\n{\"move\": [2, 1]}"
+      },
+      {
+        "turn": 9,
+        "board_state": "OXO---\nOXO---\nXX----\n------\n------\n------",
+        "tokens_used": 2419,
+        "action": [
+          3,
+          0
+        ]
+      },
+      {
+        "turn": 11,
+        "board_state": "OXO---\nOXO---\nXXO---\nX-----\n------\n------",
+        "tokens_used": 2655,
+        "action": [
+          3,
+          1
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

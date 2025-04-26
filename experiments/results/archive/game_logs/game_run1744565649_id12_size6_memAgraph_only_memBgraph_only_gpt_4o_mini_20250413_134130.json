@@ -1,0 +1,187 @@
+{
+  "run_id": 1744565649,
+  "game_id": 12,
+  "timestamp": "2025-04-13T13:41:05.314925",
+  "board_size": 6,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 16666,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "------\n------\n------\n------\n------\n------",
+        "tokens_used": 952,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O-----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1643,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "O-----\nOX----\n--X---\n------\n------\n------",
+        "tokens_used": 1813,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "O-X---\nOX----\nO-X---\n------\n------\n------",
+        "tokens_used": 1168,
+        "action": [
+          3,
+          0
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "OOX---\nOX----\nO-X---\nX-----\n------\n------",
+        "tokens_used": 2083,
+        "action": [
+          3,
+          1
+        ]
+      },
+      {
+        "turn": 11,
+        "board_state": "OOX---\nOXO---\nO-X---\nXX----\n------\n------",
+        "tokens_used": 2259,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 13,
+        "board_state": "OOX---\nOXO---\nOXX---\nXX----\n------\n---O--",
+        "tokens_used": 1395,
+        "action": [
+          3,
+          2
+        ]
+      },
+      {
+        "turn": 15,
+        "board_state": "OOX---\nOXO---\nOXX---\nXXX---\nO-----\n---O--",
+        "tokens_used": 5353,
+        "action": [
+          4,
+          1
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Winning move: Placed X at (3,2) to complete the row and win the game."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 20543,
+    "memory_usage_summary": {
+      "graph_store": 3,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "------\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1719,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O-----\n-X----\n--X---\n------\n------\n------",
+        "tokens_used": 2349,
+        "action": [
+          1,
+          0
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Opponent has placed 'O' in top-left corner and 'X' in the center and bottom-middle. I should block the opponent's next potential winning move."
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X---\nOX----\n--X---\n------\n------\n------",
+        "tokens_used": 1248,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "O-X---\nOX----\nO-X---\nX-----\n------\n------",
+        "tokens_used": 3738,
+        "action": [
+          0,
+          1
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "I have created a vertical win with 'O' in the left column. The last move was placing 'O' at (2, 0) which secured the victory."
+      },
+      {
+        "turn": 10,
+        "board_state": "OOX---\nOX----\nO-X---\nXX----\n------\n------",
+        "tokens_used": 1467,
+        "action": [
+          1,
+          2
+        ]
+      },
+      {
+        "turn": 12,
+        "board_state": "OOX---\nOXO---\nOXX---\nXX----\n------\n------",
+        "tokens_used": 5129,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 14,
+        "board_state": "OOX---\nOXO---\nOXX---\nXXX---\n------\n---O--",
+        "tokens_used": 4893,
+        "action": [
+          4,
+          0
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "I have won the game with 'X' in the bottom row. The last move was placing 'X' at (3, 0) which secured the victory."
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

@@ -1,0 +1,27 @@
+{
+  "wins_a": 0,
+  "wins_b": 1,
+  "draws": 0,
+  "timeouts": 1,
+  "errors": 0,
+  "total_moves": 40,
+  "total_time": 105.19365811347961,
+  "games": [
+    {
+      "game_id": 0,
+      "outcome": "B_WINS",
+      "moves": 22,
+      "time": 39.02857804298401,
+      "board_size": 6,
+      "final_state": "XXOOOX\nOXOOOX\nXOXOXX\nXOXO--\n------\n------"
+    },
+    {
+      "game_id": 1,
+      "outcome": "TIMEOUT",
+      "moves": 18,
+      "time": 66.1650800704956,
+      "board_size": 6,
+      "final_state": "XOO---\nOXX---\nXOX---\nOXO---\nXOX---\nOXO---"
+    }
+  ]
+}

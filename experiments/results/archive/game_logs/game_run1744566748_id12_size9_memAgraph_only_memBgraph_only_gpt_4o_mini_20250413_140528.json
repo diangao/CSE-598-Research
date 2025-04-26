@@ -1,0 +1,339 @@
+{
+  "run_id": 1744566748,
+  "game_id": 12,
+  "timestamp": "2025-04-13T14:04:29.973281",
+  "board_size": 9,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 26842,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1561,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "XO-------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1042,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "XO-------\nOX-------\n--X------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1092,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "XO-------\nOX-------\nXOX------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1933,
+        "action": [
+          3,
+          0
+        ]
+      },
+      {
+        "turn": 10,
+        "board_state": "XO-------\nOX-------\nXOX------\nO--------\nX--------\n---------\n---------\n---------\n---------",
+        "tokens_used": 3032,
+        "action": [
+          3,
+          1
+        ]
+      },
+      {
+        "turn": 12,
+        "board_state": "XO-------\nOX-------\nXOX------\nOO-------\nXX-------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1360,
+        "action": [
+          4,
+          2
+        ]
+      },
+      {
+        "turn": 14,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXO------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1414,
+        "action": [
+          5,
+          0
+        ]
+      },
+      {
+        "turn": 16,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXO------\nO-X------\n---------\n---------\n---------",
+        "tokens_used": 1470,
+        "action": [
+          5,
+          1
+        ]
+      },
+      {
+        "turn": 18,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXO------\nOOX------\n--X------\n---------\n---------",
+        "tokens_used": 1528,
+        "action": [
+          6,
+          1
+        ]
+      },
+      {
+        "turn": 20,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXO------\nOOX------\nXOX------\n---------\n---------",
+        "tokens_used": 1586,
+        "action": [
+          7,
+          0
+        ]
+      },
+      {
+        "turn": 22,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXO------\nOOX------\nXOX------\nO-X------\n---------",
+        "tokens_used": 1646,
+        "action": [
+          7,
+          1
+        ]
+      },
+      {
+        "turn": 24,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXO---X--\nOOX------\nXOX------\nOOX------\n---------",
+        "tokens_used": 1708,
+        "action": [
+          8,
+          0
+        ]
+      },
+      {
+        "turn": 26,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXOX--X--\nOOX------\nXOX------\nOOX------\nO--------",
+        "tokens_used": 1771,
+        "action": [
+          8,
+          1
+        ]
+      },
+      {
+        "turn": 28,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXOXX-X--\nOOX------\nXOX------\nOOX------\nOO-------",
+        "tokens_used": 1834,
+        "action": [
+          8,
+          2
+        ]
+      },
+      {
+        "turn": 30,
+        "board_state": "XO-----X-\nOX-------\nXOX------\nOOX------\nXXOXX-X--\nOOX------\nXOX------\nOOX------\nOOO------",
+        "tokens_used": 1900,
+        "action": [
+          8,
+          3
+        ]
+      },
+      {
+        "turn": 32,
+        "board_state": "XO-----X-\nOX-------\nXOX------\nOOX------\nXXOXX-X--\nOOXX-----\nXOX------\nOOX------\nOOOO-----",
+        "tokens_used": 1965,
+        "action": [
+          8,
+          4
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 72368,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---------\n---------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1082,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Since the board is currently empty, there are no previous states or patterns to retrieve from memory. The best move in this situation is to take the center position, which is strategically valuable.\n\n"
+      },
+      {
+        "turn": 3,
+        "board_state": "-O-------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1186,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "In this board state, I have the opportunity to make a strategic move. My opponent (X) has taken the center position, and I (O) can take a corner position to build toward a fork or maximize my chances."
+      },
+      {
+        "turn": 5,
+        "board_state": "XO-------\nOX-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1294,
+        "action": [
+          2,
+          2
+        ],
+        "reasoning_excerpt": "In this board state, my opponent has O in the bottom-left corner and X in the center. I need to block my opponent's potential winning move while also considering my own strategy.\n\nThe best move here i"
+      },
+      {
+        "turn": 7,
+        "board_state": "XO-------\nOX-------\n-OX------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1403,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "In this board state, I see that my opponent has O in the middle of the bottom row and X in the center, which means they are one move away from winning if I do not block them. \n\nTo prevent my opponent "
+      },
+      {
+        "turn": 9,
+        "board_state": "XO-------\nOX-------\nXOX------\nO--------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2673,
+        "action": [
+          4,
+          0
+        ]
+      },
+      {
+        "turn": 11,
+        "board_state": "XO-------\nOX-------\nXOX------\nOO-------\nX--------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2957,
+        "action": [
+          4,
+          1
+        ]
+      },
+      {
+        "turn": 13,
+        "board_state": "XO-------\nOX-------\nXOX------\nOO-------\nXXO------\n---------\n---------\n---------\n---------",
+        "tokens_used": 4706,
+        "action": [
+          3,
+          2
+        ]
+      },
+      {
+        "turn": 15,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXO------\nO--------\n---------\n---------\n---------",
+        "tokens_used": 1978,
+        "action": [
+          5,
+          2
+        ],
+        "reasoning_excerpt": "In this board state, I see that my opponent (X) has two X's in a row in the last column and is one move away from winning. I must block them by placing my O in the last available position in that colu"
+      },
+      {
+        "turn": 17,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXO------\nOOX------\n---------\n---------\n---------",
+        "tokens_used": 5603,
+        "action": [
+          6,
+          2
+        ]
+      },
+      {
+        "turn": 19,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXO------\nOOX------\n-OX------\n---------\n---------",
+        "tokens_used": 6161,
+        "action": [
+          6,
+          0
+        ]
+      },
+      {
+        "turn": 21,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXO------\nOOX------\nXOX------\nO--------\n---------",
+        "tokens_used": 6743,
+        "action": [
+          7,
+          2
+        ]
+      },
+      {
+        "turn": 23,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXO------\nOOX------\nXOX------\nOOX------\n---------",
+        "tokens_used": 9661,
+        "action": [
+          5,
+          0
+        ]
+      },
+      {
+        "turn": 25,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXO---X--\nOOX------\nXOX------\nOOX------\nO--------",
+        "tokens_used": 2876,
+        "action": [
+          4,
+          3
+        ],
+        "reasoning_excerpt": "In this board state, my opponent (X) has two X's in the fourth column and is one move away from winning. I need to block my opponent by placing my O in the fourth column.\n\nThe only available position "
+      },
+      {
+        "turn": 27,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXOX--X--\nOOX------\nXOX------\nOOX------\nOO-------",
+        "tokens_used": 2996,
+        "action": [
+          4,
+          4
+        ],
+        "reasoning_excerpt": "In this board state, I need to block my opponent (X) from winning, as they have two X's in the last column and will win if I do not block them. \n\nThe only available position to block them is [4, 4]. I"
+      },
+      {
+        "turn": 29,
+        "board_state": "XO-------\nOX-------\nXOX------\nOOX------\nXXOXX-X--\nOOX------\nXOX------\nOOX------\nOOO------",
+        "tokens_used": 11525,
+        "action": [
+          5,
+          1
+        ]
+      },
+      {
+        "turn": 31,
+        "board_state": "XO-----X-\nOX-------\nXOX------\nOOX------\nXXOXX-X--\nOOX------\nXOX------\nOOX------\nOOOO-----",
+        "tokens_used": 9524,
+        "action": [
+          5,
+          3
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

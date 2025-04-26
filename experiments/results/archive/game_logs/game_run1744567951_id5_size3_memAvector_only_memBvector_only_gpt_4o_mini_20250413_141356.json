@@ -1,0 +1,133 @@
+{
+  "run_id": 1744567951,
+  "game_id": 5,
+  "timestamp": "2025-04-13T14:13:39.386486",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 8315,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 0,
+      "vector_store": 1,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1549,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1031,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\nXX-\nO--",
+        "tokens_used": 2261,
+        "action": [
+          2,
+          1
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: O-X, XX-, O--. I need to block the opponent's potential winning move at (2, 1)."
+      },
+      {
+        "turn": 8,
+        "board_state": "O-X\nXX-\nOOX",
+        "tokens_used": 3474,
+        "action": [
+          1,
+          2
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Current board state: O-X, XX-, OOX. The opponent is at risk of winning next turn, so I need to block at (1, 0) to prevent their victory."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 7010,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1058,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Since the board is empty, I can make a strategic move without needing to retrieve any memory. I'll take the center position, which is the most valuable starting move.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1927,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-X-\nO--",
+        "tokens_used": 1261,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "In this board state, I need to block the opponent from winning in the next turn. The opponent has two X's in the second column, so I must place my mark in the center row and left column to block them."
+      },
+      {
+        "turn": 7,
+        "board_state": "O-X\nXX-\nOO-",
+        "tokens_used": 1338,
+        "action": [
+          2,
+          2
+        ],
+        "reasoning_excerpt": "In this board state, I have an opportunity to win by placing my mark in the last position of the bottom row (2, 2). This will create a line of three O's.\n\n{\"move\": [2, 2]}"
+      },
+      {
+        "turn": 9,
+        "board_state": "O-X\nXXO\nOOX",
+        "tokens_used": 1426,
+        "action": [
+          0,
+          1
+        ],
+        "reasoning_excerpt": "In this board state, the opponent is about to win with a move in the middle column (1, 1). I must block this potential win by placing my mark in the middle column of the top row (0, 1).\n\n{\"move\": [0, "
+      }
+    ]
+  },
+  "final_result": "draw",
+  "winner": "draw"
+}

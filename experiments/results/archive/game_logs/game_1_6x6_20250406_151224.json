@@ -1,0 +1,188 @@
+{
+  "game_id": 1,
+  "timestamp": "2025-04-06T15:11:36.226269",
+  "board_size": "6x6",
+  "agent_a": {
+    "objective": "maximize win rate",
+    "total_tokens_used": 0,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "------\n------\n------\n--X---\n------\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 4,
+        "board_state": "------\n------\n-----X\n--X---\n-----O\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 6,
+        "board_state": "------\n---X-O\n-----X\n--X---\n-----O\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 8,
+        "board_state": "-O-X--\n---X-O\n-----X\n--X---\n-----O\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 10,
+        "board_state": "-OOX--\n---X-O\n-----X\n--X--X\n-----O\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 12,
+        "board_state": "-OOX--\n---X-O\n----OX\n--X--X\nX----O\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 14,
+        "board_state": "-OOX--\n---X-O\n----OX\n--XO-X\nX---XO\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 16,
+        "board_state": "-OOX--\n---X-O\nX---OX\n--XO-X\nX---XO\n-----O",
+        "tokens_used": 0
+      },
+      {
+        "turn": 18,
+        "board_state": "-OOX-X\n--OX-O\nX---OX\n--XO-X\nX---XO\n-----O",
+        "tokens_used": 0
+      },
+      {
+        "turn": 20,
+        "board_state": "-OOX-X\n--OX-O\nX--XOX\nO-XO-X\nX---XO\n-----O",
+        "tokens_used": 0
+      },
+      {
+        "turn": 22,
+        "board_state": "-OOX-X\n-XOX-O\nX--XOX\nO-XO-X\nX---XO\n---O-O",
+        "tokens_used": 0
+      },
+      {
+        "turn": 24,
+        "board_state": "-OOX-X\nXXOX-O\nX--XOX\nO-XO-X\nX---XO\n--OO-O",
+        "tokens_used": 0
+      },
+      {
+        "turn": 26,
+        "board_state": "-OOX-X\nXXOX-O\nXO-XOX\nO-XO-X\nX--XXO\n--OO-O",
+        "tokens_used": 0
+      },
+      {
+        "turn": 28,
+        "board_state": "-OOX-X\nXXOX-O\nXO-XOX\nO-XO-X\nXO-XXO\nX-OO-O",
+        "tokens_used": 0
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate minus token use",
+    "total_tokens_used": 0,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "------\n------\n------\n------\n------\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 3,
+        "board_state": "------\n------\n------\n--X---\n-----O\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 5,
+        "board_state": "------\n-----O\n-----X\n--X---\n-----O\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 7,
+        "board_state": "-O----\n---X-O\n-----X\n--X---\n-----O\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 9,
+        "board_state": "-OOX--\n---X-O\n-----X\n--X---\n-----O\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 11,
+        "board_state": "-OOX--\n---X-O\n----OX\n--X--X\n-----O\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 13,
+        "board_state": "-OOX--\n---X-O\n----OX\n--XO-X\nX----O\n------",
+        "tokens_used": 0
+      },
+      {
+        "turn": 15,
+        "board_state": "-OOX--\n---X-O\n----OX\n--XO-X\nX---XO\n-----O",
+        "tokens_used": 0
+      },
+      {
+        "turn": 17,
+        "board_state": "-OOX--\n--OX-O\nX---OX\n--XO-X\nX---XO\n-----O",
+        "tokens_used": 0
+      },
+      {
+        "turn": 19,
+        "board_state": "-OOX-X\n--OX-O\nX---OX\nO-XO-X\nX---XO\n-----O",
+        "tokens_used": 0
+      },
+      {
+        "turn": 21,
+        "board_state": "-OOX-X\n--OX-O\nX--XOX\nO-XO-X\nX---XO\n---O-O",
+        "tokens_used": 0
+      },
+      {
+        "turn": 23,
+        "board_state": "-OOX-X\n-XOX-O\nX--XOX\nO-XO-X\nX---XO\n--OO-O",
+        "tokens_used": 0
+      },
+      {
+        "turn": 25,
+        "board_state": "-OOX-X\nXXOX-O\nXO-XOX\nO-XO-X\nX---XO\n--OO-O",
+        "tokens_used": 0
+      },
+      {
+        "turn": 27,
+        "board_state": "-OOX-X\nXXOX-O\nXO-XOX\nO-XO-X\nXO-XXO\n--OO-O",
+        "tokens_used": 0
+      },
+      {
+        "turn": 29,
+        "board_state": "-OOX-X\nXXOX-O\nXOOXOX\nO-XO-X\nXO-XXO\nX-OO-O",
+        "tokens_used": 0
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

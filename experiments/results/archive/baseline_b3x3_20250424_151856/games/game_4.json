@@ -1,0 +1,8 @@
+{
+  "game_id": 4,
+  "outcome": "A_WINS",
+  "moves": 5,
+  "time": 10.07293176651001,
+  "board_size": 3,
+  "final_state": "XO-\n-X-\nO-X"
+}

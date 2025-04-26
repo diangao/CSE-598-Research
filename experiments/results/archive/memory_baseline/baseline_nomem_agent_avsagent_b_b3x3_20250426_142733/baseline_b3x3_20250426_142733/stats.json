@@ -1,0 +1,19 @@
+{
+  "wins_a": 1,
+  "wins_b": 0,
+  "draws": 0,
+  "timeouts": 0,
+  "errors": 0,
+  "total_moves": 7,
+  "total_time": 11.59637188911438,
+  "games": [
+    {
+      "game_id": 0,
+      "outcome": "A_WINS",
+      "moves": 7,
+      "time": 11.59637188911438,
+      "board_size": 3,
+      "final_state": "X-X\n-XO\nOOX"
+    }
+  ]
+}

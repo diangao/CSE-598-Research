@@ -1,0 +1,125 @@
+{
+  "run_id": 1744563480,
+  "game_id": 2,
+  "timestamp": "2025-04-13T12:58:25.264765",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 6032,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 2,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 948,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "---\n-X-\nO--",
+        "tokens_used": 1004,
+        "memory_function": "vector_store",
+        "memory_content_stored": "Opponent has placed an X in the center. I need to block potential winning moves."
+      },
+      {
+        "turn": 5,
+        "board_state": "-X-\n-XO\nO--",
+        "tokens_used": 1746,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "-X-\n-XO\nOOX",
+        "tokens_used": 1144,
+        "memory_function": "vector_store",
+        "memory_content_stored": "Game ended with a draw. The opponent was able to block my moves effectively."
+      },
+      {
+        "turn": 9,
+        "board_state": "OXX\n-XO\nOOX",
+        "tokens_used": 1190,
+        "action": [
+          1,
+          0
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 4790,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1067,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state, the center position is already occupied by 'X'. The best move is to take a corner position to maximize future winning opportunities. \n\nI'll make a move to the bottom lef"
+      },
+      {
+        "turn": 4,
+        "board_state": "-X-\n-X-\nO--",
+        "tokens_used": 1148,
+        "action": [
+          1,
+          2
+        ],
+        "reasoning_excerpt": "In the current board state, I have an opportunity to win by placing 'X' in the middle right position. This will complete a vertical line of 'X's.\n\nI'll make the move to the middle right position.\n\n{\"m"
+      },
+      {
+        "turn": 6,
+        "board_state": "-X-\n-XO\nO-X",
+        "tokens_used": 1241,
+        "action": [
+          2,
+          1
+        ],
+        "reasoning_excerpt": "In the current board state, I need to block my opponent from winning. They have 'O' in the bottom row and could win by placing 'O' in the bottom center position. Therefore, I will make my move to the "
+      },
+      {
+        "turn": 8,
+        "board_state": "-XX\n-XO\nOOX",
+        "tokens_used": 1334,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state, I can see that I have a winning move available. By placing 'X' in the top left corner, I will create a horizontal line of 'X's in the top row.\n\nI'll make the move to the to"
+      }
+    ]
+  },
+  "final_result": "draw",
+  "winner": "draw"
+}

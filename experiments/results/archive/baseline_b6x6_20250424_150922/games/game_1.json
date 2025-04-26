@@ -1,0 +1,8 @@
+{
+  "game_id": 1,
+  "outcome": "TIMEOUT",
+  "moves": 18,
+  "time": 66.1650800704956,
+  "board_size": 6,
+  "final_state": "XOO---\nOXX---\nXOX---\nOXO---\nXOX---\nOXO---"
+}

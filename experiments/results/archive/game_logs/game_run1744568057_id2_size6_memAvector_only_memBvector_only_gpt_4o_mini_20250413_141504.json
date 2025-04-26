@@ -1,0 +1,149 @@
+{
+  "run_id": 1744568057,
+  "game_id": 2,
+  "timestamp": "2025-04-13T14:14:46.633313",
+  "board_size": 6,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 9032,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "------\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1555,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "OX----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1721,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "OX----\nOX----\nX-----\n------\n------\n------",
+        "tokens_used": 1120,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "OXO---\nOX----\nXX----\n------\n------\n------",
+        "tokens_used": 1167,
+        "action": [
+          1,
+          2
+        ]
+      },
+      {
+        "turn": 10,
+        "board_state": "OXO---\nOXO---\nXXX---\n------\n------\n------",
+        "tokens_used": 3469,
+        "action": [
+          3,
+          0
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Winning move: Placed 'X' in (1, 2) to complete a row and win."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 11699,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "------\n------\n------\n------\n------\n------",
+        "tokens_used": 1064,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "In this case, the board is entirely empty. Since there are no previous states to retrieve and the best move is to take the center position, I will make the move directly.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "O-----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1995,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "OX----\nOX----\n------\n------\n------\n------",
+        "tokens_used": 1286,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "I see that I have two \"O\"s in the first column and can win by placing my \"O\" in the bottom left corner. Therefore, I will make that move.\n\n{\"move\": [2, 0]}"
+      },
+      {
+        "turn": 7,
+        "board_state": "OXO---\nOX----\nX-----\n------\n------\n------",
+        "tokens_used": 1388,
+        "action": [
+          2,
+          1
+        ],
+        "reasoning_excerpt": "In this situation, my opponent has an \"X\" in the middle column and can win in the next turn if they place their \"X\" in the middle cell of the bottom row. Therefore, I need to block that move by placin"
+      },
+      {
+        "turn": 9,
+        "board_state": "OXO---\nOXO---\nXX----\n------\n------\n------",
+        "tokens_used": 1477,
+        "action": [
+          2,
+          2
+        ],
+        "reasoning_excerpt": "In this board state, I see that my opponent has two \"X\"s in the bottom row. To prevent them from winning on their next turn, I need to block them by placing my \"O\" in the bottom right corner.\n\n{\"move\""
+      },
+      {
+        "turn": 11,
+        "board_state": "OXO---\nOXO---\nXXX---\nO-----\n------\n------",
+        "tokens_used": 4489,
+        "action": [
+          3,
+          1
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

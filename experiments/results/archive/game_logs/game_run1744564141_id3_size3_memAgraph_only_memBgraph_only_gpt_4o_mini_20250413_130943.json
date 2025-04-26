@@ -1,0 +1,95 @@
+{
+  "run_id": 1744564141,
+  "game_id": 3,
+  "timestamp": "2025-04-13T13:09:37.585631",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 5303,
+    "memory_usage_summary": {
+      "graph_store": 2,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 2067,
+        "action": [
+          0,
+          2
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Board state: O--\n-X-\n---; Next move: [0,2]"
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\nOX-\n---",
+        "tokens_used": 2287,
+        "action": [
+          2,
+          0
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Board state: O-X\nOX-\n---; Next move: [2,0]"
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2237,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1075,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "Since the center position is occupied by an X, I will focus on the corner positions. The best move is to take a corner position to maximize my chances of winning.\n\nI'll make the move in the top-left c"
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1162,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "In this situation, I need to block my opponent (X) from winning in the next turn. The opponent can win by placing X in the middle-left position [1, 0]. Therefore, I will make my move there to block th"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

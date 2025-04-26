@@ -1,0 +1,15 @@
+Baseline Experiments Summary
+==========================
+
+Started: 2025-04-24 15:09:02.651211
+Ended: 2025-04-24 15:13:14.558353
+Duration: 4.2 minutes
+
+Games per board size: 2
+Model: gpt-4o
+Timeout: 60 seconds
+
+Results:
+- Board 3x3: SUCCESS
+- Board 6x6: SUCCESS
+- Board 9x9: SUCCESS

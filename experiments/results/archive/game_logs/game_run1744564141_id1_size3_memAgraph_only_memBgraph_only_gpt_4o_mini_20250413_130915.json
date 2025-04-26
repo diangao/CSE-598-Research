@@ -1,0 +1,128 @@
+{
+  "run_id": 1744564141,
+  "game_id": 1,
+  "timestamp": "2025-04-13T13:09:01.068798",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 6346,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1549,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1031,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\n-X-\nOX-",
+        "tokens_used": 1799,
+        "action": [
+          1,
+          2
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "O-X\n-XO\nOXX",
+        "tokens_used": 1967,
+        "action": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 12565,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1067,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Given that this is the beginning of the game and the board is empty, I will make a strategic move without using memory. I will take the center position, which is the most valuable in TicTacToe.\n\n{\"mov"
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1182,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "The current board state shows that I have an X in the center and my opponent has an O in the top left corner and an X in the middle center. \n\nTo maximize my chances of winning, I need to make a move t"
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-X-\nO--",
+        "tokens_used": 2187,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "O-X\n-XO\nOX-",
+        "tokens_used": 1382,
+        "action": [
+          2,
+          2
+        ],
+        "reasoning_excerpt": "In the current board state, I can see that I have a potential winning move by placing X in the bottom right corner. This will give me three X's in a diagonal.\n\n{\"move\": [2, 2]}"
+      },
+      {
+        "turn": 9,
+        "board_state": "OOX\n-XO\nOXX",
+        "tokens_used": 6747,
+        "action": [
+          1,
+          0
+        ]
+      }
+    ]
+  },
+  "final_result": "draw",
+  "winner": "draw"
+}

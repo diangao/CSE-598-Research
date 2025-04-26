@@ -1,0 +1,135 @@
+{
+  "run_id": 1745692381,
+  "game_id": 1,
+  "timestamp": "2025-04-26T14:33:01.464851",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 12607,
+    "memory_usage_summary": {
+      "graph_store": 4,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 2787,
+        "action": [
+          0,
+          2
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Board state: O--\n-X-\n---; Move: [1, 1]; Outcome: In progress"
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-X-\n-O-",
+        "tokens_used": 3249,
+        "action": [
+          2,
+          2
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Board state: O-X\n-X-\n-O-; Move: [0, 2]; Outcome: In progress"
+      },
+      {
+        "turn": 7,
+        "board_state": "O-X\n-X-\nOOX",
+        "tokens_used": 2693,
+        "action": [
+          1,
+          0
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Board state: O-X\n-X-\nOOX; Move: [2, 2]; Outcome: In progress"
+      },
+      {
+        "turn": 9,
+        "board_state": "O-X\nXXO\nOOX",
+        "tokens_used": 2929,
+        "action": [
+          0,
+          1
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Board state: O-X\nXXO\nOOX; Move: [1, 0]; Outcome: In progress"
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 6774,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1069,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "Since the center position is already occupied and it's my turn, I will take the opportunity to place my mark in one of the corners, which is strategically valuable.\n\nI will make my move at the top lef"
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1981,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\n-X-\n-OX",
+        "tokens_used": 1297,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "I need to block my opponent from winning, as they have an \"O\" in the bottom row and can potentially win with their next move. The only available position to block them is the bottom left corner.\n\nI wi"
+      },
+      {
+        "turn": 8,
+        "board_state": "O-X\nXX-\nOOX",
+        "tokens_used": 2427,
+        "action": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  "final_result": "draw",
+  "winner": "draw"
+}

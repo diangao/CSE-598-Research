@@ -1,0 +1,128 @@
+{
+  "run_id": 1744564141,
+  "game_id": 15,
+  "timestamp": "2025-04-13T13:13:11.916108",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 4745,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1537,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1025,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\nXX-\nO--",
+        "tokens_used": 1069,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "O-X\nXX-\nOOX",
+        "tokens_used": 1114,
+        "action": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 13286,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1053,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Since the board is completely empty, I will make my first move by placing my mark in the center position, which is strategically valuable. \n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1145,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "The current board state shows that I need to block my opponent from winning in the next move. They have placed 'O' in the top left corner and 'X' in the center. The best move here is to block them by "
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-X-\nO--",
+        "tokens_used": 1235,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "In this board state, I need to block my opponent from winning on their next move. They have two 'X's in the second column, and placing an 'O' in the middle left (1, 0) will prevent them from winning. "
+      },
+      {
+        "turn": 7,
+        "board_state": "O-X\nXX-\nOO-",
+        "tokens_used": 4309,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "O-X\nXXO\nOOX",
+        "tokens_used": 5544,
+        "action": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "final_result": "draw",
+  "winner": "draw"
+}

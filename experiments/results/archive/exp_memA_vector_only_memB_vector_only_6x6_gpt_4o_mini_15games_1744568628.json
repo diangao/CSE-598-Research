@@ -1,0 +1,37 @@
+{
+  "board_size": "6x6",
+  "agent_a_wins_as_first": 8,
+  "agent_a_wins_as_second": 1,
+  "agent_b_wins_as_first": 1,
+  "agent_b_wins_as_second": 5,
+  "draws": 0,
+  "agent_a_total_tokens": 304267,
+  "agent_b_total_tokens": 367293,
+  "agent_a_memory_calls": {
+    "graph_store": 4,
+    "graph_read": 1,
+    "vector_store": 0,
+    "vector_read": 12,
+    "semantic_store": 0,
+    "semantic_read": 0,
+    "update_graph_schema": 0,
+    "update_vector_schema": 0,
+    "update_semantic_schema": 0
+  },
+  "agent_b_memory_calls": {
+    "graph_store": 0,
+    "graph_read": 1,
+    "vector_store": 0,
+    "vector_read": 4,
+    "semantic_store": 0,
+    "semantic_read": 0,
+    "update_graph_schema": 0,
+    "update_vector_schema": 0,
+    "update_semantic_schema": 0
+  },
+  "agent_a_total_wins": 9,
+  "agent_b_total_wins": 6,
+  "memory_constraint_a": "vector_only",
+  "memory_constraint_b": "vector_only",
+  "run_id": 1744568057
+}

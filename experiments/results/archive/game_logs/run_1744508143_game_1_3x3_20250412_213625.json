@@ -1,0 +1,135 @@
+{
+  "run_id": 1744508143,
+  "game_id": 1,
+  "timestamp": "2025-04-12T21:35:43.987786",
+  "board_size": "3x3",
+  "agent_a": {
+    "objective": "maximize win rate",
+    "total_tokens_used": 9081,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n---\n-X-",
+        "tokens_used": 1037,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "Based on the current board state, I don't have any valuable information stored in memory that would help me make a better move. I will calculate the best move directly.\n\nThe center position is strateg"
+      },
+      {
+        "turn": 4,
+        "board_state": "--O\n-X-\n-X-",
+        "tokens_used": 1943,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "-OO\n-XX\n-X-",
+        "tokens_used": 1309,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "Based on the current board state, I will calculate the best move directly.\n\nLooking at the board, I can see that the opponent has created a winning line in the first column with their moves. To block "
+      },
+      {
+        "turn": 8,
+        "board_state": "-OO\n-XX\nOXX",
+        "tokens_used": 4792,
+        "action": [
+          1,
+          0
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 48458,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 3,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 6006,
+        "action": [
+          2,
+          1
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "I played in the bottom left corner position."
+      },
+      {
+        "turn": 3,
+        "board_state": "--O\n---\n-X-",
+        "tokens_used": 8304,
+        "action": [
+          1,
+          1
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "board state"
+      },
+      {
+        "turn": 5,
+        "board_state": "-OO\n-X-\n-X-",
+        "tokens_used": 10755,
+        "action": [
+          1,
+          2
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "board state"
+      },
+      {
+        "turn": 7,
+        "board_state": "-OO\n-XX\nOX-",
+        "tokens_used": 6839,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "-OO\nOXX\nOXX",
+        "tokens_used": 16554,
+        "action": [
+          0,
+          0
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "board state"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

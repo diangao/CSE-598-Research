@@ -1,0 +1,133 @@
+{
+  "run_id": 1744563480,
+  "game_id": 1,
+  "timestamp": "2025-04-13T12:58:00.860209",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 4773,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1548,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1030,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\nXX-\n--O",
+        "tokens_used": 1075,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "O-X\nXX-\nOXO",
+        "tokens_used": 1120,
+        "action": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 17189,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 4,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1030,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 2312,
+        "action": [
+          0,
+          2
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "Current board situation: O-- -X- ---; consider potential winning moves and blocking strategies."
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-X-\n--O",
+        "tokens_used": 2706,
+        "action": [
+          1,
+          0
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "Current board situation: O-X -X- --O; evaluate winning moves or blocking potential."
+      },
+      {
+        "turn": 7,
+        "board_state": "O-X\nXX-\nO-O",
+        "tokens_used": 3098,
+        "action": [
+          2,
+          1
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "Current board situation: O-X XX- O-O; assess winning moves or necessary blocks."
+      },
+      {
+        "turn": 9,
+        "board_state": "O-X\nXXO\nOXO",
+        "tokens_used": 8043,
+        "action": [
+          1,
+          2
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "Current board situation: O-X XXO OXO; evaluate to determine if a move can lead to a win or block the opponent."
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

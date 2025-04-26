@@ -1,0 +1,268 @@
+{
+  "run_id": 1744568057,
+  "game_id": 8,
+  "timestamp": "2025-04-13T14:18:42.153545",
+  "board_size": 6,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 24028,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "------\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1555,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X---\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1037,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X---\n-XX---\n--O---\n------\n------\n------",
+        "tokens_used": 1086,
+        "action": [
+          3,
+          1
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "O-X---\n-XX---\n--O---\nXO----\n------\n------",
+        "tokens_used": 1136,
+        "action": [
+          4,
+          0
+        ]
+      },
+      {
+        "turn": 10,
+        "board_state": "O-X---\n-XX---\n-XO---\nXO----\nO-----\n------",
+        "tokens_used": 1187,
+        "action": [
+          4,
+          1
+        ]
+      },
+      {
+        "turn": 12,
+        "board_state": "O-X---\n-XX---\n-XO---\nXOX---\nOO----\n------",
+        "tokens_used": 1239,
+        "action": [
+          4,
+          2
+        ]
+      },
+      {
+        "turn": 14,
+        "board_state": "O-X---\n-XX---\nXXO---\nXOX---\nOOO---\n------",
+        "tokens_used": 5827,
+        "action": [
+          1,
+          0
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Winning move by placing X at (4,2) to create a winning row."
+      },
+      {
+        "turn": 16,
+        "board_state": "OXX---\nOXX---\nXXO---\nXOX---\nOOO---\n------",
+        "tokens_used": 1532,
+        "action": [
+          0,
+          3
+        ]
+      },
+      {
+        "turn": 18,
+        "board_state": "OXXO--\nOXX-X-\nXXO---\nXOX---\nOOO---\n------",
+        "tokens_used": 4097,
+        "action": [
+          0,
+          4
+        ]
+      },
+      {
+        "turn": 20,
+        "board_state": "OXXOO-\nOXX-X-\nXXO---\nXOX---\nOOO---\n-X----",
+        "tokens_used": 1719,
+        "action": [
+          2,
+          3
+        ]
+      },
+      {
+        "turn": 22,
+        "board_state": "OXXOO-\nOXX-X-\nXXOO--\nXOX--X\nOOO---\n-X----",
+        "tokens_used": 1777,
+        "action": [
+          3,
+          3
+        ]
+      },
+      {
+        "turn": 24,
+        "board_state": "OXXOO-\nOXX-X-\nXXOO--\nXOXO-X\nOOO-X-\n-X----",
+        "tokens_used": 1836,
+        "action": [
+          4,
+          3
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 67603,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "------\n------\n------\n------\n------\n------",
+        "tokens_used": 1059,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "The board is currently empty, which means I can choose any strategic position. I will start by taking the center position, as it is the most valuable.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "O-----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1173,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "The current board state shows that I have an 'X' in the center, and my opponent has an 'O' in the top left corner and an 'X' in the middle left. \n\nTo maximize my chances of winning, I need to block my"
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X---\n-X----\n--O---\n------\n------\n------",
+        "tokens_used": 1307,
+        "action": [
+          1,
+          2
+        ],
+        "reasoning_excerpt": "The current board state shows that I have 'X' in the center (1, 1) and middle left (1, 0), while my opponent has 'O' in the top left (0, 0) and middle right (2, 1). I need to block my opponent from wi"
+      },
+      {
+        "turn": 7,
+        "board_state": "O-X---\n-XX---\n--O---\n-O----\n------\n------",
+        "tokens_used": 1457,
+        "action": [
+          3,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state, I have 'X's in the center (1, 1), middle left (1, 0), and middle right (1, 2). My opponent has 'O's in the top left (0, 0), bottom left (3, 0), and middle right (2, 1).\n\nTo"
+      },
+      {
+        "turn": 9,
+        "board_state": "O-X---\n-XX---\n--O---\nXO----\nO-----\n------",
+        "tokens_used": 2873,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 11,
+        "board_state": "O-X---\n-XX---\n-XO---\nXO----\nOO----\n------",
+        "tokens_used": 1811,
+        "action": [
+          3,
+          2
+        ],
+        "reasoning_excerpt": "In the current board state, I have 'X's in the center (1, 1), middle left (1, 0), middle right (1, 2), and bottom left (3, 0) and (3, 1). My opponent has 'O's in the top left (0, 0), middle right (2, "
+      },
+      {
+        "turn": 13,
+        "board_state": "O-X---\n-XX---\n-XO---\nXOX---\nOOO---\n------",
+        "tokens_used": 5851,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 15,
+        "board_state": "O-X---\nOXX---\nXXO---\nXOX---\nOOO---\n------",
+        "tokens_used": 10967,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 17,
+        "board_state": "OXXO--\nOXX---\nXXO---\nXOX---\nOOO---\n------",
+        "tokens_used": 12997,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 19,
+        "board_state": "OXXOO-\nOXX-X-\nXXO---\nXOX---\nOOO---\n------",
+        "tokens_used": 11529,
+        "action": [
+          0,
+          3
+        ]
+      },
+      {
+        "turn": 21,
+        "board_state": "OXXOO-\nOXX-X-\nXXOO--\nXOX---\nOOO---\n-X----",
+        "tokens_used": 12793,
+        "action": [
+          0,
+          4
+        ]
+      },
+      {
+        "turn": 23,
+        "board_state": "OXXOO-\nOXX-X-\nXXOO--\nXOXO-X\nOOO---\n-X----",
+        "tokens_used": 3786,
+        "action": [
+          4,
+          4
+        ],
+        "reasoning_excerpt": "In the current board state, I have 'X's in the following positions:\n- (1, 1)\n- (1, 2)\n- (2, 1)\n- (2, 0)\n- (3, 0)\n- (3, 1)\n- (3, 2)\n- (3, 4)\n\nMy opponent has 'O's in the following positions:\n- (0, 0)\n-"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

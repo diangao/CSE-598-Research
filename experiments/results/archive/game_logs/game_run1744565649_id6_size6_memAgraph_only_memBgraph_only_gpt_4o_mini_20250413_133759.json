@@ -1,0 +1,258 @@
+{
+  "run_id": 1744565649,
+  "game_id": 6,
+  "timestamp": "2025-04-13T13:37:15.834863",
+  "board_size": 6,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 64691,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 9,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "------\n------\n------\n------\n------\n------",
+        "tokens_used": 946,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "-O----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 985,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "{\"move\": [0, 0]}"
+      },
+      {
+        "turn": 5,
+        "board_state": "XO----\nOX----\n------\n------\n------\n------",
+        "tokens_used": 2342,
+        "action": [
+          1,
+          2
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "current board state is XO on top left and X in the center, O in the middle left. Need to find the best move to win or block.",
+        "reasoning_excerpt": "{\"move\": [1, 2]}"
+      },
+      {
+        "turn": 7,
+        "board_state": "XO----\nOXX---\nO-----\n------\n------\n------",
+        "tokens_used": 2954,
+        "action": [
+          2,
+          1
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "current board state has X in the top left, O in the middle left and center, and X in the middle right. Need to find the best move to win or block.",
+        "reasoning_excerpt": "{\"move\": [2, 1]}"
+      },
+      {
+        "turn": 9,
+        "board_state": "XO----\nOXX---\nOXO---\n------\n------\n------",
+        "tokens_used": 3576,
+        "action": [
+          3,
+          0
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "current board state has X in the top left, O in the middle left, X in the middle right, and O in the bottom left. Need to find the best move to win or block.",
+        "reasoning_excerpt": "{\"move\": [3, 0]}"
+      },
+      {
+        "turn": 11,
+        "board_state": "XOO---\nOXX---\nOXO---\nX-----\n------\n------",
+        "tokens_used": 4214,
+        "action": [
+          3,
+          1
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "current board state has X in the top left, O in the top middle, O in the middle left, X in the middle right, and O in the bottom left. Need to find the best move to win or block.",
+        "reasoning_excerpt": "{\"move\": [3, 1]}"
+      },
+      {
+        "turn": 13,
+        "board_state": "XOO---\nOXX---\nOXO---\nXXO---\n------\n------",
+        "tokens_used": 7061,
+        "action": [
+          4,
+          0
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "current board state has X in the top left, O in the top middle, O in the middle left, X in the middle right, O in the bottom left, and X in the bottom middle. Need to find the best move to win or block."
+      },
+      {
+        "turn": 15,
+        "board_state": "XOO---\nOXX---\nOXO---\nXXO---\nXO----\n------",
+        "tokens_used": 8156,
+        "action": [
+          4,
+          2
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "current board state has X in the top left, O in the top middle, O in the middle left, X in the middle right, O in the bottom left, and X in the bottom middle. Need to find the best move to win or block."
+      },
+      {
+        "turn": 17,
+        "board_state": "XOO---\nOXX---\nOXO---\nXXO---\nXOXO--\n------",
+        "tokens_used": 9275,
+        "action": [
+          4,
+          4
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "current board state has X in the top left, O in the top middle, O in the middle left, X in the middle right, O in the bottom left, X in the bottom middle, and O in the bottom right. Need to find the best move to win or block."
+      },
+      {
+        "turn": 19,
+        "board_state": "XOO---\nOXX---\nOXO---\nXXO---\nXOXOXO\n------",
+        "tokens_used": 17170,
+        "action": [
+          3,
+          0
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "current board state has X in the top left, O in the top middle, O in the middle left, X in the middle right, O in the bottom left, X in the bottom middle, and O in the bottom right. The bottom row is filled with X's. Need to find the best move to win or block."
+      },
+      {
+        "turn": 21,
+        "board_state": "XOO--X\nOXX---\nOXO---\nXXOO--\nXOXOXO\n------",
+        "tokens_used": 8012,
+        "action": [
+          0,
+          3
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "current board state has X in the top left, O in the top middle, O in the middle left, X in the middle right, O in the bottom left, X in the bottom middle, and O in the bottom right. Need to find the best move to win or block.",
+        "reasoning_excerpt": "{\"move\": [0, 3]}"
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 28636,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "------\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1769,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "XO----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1143,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "XO----\nOXX---\n------\n------\n------\n------",
+        "tokens_used": 1189,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "XO----\nOXX---\nOX----\n------\n------\n------",
+        "tokens_used": 2121,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 10,
+        "board_state": "XO----\nOXX---\nOXO---\nX-----\n------\n------",
+        "tokens_used": 4353,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 12,
+        "board_state": "XOO---\nOXX---\nOXO---\nXX----\n------\n------",
+        "tokens_used": 2623,
+        "action": [
+          3,
+          2
+        ]
+      },
+      {
+        "turn": 14,
+        "board_state": "XOO---\nOXX---\nOXO---\nXXO---\nX-----\n------",
+        "tokens_used": 2803,
+        "action": [
+          4,
+          1
+        ]
+      },
+      {
+        "turn": 16,
+        "board_state": "XOO---\nOXX---\nOXO---\nXXO---\nXOX---\n------",
+        "tokens_used": 2985,
+        "action": [
+          4,
+          3
+        ]
+      },
+      {
+        "turn": 18,
+        "board_state": "XOO---\nOXX---\nOXO---\nXXO---\nXOXOX-\n------",
+        "tokens_used": 3169,
+        "action": [
+          4,
+          5
+        ]
+      },
+      {
+        "turn": 20,
+        "board_state": "XOO--X\nOXX---\nOXO---\nXXO---\nXOXOXO\n------",
+        "tokens_used": 6481,
+        "action": [
+          3,
+          3
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

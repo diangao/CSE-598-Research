@@ -1,0 +1,129 @@
+{
+  "run_id": 1744567951,
+  "game_id": 12,
+  "timestamp": "2025-04-13T14:16:11.090438",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 4778,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1549,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O--\n-X-\n--X",
+        "tokens_used": 1032,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "O--\nXX-\nO-X",
+        "tokens_used": 1076,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "OOX\nXX-\nO-X",
+        "tokens_used": 1121,
+        "action": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 7585,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1062,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Given that the board is currently empty, the best strategic move is to take the center position, which is a strong opening move in TicTacToe. \n\nI'll proceed with the move.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1180,
+        "action": [
+          2,
+          2
+        ],
+        "reasoning_excerpt": "In the current board state:\n\n```\nO - -\n- X -\n- - -\n```\n\nThe opponent has placed an 'O' in the top left corner. My 'X' is in the center. The best move is to take the bottom right corner (2, 2) to creat"
+      },
+      {
+        "turn": 5,
+        "board_state": "O--\n-X-\nO-X",
+        "tokens_used": 1294,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state:\n\n```\nO - -\n- X -\nO X -\n```\n\nI can see that I have two 'X's in the second column. To win, I need to place 'X' in the middle left position (1, 0). This will allow me to win w"
+      },
+      {
+        "turn": 7,
+        "board_state": "OO-\nXX-\nO-X",
+        "tokens_used": 1396,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "In the current board state:\n\n```\nO O -\nX X -\nO - X\n```\n\nThe opponent has already set up a winning opportunity in the top row. I need to block their winning move by placing my 'X' in the top right corn"
+      },
+      {
+        "turn": 9,
+        "board_state": "OOX\nXXO\nO-X",
+        "tokens_used": 2653,
+        "action": [
+          2,
+          1
+        ]
+      }
+    ]
+  },
+  "final_result": "draw",
+  "winner": "draw"
+}

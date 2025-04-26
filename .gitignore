@@ -168,11 +168,11 @@ logs/
 log/
 
 # Modify experiments/results to allow organized directories
-experiments/results/*
-!experiments/results/from_dian/
-!experiments/results/from_anish/
-!experiments/results/analysis/
-!experiments/results/.gitkeep
+# experiments/results/*
+# !experiments/results/from_dian/
+# !experiments/results/from_anish/
+# !experiments/results/analysis/
+# !experiments/results/.gitkeep
 
 *.npy
 *.pkl

@@ -1,0 +1,109 @@
+{
+  "game_id": 1,
+  "timestamp": "2025-04-06T15:44:33.150307",
+  "board_size": "3x3",
+  "agent_a": {
+    "objective": "maximize win rate",
+    "total_tokens_used": 0,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 0,
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      },
+      {
+        "turn": 4,
+        "board_state": "---\n-X-\nX-O",
+        "tokens_used": 0,
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      },
+      {
+        "turn": 6,
+        "board_state": "-O-\n-X-\nXXO",
+        "tokens_used": 0,
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      },
+      {
+        "turn": 8,
+        "board_state": "XO-\nOX-\nXXO",
+        "tokens_used": 0,
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate minus token use",
+    "total_tokens_used": 4544,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1072,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "ChatCompletionMessage(content='Based on the current board state, I will make my move in the center position.\\n\\n{\"move\": [1, 1]}\\n{\"move\": [1, 1]}', refusal=None, role='assistant', annotations=[], aud"
+      },
+      {
+        "turn": 3,
+        "board_state": "---\n-X-\n--O",
+        "tokens_used": 1411,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "ChatCompletionMessage(content='Based on the current board state, I will make my move in the bottom left corner position.\\n\\n{\"move\": [2, 0]}\\n{\"move\": [2, 0]}', refusal=None, role='assistant', annotat"
+      },
+      {
+        "turn": 5,
+        "board_state": "-O-\n-X-\nX-O",
+        "tokens_used": 0,
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      },
+      {
+        "turn": 7,
+        "board_state": "-O-\nOX-\nXXO",
+        "tokens_used": 2061,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "ChatCompletionMessage(content='Based on the current board state, I will make my move in the top left corner position.\\n\\n{\"move\": [0, 0]}\\n{\"move\": [0, 0]}\\nBased on the current board state, I will ma"
+      },
+      {
+        "turn": 9,
+        "board_state": "XO-\nOXO\nXXO",
+        "tokens_used": 0,
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

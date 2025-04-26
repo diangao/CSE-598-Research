@@ -1,0 +1,14 @@
+{
+  "board_size": 6,
+  "games": 2,
+  "results_dir": "experiments/results/baseline",
+  "system_a": "experiments/prompts/system_agent_a.txt",
+  "system_b": "experiments/prompts/system_agent_b.txt",
+  "timeout": 60,
+  "max_tokens": 1024,
+  "temperature": 0.7,
+  "model": "gpt-4o",
+  "exp_id": "baseline_b6x6_20250424_150922",
+  "timestamp": "2025-04-24T15:09:22.990056",
+  "type": "baseline_no_memory"
+}

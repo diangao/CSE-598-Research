@@ -1,0 +1,122 @@
+{
+  "run_id": 1744506875,
+  "game_id": 4,
+  "timestamp": "2025-04-12T21:17:26.392196",
+  "board_size": "3x3",
+  "agent_a": {
+    "objective": "maximize win rate",
+    "total_tokens_used": 0,
+    "memory_usage_summary": {
+      "graph_store": 2,
+      "graph_read": 0,
+      "vector_store": 2,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 0,
+        "memory_function": "vector_store",
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      },
+      {
+        "turn": 4,
+        "board_state": "X--\n-X-\n-O-",
+        "tokens_used": 0,
+        "memory_function": "graph_store",
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      },
+      {
+        "turn": 6,
+        "board_state": "XOX\n-X-\n-O-",
+        "tokens_used": 0,
+        "memory_function": "graph_store",
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      },
+      {
+        "turn": 8,
+        "board_state": "XOX\nOXX\n-O-",
+        "tokens_used": 0,
+        "memory_function": "vector_store",
+        "reasoning_excerpt": "Maximum recursion depth reached, need to make a move"
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate minus token use",
+    "total_tokens_used": 5208,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 932,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "ChatCompletionMessage(content='{\"move\": [1, 1]}\\nI will make my move in the center position.\\n\\nUpdated board state:\\n---\\n-O-\\n---', refusal=None, role='assistant', annotations=[], audio=None, functi"
+      },
+      {
+        "turn": 3,
+        "board_state": "---\n-X-\n-O-",
+        "tokens_used": 983,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "ChatCompletionMessage(content='{\"move\": [0, 0]}\\nI will make my move in the top-left corner position.\\n\\nUpdated board state:\\nX--\\n-X-\\n-O-', refusal=None, role='assistant', annotations=[], audio=Non"
+      },
+      {
+        "turn": 5,
+        "board_state": "XO-\n-X-\n-O-",
+        "tokens_used": 1040,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "ChatCompletionMessage(content='{\"move\": [0, 2]}\\nI will make my move in the top-right corner position.\\n\\nUpdated board state:\\nXO-\\n-X-\\n-OO', refusal=None, role='assistant', annotations=[], audio=No"
+      },
+      {
+        "turn": 7,
+        "board_state": "XOX\nOX-\n-O-",
+        "tokens_used": 1097,
+        "action": [
+          1,
+          2
+        ],
+        "reasoning_excerpt": "ChatCompletionMessage(content='{\"move\": [1, 2]}\\nI will make my move in the middle-right position.\\n\\nUpdated board state:\\nXOX\\nOXO\\n-O-', refusal=None, role='assistant', annotations=[], audio=None, "
+      },
+      {
+        "turn": 9,
+        "board_state": "XOX\nOXX\nOO-",
+        "tokens_used": 1156,
+        "action": [
+          2,
+          2
+        ],
+        "reasoning_excerpt": "ChatCompletionMessage(content='{\"move\": [2, 2]}\\nI will make my move in the bottom-right corner position.\\n\\nUpdated board state:\\nXOX\\nOXX\\nOOX', refusal=None, role='assistant', annotations=[], audio"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

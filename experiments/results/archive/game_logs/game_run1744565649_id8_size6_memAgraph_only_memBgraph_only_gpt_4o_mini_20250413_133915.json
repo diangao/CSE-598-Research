@@ -1,0 +1,211 @@
+{
+  "run_id": 1744565649,
+  "game_id": 8,
+  "timestamp": "2025-04-13T13:38:44.541821",
+  "board_size": 6,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 24677,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "------\n------\n------\n------\n------\n------",
+        "tokens_used": 990,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "In this case, the board is completely empty. The best opening move in TicTacToe is to take the center position, as it maximizes control of the game.\n\nI will make the move to the center position.\n\n{\"mo"
+      },
+      {
+        "turn": 3,
+        "board_state": "O-----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1093,
+        "action": [
+          0,
+          1
+        ],
+        "reasoning_excerpt": "Given the current board state, I have O in the top left corner and X in the center, which means I need to block my opponent's next potential winning move. X can win by placing another X in either the "
+      },
+      {
+        "turn": 5,
+        "board_state": "OXO---\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1206,
+        "action": [
+          1,
+          2
+        ],
+        "reasoning_excerpt": "In the current board state, I have O in the top row (positions [0,0] and [0,2]), and X is at the center (position [1,1]). X can win by placing another X in the middle right position [1,2]. \n\nI need to"
+      },
+      {
+        "turn": 7,
+        "board_state": "OXO---\n-XX---\nO-----\n------\n------\n------",
+        "tokens_used": 1332,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state, I have O in positions [0,0], [0,2], and [2,0]. X has two Xs in the middle row ([1,1] and [1,2]), and I need to block their opportunity to win by placing another X in the mi"
+      },
+      {
+        "turn": 9,
+        "board_state": "OXO---\nXXX---\nOO----\n------\n------\n------",
+        "tokens_used": 4833,
+        "action": [
+          3,
+          0
+        ]
+      },
+      {
+        "turn": 11,
+        "board_state": "OXO---\nXXX---\nOOO---\nX-----\n------\n------",
+        "tokens_used": 5701,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 13,
+        "board_state": "OXO---\nXXX---\nOOO---\nX-----\nO----X\n------",
+        "tokens_used": 3463,
+        "action": [
+          3,
+          1
+        ]
+      },
+      {
+        "turn": 15,
+        "board_state": "OXO---\nXXX---\nOOO---\nXX----\nOO---X\n------",
+        "tokens_used": 2060,
+        "action": [
+          3,
+          2
+        ],
+        "reasoning_excerpt": "In the current board state, I have three Os lined up in the third row ([2,0], [2,1], [2,2]), meaning I have already won the game. \n\nHowever, since I need to provide a move, I will make a move in the n"
+      },
+      {
+        "turn": 17,
+        "board_state": "OXO---\nXXX---\nOOO---\nXXX---\nOOO--X\n------",
+        "tokens_used": 3999,
+        "action": [
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 18848,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "------\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1719,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "OX----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1885,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "OXO---\n-XX---\n------\n------\n------\n------",
+        "tokens_used": 1203,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "OXO---\nXXX---\nO-----\n------\n------\n------",
+        "tokens_used": 2574,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 10,
+        "board_state": "OXO---\nXXX---\nOO----\nX-----\n------\n------",
+        "tokens_used": 1357,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 12,
+        "board_state": "OXO---\nXXX---\nOOO---\nX-----\n-----X\n------",
+        "tokens_used": 5164,
+        "action": [
+          4,
+          0
+        ]
+      },
+      {
+        "turn": 14,
+        "board_state": "OXO---\nXXX---\nOOO---\nXX----\nO----X\n------",
+        "tokens_used": 1596,
+        "action": [
+          4,
+          1
+        ]
+      },
+      {
+        "turn": 16,
+        "board_state": "OXO---\nXXX---\nOOO---\nXXX---\nOO---X\n------",
+        "tokens_used": 1648,
+        "action": [
+          4,
+          2
+        ]
+      },
+      {
+        "turn": 18,
+        "board_state": "OXO---\nXXX---\nOOO---\nXXX-X-\nOOO--X\n------",
+        "tokens_used": 1702,
+        "action": [
+          4,
+          3
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

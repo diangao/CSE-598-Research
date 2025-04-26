@@ -1,0 +1,92 @@
+{
+  "run_id": 1745692359,
+  "game_id": 1,
+  "timestamp": "2025-04-26T14:32:39.795015",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2583,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 950,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "XO-\n-X-\n---",
+        "tokens_used": 1633,
+        "action": [
+          2,
+          1
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3416,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1055,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "In the current empty board state, the optimal move is to take the center position, which is strategically valuable. I will proceed to make that move.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "-O-\n-X-\n---",
+        "tokens_used": 1140,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "In this situation, the opponent (X) has taken the center position, and I (O) need to block them from winning. The best move is to take one of the corners. I will choose the top left corner for my move"
+      },
+      {
+        "turn": 5,
+        "board_state": "XO-\n-X-\n-O-",
+        "tokens_used": 1221,
+        "action": [
+          2,
+          2
+        ],
+        "reasoning_excerpt": "In this situation, I need to block the opponent (X) from winning. They can win with a move to the bottom right corner ([2, 2]). Therefore, I will take that position to block them.\n\n{\"move\": [2, 2]}"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

@@ -1,0 +1,186 @@
+{
+  "run_id": 1744565649,
+  "game_id": 4,
+  "timestamp": "2025-04-13T13:36:18.886353",
+  "board_size": 6,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 21636,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 5,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "------\n------\n------\n------\n------\n------",
+        "tokens_used": 946,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "-O----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 985,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "{\"move\": [0, 0]}"
+      },
+      {
+        "turn": 5,
+        "board_state": "XO----\nOX----\n------\n------\n------\n------",
+        "tokens_used": 2344,
+        "action": [
+          1,
+          2
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "current board state is X at (0,1), O at (1,0). I need to find the best move to either win or block opponent.",
+        "reasoning_excerpt": "{\"move\": [1, 2]}"
+      },
+      {
+        "turn": 7,
+        "board_state": "XO----\nOXX---\nO-----\n------\n------\n------",
+        "tokens_used": 4217,
+        "action": [
+          2,
+          2
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "Current board state has X at (0,0), O at (1,0), (1,1), (1,2), and I need to find the best move to either win or block opponent."
+      },
+      {
+        "turn": 9,
+        "board_state": "XO----\nOXX---\nOOX---\n------\n------\n------",
+        "tokens_used": 3694,
+        "action": [
+          3,
+          0
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "Current board state has X at (0,0), O at (1,0), (1,1), (1,2), (2,0), (2,1) and I need to find the best move to either win or block opponent.",
+        "reasoning_excerpt": "{\"move\": [3, 0]}"
+      },
+      {
+        "turn": 11,
+        "board_state": "XOO---\nOXX---\nOOX---\nX-----\n------\n------",
+        "tokens_used": 4378,
+        "action": [
+          3,
+          1
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "Current board state has X at (0,0), (3,0) and O at (0,1), (0,2), (1,0), (1,1), (1,2), (2,0), (2,1) and I need to find the best move to either win or block opponent.",
+        "reasoning_excerpt": "{\"move\": [3, 1]}"
+      },
+      {
+        "turn": 13,
+        "board_state": "XOOO--\nOXX---\nOOX---\nXX----\n------\n------",
+        "tokens_used": 5072,
+        "action": [
+          3,
+          2
+        ],
+        "memory_function": "graph_read",
+        "memory_query": "Current board state has X at (0,0), (3,0), (3,1) and O at (0,1), (0,2), (1,0), (1,1), (1,2), (2,0), (2,1). I need to find the best move to either win or block opponent.",
+        "reasoning_excerpt": "{\"move\": [3, 2]}"
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 12418,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "------\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1753,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "XO----\n-X----\n------\n------\n------\n------",
+        "tokens_used": 1135,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "XO----\nOXX---\n------\n------\n------\n------",
+        "tokens_used": 1181,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "XO----\nOXX---\nO-X---\n------\n------\n------",
+        "tokens_used": 1229,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 10,
+        "board_state": "XO----\nOXX---\nOOX---\nX-----\n------\n------",
+        "tokens_used": 3170,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 12,
+        "board_state": "XOO---\nOXX---\nOOX---\nXX----\n------\n------",
+        "tokens_used": 2457,
+        "action": [
+          0,
+          3
+        ]
+      },
+      {
+        "turn": 14,
+        "board_state": "XOOO--\nOXX---\nOOX---\nXXX---\n------\n------",
+        "tokens_used": 1493,
+        "action": [
+          0,
+          4
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}
