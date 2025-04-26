@@ -185,3 +185,4 @@ data/
 !experiments/results/from_anish/**/*.json
 !experiments/results/analysis/**/*.json
 output/
+!experiments/results/analysis/**/*.py
