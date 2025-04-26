@@ -1,0 +1,95 @@
+{
+  "run_id": 1745696630,
+  "game_id": 12,
+  "timestamp": "2025-04-26T15:47:24.989522",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 5323,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 0,
+      "vector_store": 1,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 2073,
+        "action": [
+          0,
+          2
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: O--\n-X-\n--- \nNext move: [0, 2]"
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-XO\n---",
+        "tokens_used": 2301,
+        "action": [
+          2,
+          0
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Current board state: O-X\n-XO\n--- \nNext move: [2, 0]"
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2279,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1087,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\n- - -\n- X -\n- - -\n```\n\nThe center position is taken by my opponent (X), so I should aim for a corner position for strategic advantage. \n\nI will choose the move [0, "
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1192,
+        "action": [
+          1,
+          2
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\nO - X\n- X -\n- - -\n```\n\nMy opponent (X) is about to win if they play in the center right position [1, 2]. Therefore, I need to block that move.\n\nI will make the move"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

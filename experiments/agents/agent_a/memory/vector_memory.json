@@ -220,6 +220,125 @@
       "board_state": null,
       "embedding": null,
       "timestamp": "2025-04-13T14:25:57.871104"
+    },
+    {
+      "id": 37,
+      "content": "Current board state:\nX - -\n- X -\nO O -\nMy opponent has two 'O's in the bottom row. I need to block them by placing 'X' in the bottom left corner.",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-26T15:39:28.288314"
+    },
+    {
+      "id": 38,
+      "content": "I have two O's in the first column, and I need to block opponent from winning in the next turn.",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-26T15:39:47.885986"
+    },
+    {
+      "id": 39,
+      "content": "Opponent has two X's in the second row. I need to block them by placing O in the middle of the second row.",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-26T15:39:51.556895"
+    },
+    {
+      "id": 40,
+      "content": "Current board state: OXX/-XO/O-X. Observed that the winning move is available at (0,2).",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-26T15:42:14.427912"
+    },
+    {
+      "id": 41,
+      "content": "After making my move at [1, 1], I need to consider potential responses from my opponent and plan my next move.",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-26T16:36:41.792555"
+    },
+    {
+      "id": 42,
+      "content": "I have two X's in the second column and I need to look for possible winning moves or strategic plays.",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-26T16:36:47.809868"
+    },
+    {
+      "id": 43,
+      "content": "The opponent has a winning opportunity in the first column. I need to consider my next strategic move.",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-26T16:36:50.822467"
+    },
+    {
+      "id": 44,
+      "content": "I have placed an X in the first column. Now I need to analyze potential threats from the opponent while planning my next move.",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-26T16:36:54.327719"
+    },
+    {
+      "id": 45,
+      "content": "I have two X's in the fourth row and need to block the opponent's winning move while looking for my own opportunities.",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-26T16:36:57.116577"
+    },
+    {
+      "id": 46,
+      "content": "I have placed an X in the fifth row, first column. The game is progressing with potential threats from the opponent. I'll need to analyze my next best move.",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-26T16:37:00.257177"
+    },
+    {
+      "id": 47,
+      "content": "I have placed an X in the sixth row, first column. The game has reached a critical state where I need to block the opponent while finding winning opportunities.",
+      "board_state": null,
+      "embedding": null,
+      "timestamp": "2025-04-26T16:37:02.925224"
+    },
+    {
+      "id": 48,
+      "content": "Current board state: O--------\n-XO------\nX--------",
+      "board_state": "-XO------",
+      "embedding": [
+        0.0,
+        0.15028595924377441,
+        0.0,
+        0.14369380474090576,
+        0.0,
+        0.0
+      ],
+      "timestamp": "2025-04-26T16:44:22.177493"
+    },
+    {
+      "id": 49,
+      "content": "Current board state: OO-------\n-XO------\nXX-------",
+      "board_state": "-XO------",
+      "embedding": [
+        0.0,
+        0.15028595924377441,
+        0.0,
+        0.14369380474090576,
+        0.0,
+        0.0
+      ],
+      "timestamp": "2025-04-26T16:44:27.029032"
+    },
+    {
+      "id": 50,
+      "content": "Current board state: OOOO-----\n-XO------\nXXX------\nX--------",
+      "board_state": "-XO------",
+      "embedding": [
+        0.0,
+        0.15028595924377441,
+        0.0,
+        0.14369380474090576,
+        0.0,
+        0.0
+      ],
+      "timestamp": "2025-04-26T16:44:35.732277"
     }
   ]
 }

@@ -1,0 +1,95 @@
+{
+  "run_id": 1745696325,
+  "game_id": 3,
+  "timestamp": "2025-04-26T15:39:18.232271",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 6405,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 0,
+      "vector_store": 1,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "---\n-X-\nO--",
+        "tokens_used": 2141,
+        "action": [
+          0,
+          0
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: - - -\n- X -\nO - -.\nI placed 'X' in the center and my opponent placed 'O' in the bottom left. I should aim to either block my opponent or create a winning opportunity."
+      },
+      {
+        "turn": 5,
+        "board_state": "X--\n-X-\nOO-",
+        "tokens_used": 3315,
+        "action": [
+          2,
+          2
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Current board state:\nX - -\n- X -\nO O -\nMy opponent has two 'O's in the bottom row. I need to block them by placing 'X' in the bottom left corner."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2245,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1074,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\n- X -\n- - -\n- - -\n```\n\nThe center position is occupied, so the next best moves would be to take a corner. I will make my move to the bottom left corner.\n\n{\"move\": ["
+      },
+      {
+        "turn": 4,
+        "board_state": "X--\n-X-\nO--",
+        "tokens_used": 1171,
+        "action": [
+          2,
+          1
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\nX - -\n- X -\nO - -\n```\n\nThe best move is to block the opponent from winning by placing an \"X\" in the bottom middle position (2, 1). This prevents the opponent from c"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

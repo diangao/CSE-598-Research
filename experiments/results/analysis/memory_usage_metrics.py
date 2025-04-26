@@ -606,6 +606,348 @@ def analyze_memory_and_win_relationship(df=None, memory_usage_df=None, save_path
     
     return relation_df
 
+def analyze_memory_usage_patterns(df=None, memory_usage_df=None, save_path='experiments/results/analysis/figures/memory_baseline'):
+    """
+    Analyze memory usage patterns in baseline experiments, comparing agents with and without memory
+    
+    Args:
+        df: Experiment data DataFrame, loaded if None
+        memory_usage_df: Memory usage data DataFrame from game logs, loaded if None
+        save_path: Path to save figures
+    """
+    # 加载必要的数据
+    if df is None:
+        df = load_experiment_data(experiment_type='memory_comparison')
+    
+    if memory_usage_df is None:
+        memory_usage_df = process_game_logs(experiment_type='memory_comparison')
+    
+    os.makedirs(save_path, exist_ok=True)
+    
+    # 检查数据是否可用
+    if df.empty:
+        print("No memory comparison data found")
+        return None
+    
+    if memory_usage_df.empty:
+        print("No memory usage data found in game logs")
+        return None
+    
+    # 设置图表样式
+    plt.style.use('seaborn-v0_8-whitegrid')
+    
+    # 创建一个大型图表展示记忆使用模式
+    plt.figure(figsize=(16, 14))
+    
+    # 1. 记忆函数调用的时间分布 - 分析记忆使用在游戏过程中的分布
+    plt.subplot(2, 2, 1)
+    
+    # 计算每次记忆调用的游戏进程百分比
+    if 'turn' in memory_usage_df.columns:
+        # 按游戏ID分组，计算每个游戏的总回合数
+        game_turns = memory_usage_df.groupby(['run_id', 'game_id'])['turn'].max() + 1
+        
+        # 创建一个新的DataFrame，包含每次记忆调用的游戏进程百分比
+        memory_timeline = []
+        
+        for _, row in memory_usage_df.iterrows():
+            run_id = row['run_id']
+            game_id = row['game_id']
+            
+            # 跳过缺失总回合数的游戏
+            if (run_id, game_id) not in game_turns.index:
+                continue
+                
+            total_turns = game_turns[(run_id, game_id)]
+            
+            # 如果总回合数为0，跳过
+            if total_turns == 0:
+                continue
+                
+            # 计算游戏进程百分比
+            turn_percentage = row['turn'] / total_turns * 100
+            
+            memory_timeline.append({
+                'agent_id': row['agent_id'],
+                'memory_type': row['memory_type'],
+                'operation': row['operation'],
+                'memory_constraint': row['memory_constraint_a'],
+                'turn_percentage': turn_percentage,
+                'board_size': row['board_size']
+            })
+        
+        if memory_timeline:
+            # 转换为DataFrame
+            timeline_df = pd.DataFrame(memory_timeline)
+            
+            # 绘制记忆调用的时间分布直方图
+            sns.histplot(data=timeline_df, x='turn_percentage', hue='memory_type', 
+                        element='step', bins=20, multiple='stack')
+            
+            plt.title('Memory Call Distribution Throughout Game Progress', fontsize=14, fontweight='bold')
+            plt.xlabel('Game Progress (%)', fontsize=12)
+            plt.ylabel('Number of Memory Calls', fontsize=12)
+            plt.legend(title='Memory Type')
+            
+            # 添加垂直线标记游戏的开始、中期和结束阶段
+            plt.axvline(x=33.3, color='gray', linestyle='--', alpha=0.7)
+            plt.axvline(x=66.6, color='gray', linestyle='--', alpha=0.7)
+            
+            # 添加文本标记游戏阶段
+            plt.text(16.7, plt.ylim()[1]*0.9, 'Early Game', ha='center', va='center', bbox=dict(facecolor='white', alpha=0.7))
+            plt.text(50, plt.ylim()[1]*0.9, 'Mid Game', ha='center', va='center', bbox=dict(facecolor='white', alpha=0.7))
+            plt.text(83.3, plt.ylim()[1]*0.9, 'Late Game', ha='center', va='center', bbox=dict(facecolor='white', alpha=0.7))
+        else:
+            plt.text(0.5, 0.5, 'No memory timeline data available', ha='center', va='center', transform=plt.gca().transAxes)
+    else:
+        plt.text(0.5, 0.5, 'No turn data available', ha='center', va='center', transform=plt.gca().transAxes)
+    
+    # 2. 记忆使用频率 - 按记忆类型和代理
+    plt.subplot(2, 2, 2)
+    
+    # 计算每个代理的记忆使用频率
+    memory_frequency = memory_usage_df.groupby(['agent_id', 'memory_type']).size().reset_index(name='frequency')
+    
+    if not memory_frequency.empty:
+        # 绘制记忆使用频率条形图
+        sns.barplot(data=memory_frequency, x='agent_id', y='frequency', hue='memory_type')
+        
+        plt.title('Memory Usage Frequency by Agent and Memory Type', fontsize=14, fontweight='bold')
+        plt.xlabel('Agent', fontsize=12)
+        plt.ylabel('Number of Memory Calls', fontsize=12)
+        plt.legend(title='Memory Type')
+        
+        # 为每个条形添加标签
+        for container in plt.gca().containers:
+            plt.bar_label(container, fmt='%d')
+    else:
+        plt.text(0.5, 0.5, 'No memory frequency data available', ha='center', va='center', transform=plt.gca().transAxes)
+    
+    # 3. 记忆操作类型分布 - 存储 vs 读取 vs 模式更新
+    plt.subplot(2, 2, 3)
+    
+    # 计算每个代理的记忆操作类型分布
+    operation_dist = memory_usage_df.groupby(['agent_id', 'operation']).size().reset_index(name='count')
+    
+    if not operation_dist.empty:
+        # 绘制记忆操作类型分布条形图
+        sns.barplot(data=operation_dist, x='agent_id', y='count', hue='operation')
+        
+        plt.title('Memory Operation Types by Agent', fontsize=14, fontweight='bold')
+        plt.xlabel('Agent', fontsize=12)
+        plt.ylabel('Number of Operations', fontsize=12)
+        plt.legend(title='Operation Type')
+        
+        # 为每个条形添加标签
+        for container in plt.gca().containers:
+            plt.bar_label(container, fmt='%d')
+    else:
+        plt.text(0.5, 0.5, 'No operation distribution data available', ha='center', va='center', transform=plt.gca().transAxes)
+    
+    # 4. 不同棋盘大小的记忆使用模式
+    plt.subplot(2, 2, 4)
+    
+    # 计算每个棋盘大小的记忆使用
+    board_size_usage = memory_usage_df.groupby(['board_size', 'memory_type']).size().reset_index(name='count')
+    
+    if not board_size_usage.empty:
+        # 确保棋盘大小是按数字排序的
+        board_size_usage['board_size_num'] = board_size_usage['board_size'].astype(str).str.extract('(\d+)').astype(int)
+        board_size_usage = board_size_usage.sort_values('board_size_num')
+        
+        # 绘制不同棋盘大小的记忆使用条形图
+        sns.barplot(data=board_size_usage, x='board_size', y='count', hue='memory_type')
+        
+        plt.title('Memory Usage by Board Size and Memory Type', fontsize=14, fontweight='bold')
+        plt.xlabel('Board Size', fontsize=12)
+        plt.ylabel('Number of Memory Calls', fontsize=12)
+        plt.legend(title='Memory Type')
+        
+        # 为每个条形添加标签
+        for container in plt.gca().containers:
+            plt.bar_label(container, fmt='%d')
+    else:
+        plt.text(0.5, 0.5, 'No board size usage data available', ha='center', va='center', transform=plt.gca().transAxes)
+    
+    plt.tight_layout()
+    plt.savefig(os.path.join(save_path, 'memory_usage_patterns.png'), dpi=300, bbox_inches='tight')
+    print(f"Memory usage patterns analysis saved to {os.path.join(save_path, 'memory_usage_patterns.png')}")
+    
+    # 创建第二个图表，分析记忆使用与棋局状态的关系
+    plt.figure(figsize=(16, 10))
+    
+    # 1. 记忆使用与游戏阶段的胜率关系
+    plt.subplot(2, 2, 1)
+    
+    # 计算每个游戏阶段每种记忆类型的胜率
+    if 'agent_won' in memory_usage_df.columns and 'phase' in memory_usage_df.columns:
+        phase_win_rate = memory_usage_df.groupby(['phase', 'memory_type'])['agent_won'].mean().reset_index(name='win_rate')
+        
+        if not phase_win_rate.empty:
+            # 绘制每个游戏阶段每种记忆类型的胜率
+            sns.barplot(data=phase_win_rate, x='phase', y='win_rate', hue='memory_type')
+            
+            plt.title('Win Rate by Game Phase and Memory Type', fontsize=14, fontweight='bold')
+            plt.xlabel('Game Phase', fontsize=12)
+            plt.ylabel('Win Rate', fontsize=12)
+            plt.legend(title='Memory Type')
+            
+            # 为每个条形添加标签
+            for container in plt.gca().containers:
+                plt.bar_label(container, fmt='%.2f')
+        else:
+            plt.text(0.5, 0.5, 'No phase win rate data available', ha='center', va='center', transform=plt.gca().transAxes)
+    else:
+        plt.text(0.5, 0.5, 'No phase or win data available', ha='center', va='center', transform=plt.gca().transAxes)
+    
+    # 2. 记忆调用类型比例 - 存储/读取比例随游戏进行变化
+    plt.subplot(2, 2, 2)
+    
+    if 'turn' in memory_usage_df.columns and 'operation' in memory_usage_df.columns:
+        # 创建游戏进度区间
+        memory_usage_df['progress_bin'] = pd.cut(
+            memory_usage_df['turn'] / memory_usage_df.groupby(['run_id', 'game_id'])['turn'].transform('max'),
+            bins=[0, 0.33, 0.66, 1.0],
+            labels=['Early', 'Mid', 'Late']
+        )
+        
+        # 计算每个进度区间的操作类型计数
+        progress_ops = memory_usage_df.groupby(['progress_bin', 'operation']).size().reset_index(name='count')
+        
+        if not progress_ops.empty:
+            # 绘制堆叠条形图显示随游戏进行操作类型的变化
+            pivot_data = progress_ops.pivot(index='progress_bin', columns='operation', values='count').fillna(0)
+            pivot_data = pivot_data.div(pivot_data.sum(axis=1), axis=0)
+            
+            pivot_data.plot(kind='bar', stacked=True, ax=plt.gca())
+            
+            plt.title('Memory Operation Type Ratio Throughout Game Progress', fontsize=14, fontweight='bold')
+            plt.xlabel('Game Progress', fontsize=12)
+            plt.ylabel('Operation Type Ratio', fontsize=12)
+            plt.legend(title='Operation Type')
+            
+            # 添加比例标签
+            for n, x in enumerate([p.get_x() + p.get_width() / 2 for p in plt.gca().patches[:len(pivot_data)]]):
+                for proportion in pivot_data.iloc[n]:
+                    if proportion > 0.05:  # 只显示大于5%的标签
+                        plt.text(x, 0.5, f'{proportion:.2f}', ha='center', va='center')
+        else:
+            plt.text(0.5, 0.5, 'No progress operation data available', ha='center', va='center', transform=plt.gca().transAxes)
+    else:
+        plt.text(0.5, 0.5, 'No turn or operation data available', ha='center', va='center', transform=plt.gca().transAxes)
+    
+    # 3. 胜利方与失败方的记忆使用对比
+    plt.subplot(2, 2, 3)
+    
+    if 'agent_won' in memory_usage_df.columns:
+        # 统计胜利方和失败方的记忆使用
+        winner_memory = memory_usage_df.groupby(['agent_won', 'memory_type']).size().reset_index(name='count')
+        
+        if not winner_memory.empty:
+            # 绘制胜利方与失败方的记忆使用对比
+            sns.barplot(data=winner_memory, x='agent_won', y='count', hue='memory_type')
+            
+            plt.title('Memory Usage by Winners vs Losers', fontsize=14, fontweight='bold')
+            plt.xlabel('Agent Won', fontsize=12)
+            plt.ylabel('Number of Memory Calls', fontsize=12)
+            plt.legend(title='Memory Type')
+            
+            # 为每个条形添加标签
+            for container in plt.gca().containers:
+                plt.bar_label(container, fmt='%d')
+            
+            # 设置X轴刻度标签
+            plt.xticks([0, 1], ['Lost', 'Won'])
+        else:
+            plt.text(0.5, 0.5, 'No winner memory data available', ha='center', va='center', transform=plt.gca().transAxes)
+    else:
+        plt.text(0.5, 0.5, 'No agent_won data available', ha='center', va='center', transform=plt.gca().transAxes)
+    
+    # 4. 不同记忆约束下的记忆使用效率
+    plt.subplot(2, 2, 4)
+    
+    # 合并实验数据和游戏日志数据
+    if not df.empty and not memory_usage_df.empty:
+        # 对每种记忆约束计算记忆调用次数
+        constraint_calls = memory_usage_df.groupby('memory_constraint_a').size().reset_index(name='total_calls')
+        
+        # 计算每种记忆约束的总游戏数
+        constraint_games = df.groupby('memory_constraint_a')['total_games'].sum().reset_index()
+        
+        # 合并数据
+        constraint_efficiency = pd.merge(constraint_calls, constraint_games, on='memory_constraint_a')
+        
+        if not constraint_efficiency.empty:
+            # 计算每游戏的平均记忆调用次数
+            constraint_efficiency['calls_per_game'] = constraint_efficiency['total_calls'] / constraint_efficiency['total_games']
+            
+            # 绘制每种记忆约束的记忆使用效率
+            sns.barplot(data=constraint_efficiency, x='memory_constraint_a', y='calls_per_game')
+            
+            plt.title('Memory Calls per Game by Memory Constraint', fontsize=14, fontweight='bold')
+            plt.xlabel('Memory Constraint', fontsize=12)
+            plt.ylabel('Average Memory Calls per Game', fontsize=12)
+            
+            # 为每个条形添加标签
+            for i, row in enumerate(constraint_efficiency.itertuples()):
+                plt.text(i, row.calls_per_game, f'{row.calls_per_game:.2f}', ha='center', va='bottom')
+            
+            # 美化x轴标签
+            plt.xticks(range(len(constraint_efficiency)), 
+                    [c.replace('_only', ' Only').replace('_', ' ').title() for c in constraint_efficiency['memory_constraint_a']])
+        else:
+            plt.text(0.5, 0.5, 'No constraint efficiency data available', ha='center', va='center', transform=plt.gca().transAxes)
+    else:
+        plt.text(0.5, 0.5, 'Insufficient data for constraint efficiency analysis', ha='center', va='center', transform=plt.gca().transAxes)
+    
+    plt.tight_layout()
+    plt.savefig(os.path.join(save_path, 'memory_usage_strategy.png'), dpi=300, bbox_inches='tight')
+    print(f"Memory usage strategy analysis saved to {os.path.join(save_path, 'memory_usage_strategy.png')}")
+    
+    # 生成记忆使用模式的详细统计数据
+    memory_pattern_stats = []
+    
+    # 按游戏阶段和记忆类型统计记忆使用
+    if 'phase' in memory_usage_df.columns:
+        phase_stats = memory_usage_df.groupby(['phase', 'memory_type', 'operation']).size().reset_index(name='count')
+        
+        # 计算每个组合的胜率
+        if 'agent_won' in memory_usage_df.columns:
+            phase_win = memory_usage_df.groupby(['phase', 'memory_type', 'operation'])['agent_won'].mean().reset_index(name='win_rate')
+            phase_stats = pd.merge(phase_stats, phase_win, on=['phase', 'memory_type', 'operation'])
+        
+        # 添加到总统计数据
+        memory_pattern_stats.append(('phase_memory_stats', phase_stats))
+    
+    # 按代理和记忆类型统计记忆使用
+    agent_stats = memory_usage_df.groupby(['agent_id', 'memory_type', 'operation']).size().reset_index(name='count')
+    
+    # 计算每个组合的胜率
+    if 'agent_won' in memory_usage_df.columns:
+        agent_win = memory_usage_df.groupby(['agent_id', 'memory_type', 'operation'])['agent_won'].mean().reset_index(name='win_rate')
+        agent_stats = pd.merge(agent_stats, agent_win, on=['agent_id', 'memory_type', 'operation'])
+    
+    # 添加到总统计数据
+    memory_pattern_stats.append(('agent_memory_stats', agent_stats))
+    
+    # 按棋盘大小和记忆类型统计记忆使用
+    board_stats = memory_usage_df.groupby(['board_size', 'memory_type', 'operation']).size().reset_index(name='count')
+    
+    # 计算每个组合的胜率
+    if 'agent_won' in memory_usage_df.columns:
+        board_win = memory_usage_df.groupby(['board_size', 'memory_type', 'operation'])['agent_won'].mean().reset_index(name='win_rate')
+        board_stats = pd.merge(board_stats, board_win, on=['board_size', 'memory_type', 'operation'])
+    
+    # 添加到总统计数据
+    memory_pattern_stats.append(('board_memory_stats', board_stats))
+    
+    # 保存所有统计数据到CSV文件
+    for name, stats in memory_pattern_stats:
+        stats.to_csv(os.path.join(save_path, f'{name}.csv'))
+        print(f"Memory usage statistics saved to {os.path.join(save_path, f'{name}.csv')}")
+    
+    return memory_pattern_stats
+
 if __name__ == "__main__":
     # Load data
     df = load_experiment_data(experiment_type='constrained')
@@ -619,5 +961,6 @@ if __name__ == "__main__":
     analyze_memory_operation_ratios()
     analyze_game_phase_memory_usage()
     analyze_memory_and_win_relationship(df, memory_usage_df)
+    analyze_memory_usage_patterns(df, memory_usage_df)
     
     print("Memory usage metrics analysis completed.") 

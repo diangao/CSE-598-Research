@@ -1,0 +1,125 @@
+{
+  "run_id": 1745696032,
+  "game_id": 8,
+  "timestamp": "2025-04-26T15:36:33.221570",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 8144,
+    "memory_usage_summary": {
+      "graph_store": 2,
+      "graph_read": 0,
+      "vector_store": 1,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 2111,
+        "action": [
+          0,
+          2
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: O--\n-X-\n---\nDescription: O is in the top left corner, X is in the center, and I need to make a move to block or win."
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-X-\nO--",
+        "tokens_used": 2395,
+        "action": [
+          2,
+          1
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Current board state: O-X\n-X-\nO--\nDescription: O is in the top left and bottom left, X is in the center and top center. I need to block X from winning and also look for a winning move."
+      },
+      {
+        "turn": 7,
+        "board_state": "O-X\n-XO\nOX-",
+        "tokens_used": 2689,
+        "action": [
+          2,
+          2
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: O-X\n-XO\nOX-\nDescription: O is in the top left, top right, and bottom left. X is in the center, left center, and bottom center. I need to make a move to block X from winning."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 5981,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1069,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state with an 'X' in the center, it's a strong position to build on. I will make a move to one of the corners to maximize my chances of creating forks or winning opportunities."
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1205,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "The current board state is as follows:\n\n```\nO X -\n- X -\n- - -\n```\n\nIt's crucial to block the opponent from winning in the next turn. The opponent 'O' is in the top left corner and could win by placing"
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\n-X-\nOX-",
+        "tokens_used": 2257,
+        "action": [
+          1,
+          2
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "O-X\n-XO\nOXX",
+        "tokens_used": 1450,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "The current board state is as follows:\n\n```\nO X O\n- X O\nO X X\n```\n\nThe opponent 'O' has three in a row in the right column (column 2). I need to block this move by placing 'X' in the center left posit"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

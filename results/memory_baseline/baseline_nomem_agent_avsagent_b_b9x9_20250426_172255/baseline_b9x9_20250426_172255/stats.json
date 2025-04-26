@@ -1,0 +1,131 @@
+{
+  "wins_a": 2,
+  "wins_b": 8,
+  "draws": 0,
+  "timeouts": 5,
+  "errors": 0,
+  "total_moves": 350,
+  "total_time": 581.378839969635,
+  "games": [
+    {
+      "game_id": 0,
+      "outcome": "TIMEOUT",
+      "moves": 35,
+      "time": 61.76980996131897,
+      "board_size": 9,
+      "final_state": "XOX-X----\nOXX---X-O\nOOX------\nOXO------\nXOX------\nOXOOXO---\nXOX------\nOXO----O-\nXOX----X-"
+    },
+    {
+      "game_id": 1,
+      "outcome": "A_WINS",
+      "moves": 13,
+      "time": 21.365938186645508,
+      "board_size": 9,
+      "final_state": "X-O------\n-X-------\nXOO------\nXO-------\nXO-------\nXO-------\nX--------\n---------\n---------"
+    },
+    {
+      "game_id": 2,
+      "outcome": "B_WINS",
+      "moves": 34,
+      "time": 47.278517961502075,
+      "board_size": 9,
+      "final_state": "XOXXX----\nXXX------\nOOO------\nXOO------\nXXO------\nXOX------\nOXO---X--\nXOX------\nOXOOOOO--"
+    },
+    {
+      "game_id": 3,
+      "outcome": "TIMEOUT",
+      "moves": 32,
+      "time": 61.93359994888306,
+      "board_size": 9,
+      "final_state": "XOX------\nOXO------\nXXO------\nXOO------\nXXO----O-\nOXX-----O\nOXX-OX---\nXOX---O--\nXOO------"
+    },
+    {
+      "game_id": 4,
+      "outcome": "TIMEOUT",
+      "moves": 29,
+      "time": 62.451026916503906,
+      "board_size": 9,
+      "final_state": "XOO------\nOXX------\nXXO------\nOXX------\nXO-------\nXXO------\nOXX-X--X-\nOXO--O---\nOOO------"
+    },
+    {
+      "game_id": 5,
+      "outcome": "B_WINS",
+      "moves": 14,
+      "time": 31.043966054916382,
+      "board_size": 9,
+      "final_state": "XOX------\nOXX------\nOOX------\nOX-------\nOX-------\nO--------\n---------\n---------\n---------"
+    },
+    {
+      "game_id": 6,
+      "outcome": "B_WINS",
+      "moves": 12,
+      "time": 12.645424842834473,
+      "board_size": 9,
+      "final_state": "XO-------\nOX-------\nOXX------\nO-X------\nOX-------\nO--------\n---------\n---------\n---------"
+    },
+    {
+      "game_id": 7,
+      "outcome": "B_WINS",
+      "moves": 22,
+      "time": 53.474021196365356,
+      "board_size": 9,
+      "final_state": "XOX------\nXXO------\nOXX----X-\nOOO------\nOXX-----X\nOOO------\nO--------\n---------\n-X-------"
+    },
+    {
+      "game_id": 8,
+      "outcome": "B_WINS",
+      "moves": 20,
+      "time": 23.894301176071167,
+      "board_size": 9,
+      "final_state": "XOO------\nOXX------\nOOX------\nXXO------\nXXO------\nXXO------\n--O------\n--O------\n---------"
+    },
+    {
+      "game_id": 9,
+      "outcome": "TIMEOUT",
+      "moves": 31,
+      "time": 60.51508665084839,
+      "board_size": 9,
+      "final_state": "XOX------\nOX----O--\nOOX------\nOXO--X---\nXXX-----O\nOXO--X---\nXOX----O-\nOXO------\nXOX------"
+    },
+    {
+      "game_id": 10,
+      "outcome": "A_WINS",
+      "moves": 13,
+      "time": 13.682736873626709,
+      "board_size": 9,
+      "final_state": "XOO------\nOXX------\n--X------\nOOX------\nO-X------\n--X------\n---------\n---------\n---------"
+    },
+    {
+      "game_id": 11,
+      "outcome": "B_WINS",
+      "moves": 12,
+      "time": 10.628736972808838,
+      "board_size": 9,
+      "final_state": "XO-------\nOX-------\nOXX------\nO-X------\nO-X------\nO--------\n---------\n---------\n---------"
+    },
+    {
+      "game_id": 12,
+      "outcome": "B_WINS",
+      "moves": 24,
+      "time": 29.82218313217163,
+      "board_size": 9,
+      "final_state": "OOXO-----\nXXOO-----\nOOX------\nXXO------\nXXO------\nXXO------\nXXO------\n--O------\n---------"
+    },
+    {
+      "game_id": 13,
+      "outcome": "B_WINS",
+      "moves": 24,
+      "time": 29.694833040237427,
+      "board_size": 9,
+      "final_state": "XOX------\nOXX------\nOXO------\nXOO------\nXOO------\nOXO------\nXOO------\n-X-------\n-XX------"
+    },
+    {
+      "game_id": 14,
+      "outcome": "TIMEOUT",
+      "moves": 35,
+      "time": 61.17865705490112,
+      "board_size": 9,
+      "final_state": "XOO------\nOX-------\nXXO------\nXOX----O-\nOXO-----X\nXOX------\nOXO---O--\nXOX------\nOXOXXXOXO"
+    }
+  ]
+}

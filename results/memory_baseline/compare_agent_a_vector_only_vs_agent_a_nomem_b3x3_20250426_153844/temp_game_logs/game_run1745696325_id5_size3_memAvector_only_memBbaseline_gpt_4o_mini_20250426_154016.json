@@ -1,0 +1,129 @@
+{
+  "run_id": 1745696325,
+  "game_id": 5,
+  "timestamp": "2025-04-26T15:40:01.493855",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 6744,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "---\n-X-\nO--",
+        "tokens_used": 991,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "XO-\n-X-\nO--",
+        "tokens_used": 1717,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "XOO\n-X-\nOX-",
+        "tokens_used": 1116,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "XOO\nXXO\nOX-",
+        "tokens_used": 1971,
+        "action": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 5190,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1101,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\n- - -\n- X -\n- - -\n```\n\nIt's my turn, and I should prioritize taking a strategic position. The center is already occupied by 'X', so the next best moves are the corn"
+      },
+      {
+        "turn": 4,
+        "board_state": "X--\n-X-\nO--",
+        "tokens_used": 1239,
+        "action": [
+          0,
+          1
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\nX - -\n- X -\nO - -\n```\n\nIt's my turn, and I need to analyze the board for possible moves. \n\n1. The opponent has 'X' at (0,0) and (1,1), which means they are setting "
+      },
+      {
+        "turn": 6,
+        "board_state": "XO-\n-X-\nOX-",
+        "tokens_used": 1360,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\nX O -\n- X -\nO X -\n```\n\nIt's my turn, and I need to evaluate my options:\n\n1. The opponent has 'X' in positions (0,0), (1,1), and (2,1). \n2. I can win by placing 'O' "
+      },
+      {
+        "turn": 8,
+        "board_state": "XOO\nXX-\nOX-",
+        "tokens_used": 1490,
+        "action": [
+          1,
+          2
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\nX O O\nX X -\nO X -\n```\n\nIt's my turn. I need to evaluate the situation:\n\n1. The opponent has 'X' in (0,0), (1,0), (1,1), and (2,1). \n2. I must block the opponent fro"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

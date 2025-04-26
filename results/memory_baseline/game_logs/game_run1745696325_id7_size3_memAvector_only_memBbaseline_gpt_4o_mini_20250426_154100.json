@@ -1,0 +1,128 @@
+{
+  "run_id": 1745696325,
+  "game_id": 7,
+  "timestamp": "2025-04-26T15:40:43.736712",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 5947,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "-O-\n-X-\n---",
+        "tokens_used": 991,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "XO-\n-X-\nO--",
+        "tokens_used": 1034,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "XOX\nOX-\nO--",
+        "tokens_used": 1078,
+        "action": [
+          1,
+          2
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "XOX\nOXX\nOO-",
+        "tokens_used": 1895,
+        "action": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 5728,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1781,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "XO-\n-X-\n---",
+        "tokens_used": 1219,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "The current board state is:\n\n```\nX O -\n- X -\n- - -\n```\n\nI need to block my opponent's potential win on the next move. The opponent has \"O\" in the top-right corner and the center, which means they coul"
+      },
+      {
+        "turn": 6,
+        "board_state": "XOX\n-X-\nO--",
+        "tokens_used": 1309,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "The current board state is:\n\n```\nX O X\n- X -\nO - -\n```\n\nTo win, I can place \"X\" in the middle left position (1, 0), which will create a vertical line of three \"X\"s.\n\n{\"move\": [1, 0]}"
+      },
+      {
+        "turn": 8,
+        "board_state": "XOX\nOXX\nO--",
+        "tokens_used": 1419,
+        "action": [
+          2,
+          1
+        ],
+        "reasoning_excerpt": "The current board state is:\n\n```\nX O X\nO X X\nO - -\n```\n\nThe opponent has \"O\" in the bottom-left corner (2, 0), which means they will win if I don't block them. To prevent that, I must place my \"X\" in "
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

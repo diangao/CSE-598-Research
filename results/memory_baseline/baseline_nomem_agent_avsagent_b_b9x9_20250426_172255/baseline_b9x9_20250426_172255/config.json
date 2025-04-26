@@ -1,0 +1,14 @@
+{
+  "board_size": 9,
+  "games": 15,
+  "results_dir": "/Users/diangao/Documents/Workspace/598/CSE-598-Research/results/memory_baseline/baseline_nomem_agent_avsagent_b_b9x9_20250426_172255",
+  "system_a": "experiments/prompts/system_agent_a.txt",
+  "system_b": "experiments/prompts/system_agent_b.txt",
+  "timeout": 60,
+  "max_tokens": 1024,
+  "temperature": 0.7,
+  "model": "gpt-4o-mini",
+  "exp_id": "baseline_b9x9_20250426_172255",
+  "timestamp": "2025-04-26T17:22:55.686396",
+  "type": "baseline_no_memory"
+}

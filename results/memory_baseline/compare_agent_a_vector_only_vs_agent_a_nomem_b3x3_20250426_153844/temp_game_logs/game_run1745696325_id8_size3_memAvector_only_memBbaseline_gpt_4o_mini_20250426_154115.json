@@ -1,0 +1,91 @@
+{
+  "run_id": 1745696325,
+  "game_id": 8,
+  "timestamp": "2025-04-26T15:41:08.796376",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3652,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1631,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\nOX-\n---",
+        "tokens_used": 1072,
+        "action": [
+          2,
+          0
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2258,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1077,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\n- - -\n- X -\n- - -\n```\n\nThe center position is already occupied by 'X'. The best strategic move is to take a corner. I'll choose the top-left corner (0, 0).\n\n{\"move\""
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1181,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\nO - X\n- X -\n- - -\n```\n\nI need to block my opponent from winning in the next move, which they can do by placing 'O' in (1, 0). Therefore, the best move is to place '"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

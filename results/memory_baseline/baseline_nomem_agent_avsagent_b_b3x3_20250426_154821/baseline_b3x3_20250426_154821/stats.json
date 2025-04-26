@@ -1,0 +1,131 @@
+{
+  "wins_a": 9,
+  "wins_b": 5,
+  "draws": 1,
+  "timeouts": 0,
+  "errors": 0,
+  "total_moves": 98,
+  "total_time": 124.22577142715454,
+  "games": [
+    {
+      "game_id": 0,
+      "outcome": "A_WINS",
+      "moves": 9,
+      "time": 11.68610668182373,
+      "board_size": 3,
+      "final_state": "XOX\nXXO\nOOX"
+    },
+    {
+      "game_id": 1,
+      "outcome": "B_WINS",
+      "moves": 6,
+      "time": 5.423472166061401,
+      "board_size": 3,
+      "final_state": "O-X\nOX-\nOX-"
+    },
+    {
+      "game_id": 2,
+      "outcome": "B_WINS",
+      "moves": 8,
+      "time": 11.367319107055664,
+      "board_size": 3,
+      "final_state": "O-X\nOXO\nOXX"
+    },
+    {
+      "game_id": 3,
+      "outcome": "A_WINS",
+      "moves": 7,
+      "time": 7.083545207977295,
+      "board_size": 3,
+      "final_state": "XOX\nOX-\nX-O"
+    },
+    {
+      "game_id": 4,
+      "outcome": "B_WINS",
+      "moves": 6,
+      "time": 11.185526132583618,
+      "board_size": 3,
+      "final_state": "O-X\nOX-\nOX-"
+    },
+    {
+      "game_id": 5,
+      "outcome": "B_WINS",
+      "moves": 6,
+      "time": 9.4690260887146,
+      "board_size": 3,
+      "final_state": "O-X\nOX-\nOX-"
+    },
+    {
+      "game_id": 6,
+      "outcome": "DRAW",
+      "moves": 9,
+      "time": 7.571597099304199,
+      "board_size": 3,
+      "final_state": "XOX\nOXX\nOXO"
+    },
+    {
+      "game_id": 7,
+      "outcome": "A_WINS",
+      "moves": 7,
+      "time": 9.993462085723877,
+      "board_size": 3,
+      "final_state": "XO-\nOX-\nOXX"
+    },
+    {
+      "game_id": 8,
+      "outcome": "A_WINS",
+      "moves": 5,
+      "time": 4.7520551681518555,
+      "board_size": 3,
+      "final_state": "XO-\n-X-\nO-X"
+    },
+    {
+      "game_id": 9,
+      "outcome": "A_WINS",
+      "moves": 5,
+      "time": 6.219189882278442,
+      "board_size": 3,
+      "final_state": "XO-\n-X-\n-OX"
+    },
+    {
+      "game_id": 10,
+      "outcome": "A_WINS",
+      "moves": 5,
+      "time": 5.92512321472168,
+      "board_size": 3,
+      "final_state": "XO-\n-X-\nO-X"
+    },
+    {
+      "game_id": 11,
+      "outcome": "A_WINS",
+      "moves": 5,
+      "time": 6.322812795639038,
+      "board_size": 3,
+      "final_state": "O-X\n-XO\nX--"
+    },
+    {
+      "game_id": 12,
+      "outcome": "A_WINS",
+      "moves": 7,
+      "time": 10.341075897216797,
+      "board_size": 3,
+      "final_state": "O-X\nOX-\nXOX"
+    },
+    {
+      "game_id": 13,
+      "outcome": "B_WINS",
+      "moves": 8,
+      "time": 10.502261877059937,
+      "board_size": 3,
+      "final_state": "O-X\nOXO\nOXX"
+    },
+    {
+      "game_id": 14,
+      "outcome": "A_WINS",
+      "moves": 5,
+      "time": 6.383198022842407,
+      "board_size": 3,
+      "final_state": "O-X\n-X-\nXO-"
+    }
+  ]
+}

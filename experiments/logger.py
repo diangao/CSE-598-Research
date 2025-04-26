@@ -10,8 +10,12 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class GameLogger:
-    def __init__(self, logs_dir="experiments/results/game_logs"):
+    def __init__(self, logs_dir=None):
         """Initialize logger with directory for game logs"""
+        # 检查环境变量中是否有日志目录的定义，这允许在不同的实验中使用不同的日志目录
+        if logs_dir is None:
+            logs_dir = os.environ.get("GAME_LOGS_DIR", "experiments/results/game_logs")
+        
         self.logs_dir = Path(logs_dir)
         self.logs_dir.mkdir(parents=True, exist_ok=True)
         

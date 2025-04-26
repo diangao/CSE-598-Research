@@ -1,0 +1,115 @@
+{
+  "run_id": 1745695744,
+  "game_id": 7,
+  "timestamp": "2025-04-26T15:31:00.257971",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 8935,
+    "memory_usage_summary": {
+      "graph_store": 2,
+      "graph_read": 0,
+      "vector_store": 1,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 2089,
+        "action": [
+          0,
+          2
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Current board state: O--\n-X-\n---; Move to block opponent and prevent them from winning in the next turn."
+      },
+      {
+        "turn": 5,
+        "board_state": "OOX\n-X-\n---",
+        "tokens_used": 2345,
+        "action": [
+          1,
+          0
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: OOX\n-X-\n---; Opponent has two O's in the first row, I need to block them in the next move."
+      },
+      {
+        "turn": 7,
+        "board_state": "OOX\nXX-\n-O-",
+        "tokens_used": 3552,
+        "action": [
+          2,
+          0
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: OOX\nXX-\n-O-; I have an opportunity to win by placing an X in the bottom middle."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 4505,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1087,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state where I have 'X' in the center and the opponent has not made a move yet, it's a straightforward situation. \n\nI can take the opportunity to place 'X' in a corner position "
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 2055,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "OOX\nXX-\n---",
+        "tokens_used": 1363,
+        "action": [
+          2,
+          1
+        ],
+        "reasoning_excerpt": "The current board state shows that the opponent has 'O' in the top row and I have 'X' in the middle row. The opponent is close to winning, as they already have two 'O's in the top row.\n\nTo prevent the"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

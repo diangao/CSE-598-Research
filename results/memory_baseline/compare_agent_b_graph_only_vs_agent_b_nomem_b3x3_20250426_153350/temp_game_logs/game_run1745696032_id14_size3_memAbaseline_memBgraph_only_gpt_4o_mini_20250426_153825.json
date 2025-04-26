@@ -1,0 +1,92 @@
+{
+  "run_id": 1745696032,
+  "game_id": 14,
+  "timestamp": "2025-04-26T15:38:18.720393",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2580,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1549,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O--\n-X-\nX--",
+        "tokens_used": 1031,
+        "action": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3422,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1050,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Given that the board is completely empty, I will make the first move by taking the center position, which is strategically valuable.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1146,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "In this situation, I need to block my opponent from winning. They have an \"O\" in the top-left corner and I have an \"X\" in the center. The best move is to place my \"X\" in the bottom-left corner to prev"
+      },
+      {
+        "turn": 5,
+        "board_state": "OO-\n-X-\nX--",
+        "tokens_used": 1226,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "My opponent has two \"O\"s in the top row, which means I need to block them immediately. I will place my \"X\" in the top-right corner to prevent them from winning on the next turn.\n\n{\"move\": [0, 2]}"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

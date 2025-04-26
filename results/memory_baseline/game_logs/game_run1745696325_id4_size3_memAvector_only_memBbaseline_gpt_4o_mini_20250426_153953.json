@@ -1,0 +1,113 @@
+{
+  "run_id": 1745696325,
+  "game_id": 4,
+  "timestamp": "2025-04-26T15:39:38.445141",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 8842,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 0,
+      "vector_store": 2,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "-O-\n-X-\n---",
+        "tokens_used": 2077,
+        "action": [
+          0,
+          2
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Opponent has X in the center, I have O in the top left. It's my turn to play."
+      },
+      {
+        "turn": 5,
+        "board_state": "-OX\n-X-\n-O-",
+        "tokens_used": 2315,
+        "action": [
+          1,
+          0
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "I have two O's in the first column, and I need to block opponent from winning in the next turn."
+      },
+      {
+        "turn": 7,
+        "board_state": "-OX\nXX-\nOO-",
+        "tokens_used": 3501,
+        "action": [
+          1,
+          2
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Opponent has two X's in the second row. I need to block them by placing O in the middle of the second row."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 4147,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1795,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "-OX\n-X-\n---",
+        "tokens_used": 1154,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "-OX\nXX-\n-O-",
+        "tokens_used": 1198,
+        "action": [
+          2,
+          0
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

@@ -1,0 +1,79 @@
+{
+  "start_time": "2025-04-26T15:29:02.525159",
+  "end_time": "2025-04-26T17:32:37.156622",
+  "duration_minutes": 123.57719105,
+  "experiments": [
+    {
+      "board_size": 3,
+      "memory_type": "graph_only",
+      "agent_a": "agent_a (graph_only)",
+      "agent_b": "agent_a (no memory)",
+      "status": "success"
+    },
+    {
+      "board_size": 3,
+      "memory_type": "graph_only",
+      "agent_a": "agent_b (graph_only)",
+      "agent_b": "agent_b (no memory)",
+      "status": "success"
+    },
+    {
+      "board_size": 3,
+      "memory_type": "vector_only",
+      "agent_a": "agent_a (vector_only)",
+      "agent_b": "agent_a (no memory)",
+      "status": "success"
+    },
+    {
+      "board_size": 3,
+      "memory_type": "vector_only",
+      "agent_a": "agent_b (vector_only)",
+      "agent_b": "agent_b (no memory)",
+      "status": "success"
+    },
+    {
+      "board_size": 3,
+      "memory_type": "baseline",
+      "agent_a": "agent_a (no memory)",
+      "agent_b": "agent_b (no memory)",
+      "status": "success"
+    },
+    {
+      "board_size": 9,
+      "memory_type": "graph_only",
+      "agent_a": "agent_a (graph_only)",
+      "agent_b": "agent_a (no memory)",
+      "status": "success"
+    },
+    {
+      "board_size": 9,
+      "memory_type": "graph_only",
+      "agent_a": "agent_b (graph_only)",
+      "agent_b": "agent_b (no memory)",
+      "status": "success"
+    },
+    {
+      "board_size": 9,
+      "memory_type": "vector_only",
+      "agent_a": "agent_a (vector_only)",
+      "agent_b": "agent_a (no memory)",
+      "status": "success"
+    },
+    {
+      "board_size": 9,
+      "memory_type": "vector_only",
+      "agent_a": "agent_b (vector_only)",
+      "agent_b": "agent_b (no memory)",
+      "status": "success"
+    },
+    {
+      "board_size": 9,
+      "memory_type": "baseline",
+      "agent_a": "agent_a (no memory)",
+      "agent_b": "agent_b (no memory)",
+      "status": "success"
+    }
+  ],
+  "model": "gpt-4o-mini",
+  "games_per_condition": 15
+}

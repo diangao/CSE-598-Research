@@ -1,0 +1,91 @@
+{
+  "run_id": 1745696630,
+  "game_id": 6,
+  "timestamp": "2025-04-26T15:45:39.411380",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3654,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1631,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-X-\n--O",
+        "tokens_used": 1074,
+        "action": [
+          2,
+          0
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2248,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1068,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "In this situation, the center position is already occupied, and the best move is to take a corner position to maximize my chances of winning. \n\nI'll go ahead and make the move in the top-left corner.\n"
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1180,
+        "action": [
+          2,
+          2
+        ],
+        "reasoning_excerpt": "The current board state shows that my opponent has placed an O in the top-left corner (0, 0) and I have an X in the center (1, 1). The best move here is to occupy the bottom-right corner (2, 2) to cre"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

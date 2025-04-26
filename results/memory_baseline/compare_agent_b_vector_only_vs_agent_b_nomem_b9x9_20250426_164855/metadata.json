@@ -1,0 +1,10 @@
+{
+  "experiment_type": "memory_comparison",
+  "board_size": 9,
+  "memory_type": "vector_only",
+  "memory_agent_type": "agent_b",
+  "baseline_agent_type": "agent_b",
+  "games": 15,
+  "model": "gpt-4o-mini",
+  "timestamp": "2025-04-26T17:22:55.283149"
+}

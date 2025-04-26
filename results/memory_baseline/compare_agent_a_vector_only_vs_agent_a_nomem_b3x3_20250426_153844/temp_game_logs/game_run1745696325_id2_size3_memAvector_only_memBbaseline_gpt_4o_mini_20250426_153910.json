@@ -1,0 +1,90 @@
+{
+  "run_id": 1745696325,
+  "game_id": 2,
+  "timestamp": "2025-04-26T15:39:01.706623",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3653,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1631,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-XO\n---",
+        "tokens_used": 1073,
+        "action": [
+          2,
+          0
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3059,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1823,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1236,
+        "action": [
+          1,
+          2
+        ],
+        "reasoning_excerpt": "Given the board state:\n\n```\nO - X\n- X -\n- - -\n```\n\nI need to block my opponent from winning on their next turn. The opponent can win by placing an 'X' in (1, 2) or (2, 1). \n\nTo block them, I will plac"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

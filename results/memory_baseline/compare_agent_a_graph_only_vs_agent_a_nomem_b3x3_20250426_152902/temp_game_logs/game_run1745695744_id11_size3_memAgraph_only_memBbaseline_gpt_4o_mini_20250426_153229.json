@@ -1,0 +1,92 @@
+{
+  "run_id": 1745695744,
+  "game_id": 11,
+  "timestamp": "2025-04-26T15:32:21.269337",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2580,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1549,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O--\n-X-\nX--",
+        "tokens_used": 1031,
+        "action": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3545,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1072,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Given that the board is completely empty, I can make an optimal move without needing to use memory. The center position (1, 1) is the most strategically valuable in TicTacToe, so I will make my move t"
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1190,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "In this board state, I need to block my opponent from winning. The opponent has an \"O\" in the top-left corner (0, 0) and a \"X\" in the middle (1, 1). \n\nThe best move is to place an \"X\" in the bottom-le"
+      },
+      {
+        "turn": 5,
+        "board_state": "OO-\n-X-\nX--",
+        "tokens_used": 1283,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "The current board state shows that the opponent has two \"O\"s in the top row (0, 0) and (0, 1), which means I need to block their potential win by placing an \"X\" in the top-right corner (0, 2).\n\n{\"move"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

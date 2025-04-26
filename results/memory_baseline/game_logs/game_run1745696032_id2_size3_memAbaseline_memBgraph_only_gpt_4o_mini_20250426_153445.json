@@ -1,0 +1,101 @@
+{
+  "run_id": 1745696032,
+  "game_id": 2,
+  "timestamp": "2025-04-26T15:34:31.597540",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3652,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1631,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\nOX-\n---",
+        "tokens_used": 1072,
+        "action": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3712,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1104,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\n- - -\n- X -\n- - -\n```\n\nThe center position is already occupied by \"X.\" The next best move is to take a corner position. Since I have no previous context or specific"
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1238,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\nO - X\n- X -\n- - -\n```\n\nI need to analyze the situation. I see that I have an opportunity to win by placing my \"O\" in the middle-left position (1, 0). This will crea"
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\nOX-\n--X",
+        "tokens_used": 1370,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\nO - X\nO X -\n- - X\n```\n\nI see that my opponent has a winning move in the next turn if I do not block them. They can win by placing an \"O\" in the bottom-left position"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

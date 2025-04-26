@@ -19,9 +19,8 @@ The experiment tracks how agents learn to use memory strategically through multi
 To test how different memory architectures support generalization and adaptability under increasing task complexity, we implement a complexity gradient by progressively enlarging the TicTacToe board:
 
 - **3×3**: Baseline (short horizon, low memory pressure)
-- **4×4**: Medium complexity (more planning, more distractor states)
-- **5×5**: Higher complexity (increased memory length, sparse reward)
 - **6×6**: Optional stretch goal (scaling limit test)
+- **9x9**: Advanced complexity level
 
 Each size introduces exponentially more possible states and longer action sequences, creating increasing pressure on the agent's memory retrieval and schema organization capabilities.
 
@@ -96,3 +95,39 @@ The experiment saves detailed logs for each game in JSON format under `experimen
 - Board size
 
 A summary statistics file is also generated at the end of the experiment run. 
+
+## Memory Comparison Baseline Experiments
+
+To compare the performance of agents with and without memory, use the `run_memory_baselines.py` script:
+
+```bash
+python experiments/run_memory_baselines.py --games 15
+```
+
+This script automatically runs several comparison experiments:
+1. **Agent A with memory vs Agent A without memory** - Tests the impact of memory on Agent A
+2. **Agent B with memory vs Agent B without memory** - Tests the impact of memory on Agent B
+3. **Agent A without memory vs Agent B without memory** - Baseline comparison with no memory
+
+### Command-Line Options for Memory Baselines
+
+- `--games N`: Number of games per condition (default: 15)
+- `--results-dir DIR`: Directory to save results (default: experiments/results/memory_baseline)
+- `--model MODEL`: LLM model to use (default: gpt-4o-mini)
+- `--skip-3x3`: Skip 3x3 board experiments
+- `--skip-9x9`: Skip 9x9 board experiments
+- `--skip-graph`: Skip GraphMemory experiments
+- `--skip-vector`: Skip VectorMemory experiments
+- `--skip-no-memory`: Skip No-Memory baseline experiments
+
+### Example Commands for Memory Baselines
+
+Run only 3x3 board experiments with 10 games each:
+```bash
+python experiments/run_memory_baselines.py --games 10 --skip-9x9
+```
+
+Run only vector memory comparison experiments with GPT-4:
+```bash
+python experiments/run_memory_baselines.py --skip-graph --skip-no-memory --model gpt-4
+``` 

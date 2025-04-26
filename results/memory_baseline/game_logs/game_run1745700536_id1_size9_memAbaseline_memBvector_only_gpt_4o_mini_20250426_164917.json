@@ -1,0 +1,190 @@
+{
+  "run_id": 1745700536,
+  "game_id": 1,
+  "timestamp": "2025-04-26T16:48:56.866264",
+  "board_size": 9,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 16262,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---------\n---------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 955,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "-O-------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1003,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "XO-------\nOX-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2489,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "XO-------\nOX-------\n-OX------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2003,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "XO-------\nOX-------\nXOX------\nO--------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2181,
+        "action": [
+          3,
+          1
+        ]
+      },
+      {
+        "turn": 11,
+        "board_state": "XO-------\nOX-------\nXOX------\nOX-------\nO--------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2361,
+        "action": [
+          4,
+          1
+        ]
+      },
+      {
+        "turn": 13,
+        "board_state": "XO-------\nOX-------\nXOX------\nOX-------\nOX-------\nO--------\n---------\n---------\n---------",
+        "tokens_used": 2543,
+        "action": [
+          5,
+          1
+        ]
+      },
+      {
+        "turn": 15,
+        "board_state": "XO-------\nOX-------\nXOX------\nOX-------\nOX-------\nOX-------\nO--------\n---------\n---------",
+        "tokens_used": 2727,
+        "action": [
+          6,
+          1
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 12912,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1789,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "XO-------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1202,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state, my opponent has taken the center position (0, 1) and I have an opportunity to block them from winning. I will place my move in the top-left corner (1, 0) to create a defens"
+      },
+      {
+        "turn": 6,
+        "board_state": "XO-------\nOX-------\n--X------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1302,
+        "action": [
+          2,
+          1
+        ],
+        "reasoning_excerpt": "The current board state shows that I need to block my opponent from winning on their next turn. They have two X's in the second column and could win by placing another X in (2, 1). Therefore, I will m"
+      },
+      {
+        "turn": 8,
+        "board_state": "XO-------\nOX-------\nXOX------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2415,
+        "action": [
+          3,
+          0
+        ]
+      },
+      {
+        "turn": 10,
+        "board_state": "XO-------\nOX-------\nXOX------\nOX-------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1472,
+        "action": [
+          4,
+          0
+        ]
+      },
+      {
+        "turn": 12,
+        "board_state": "XO-------\nOX-------\nXOX------\nOX-------\nOX-------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1524,
+        "action": [
+          5,
+          0
+        ]
+      },
+      {
+        "turn": 14,
+        "board_state": "XO-------\nOX-------\nXOX------\nOX-------\nOX-------\nOX-------\n---------\n---------\n---------",
+        "tokens_used": 1577,
+        "action": [
+          6,
+          0
+        ]
+      },
+      {
+        "turn": 16,
+        "board_state": "XO-------\nOX-------\nXOX------\nOX-------\nOX-------\nOX-------\nOX-------\n---------\n---------",
+        "tokens_used": 1631,
+        "action": [
+          7,
+          0
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

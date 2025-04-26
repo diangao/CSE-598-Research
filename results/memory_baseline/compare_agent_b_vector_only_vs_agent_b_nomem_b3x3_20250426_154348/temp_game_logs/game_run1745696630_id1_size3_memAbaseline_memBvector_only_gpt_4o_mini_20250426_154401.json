@@ -1,0 +1,101 @@
+{
+  "run_id": 1745696630,
+  "game_id": 1,
+  "timestamp": "2025-04-26T15:43:50.248491",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3652,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1631,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\nOX-\n---",
+        "tokens_used": 1072,
+        "action": [
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3757,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1101,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\n- - -\n- X -\n- - -\n```\n\nThe center position is already occupied by 'X', so I should aim to take a strategic move. The best option is to take one of the corners to in"
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1267,
+        "action": [
+          1,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\nO - X\n- X -\n- - -\n```\n\nI see that I need to block my opponent 'O' from potentially winning in the next turn. The 'O' in the top-left corner (0, 0) and the 'X' in th"
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\nOX-\n--X",
+        "tokens_used": 1389,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\nO - X\nO X -\n- - X\n```\n\nI see that the opponent 'O' has two 'O's in the first column and can win in their next move by placing an 'O' in (2, 0). Therefore, I must bl"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_b"
+}

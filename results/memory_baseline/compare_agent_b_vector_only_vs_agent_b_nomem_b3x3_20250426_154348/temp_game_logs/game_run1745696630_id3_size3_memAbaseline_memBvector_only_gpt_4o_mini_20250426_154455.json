@@ -1,0 +1,130 @@
+{
+  "run_id": 1745696630,
+  "game_id": 3,
+  "timestamp": "2025-04-26T15:44:40.140871",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 6766,
+    "memory_usage_summary": {
+      "graph_store": 1,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1549,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O--\n-X-\nX--",
+        "tokens_used": 1711,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "O--\n-X-\nXXO",
+        "tokens_used": 1113,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "O--\nOXX\nXXO",
+        "tokens_used": 2393,
+        "action": [
+          0,
+          1
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Game ended in a loss. Final board state: O-- OXX XXO"
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 7898,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1049,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Since the board is completely empty, I will make the optimal first move by placing 'X' in the center position.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1899,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "O--\n-X-\nX-O",
+        "tokens_used": 1243,
+        "action": [
+          2,
+          1
+        ],
+        "reasoning_excerpt": "Currently, I need to block the opponent from winning. The opponent has 'O' in the center and bottom-right positions, which means I must place 'X' in the bottom-center position to block them.\n\n{\"move\":"
+      },
+      {
+        "turn": 7,
+        "board_state": "O--\nOX-\nXXO",
+        "tokens_used": 2283,
+        "action": [
+          1,
+          2
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "OO-\nOXX\nXXO",
+        "tokens_used": 1424,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "In this situation, I need to block the opponent's winning move in the top row. I will place 'X' in the top-right corner.\n\n{\"move\": [0, 2]}"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

@@ -1,0 +1,113 @@
+{
+  "run_id": 1745695744,
+  "game_id": 10,
+  "timestamp": "2025-04-26T15:32:01.751387",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 9014,
+    "memory_usage_summary": {
+      "graph_store": 2,
+      "graph_read": 0,
+      "vector_store": 1,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "-O-\n-X-\n---",
+        "tokens_used": 2101,
+        "action": [
+          0,
+          0
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Current board state: -O-\n-X-\n---. I played in the center and the opponent played in a corner. This is a common opening scenario."
+      },
+      {
+        "turn": 5,
+        "board_state": "XO-\n-X-\nO--",
+        "tokens_used": 2367,
+        "action": [
+          1,
+          0
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: XO-\n-X-\nO--. I have two O's in the first column, and I need to block my opponent's winning move in the second column."
+      },
+      {
+        "turn": 7,
+        "board_state": "XO-\nXX-\nOO-",
+        "tokens_used": 3597,
+        "action": [
+          2,
+          2
+        ],
+        "memory_function": "graph_store",
+        "memory_content_stored": "Current board state: XO-\nXX-\nOO-. I have created two O's in the last row, which means I can win in the next move."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 4092,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1769,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "XO-\n-X-\n---",
+        "tokens_used": 1140,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "XO-\nXX-\nO--",
+        "tokens_used": 1183,
+        "action": [
+          2,
+          1
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

@@ -1,0 +1,119 @@
+\documentclass[12pt]{article}
+
+% Margins and layout
+\usepackage[margin=1in]{geometry}
+
+% Encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% No paragraph indent, space between paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% Page number in footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\usepackage[numbers]{natbib}
+
+
+\title{REPLACE WITH PAPER TITLE}
+\author{Anish Chandra, Diyan Gao, Linglong Meng}
+\date{April 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\section{Methods}
+WRITE TRANSITION HERE
+\subsection{Experiment Setup}
+There are two primary experiments that are being ran: constrained memory and the adaptive memory. These are simple shifts in the 
+\subsubsection{Constrained vs. Adaptive}
+\subsubsection{Control}
+\subsection{Agent Definition}
+The agent that we define here is derived from the Cognitive Language Agent \cite{sumers2024cognitivearchitectureslanguageagents}. In simple form, our agent is made up of an LLM ``brain'' and a memory module. Recall that the goal of the experiment is to allow the LLM to use this memory to recall strategies it may have recognized previously. It is also the intention to optimize the model so that it doesn't choose to perform many memory recalls during a step, thus two agents have been constructed.
+\subsubsection{Agent A vs. Agent B}
+Agent A's goal is to 
+\subsection{Scaling TicTacToe}
+\subsection{Memory Module}
+\subsection{Graph}
+\subsection{Vector}
+
+
+\section{Results}
+
+In this section, we present the results from our \textbf{Baseline} and \textbf{Constrained} experiments, focusing on how different memory architectures and agent objectives influence performance and memory usage patterns in \textbf{TicTacToe}. These experiments were conducted across \textbf{three board sizes (3×3, 6×6, 9×9)}, allowing us to investigate how task complexity interacts with memory systems.
+
+\subsection{Baseline: Agents without Memory Modules}
+
+The \textbf{baseline condition} evaluates both agents \textbf{without access to any external memory modules}, serving as a control to assess the intrinsic reasoning capabilities of the LLM without additional state representation mechanisms. Under this setting, \textbf{Agent A}, whose objective is to maximize win rate, achieved a \textbf{53.3\% win rate}. This suggests that the base model, even without external memory, performs reasonably well on smaller boards, but likely struggles to generalize on larger ones where the state space grows. In contrast, \textbf{Agent B}, which is optimized for a \textbf{win-token efficiency tradeoff}, performed substantially worse, with a \textbf{win rate of only 13.8\%}. This result highlights the critical role of memory in supporting token-constrained agents, confirming that \textbf{memory absence exacerbates the impact of resource-limited objectives}. These findings align with our \textbf{H3 hypothesis}, which anticipates that token-aware agents depend more on memory augmentation to maintain competitive performance.
+
+\subsection{Constrained Memory Experiments}
+
+The \textbf{constrained experiments} evaluate how agents perform when restricted to a \textbf{single memory architecture}, either \textbf{GraphMemory} or \textbf{VectorMemory}. This setup allows us to assess the \textbf{effectiveness and scalability} of each memory type in isolation.
+
+\subsubsection{Performance Across Memory Types}
+
+Table 1 reports the \textbf{win rates} of both agents across memory types and board sizes. \textbf{GraphMemory} supports competitive performance on the \textbf{3×3 board}, with Agent A achieving a \textbf{60.0\% win rate}. However, as board size increases, the performance of GraphMemory declines sharply. On the \textbf{9×9 board}, Agent A's win rate drops to \textbf{26.7\%}, while Agent B surprisingly improves to \textbf{73.3\%}. In contrast, \textbf{VectorMemory} demonstrates more stable performance across scales, with Agent A maintaining \textbf{53.3\%} win rate on \textbf{9×9}, supporting \textbf{H1.2}, which hypothesized that \textbf{vector-based retrieval mechanisms} generalize better in large, sparse state spaces.
+
+\begin{table}
+\centering
+\caption{Win rates across constrained memory types and board sizes.}
+\begin{tabular}{llcc}
+\hline
+Board Size & Memory Type & Agent A Win Rate & Agent B Win Rate \\
+\hline
+3×3 & Graph & 60.0\% & 20.0\% \\
+6×6 & Graph & 46.7\% & 53.3\% \\
+9×9 & Graph & 26.7\% & 73.3\% \\
+3×3 & Vector & 66.7\% & 6.7\% \\
+6×6 & Vector & 60.0\% & 40.0\% \\
+9×9 & Vector & 53.3\% & 46.7\% \\
+\hline
+\end{tabular}
+\end{table}
+
+The \textbf{performance retention analysis} further highlights these scalability differences. When normalizing win rates relative to \textbf{3×3 performance}, \textbf{GraphMemory} exhibits severe degradation, particularly for Agent A, whose retention drops below \textbf{50\%} on \textbf{9×9}. Conversely, \textbf{VectorMemory} retains approximately \textbf{80\%} of its baseline performance on \textbf{9×9}, demonstrating \textbf{better resilience} as task complexity increases. Interestingly, Agent B's retention improves significantly with GraphMemory on \textbf{9×9}, likely due to more \textbf{conservative memory usage patterns} that emerge under token efficiency constraints.
+
+These results support \textbf{H1.1} and \textbf{H1.2}, confirming that \textbf{GraphMemory} aligns well with simpler, structured environments, while \textbf{VectorMemory} provides superior scalability in more complex settings. This aligns with expectations that \textbf{fuzzy matching mechanisms} handle larger, less predictable state spaces more effectively.
+
+\subsubsection{Memory Usage Patterns}
+
+To examine \textbf{memory usage behavior}, we analyzed the number of \textbf{memory function calls per game} across agents and memory types. The results indicate that \textbf{Agent A consistently uses memory more frequently} than Agent B, making approximately \textbf{2–4 times more memory calls per game}. This pattern holds across board sizes and memory types, validating \textbf{H3.1}, which posits that \textbf{win-maximizing agents} are more liberal in their memory access strategies compared to \textbf{token-constrained agents}.
+
+Memory usage patterns also differ across memory architectures. \textbf{VectorMemory} exhibits a \textbf{monotonic increase} in memory calls as board size grows, suggesting consistent scaling with task complexity. In contrast, \textbf{GraphMemory} shows \textbf{non-linear growth}, with memory calls peaking on \textbf{6×6 boards} before declining on \textbf{9×9}. This inconsistency likely reflects \textbf{GraphMemory's reduced utility} as the game environment becomes less structured and harder to represent relationally.
+
+These observations confirm \textbf{H2.1}, that \textbf{memory demands grow with task complexity}, while also revealing how memory architecture shapes the \textbf{scaling behavior} of memory operations.
+
+\subsubsection{Memory Efficiency and Token Usage}
+
+To assess \textbf{memory efficiency}, we analyzed the \textbf{win-rate-to-token ratio} for both agents across board sizes. While \textbf{Agent A} appears efficient on \textbf{3×3}, this is likely due to the simplicity of the environment and low token overhead. As board size increases, Agent A's efficiency \textbf{drops sharply}, reaching only \textbf{0.08} on \textbf{9×9} boards. In contrast, \textbf{Agent B} maintains \textbf{consistent efficiency} across board sizes, despite achieving lower raw win rates.
+
+This supports \textbf{H3.2}, which hypothesized that \textbf{token-constrained agents} would adopt \textbf{more selective and efficient memory usage strategies}. Agent B's efficiency stems from making \textbf{fewer but richer memory calls}, aligning with its optimization objective to minimize token usage while remaining competitive.
+
+\section{Discussion}
+
+The \textbf{Baseline} and \textbf{Constrained} experiments provide clear insights into how \textbf{memory architectures} and \textbf{agent objectives} interact in shaping performance and memory strategies. 
+
+First, \textbf{memory architecture has a profound impact on agent scalability}. While \textbf{GraphMemory} performs well in \textbf{low-complexity environments}, it fails to generalize as the game state space expands. In contrast, \textbf{VectorMemory} consistently supports better \textbf{performance retention} across board sizes, confirming its adaptability in handling \textbf{sparse and less structured tasks}.
+
+Second, \textbf{agent objectives directly influence memory usage patterns}. \textbf{Agent A}, with its \textbf{win-maximization goal}, leverages memory aggressively, but this doesn't always translate into better outcomes—particularly in larger environments where overuse leads to diminishing returns. \textbf{Agent B}, constrained by \textbf{token efficiency}, uses memory more \textbf{selectively and efficiently}, demonstrating an emergent alignment between \textbf{optimization objective and memory strategy}.
+
+Finally, these results underscore the importance of \textbf{memory quality over quantity}. Higher memory call frequencies do not guarantee better performance. Instead, \textbf{targeted, efficient memory use}, particularly with \textbf{VectorMemory}, leads to better scaling and robustness. This aligns with the broader hypothesis that \textbf{adaptive memory strategies} emerge as agents balance environmental complexity and internal objectives.
+
+These findings validate our \textbf{H1–H3 hypotheses}, setting the stage for deeper exploration in \textbf{adaptive memory selection}, which will be presented in the next section.
+
+\section{Conclusion}
+
+\bibliographystyle{plainnat}
+\bibliography{bibliography}
+
+\end{document}

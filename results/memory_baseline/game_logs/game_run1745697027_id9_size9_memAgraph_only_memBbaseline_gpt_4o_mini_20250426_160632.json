@@ -1,0 +1,744 @@
+{
+  "run_id": 1745697027,
+  "game_id": 9,
+  "timestamp": "2025-04-26T16:01:39.310494",
+  "board_size": 9,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 422010,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1561,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1043,
+        "action": [
+          1,
+          2
+        ]
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X------\n-XO------\nX--------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1094,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 8,
+        "board_state": "O-X------\n-XO------\nXOX------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1146,
+        "action": [
+          3,
+          0
+        ]
+      },
+      {
+        "turn": 10,
+        "board_state": "O-X------\n-XO------\nXOX------\nOX-------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2047,
+        "action": [
+          3,
+          2
+        ]
+      },
+      {
+        "turn": 12,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nX--------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2233,
+        "action": [
+          4,
+          1
+        ]
+      },
+      {
+        "turn": 14,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1386,
+        "action": [
+          5,
+          0
+        ]
+      },
+      {
+        "turn": 16,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nOX-------\n---------\n---------\n---------",
+        "tokens_used": 2535,
+        "action": [
+          5,
+          2
+        ]
+      },
+      {
+        "turn": 18,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nOXO------\nX--------\n---------\n---------",
+        "tokens_used": 2729,
+        "action": [
+          6,
+          1
+        ]
+      },
+      {
+        "turn": 20,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nOXO------\nXOX------\n---------\n---------",
+        "tokens_used": 1638,
+        "action": [
+          7,
+          0
+        ]
+      },
+      {
+        "turn": 22,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nOXO------\nXOX------\nOX-------\n---------",
+        "tokens_used": 3047,
+        "action": [
+          7,
+          2
+        ]
+      },
+      {
+        "turn": 24,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nOXO------\nXOX------\nOXO------\nX--------",
+        "tokens_used": 3249,
+        "action": [
+          8,
+          1
+        ]
+      },
+      {
+        "turn": 26,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nOXO------\nXOX------\nOXO------\nXOX------",
+        "tokens_used": 6669,
+        "action": [
+          8,
+          2
+        ]
+      },
+      {
+        "turn": 28,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nOXO-----O\nXOX------\nOXO-X----\nXOX------",
+        "tokens_used": 7393,
+        "action": [
+          6,
+          2
+        ]
+      },
+      {
+        "turn": 30,
+        "board_state": "O-X------\n-XO----O-\nXOX------\nOXO------\nXOX------\nOXO---X-O\nXOX------\nOXO-X----\nXOX------",
+        "tokens_used": 8129,
+        "action": [
+          4,
+          2
+        ]
+      },
+      {
+        "turn": 32,
+        "board_state": "O-X------\n-XO----O-\nXOX------\nOXO------\nXOX------\nOXO---X-O\nXOX-----X\nOXO-X----\nXOX-----O",
+        "tokens_used": 8881,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 34,
+        "board_state": "O-X------\n-XO----O-\nXOX------\nOXO---O--\nXOX-----X\nOXO---X-O\nXOX-----X\nOXO-X----\nXOX-----O",
+        "tokens_used": 9649,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 36,
+        "board_state": "O-X------\n-XO----O-\nXOX------\nOXO---O--\nXOXX----X\nOXO--OX-O\nXOX-----X\nOXO-X----\nXOX-----O",
+        "tokens_used": 2839,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 38,
+        "board_state": "OOX------\n-XO----OX\nXOX------\nOXO---O--\nXOXX----X\nOXO--OX-O\nXOX-----X\nOXO-X----\nXOX-----O",
+        "tokens_used": 5483,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 40,
+        "board_state": "OOX------\nOXO---XOX\nXOX------\nOXO---O--\nXOXX----X\nOXO--OX-O\nXOX-----X\nOXO-X----\nXOX-----O",
+        "tokens_used": 11197,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 42,
+        "board_state": "OOX------\nOXOO--XOX\nXOX------\nOXO---O--\nXOXXX---X\nOXO--OX-O\nXOX-----X\nOXO-X----\nXOX-----O",
+        "tokens_used": 11969,
+        "action": [
+          3,
+          1
+        ]
+      },
+      {
+        "turn": 44,
+        "board_state": "OOX------\nOXOOX-XOX\nXOX------\nOXO---O--\nXOXXX---X\nOXO--OX-O\nXOX-----X\nOXO-X----\nXOXO----O",
+        "tokens_used": 12745,
+        "action": [
+          5,
+          1
+        ]
+      },
+      {
+        "turn": 46,
+        "board_state": "OOX-X---O\nOXOOX-XOX\nXOX------\nOXO---O--\nXOXXX---X\nOXO--OX-O\nXOX-----X\nOXO-X----\nXOXO----O",
+        "tokens_used": 13533,
+        "action": [
+          5,
+          2
+        ]
+      },
+      {
+        "turn": 48,
+        "board_state": "OOX-X---O\nOXOOX-XOX\nXOX-X----\nOXO---O--\nXOXXX---X\nOXO--OX-O\nXOX--O--X\nOXO-X----\nXOXO----O",
+        "tokens_used": 14333,
+        "action": [
+          7,
+          0
+        ]
+      },
+      {
+        "turn": 50,
+        "board_state": "OOX-X---O\nOXOOXOXOX\nXOX-X----\nOXO---O--\nXOXXX---X\nOXO--OX-O\nXOX--OX-X\nOXO-X----\nXOXO----O",
+        "tokens_used": 15129,
+        "action": [
+          8,
+          1
+        ]
+      },
+      {
+        "turn": 52,
+        "board_state": "OOX-X---O\nOXOOXOXOX\nXOX-X----\nOXO--XO--\nXOXXX---X\nOXOO-OX-O\nXOX--OX-X\nOXO-X----\nXOXO----O",
+        "tokens_used": 15925,
+        "action": [
+          7,
+          0
+        ]
+      },
+      {
+        "turn": 54,
+        "board_state": "OOX-X---O\nOXOOXOXOX\nXOX-X----\nOXO--XO--\nXOXXX---X\nOXOO-OX-O\nXOX--OX-X\nOXO-XO-X-\nXOXO----O",
+        "tokens_used": 16729,
+        "action": [
+          8,
+          2
+        ]
+      },
+      {
+        "turn": 56,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X--\nOXO--XO--\nXOXXX---X\nOXOO-OX-O\nXOX--OX-X\nOXO-XO-X-\nXOXO----O",
+        "tokens_used": 17537,
+        "action": [
+          5,
+          2
+        ]
+      },
+      {
+        "turn": 58,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X--\nOXO--XO-O\nXOXXX---X\nOXOO-OX-O\nXOX--OX-X\nOXO-XO-X-\nXOXO---XO",
+        "tokens_used": 18349,
+        "action": [
+          4,
+          1
+        ]
+      },
+      {
+        "turn": 60,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X--\nOXO--XO-O\nXOXXX---X\nOXOO-OX-O\nXOXX-OXOX\nOXO-XO-X-\nXOXO---XO",
+        "tokens_used": 19161,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 62,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X--\nOXO--XOXO\nXOXXX---X\nOXOO-OXOO\nXOXX-OXOX\nOXO-XO-X-\nXOXO---XO",
+        "tokens_used": 19977,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 64,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X--\nOXOO-XOXO\nXOXXX---X\nOXOO-OXOO\nXOXX-OXOX\nOXOXXO-X-\nXOXO---XO",
+        "tokens_used": 20789,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 66,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X--\nOXOO-XOXO\nXOXXX---X\nOXOOOOXOO\nXOXX-OXOX\nOXOXXO-X-\nXOXO-X-XO",
+        "tokens_used": 21601,
+        "action": [
+          3,
+          0
+        ]
+      },
+      {
+        "turn": 68,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X-X\nOXOO-XOXO\nXOXXX-O-X\nOXOOOOXOO\nXOXX-OXOX\nOXOXXO-X-\nXOXO-X-XO",
+        "tokens_used": 22417,
+        "action": [
+          5,
+          2
+        ]
+      },
+      {
+        "turn": 70,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X-X\nOXOO-XOXO\nXOXXX-OXX\nOXOOOOXOO\nXOXX-OXOX\nOXOXXO-XO\nXOXO-X-XO",
+        "tokens_used": 23237,
+        "action": [
+          7,
+          0
+        ]
+      },
+      {
+        "turn": 72,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X-X\nOXOO-XOXO\nXOXXXOOXX\nOXOOOOXOO\nXOXX-OXOX\nOXOXXO-XO\nXOXO-XXXO",
+        "tokens_used": 24057,
+        "action": [
+          8,
+          1
+        ]
+      },
+      {
+        "turn": 74,
+        "board_state": "OOXOX-O-O\nOXOOXOXOX\nXOX-X-XXX\nOXOO-XOXO\nXOXXXOOXX\nOXOOOOXOO\nXOXX-OXOX\nOXOXXO-XO\nXOXO-XXXO",
+        "tokens_used": 24877,
+        "action": [
+          9,
+          2
+        ]
+      },
+      {
+        "turn": 76,
+        "board_state": "OOXOXXO-O\nOXOOXOXOX\nXOX-XOXXX\nOXOO-XOXO\nXOXXXOOXX\nOXOOOOXOO\nXOXX-OXOX\nOXOXXO-XO\nXOXO-XXXO",
+        "tokens_used": 25697,
+        "action": [
+          6,
+          3
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 582254,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---------\n---------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1071,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "The board is completely empty, which means there are no immediate threats or strategic considerations to address. Therefore, I will take the center position, which is the most valuable starting move i"
+      },
+      {
+        "turn": 3,
+        "board_state": "O--------\n-X-------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1158,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "Given the current board state, I see that I have an opportunity to win by placing my mark (X) in the top right corner. This is also a strong move since it creates a potential fork for my next turn.\n\n{"
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X------\n-XO------\n---------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1253,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state, I need to block my opponent from winning on the next turn. They have two O's in the bottom left and center positions. Therefore, I must place my mark (X) in the bottom left"
+      },
+      {
+        "turn": 7,
+        "board_state": "O-X------\n-XO------\nXO-------\n---------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2299,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "O-X------\n-XO------\nXOX------\nO--------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1464,
+        "action": [
+          3,
+          1
+        ],
+        "reasoning_excerpt": "In the current board state, my opponent has an O in the fourth row, which means I need to block them from potentially winning. By placing my mark (X) in the fourth column of the fourth row, I can bloc"
+      },
+      {
+        "turn": 11,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\n---------\n---------\n---------\n---------\n---------",
+        "tokens_used": 1562,
+        "action": [
+          4,
+          0
+        ],
+        "reasoning_excerpt": "In the current board state, my opponent has two O's in the fourth row, which means I need to block them from winning on their next turn. I will place my mark (X) in the first column of the fifth row t"
+      },
+      {
+        "turn": 13,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXO-------\n---------\n---------\n---------\n---------",
+        "tokens_used": 2949,
+        "action": [
+          4,
+          2
+        ]
+      },
+      {
+        "turn": 15,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nO--------\n---------\n---------\n---------",
+        "tokens_used": 3237,
+        "action": [
+          5,
+          1
+        ]
+      },
+      {
+        "turn": 17,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nOXO------\n---------\n---------\n---------",
+        "tokens_used": 3509,
+        "action": [
+          6,
+          0
+        ]
+      },
+      {
+        "turn": 19,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nOXO------\nXO-------\n---------\n---------",
+        "tokens_used": 5543,
+        "action": [
+          6,
+          2
+        ]
+      },
+      {
+        "turn": 21,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nOXO------\nXOX------\nO--------\n---------",
+        "tokens_used": 6077,
+        "action": [
+          7,
+          1
+        ]
+      },
+      {
+        "turn": 23,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nOXO------\nXOX------\nOXO------\n---------",
+        "tokens_used": 4507,
+        "action": [
+          8,
+          0
+        ]
+      },
+      {
+        "turn": 25,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nOXO------\nXOX------\nOXO------\nXO-------",
+        "tokens_used": 2579,
+        "action": [
+          8,
+          2
+        ],
+        "reasoning_excerpt": "In the current board state, my opponent has created a vertical line of O's in the last column, which means I need to block them from winning. I will place my mark (X) in the last available position, w"
+      },
+      {
+        "turn": 27,
+        "board_state": "O-X------\n-XO------\nXOX------\nOXO------\nXOX------\nOXO-----O\nXOX------\nOXO------\nXOX------",
+        "tokens_used": 9817,
+        "action": [
+          7,
+          2
+        ]
+      },
+      {
+        "turn": 29,
+        "board_state": "O-X------\n-XO----O-\nXOX------\nOXO------\nXOX------\nOXO-----O\nXOX------\nOXO-X----\nXOX------",
+        "tokens_used": 10741,
+        "action": [
+          6,
+          1
+        ]
+      },
+      {
+        "turn": 31,
+        "board_state": "O-X------\n-XO----O-\nXOX------\nOXO------\nXOX------\nOXO---X-O\nXOX------\nOXO-X----\nXOX-----O",
+        "tokens_used": 11649,
+        "action": [
+          5,
+          0
+        ]
+      },
+      {
+        "turn": 33,
+        "board_state": "O-X------\n-XO----O-\nXOX------\nOXO---O--\nXOX------\nOXO---X-O\nXOX-----X\nOXO-X----\nXOX-----O",
+        "tokens_used": 12573,
+        "action": [
+          2,
+          0
+        ]
+      },
+      {
+        "turn": 35,
+        "board_state": "O-X------\n-XO----O-\nXOX------\nOXO---O--\nXOX-----X\nOXO--OX-O\nXOX-----X\nOXO-X----\nXOX-----O",
+        "tokens_used": 13533,
+        "action": [
+          2,
+          1
+        ]
+      },
+      {
+        "turn": 37,
+        "board_state": "OOX------\n-XO----O-\nXOX------\nOXO---O--\nXOXX----X\nOXO--OX-O\nXOX-----X\nOXO-X----\nXOX-----O",
+        "tokens_used": 14449,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 39,
+        "board_state": "OOX------\nOXO----OX\nXOX------\nOXO---O--\nXOXX----X\nOXO--OX-O\nXOX-----X\nOXO-X----\nXOX-----O",
+        "tokens_used": 15401,
+        "action": [
+          5,
+          2
+        ]
+      },
+      {
+        "turn": 41,
+        "board_state": "OOX------\nOXOO--XOX\nXOX------\nOXO---O--\nXOXX----X\nOXO--OX-O\nXOX-----X\nOXO-X----\nXOX-----O",
+        "tokens_used": 16369,
+        "action": [
+          6,
+          0
+        ]
+      },
+      {
+        "turn": 43,
+        "board_state": "OOX------\nOXOO--XOX\nXOX------\nOXO---O--\nXOXXX---X\nOXO--OX-O\nXOX-----X\nOXO-X----\nXOXO----O",
+        "tokens_used": 17317,
+        "action": [
+          3,
+          1
+        ]
+      },
+      {
+        "turn": 45,
+        "board_state": "OOX-----O\nOXOOX-XOX\nXOX------\nOXO---O--\nXOXXX---X\nOXO--OX-O\nXOX-----X\nOXO-X----\nXOXO----O",
+        "tokens_used": 18285,
+        "action": [
+          0,
+          0
+        ]
+      },
+      {
+        "turn": 47,
+        "board_state": "OOX-X---O\nOXOOX-XOX\nXOX------\nOXO---O--\nXOXXX---X\nOXO--OX-O\nXOX--O--X\nOXO-X----\nXOXO----O",
+        "tokens_used": 19269,
+        "action": [
+          3,
+          2
+        ]
+      },
+      {
+        "turn": 49,
+        "board_state": "OOX-X---O\nOXOOXOXOX\nXOX-X----\nOXO---O--\nXOXXX---X\nOXO--OX-O\nXOX--O--X\nOXO-X----\nXOXO----O",
+        "tokens_used": 20253,
+        "action": [
+          3,
+          1
+        ]
+      },
+      {
+        "turn": 51,
+        "board_state": "OOX-X---O\nOXOOXOXOX\nXOX-X----\nOXO---O--\nXOXXX---X\nOXOO-OX-O\nXOX--OX-X\nOXO-X----\nXOXO----O",
+        "tokens_used": 21277,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 53,
+        "board_state": "OOX-X---O\nOXOOXOXOX\nXOX-X----\nOXO--XO--\nXOXXX---X\nOXOO-OX-O\nXOX--OX-X\nOXO-XO---\nXOXO----O",
+        "tokens_used": 22261,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 55,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X----\nOXO--XO--\nXOXXX---X\nOXOO-OX-O\nXOX--OX-X\nOXO-XO-X-\nXOXO----O",
+        "tokens_used": 23253,
+        "action": [
+          3,
+          0
+        ]
+      },
+      {
+        "turn": 57,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X--\nOXO--XO-O\nXOXXX---X\nOXOO-OX-O\nXOX--OX-X\nOXO-XO-X-\nXOXO----O",
+        "tokens_used": 24249,
+        "action": [
+          1,
+          2
+        ]
+      },
+      {
+        "turn": 59,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X--\nOXO--XO-O\nXOXXX---X\nOXOO-OX-O\nXOX--OXOX\nOXO-XO-X-\nXOXO---XO",
+        "tokens_used": 25249,
+        "action": [
+          3,
+          1
+        ]
+      },
+      {
+        "turn": 61,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X--\nOXO--XO-O\nXOXXX---X\nOXOO-OXOO\nXOXX-OXOX\nOXO-XO-X-\nXOXO---XO",
+        "tokens_used": 26257,
+        "action": [
+          4,
+          1
+        ]
+      },
+      {
+        "turn": 63,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X--\nOXOO-XOXO\nXOXXX---X\nOXOO-OXOO\nXOXX-OXOX\nOXO-XO-X-\nXOXO---XO",
+        "tokens_used": 7061,
+        "action": [
+          7,
+          3
+        ],
+        "reasoning_excerpt": "In the current board state, my opponent has two O's in the last column and can win by placing an O in the last column of the last row. To block them, I will place my mark (X) in the first available po"
+      },
+      {
+        "turn": 65,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X--\nOXOO-XOXO\nXOXXX---X\nOXOOOOXOO\nXOXX-OXOX\nOXOXXO-X-\nXOXO---XO",
+        "tokens_used": 27813,
+        "action": [
+          4,
+          2
+        ]
+      },
+      {
+        "turn": 67,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X--\nOXOO-XOXO\nXOXXX-O-X\nOXOOOOXOO\nXOXX-OXOX\nOXOXXO-X-\nXOXO-X-XO",
+        "tokens_used": 28805,
+        "action": [
+          4,
+          1
+        ]
+      },
+      {
+        "turn": 69,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X-X\nOXOO-XOXO\nXOXXX-O-X\nOXOOOOXOO\nXOXX-OXOX\nOXOXXO-XO\nXOXO-X-XO",
+        "tokens_used": 29821,
+        "action": [
+          4,
+          2
+        ]
+      },
+      {
+        "turn": 71,
+        "board_state": "OOXOX---O\nOXOOXOXOX\nXOX-X-X-X\nOXOO-XOXO\nXOXXXOOXX\nOXOOOOXOO\nXOXX-OXOX\nOXOXXO-XO\nXOXO-X-XO",
+        "tokens_used": 30825,
+        "action": [
+          4,
+          0
+        ]
+      },
+      {
+        "turn": 73,
+        "board_state": "OOXOX-O-O\nOXOOXOXOX\nXOX-X-X-X\nOXOO-XOXO\nXOXXXOOXX\nOXOOOOXOO\nXOXX-OXOX\nOXOXXO-XO\nXOXO-XXXO",
+        "tokens_used": 31837,
+        "action": [
+          4,
+          2
+        ]
+      },
+      {
+        "turn": 75,
+        "board_state": "OOXOX-O-O\nOXOOXOXOX\nXOX-XOXXX\nOXOO-XOXO\nXOXXXOOXX\nOXOOOOXOO\nXOXX-OXOX\nOXOXXO-XO\nXOXO-XXXO",
+        "tokens_used": 32849,
+        "action": [
+          4,
+          1
+        ]
+      },
+      {
+        "turn": 77,
+        "board_state": "OOXOXXO-O\nOXOOXOXOX\nXOX-XOXXX\nOXOO-XOXO\nXOXXXOOXX\nOXOOOOXOO\nXOXX-OXOX\nOXOXXO-XO\nXOXOOXXXO",
+        "tokens_used": 33833,
+        "action": [
+          4,
+          0
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

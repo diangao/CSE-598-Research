@@ -74,6 +74,21 @@ def parse_experiment_filename(filename):
         params['source'] = 'dian'
         params['experiment_type'] = 'constrained'
     
+    # Check for memory comparison experiments
+    if 'compare_' in base_name:
+        params['experiment_type'] = 'memory_comparison'
+        # Parse memory type and agent types
+        memory_match = re.search(r'compare_(\w+)_(\w+)_vs_(\w+)_nomem', base_name)
+        if memory_match:
+            params['memory_agent_type'] = memory_match.group(1)
+            params['memory_type'] = memory_match.group(2)
+            params['baseline_agent_type'] = memory_match.group(3)
+        
+        # Extract board size
+        match_size = re.search(r'_b(\d+)x\d+_', base_name)
+        if match_size:
+            params['board_size'] = match_size.group(1)
+    
     # Parse filename components
     if "memA_" in base_name and "memB_" in base_name:
         # Extract memory_constraint_a
@@ -175,7 +190,7 @@ def load_experiment_data(results_dir=None, experiment_type=None):
     
     Args:
         results_dir: Directory containing experiment results (None for both directories)
-        experiment_type: Type of experiment to load ('constrained', 'adaptive', or None for both)
+        experiment_type: Type of experiment to load ('constrained', 'adaptive', 'memory_comparison', or None for all)
         
     Returns:
         DataFrame containing experiment data
@@ -189,6 +204,14 @@ def load_experiment_data(results_dir=None, experiment_type=None):
             search_dirs.append(os.path.join(PROJECT_ROOT, "experiments/results/from_dian"))
         if experiment_type == 'adaptive' or experiment_type is None:
             search_dirs.append(os.path.join(PROJECT_ROOT, "experiments/results/from_anish"))
+        if experiment_type == 'memory_comparison' or experiment_type is None:
+            # 修正memory_baseline目录路径，从experiments/results/memory_baseline改为results/memory_baseline
+            search_dirs.append(os.path.join(PROJECT_ROOT, "results/memory_baseline"))
+            
+            # 添加备用路径，以防数据也存在旧路径
+            backup_path = os.path.join(PROJECT_ROOT, "experiments/results/memory_baseline")
+            if os.path.exists(backup_path):
+                search_dirs.append(backup_path)
     
     # Find all experiment JSON files across specified directories
     json_files = []
@@ -223,6 +246,10 @@ def load_experiment_data(results_dir=None, experiment_type=None):
             elif 'from_anish' in json_file:
                 exp_data['source'] = 'anish'
                 exp_data['experiment_type'] = 'adaptive'
+            elif 'memory_baseline' in json_file or 'baseline_nomem' in filename or 'compare_' in filename:
+                # 识别memory baseline实验
+                exp_data['source'] = 'memory_baseline'
+                exp_data['experiment_type'] = 'memory_comparison'
             else:
                 exp_data['source'] = 'unknown'
                 exp_data['experiment_type'] = 'unknown'
@@ -297,7 +324,7 @@ def process_game_logs(logs_dir=None, experiment_type=None):
     
     Args:
         logs_dir: Directory containing game logs (None for both directories)
-        experiment_type: Type of experiment to load ('constrained', 'adaptive', or None for both)
+        experiment_type: Type of experiment to load ('constrained', 'adaptive', 'memory_comparison', or None for both)
         
     Returns:
         DataFrame containing memory usage data
@@ -311,6 +338,14 @@ def process_game_logs(logs_dir=None, experiment_type=None):
             search_dirs.append(os.path.join(PROJECT_ROOT, "experiments/results/from_dian/game_logs"))
         if experiment_type == 'adaptive' or experiment_type is None:
             search_dirs.append(os.path.join(PROJECT_ROOT, "experiments/results/from_anish/game_logs"))
+        if experiment_type == 'memory_comparison' or experiment_type is None:
+            # 修正memory_baseline目录路径
+            search_dirs.append(os.path.join(PROJECT_ROOT, "results/memory_baseline/game_logs"))
+            
+            # 添加备用路径，以防数据也存在旧路径
+            backup_path = os.path.join(PROJECT_ROOT, "experiments/results/memory_baseline/game_logs")
+            if os.path.exists(backup_path):
+                search_dirs.append(backup_path)
     
     # Find all game log JSON files across specified directories
     log_files = []
@@ -332,6 +367,10 @@ def process_game_logs(logs_dir=None, experiment_type=None):
             # Extract game parameters from filename
             filename = os.path.basename(log_file)
             file_params = parse_game_log_filename(log_file)
+            
+            # 为memory_baseline文件添加experiment_type标记
+            if 'memory_baseline' in log_file:
+                file_params['experiment_type'] = 'memory_comparison'
             
             # Skip if not the requested experiment type
             if experiment_type and file_params['experiment_type'] != experiment_type:

@@ -56,9 +56,9 @@ def parse_args():
                         help='Number of epochs for autoencoder training (default: 200)')
     parser.add_argument('--agent_mode', type=str, choices=['get_move', 'submit_board'], default='get_move',
                         help='Method to use for agent moves: get_move (original) or submit_board (simplified)')
-    parser.add_argument('--memory_constraint_a', type=str, choices=['none', 'graph_only', 'vector_only'], default='none',
+    parser.add_argument('--memory_constraint_a', type=str, choices=['none', 'graph_only', 'vector_only', 'baseline'], default='none',
                         help='Constrain memory types available to Agent A (default: none)')
-    parser.add_argument('--memory_constraint_b', type=str, choices=['none', 'graph_only', 'vector_only'], default='none',
+    parser.add_argument('--memory_constraint_b', type=str, choices=['none', 'graph_only', 'vector_only', 'baseline'], default='none',
                         help='Constrain memory types available to Agent B (default: none)')
     parser.add_argument('--use_pretrained_autoencoder', action='store_true',
                         help='Use pretrained autoencoder model instead of training a new one')
@@ -86,18 +86,29 @@ def main():
     game_logger = GameLogger()
     
     # Initialize memory managers for each agent with constraints
-    memory_manager_a = MemoryManager(
-        'agent_a', 
-        memory_constraint=args.memory_constraint_a,
-        use_pretrained_autoencoder=args.use_pretrained_autoencoder,
-        pretrained_autoencoder_path=args.pretrained_autoencoder_path
-    )
-    memory_manager_b = MemoryManager(
-        'agent_b', 
-        memory_constraint=args.memory_constraint_b,
-        use_pretrained_autoencoder=args.use_pretrained_autoencoder,
-        pretrained_autoencoder_path=args.pretrained_autoencoder_path
-    )
+    if args.memory_constraint_a == "baseline":
+        from experiments.utils.memory_ops_baseline import MemoryManager as BaselineMemoryManager
+        memory_manager_a = BaselineMemoryManager('agent_a')
+        logger.info("Using baseline (no memory) manager for Agent A")
+    else:
+        memory_manager_a = MemoryManager(
+            'agent_a', 
+            memory_constraint=args.memory_constraint_a,
+            use_pretrained_autoencoder=args.use_pretrained_autoencoder,
+            pretrained_autoencoder_path=args.pretrained_autoencoder_path
+        )
+
+    if args.memory_constraint_b == "baseline":
+        from experiments.utils.memory_ops_baseline import MemoryManager as BaselineMemoryManager
+        memory_manager_b = BaselineMemoryManager('agent_b')
+        logger.info("Using baseline (no memory) manager for Agent B")
+    else:
+        memory_manager_b = MemoryManager(
+            'agent_b', 
+            memory_constraint=args.memory_constraint_b,
+            use_pretrained_autoencoder=args.use_pretrained_autoencoder,
+            pretrained_autoencoder_path=args.pretrained_autoencoder_path
+        )
     
     # Initialize agents
     agent_a = TicTacToeAgent('agent_a', memory_manager_a)

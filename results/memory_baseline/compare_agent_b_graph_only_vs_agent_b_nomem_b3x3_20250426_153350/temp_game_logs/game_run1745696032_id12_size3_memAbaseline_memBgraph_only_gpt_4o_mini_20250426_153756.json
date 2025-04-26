@@ -1,0 +1,95 @@
+{
+  "run_id": 1745696032,
+  "game_id": 12,
+  "timestamp": "2025-04-26T15:37:47.402347",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 5295,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 2,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "---\n-X-\nO--",
+        "tokens_used": 2063,
+        "action": [
+          0,
+          0
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Opponent placed O in (2,1). I placed X in (1,1)."
+      },
+      {
+        "turn": 5,
+        "board_state": "X-O\n-X-\nO--",
+        "tokens_used": 2283,
+        "action": [
+          2,
+          2
+        ],
+        "memory_function": "vector_store",
+        "memory_content_stored": "Opponent placed O in (0,1). I placed X in (1,0)."
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2257,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1074,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state, my immediate goal is to make an optimal move. The center position is already occupied, so the next best moves are the corners.\n\nI'll place my move in the bottom left cor"
+      },
+      {
+        "turn": 4,
+        "board_state": "X--\n-X-\nO--",
+        "tokens_used": 1183,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "The current board state is as follows:\n\n```\nX - -\n- X -\nO - -\n```\n\nI need to block the opponent from winning on their next turn. The opponent (X) can win by placing their mark in the top right corner "
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

@@ -1,0 +1,128 @@
+{
+  "run_id": 1745695744,
+  "game_id": 8,
+  "timestamp": "2025-04-26T15:31:24.832113",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 7596,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 949,
+        "action": [
+          1,
+          1
+        ]
+      },
+      {
+        "turn": 3,
+        "board_state": "O--\n-X-\n---",
+        "tokens_used": 1631,
+        "action": [
+          0,
+          2
+        ]
+      },
+      {
+        "turn": 5,
+        "board_state": "O-X\n-X-\n-O-",
+        "tokens_used": 1073,
+        "action": [
+          2,
+          2
+        ]
+      },
+      {
+        "turn": 7,
+        "board_state": "OOX\n-X-\n-OX",
+        "tokens_used": 1118,
+        "action": [
+          1,
+          0
+        ]
+      },
+      {
+        "turn": 9,
+        "board_state": "OOX\nXX-\nOOX",
+        "tokens_used": 2825,
+        "action": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 7296,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1102,
+        "action": [
+          0,
+          0
+        ],
+        "reasoning_excerpt": "Given the current board state:\n\n```\n- - -\n- X -\n- - -\n```\n\nThe center position is occupied by 'X', which is a strong strategic position. The best move for me (assuming I am 'O') is to take one of the "
+      },
+      {
+        "turn": 4,
+        "board_state": "O-X\n-X-\n---",
+        "tokens_used": 1219,
+        "action": [
+          2,
+          1
+        ],
+        "reasoning_excerpt": "The current board state is:\n\n```\nO - X\n- X -\n- - -\n```\n\nIn this situation, I need to block my opponent (X) from winning on their next turn, as they have two 'X's in the second column. Thus, the best m"
+      },
+      {
+        "turn": 6,
+        "board_state": "O-X\n-X-\n-OX",
+        "tokens_used": 1334,
+        "action": [
+          0,
+          1
+        ],
+        "reasoning_excerpt": "The current board state is:\n\n```\nO - X\n- X -\nO X\n```\n\nIn this situation, I must block my opponent from winning on their next turn. The opponent (X) has two 'X's in the right column, so I need to place"
+      },
+      {
+        "turn": 8,
+        "board_state": "OOX\nXX-\n-OX",
+        "tokens_used": 3641,
+        "action": [
+          2,
+          0
+        ]
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}

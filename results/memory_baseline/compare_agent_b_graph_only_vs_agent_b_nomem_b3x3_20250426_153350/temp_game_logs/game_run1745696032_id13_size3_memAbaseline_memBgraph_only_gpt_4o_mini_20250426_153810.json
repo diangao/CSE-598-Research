@@ -1,0 +1,92 @@
+{
+  "run_id": 1745696032,
+  "game_id": 13,
+  "timestamp": "2025-04-26T15:38:04.176243",
+  "board_size": 3,
+  "agent_a": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 2580,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 2,
+        "board_state": "---\n-X-\n---",
+        "tokens_used": 1549,
+        "action": [
+          0,
+          1
+        ]
+      },
+      {
+        "turn": 4,
+        "board_state": "-OX\n-X-\n---",
+        "tokens_used": 1031,
+        "action": [
+          1,
+          0
+        ]
+      }
+    ]
+  },
+  "agent_b": {
+    "objective": "maximize win rate while minimizing token use",
+    "total_tokens_used": 3437,
+    "memory_usage_summary": {
+      "graph_store": 0,
+      "graph_read": 0,
+      "vector_store": 0,
+      "vector_read": 0,
+      "semantic_store": 0,
+      "semantic_read": 0,
+      "update_graph_schema": 0,
+      "update_vector_schema": 0,
+      "update_semantic_schema": 0
+    },
+    "schema_updates": [],
+    "turns": [
+      {
+        "turn": 1,
+        "board_state": "---\n---\n---",
+        "tokens_used": 1056,
+        "action": [
+          1,
+          1
+        ],
+        "reasoning_excerpt": "Since the board is completely empty, I will make a strategic move without using memory. The center position is the most valuable, so I will take that.\n\n{\"move\": [1, 1]}"
+      },
+      {
+        "turn": 3,
+        "board_state": "-O-\n-X-\n---",
+        "tokens_used": 1152,
+        "action": [
+          0,
+          2
+        ],
+        "reasoning_excerpt": "In this situation, I need to block the opponent's potential winning move. The opponent has an \"O\" in the top row and could win by placing another \"O\" in (0, 2). Therefore, I will make my move at (0, 2"
+      },
+      {
+        "turn": 5,
+        "board_state": "-OX\nOX-\n---",
+        "tokens_used": 1229,
+        "action": [
+          2,
+          0
+        ],
+        "reasoning_excerpt": "I have a chance to win on my next turn by placing an \"X\" in position (2, 0). This will create a winning vertical line. Therefore, I will make that move.\n\n{\"move\": [2, 0]}"
+      }
+    ]
+  },
+  "final_result": "win",
+  "winner": "agent_a"
+}
