@@ -92,12 +92,12 @@ ENV/
 /site
 
 # Experiment results and cache
-experiments/results/*
-!experiments/results/.gitkeep
-# Allow organized results and analysis directories
-!experiments/results/from_dian/
-!experiments/results/from_anish/
-!experiments/results/analysis/
+# experiments/results/*
+# !experiments/results/.gitkeep
+# # Allow organized results and analysis directories
+# !experiments/results/from_dian/
+# !experiments/results/from_anish/
+# !experiments/results/analysis/
 .cache/
 experiments/.env
 
