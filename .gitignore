@@ -186,3 +186,7 @@ data/
 !experiments/results/analysis/**/*.json
 output/
 !experiments/results/analysis/**/*.py
+!experiments/results/analysis/figures/
+!experiments/results/analysis/figures/**
+!results/memory_baseline/
+!results/memory_baseline/**
