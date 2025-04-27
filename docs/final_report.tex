@@ -303,44 +303,48 @@ This finding reinforces RQ4, demonstrating that effective memory augmentation de
 
 In the adaptive setting, agents were granted full access to all memory types—GraphMemory, VectorMemory, and SemanticMemory. This experiment aimed to assess whether agents could autonomously adapt both \textbf{when} to use memory and \textbf{which} memory type to select based on task complexity and internal objectives.
 
-\paragraph{Memory Type Preferences.}
+\paragraph{Memory Type Preferences and Call Frequency.}
 Figure~\ref{fig:adaptive_memory_type} illustrates the distribution of memory type selections per agent. Contrary to patterns observed in constrained settings, both agents exhibited a strong bias toward \textbf{GraphMemory} across all board sizes. Notably, \textbf{Agent B} also leveraged \textbf{SemanticMemory} for over 30\% of its memory calls, despite its placeholder status. This emergent behavior suggests that Agent B may interpret SemanticMemory as a cost-effective fallback or conceptual retrieval tool. \textbf{VectorMemory}, which dominated in constrained experiments, played a secondary role, especially for Agent A.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.55\textwidth]{figures/adaptive/memory_type_preference.png}
-\caption{Memory type distribution across board sizes in adaptive mode. Both agents show a preference for GraphMemory, with Agent B also utilizing SemanticMemory.}
-\label{fig:adaptive_memory_type}
-\end{figure}
-
-\paragraph{Memory Call Frequency.}
-Figure~\ref{fig:adaptive_memory_frequency} reveals a \textbf{non-linear memory engagement profile}. \textbf{Agent A} exhibited peak memory calls at $6\times6$ boards, followed by a reduction at $9\times9$, whereas \textbf{Agent B} consistently minimized memory usage across all settings. This divergence suggests that Agent A's retrieval strategies are sensitive to task complexity but prone to saturation in larger state spaces. Agent B, in contrast, maintained highly selective engagement, likely due to internalized cost constraints.
+As shown in Figure~\ref{fig:adaptive_memory_frequency}, memory engagement follows a \textbf{non-linear profile}. \textbf{Agent A} exhibited peak memory calls at $6\times6$ boards, followed by a reduction at $9\times9$, whereas \textbf{Agent B} consistently minimized memory usage across all settings. This divergence suggests that Agent A's retrieval strategies are sensitive to task complexity but prone to saturation in larger state spaces. Agent B, in contrast, maintained highly selective engagement, likely due to internalized cost constraints.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.55\textwidth]{figures/adaptive/memory_calls_vs_board_size.png}
-\caption{Average memory calls per game across board sizes. Agent A shows peak usage at $6\times6$ followed by a reduction, while Agent B maintains minimal memory engagement.}
-\label{fig:adaptive_memory_frequency}
+\begin{minipage}{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figures/adaptive/memory_type_preference.png}
+  \caption{Memory type distribution across board sizes in adaptive mode. Both agents show a preference for GraphMemory, with Agent B also utilizing SemanticMemory.}
+  \label{fig:adaptive_memory_type}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figures/adaptive/memory_calls_vs_board_size.png}
+  \caption{Average memory calls per game across board sizes. Agent A shows peak usage at $6\times6$ followed by a reduction, while Agent B maintains minimal memory engagement.}
+  \label{fig:adaptive_memory_frequency}
+\end{minipage}
 \end{figure}
 
-\paragraph{Token Usage and Efficiency.}
+\paragraph{Token Usage and Performance Tradeoffs.}
 Token consumption trends deviated from expectations. As shown in Figure~\ref{fig:adaptive_token_usage}, \textbf{Agent B} incurred \textbf{higher token costs} than Agent A, particularly on $9\times9$ boards. This inversion suggests that despite fewer memory calls, Agent B's reasoning paths may be more verbose or reliant on token-intensive computations—potentially tied to SemanticMemory's overhead.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.55\textwidth]{figures/adaptive/token_usage_vs_board_size.png}
-\caption{Token usage across board sizes in adaptive mode. Unexpectedly, Agent B shows higher token consumption on complex boards despite fewer memory calls.}
-\label{fig:adaptive_token_usage}
-\end{figure}
-
-\paragraph{Performance Tradeoffs.}
 Figure~\ref{fig:adaptive_win_rate} shows that \textbf{Agent A consistently outperformed Agent B in win rate} across all board sizes. Remarkably, this advantage was achieved with \textbf{lower token usage}, inverting the expected efficiency-performance tradeoff. Agent A's selective but effective engagement with GraphMemory appears to yield better outcomes than Agent B's cautious but costlier strategies.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.55\textwidth]{figures/adaptive/win_rate_vs_board_size.png}
-\caption{Win rates across board sizes in adaptive mode. Agent A maintains superior performance with lower token costs, contrary to expectations.}
-\label{fig:adaptive_win_rate}
+\begin{minipage}{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figures/adaptive/token_usage_vs_board_size.png}
+  \caption{Token usage across board sizes in adaptive mode. Unexpectedly, Agent B shows higher token consumption on complex boards despite fewer memory calls.}
+  \label{fig:adaptive_token_usage}
+\end{minipage}%
+\hfill
+\begin{minipage}{0.48\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figures/adaptive/win_rate_vs_board_size.png}
+  \caption{Win rates across board sizes in adaptive mode. Agent A maintains superior performance with lower token costs, contrary to expectations.}
+  \label{fig:adaptive_win_rate}
+\end{minipage}
 \end{figure}
 
 These findings refine our understanding of \textbf{H3}, demonstrating that:
