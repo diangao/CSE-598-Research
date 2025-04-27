@@ -6,6 +6,7 @@ import seaborn as sns
 from .data_loader import load_experiment_data
 import logging
 import shutil
+import json
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, 
@@ -1267,7 +1268,12 @@ def analyze_memory_baseline_comparison(df=None, save_path='experiments/results/a
         
         board_df = pd.DataFrame(board_data)
         
-        ax3 = sns.barplot(data=board_df, x='board_size', y='win_rate', hue='agent_type', palette=colors)
+        # 确保棋盘大小按照从小到大排序
+        board_sizes = sorted(board_df['board_size'].unique(), 
+                            key=lambda x: int(str(x).split('x')[0] if 'x' in str(x) else x))
+        
+        ax3 = sns.barplot(data=board_df, x='board_size', y='win_rate', hue='agent_type', 
+                         palette=colors, order=board_sizes)
         
         # Add value labels
         for p in ax3.patches:
@@ -1302,7 +1308,12 @@ def analyze_memory_baseline_comparison(df=None, save_path='experiments/results/a
         
         board_df = pd.DataFrame(board_data)
         
-        ax4 = sns.barplot(data=board_df, x='board_size', y='win_rate', hue='agent_type', palette=colors)
+        # 确保棋盘大小按照从小到大排序
+        board_sizes = sorted(board_df['board_size'].unique(), 
+                            key=lambda x: int(str(x).split('x')[0] if 'x' in str(x) else x))
+        
+        ax4 = sns.barplot(data=board_df, x='board_size', y='win_rate', hue='agent_type', 
+                         palette=colors, order=board_sizes)
         
         # Add value labels
         for p in ax4.patches:
@@ -2050,6 +2061,253 @@ def analyze_decision_time(df=None, game_logs_df=None, save_path='experiments/res
     
     return decision_stats
 
+def analyze_baseline_win_rates(df=None, save_path='experiments/results/analysis/figures/memory_baseline'):
+    """
+    Analyze win rates for baseline experiments (no memory agents only)
+    
+    Args:
+        df: Memory baseline DataFrame, loaded if None (not used if read_from_dir=True)
+        save_path: Path to save figures
+    
+    Returns:
+        DataFrame with baseline win rates
+    """
+    print("Analyzing baseline (no memory) win rates...")
+    
+    # 创建保存目录
+    os.makedirs(save_path, exist_ok=True)
+    
+    # 直接从baseline目录读取数据
+    baseline_data = []
+    baseline_dirs = [
+        "results/memory_baseline/baseline_nomem_agent_avsagent_b_b3x3_20250426_154821/baseline_b3x3_20250426_154821",
+        "results/memory_baseline/baseline_nomem_agent_avsagent_b_b9x9_20250426_172255/baseline_b9x9_20250426_172255"
+    ]
+    
+    for dir_path in baseline_dirs:
+        # 检查目录是否存在
+        if not os.path.exists(dir_path):
+            print(f"Warning: Directory {dir_path} does not exist")
+            continue
+            
+        # 读取配置文件
+        config_path = os.path.join(dir_path, "config.json")
+        if not os.path.exists(config_path):
+            print(f"Warning: Config file not found in {dir_path}")
+            continue
+            
+        with open(config_path, "r") as f:
+            config = json.load(f)
+            
+        # 读取统计文件
+        stats_path = os.path.join(dir_path, "stats.json")
+        if not os.path.exists(stats_path):
+            print(f"Warning: Stats file not found in {dir_path}")
+            continue
+            
+        with open(stats_path, "r") as f:
+            stats = json.load(f)
+            
+        # 计算胜率
+        total_completed_games = stats["wins_a"] + stats["wins_b"] + stats["draws"]
+        if total_completed_games == 0:
+            print(f"Warning: No completed games found in {dir_path}")
+            continue
+            
+        # 添加到数据集
+        baseline_data.append({
+            'board_size': config["board_size"],
+            'agent_a_wins': stats["wins_a"],
+            'agent_b_wins': stats["wins_b"],
+            'draws': stats["draws"],
+            'total_games': total_completed_games,
+            'agent_a_win_rate': stats["wins_a"] / total_completed_games,
+            'agent_b_win_rate': stats["wins_b"] / total_completed_games,
+            'draw_rate': stats["draws"] / total_completed_games,
+            'timeouts': stats.get("timeouts", 0),
+            'errors': stats.get("errors", 0),
+            'model': config.get("model", "unknown")
+        })
+    
+    # 如果没有找到数据，尝试使用传入的df
+    if not baseline_data and df is not None:
+        print("No baseline data found in directory, using provided DataFrame")
+        baseline_df = df[
+            (df['memory_constraint_a'] == 'baseline') & 
+            (df['memory_constraint_b'] == 'baseline')
+        ]
+        if not baseline_df.empty:
+            for _, row in baseline_df.iterrows():
+                baseline_data.append({
+                    'board_size': row['board_size'],
+                    'agent_a_wins': row.get('agent_a_total_wins', 0),
+                    'agent_b_wins': row.get('agent_b_total_wins', 0),
+                    'draws': row.get('draws', 0),
+                    'total_games': row.get('total_games', 0),
+                    'agent_a_win_rate': row.get('agent_a_win_rate', 0),
+                    'agent_b_win_rate': row.get('agent_b_win_rate', 0),
+                    'draw_rate': row.get('draw_rate', 0),
+                    'model': row.get('model', 'unknown')
+                })
+    
+    if not baseline_data:
+        print("No baseline data found.")
+        return None
+        
+    # 转换为DataFrame
+    baseline_df = pd.DataFrame(baseline_data)
+    
+    # 设置绘图风格
+    plt.style.use('seaborn-v0_8-whitegrid')
+    
+    # 绘制胜率条形图
+    plt.figure(figsize=(10, 6))
+    
+    # 准备绘图数据
+    win_data = []
+    for _, row in baseline_df.iterrows():
+        board_size = str(row['board_size'])
+        win_data.append({
+            'Agent': 'Agent A',
+            'Board Size': f"{board_size}x{board_size}",
+            'Win Rate (%)': row['agent_a_win_rate'] * 100
+        })
+        win_data.append({
+            'Agent': 'Agent B',
+            'Board Size': f"{board_size}x{board_size}",
+            'Win Rate (%)': row['agent_b_win_rate'] * 100
+        })
+    
+    win_df = pd.DataFrame(win_data)
+    
+    # 按棋盘大小排序
+    board_sizes = sorted(win_df['Board Size'].unique(), 
+                        key=lambda x: int(x.split('x')[0]))
+    
+    # 创建条形图
+    ax = sns.barplot(
+        data=win_df, 
+        x='Board Size', 
+        y='Win Rate (%)', 
+        hue='Agent',
+        palette={'Agent A': '#1f77b4', 'Agent B': '#ff7f0e'},
+        order=board_sizes
+    )
+    
+    # 在每个条形上添加数值标签
+    for p in ax.patches:
+        height = p.get_height()
+        if height > 0.5:  # 只为有意义的高度添加标签
+            ax.text(
+                p.get_x() + p.get_width()/2.,
+                height + 1,
+                f'{height:.1f}%',
+                ha="center",
+                fontsize=10
+            )
+    
+    # 添加50%基准线
+    plt.axhline(y=50, color='gray', linestyle='--', alpha=0.7)
+    
+    # 增强绘图标题和标签
+    plt.title('Baseline Win Rates: Agent A vs Agent B (No Memory)', 
+            fontsize=16, fontweight='bold')
+    plt.xlabel('Board Size', fontsize=14)
+    plt.ylabel('Win Rate (%)', fontsize=14)
+    plt.legend(title='Agent', fontsize=12)
+    plt.grid(axis='y', alpha=0.3)
+    
+    # 添加说明文字
+    plt.figtext(
+        0.5, 0.01, 
+        "Comparison of win rates when neither agent has memory capabilities",
+        ha='center', fontsize=11, style='italic'
+    )
+    
+    # 保存图表
+    output_path = os.path.join(save_path, 'baseline_win_rates.png')
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    
+    print(f"Baseline win rates analysis saved to {output_path}")
+    
+    # 添加超时和错误信息的条形图
+    plt.figure(figsize=(10, 6))
+    
+    # 准备数据
+    completion_data = []
+    for _, row in baseline_df.iterrows():
+        board_size = str(row['board_size'])
+        total_attempts = row['total_games'] + row.get('timeouts', 0) + row.get('errors', 0)
+        
+        # 计算完成率和超时率
+        completion_rate = row['total_games'] / total_attempts * 100 if total_attempts > 0 else 0
+        timeout_rate = row.get('timeouts', 0) / total_attempts * 100 if total_attempts > 0 else 0
+        error_rate = row.get('errors', 0) / total_attempts * 100 if total_attempts > 0 else 0
+        
+        completion_data.append({
+            'Board Size': f"{board_size}x{board_size}",
+            'Rate Type': 'Completion Rate',
+            'Percentage': completion_rate
+        })
+        completion_data.append({
+            'Board Size': f"{board_size}x{board_size}",
+            'Rate Type': 'Timeout Rate',
+            'Percentage': timeout_rate
+        })
+        completion_data.append({
+            'Board Size': f"{board_size}x{board_size}",
+            'Rate Type': 'Error Rate',
+            'Percentage': error_rate
+        })
+    
+    completion_df = pd.DataFrame(completion_data)
+    
+    # 创建条形图
+    ax2 = sns.barplot(
+        data=completion_df,
+        x='Board Size',
+        y='Percentage',
+        hue='Rate Type',
+        palette={'Completion Rate': '#2ca02c', 'Timeout Rate': '#d62728', 'Error Rate': '#9467bd'},
+        order=board_sizes
+    )
+    
+    # 添加数值标签
+    for p in ax2.patches:
+        height = p.get_height()
+        if height > 0.5:
+            ax2.text(
+                p.get_x() + p.get_width()/2.,
+                height + 1,
+                f'{height:.1f}%',
+                ha="center",
+                fontsize=9
+            )
+    
+    # 设置标题和标签
+    plt.title('Game Completion, Timeout, and Error Rates (No Memory)', fontsize=16, fontweight='bold')
+    plt.xlabel('Board Size', fontsize=14)
+    plt.ylabel('Percentage (%)', fontsize=14)
+    plt.legend(title='Rate Type', fontsize=12)
+    plt.grid(axis='y', alpha=0.3)
+    
+    # 保存图表
+    completion_path = os.path.join(save_path, 'baseline_completion_rates.png')
+    plt.tight_layout()
+    plt.savefig(completion_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    
+    print(f"Baseline completion rates analysis saved to {completion_path}")
+    
+    # 保存统计数据到CSV文件
+    stats_path = os.path.join(save_path, 'baseline_win_rates_stats.csv')
+    baseline_df.to_csv(stats_path, index=False)
+    print(f"Baseline statistics saved to {stats_path}")
+    
+    return baseline_df
+
 if __name__ == "__main__":
     # Create directory for saving figures
     os.makedirs('experiments/results/analysis/figures', exist_ok=True)
@@ -2075,6 +2333,7 @@ if __name__ == "__main__":
             print("Running memory baseline analyses...")
             # 直接从文件名中提取agent类型信息，不再检查'memory_agent_type'列
             analyze_memory_baseline_comparison(df_memory_comparison)
+            analyze_baseline_win_rates(df_memory_comparison)  # 添加新函数的调用
             analyze_memory_token_efficiency(df_memory_comparison)
             
             # 注意：还需要更新其他两个函数

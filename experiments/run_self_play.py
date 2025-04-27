@@ -91,24 +91,24 @@ def main():
         memory_manager_a = BaselineMemoryManager('agent_a')
         logger.info("Using baseline (no memory) manager for Agent A")
     else:
-        memory_manager_a = MemoryManager(
-            'agent_a', 
-            memory_constraint=args.memory_constraint_a,
-            use_pretrained_autoencoder=args.use_pretrained_autoencoder,
-            pretrained_autoencoder_path=args.pretrained_autoencoder_path
-        )
+    memory_manager_a = MemoryManager(
+        'agent_a', 
+        memory_constraint=args.memory_constraint_a,
+        use_pretrained_autoencoder=args.use_pretrained_autoencoder,
+        pretrained_autoencoder_path=args.pretrained_autoencoder_path
+    )
 
     if args.memory_constraint_b == "baseline":
         from experiments.utils.memory_ops_baseline import MemoryManager as BaselineMemoryManager
         memory_manager_b = BaselineMemoryManager('agent_b')
         logger.info("Using baseline (no memory) manager for Agent B")
     else:
-        memory_manager_b = MemoryManager(
-            'agent_b', 
-            memory_constraint=args.memory_constraint_b,
-            use_pretrained_autoencoder=args.use_pretrained_autoencoder,
-            pretrained_autoencoder_path=args.pretrained_autoencoder_path
-        )
+    memory_manager_b = MemoryManager(
+        'agent_b', 
+        memory_constraint=args.memory_constraint_b,
+        use_pretrained_autoencoder=args.use_pretrained_autoencoder,
+        pretrained_autoencoder_path=args.pretrained_autoencoder_path
+    )
     
     # Initialize agents
     agent_a = TicTacToeAgent('agent_a', memory_manager_a)
