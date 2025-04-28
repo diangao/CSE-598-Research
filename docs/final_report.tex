@@ -1,7 +1,7 @@
 \documentclass[10pt]{article}
 
-% Margins and layout
-\usepackage[left=0.75in,right=0.75in,top=0.8in,bottom=0.8in]{geometry}
+% Margins and layout - 更宽的页边距
+\usepackage[left=0.5in,right=0.5in,top=0.65in,bottom=0.65in]{geometry}
 
 % Encoding
 \usepackage[T1]{fontenc}
@@ -12,13 +12,17 @@
 
 % No paragraph indent, less space between paragraphs
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.7em}
+\setlength{\parskip}{0.8em}
+
+% 行间距调整，提高可读性
+\usepackage{setspace}
+\setstretch{1.05}
 
 % Page number in footer
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\cfoot{\thepage}
+\fancyfoot[R]{\footnotesize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
@@ -32,6 +36,13 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{tabularx}
+\renewcommand{\tabularxcolumn}[1]{m{#1}} % 使表格列更好对齐
+
+% 设置最大图形宽度比例
+\renewcommand{\textfraction}{0.10} % 允许图像占据更多页面空间
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\floatpagefraction}{0.75}
 
 % Make links compact
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
@@ -57,13 +68,23 @@
 \titlespacing*{\subsection}{0pt}{0.8em}{0.3em}
 \titlespacing*{\subsubsection}{0pt}{0.6em}{0.2em}
 
-\title{State Representation Learning for Multi-Agent Interactions & Strategizing\thanks{Code and data available at: \url{https://github.com/diangao/CSE-598-Research}}}
+% 设置首页页脚样式
+\fancypagestyle{firstpage}{
+  \fancyhf{}
+  \fancyfoot[R]{\footnotesize\thepage}
+  \fancyfoot[L]{\small Code and data available at: \url{https://github.com/diangao/CSE-598-Research}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0.5pt}
+}
+
+\title{State Representation Learning for Multi-Agent Interactions \& Strategizing}
 \author{Dian Gao, Anish Chandra, Linglong Meng}
 \date{April 2025}
 
 \begin{document}
 
 \maketitle
+\thispagestyle{firstpage}
 
 \section{Introduction}
 
@@ -109,8 +130,8 @@ This design isolates the influence of implicit prompt guidance and cost sensitiv
 
 \paragraph{Hypothesized Behavior.} This design allows us to investigate how \textbf{subtle variations in prompt framing}---rather than differing objective functions---shape emergent behaviors. We hypothesize that, even under a shared formal objective, agents will exhibit distinct memory usage patterns based on the implicit guidance embedded in their prompts:
 \begin{itemize}[leftmargin=*,nosep]
-    \item Agent A, unburdened by efficiency concerns, is expected to adopt a more \textbf{aggressive memory strategy}
-    \item Agent B is encouraged toward \textbf{selective, resource-conscious behaviors}
+    \item \textbf{Agent A}, unburdened by efficiency concerns, is expected to adopt a more aggressive memory strategy
+    \item \textbf{Agent B} is encouraged toward selective, resource-conscious behaviors
 \end{itemize}
 
 \paragraph{Baseline Comparisons.}
@@ -179,7 +200,7 @@ Notably, the overall \textbf{completion rate} on the $9\times9$ board drops to \
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\textwidth]{figures/memory_baseline/baseline_win_rates.png}
+\includegraphics[width=0.65\textwidth]{figures/memory_baseline/baseline_win_rates.png}
 \caption{Baseline win rates for Agent A and Agent B across board sizes (no memory).}
 \label{fig:baseline_win_rates}
 \end{figure}
@@ -280,9 +301,9 @@ Our analysis reveals that higher memory usage does not necessarily translate to 
 
 However, as shown in Figure~\ref{fig:scatter_win_rate}, \textbf{more memory calls do not guarantee higher win rates}. While Agent A (blue) often makes more memory calls (ranging from 7 to over 20 per game), the corresponding win rates remain variable, fluctuating between 0.28 and 0.6. In contrast, Agent B (orange) achieves higher and more stable win rates (0.5 to 0.73) with fewer memory calls (2 to 6 per game). This suggests diminishing returns for Agent A's aggressive retrieval patterns—beyond a certain point, increasing memory calls does not yield proportional performance gains.
 
-Conversely, Agent B maintains \textbf{competitive or superior win rates with consistently fewer memory calls}, particularly in complex environments like $9\times9$. This reinforces the insight that \textbf{memory quality, not quantity}, drives success—targeted, efficient memory use outperforms brute-force retrieval strategies. Further examining token usage in Figure~\ref{fig:memory_efficiency_tradeoff}, we see similar patterns where Agent A's higher token consumption doesn't consistently translate to proportional performance gains.
+Conversely, Agent B maintains competitive or superior win rates with consistently fewer memory calls, particularly in complex environments like $9\times9$. This reinforces the insight that \textbf{memory quality, not quantity}, drives success—targeted, efficient memory use outperforms brute-force retrieval strategies. Further examining token usage in Figure~\ref{fig:memory_efficiency_tradeoff}, we see similar patterns where Agent A's higher token consumption doesn't consistently translate to proportional performance gains.
 
-In sum, RQ3 is supported: \textbf{memory quantity alone is not a reliable predictor of agent success}. Instead, strategic selectivity and retrieval relevance shape effective memory use.
+In sum, RQ3 is supported: memory quantity alone is not a reliable predictor of agent success. Instead, strategic selectivity and retrieval relevance shape effective memory use.
 
 \subsubsection{RQ4: Memory Efficiency Tradeoff}
 
@@ -353,32 +374,31 @@ These findings refine our understanding of \textbf{H3}, demonstrating that:
 \item Memory architecture preferences and cost models co-determine whether adaptive strategies yield optimal tradeoffs.
 \end{enumerate}
 
-\paragraph{Summary.}
-The adaptive experiments highlight that while agents flexibly adjust memory use, \textbf{architecture alignment remains critical}. \textbf{Agent A's} reliance on GraphMemory delivered superior \textbf{win-token tradeoffs}, outperforming Agent B's more conservative, yet less efficient approach. This suggests that success in adaptive settings hinges not just on \textbf{when} or \textbf{how much} memory is used, but on \textbf{choosing the right memory architecture} for the task at hand.
+\textbf{Summary.}  The adaptive experiments highlight that while agents flexibly adjust memory use, architecture alignment remains critical. Agent A's reliance on GraphMemory delivered superior win-token tradeoffs, outperforming Agent B's more conservative, yet less efficient approach. This suggests that success in adaptive settings hinges not just on when or how much memory is used, but on choosing the right memory architecture for the task at hand.
 
 \section{Discussion}
 
 \subsection{Implications for Memory Architecture Design}
 
-Our findings carry several implications for the design of memory systems in LLM agents. First, the consistent superiority of \textbf{VectorMemory} across increasing task complexity suggests that \textbf{fuzzy retrieval mechanisms} generalize more effectively than structured, relational storage in high-variance environments. While \textbf{GraphMemory} offers clear benefits in smaller, well-structured settings (e.g., the $3 \times 3$ board), its performance degrades sharply as the environment scales. This indicates that graph-based relational reasoning—while interpretable—faces scalability limits when the number of potential state transitions explodes. In contrast, the pattern-matching capabilities of vector-based retrieval, powered by latent-space embeddings, allow agents to flexibly navigate large and sparsely populated state spaces. This suggests that for agents operating in open-ended or poorly structured environments, \textbf{vector-based memory architectures may offer more robust scalability}, a principle likely to extend beyond TicTacToe.
+Our findings carry several implications for the design of memory systems in LLM agents. First, the consistent superiority of VectorMemory across increasing task complexity suggests that \textbf{fuzzy retrieval mechanisms generalize more effectively} than structured, relational storage in high-variance environments. While GraphMemory offers clear benefits in smaller, well-structured settings (e.g., the $3 \times 3$ board), its performance degrades sharply as the environment scales. In contrast, the pattern-matching capabilities of vector-based retrieval, powered by latent-space embeddings, allow agents to flexibly navigate large and sparsely populated state spaces. This suggests that for agents operating in open-ended or poorly structured environments, vector-based memory architectures may offer more robust scalability, a principle likely to extend beyond TicTacToe.
 
-Second, our experiments highlight the subtle but significant influence of \textbf{prompt framing} in shaping agent behavior, even when optimization objectives remain formally identical. Though both agents were tasked with maximizing win rate while minimizing token use, Agent B's repeated reminders about token costs led to \textbf{emergent resource-conscious strategies}—characterized by lower memory usage frequency and greater token efficiency. This divergence demonstrates that \textbf{prompt design acts as a soft constraint} on LLM agents, shaping not only local decision-making but broader strategic patterns over time. For developers of cognitive architectures and LLM-based planning agents, this finding underscores the need to carefully craft system-level prompts, as these seemingly minor choices can have outsized effects on agent behavior.
+Second, our experiments highlight the subtle but significant influence of prompt framing in shaping agent behavior, even when optimization objectives remain formally identical. Though both agents were tasked with maximizing win rate while minimizing token use, Agent B's repeated reminders about token costs led to \textbf{emergent resource-conscious strategies}—characterized by lower memory usage frequency and greater token efficiency. This divergence demonstrates that prompt design acts as a soft constraint on LLM agents, shaping not only local decision-making but broader strategic patterns over time. For developers of cognitive architectures and LLM-based planning agents, this finding underscores the need to carefully craft system-level prompts, as these seemingly minor choices can have outsized effects on agent behavior.
 
-Finally, the tradeoff between \textbf{aggressiveness} and \textbf{efficiency} that emerged across our agents offers further insights for LLM-based agent design. Agent A's strategy—driven solely by win maximization—led to more frequent memory use, but with diminishing returns at scale. Agent B, by contrast, balanced token costs and selectively used memory, yielding \textbf{better performance retention} and \textbf{higher win-rate-to-token ratios} in larger environments. This suggests that, especially in resource-constrained settings, \textbf{conservative memory strategies} may support more scalable and robust agent performance.
+Finally, the tradeoff between aggressiveness and efficiency that emerged across our agents offers further insights for LLM-based agent design. Agent A's strategy—driven solely by win maximization—led to more frequent memory use, but with diminishing returns at scale. Agent B, by contrast, balanced token costs and selectively used memory, yielding better performance retention and higher win-rate-to-token ratios in larger environments. This suggests that, especially in resource-constrained settings, \textbf{conservative memory strategies may support more scalable and robust agent performance}.
 
 \subsection{Limitations and Reflection}
 
 While our study provides valuable insights into LLM-agent memory strategies, several limitations constrain the generalizability and depth of our conclusions:
 
-First, our experiments are confined to TicTacToe, even though we scale the board size to increase complexity. While this scaling expands the state space, TicTacToe remains a deterministic, turn-based environment with relatively simple strategy spaces. Richer domains—such as Connect4, multi-agent coordination, or open-ended dialogue—may impose different demands on memory systems.
+First, \textbf{our experiments are confined to TicTacToe}, even though we scale the board size to increase complexity. While this scaling expands the state space, TicTacToe remains a deterministic, turn-based environment with relatively simple strategy spaces. Richer domains—such as Connect4, multi-agent coordination, or open-ended dialogue—may impose \textbf{different demands on memory systems}.
 
-Second, our implementation of SemanticMemory was limited in scope and optimization. Though accessible in adaptive experiments and surprisingly leveraged by Agent B, it remained a placeholder without robust retrieval or storage mechanisms. This limits our ability to evaluate how agents might fully integrate conceptual memory alongside structured (GraphMemory) and fuzzy (VectorMemory) systems.
+Second, \textbf{our implementation of SemanticMemory was limited in scope and optimization}. Though accessible in adaptive experiments and surprisingly leveraged by Agent B, it remained a placeholder without robust retrieval or storage mechanisms. This limits our ability to evaluate how agents might fully integrate conceptual memory alongside structured (GraphMemory) and fuzzy (VectorMemory) systems.
 
-Third, our adaptive experiments, while revealing, were conducted with limited sample sizes due to computational constraints. This led to noisier trends in memory type selection and token efficiency, particularly in adaptive scenarios where agents' preferences diverged from constrained expectations (e.g., GraphMemory dominance over VectorMemory). A larger experimental pool could yield clearer patterns.
+Third, \textbf{our adaptive experiments, while revealing, were conducted with limited sample sizes due to computational constraints}. This led to noisier trends in memory type selection and token efficiency, particularly in adaptive scenarios where agents' preferences diverged from constrained expectations (e.g., GraphMemory dominance over VectorMemory). A larger experimental pool could yield clearer patterns.
 
-Fourth, our agents operated under fixed prompting-based objectives, with no reinforcement learning (RL) or external reward signals. This limits their capacity to adaptively refine memory usage strategies over time based on cumulative success or cost-efficiency. Without RL, agents cannot fully explore long-term tradeoffs or develop meta-memory behaviors such as schema evolution or memory compression.
+Fourth, \textbf{our agents operated under fixed prompting-based objectives, with no reinforcement learning (RL) or external reward signals}. This limits their capacity to adaptively refine memory usage strategies over time based on cumulative success or cost-efficiency. Without RL, agents cannot fully explore long-term tradeoffs or develop meta-memory behaviors such as schema evolution or memory compression.
 
-Finally, while our memory operations include \texttt{store}, \texttt{retrieve}, and \texttt{updateSchema}, the meta-memory reasoning capacities of agents were underutilized. Schema updates were rare, suggesting that agents did not engage deeply with memory structure optimization. Future work could explore more advanced memory lifecycle management, such as forgetting, compression, or restructuring.
+Finally, while our memory operations include \texttt{store}, \texttt{retrieve}, and \texttt{updateSchema}, \textbf{the meta-memory reasoning capacities of agents were underutilized}. Schema updates were rare, suggesting that agents did not engage deeply with memory structure optimization. Future work could explore more advanced memory lifecycle management, such as forgetting, compression, or restructuring.
 
 \subsection{Future Directions}
 
@@ -399,27 +419,30 @@ Together, these directions can advance our understanding of how LLM agents can a
 
 \section{Conclusion}
 
-This study investigated how LLM agents, equipped with modular external memory systems, adapt their memory strategies under differing objectives and task complexities. By pairing GPT-4o-mini with GraphMemory and VectorMemory in self-play TicTacToe across scaled board sizes, we systematically evaluated how memory architecture and prompt framing shape agent behavior.
+This study explored how LLM agents, equipped with modular external memory systems, develop and adapt memory usage strategies under differing objectives and task complexities. By embedding GPT-4o-mini agents in self-play TicTacToe environments across scaled board sizes, and equipping them with \textbf{GraphMemory}, \textbf{VectorMemory}, and \textbf{SemanticMemory}, we systematically investigated how memory architecture, agent framing, and task demands jointly shape performance.
 
-Our key findings include:
+Our findings reveal three core insights:
 
 \begin{itemize}[leftmargin=*,nosep]
-\item \textbf{VectorMemory scales more robustly} than GraphMemory, maintaining higher performance retention and win-token efficiency as state space complexity increases.
-\item \textbf{Agent objectives significantly influence memory usage}, with token-aware agents (Agent B) demonstrating more selective and efficient strategies than win-maximizing agents (Agent A), despite sharing formal optimization goals.
-\item \textbf{More memory usage does not always yield better performance}; targeted, efficient retrieval—rather than aggressive, high-frequency memory calls—proves crucial, especially under resource constraints.
+\item \textbf{Memory architecture shapes scalability:} \textbf{VectorMemory} consistently outperforms \textbf{GraphMemory} as state complexity grows, highlighting the importance of architecture choice for maintaining performance in large decision spaces.
+\item \textbf{Agent objectives influence memory strategies:} Token-aware agents (Agent B) adopt more selective, cost-conscious memory behaviors, while win-maximizing agents (Agent A) retrieve more aggressively—demonstrating that \textbf{prompt framing} alone can induce distinct usage patterns, even under shared optimization goals.
+\item \textbf{More memory does not guarantee better performance:} Efficient retrieval—targeted, context-sensitive memory use—proves more effective than high-frequency, brute-force memory calls, particularly under resource constraints.
 \end{itemize}
 
-These insights highlight that memory augmentation alone is insufficient: effective systems require alignment between memory architecture and agent objectives, as well as mechanisms to balance retrieval utility and computational cost.
+Together, these insights emphasize that \textbf{memory augmentation alone is insufficient}: effective memory systems must align retrieval architectures with agent objectives, balancing utility and computational cost.
 
-Looking forward, enriching memory architectures (including SemanticMemory), integrating reinforcement learning for memory optimization, and scaling to longer-horizon environments offer exciting paths for enhancing LLM-based agents' reasoning, adaptability, and resource efficiency. These advances can drive the development of more robust, scalable agents capable of operating across complex decision spaces.
+However, this work also surfaced \textbf{unexpected behaviors} that challenge simple assumptions. In adaptive settings, agents favored \textbf{GraphMemory} despite its constrained scalability, and \textbf{SemanticMemory}—initially a placeholder—emerged as a fallback strategy for token-aware agents, raising new questions about conceptual memory roles. Additionally, while Agent B exhibited more conservative memory use, its token consumption remained higher in complex tasks, suggesting that selectivity alone does not ensure efficiency.
+
+These reflections motivate several directions for future research. Expanding to \textbf{longer-horizon tasks}, integrating \textbf{reinforcement learning} for memory policy optimization, and further developing \textbf{concept-level memory architectures} (e.g., SemanticMemory) may unlock richer adaptive behaviors. Importantly, this work suggests that success hinges not only on \textbf{when} or \textbf{how much} memory is used, but on \textbf{what kind} of memory is chosen, and how it integrates with agent objectives and learning mechanisms.
+
+We hope this study contributes to a deeper understanding of how adaptive memory systems interact with LLM agents, revealing nuanced tradeoffs between architecture, agent framing, and task demands. These insights lay the groundwork for more robust, scalable agent designs capable of navigating complex decision spaces with greater adaptability and efficiency.
 
 \section{Contributors}
 Dian Gao contributed to system architecture design, implementation, and evaluation. She designed and developed the TicTacToe environment and agent framework, establishing the infrastructure for memory-augmented LLM experimentation. Her technical contributions include implementation of the baseline and constrained experimental conditions, along with comprehensive data analysis and visualization methodologies. Dian led the conceptualization and writing of the Results and Discussion sections, synthesizing findings across experimental conditions to develop the core theoretical insights regarding memory architecture performance and agent behavior. Additionally, she contributed to the overall narrative coherence and scientific rigor of the manuscript through iterative refinement and integration of experimental results with theoretical frameworks.
 
-Anish Chandra ...
+Anish Chandra contributed to the development of adaptive memory experiments and data analysis methodology. He implemented the adaptive memory architecture that allowed agents to dynamically select between GraphMemory, VectorMemory, and SemanticMemory types based on task demands. Anish designed experiments to evaluate memory type preferences and usage patterns across varying board sizes. He was responsible for collecting and analyzing the adaptive experiment data, including token usage metrics and performance tradeoffs. Additionally, Anish drafted key portions of the Methods section and contributed to the interpretation of findings regarding adaptive memory strategies and their implications for LLM agent design.
 
-Linglong Meng ...
-
+Linglong Meng contributed by creating the presentation slides and writing some sections of the mid-term and final reports, including the Introduction, Progress, and Conclusion sections. He additionally assisted with explaining and incorporating some of the relevant mathematical principles where needed, and helped run experiments, specifically conducting the non-memory baseline ablation by disabling memory tools and evaluating relevant agent performances.
 % Fix for bibliography processing
 \bibliographystyle{plainnat}
 \bibliography{bibliography}
