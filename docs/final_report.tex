@@ -51,6 +51,10 @@
 \usepackage[numbers]{natbib}
 \usepackage{amsmath,amssymb}
 
+% 添加颜色支持
+\usepackage{xcolor}
+\definecolor{professonalblue}{RGB}{0, 60, 113}
+
 % Make lists more compact
 \usepackage{enumitem}
 \setlist{noitemsep,topsep=2pt,parsep=0pt,partopsep=0pt}
@@ -68,6 +72,14 @@
 \titlespacing*{\subsection}{0pt}{0.8em}{0.3em}
 \titlespacing*{\subsubsection}{0pt}{0.6em}{0.2em}
 
+% 更优雅的章节标题样式
+\titleformat{\section}
+  {\normalfont\fontsize{12}{15}\selectfont\bfseries\scshape\color{professonalblue}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\fontsize{11}{13}\selectfont\bfseries\itshape\color{professonalblue}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{10}{12}\selectfont\itshape\color{professonalblue}}{\thesubsubsection}{1em}{}
+
 % 设置首页页脚样式
 \fancypagestyle{firstpage}{
   \fancyhf{}
@@ -78,7 +90,8 @@
 }
 
 \title{State Representation Learning for Multi-Agent Interactions \& Strategizing}
-\author{Dian Gao, Anish Chandra, Linglong Meng}
+\author{Dian Gao, Anish Chandra, Linglong Meng\\[0.8em]
+\large{\color{professonalblue}\{diangao, anishcha, linglong\}@umich.edu}}
 \date{April 2025}
 
 \begin{document}
@@ -161,7 +174,7 @@ GraphMemory organizes experiences as a directed graph, where each node represent
 We evaluate memory usage under two regimes. In \textbf{constrained} settings, agents are restricted to a single memory type (either GraphMemory or VectorMemory), enforced via system prompts and runtime checks that block disallowed memory operations. This isolates the impact of each memory architecture. In \textbf{adaptive} settings, agents have access to all available memory types and can choose which to use at each turn, enabling the exploration of emergent memory selection strategies.
 
 \paragraph{Schema Updates.} 
-In addition to \texttt{store} and \texttt{retrieve}, our memory systems expose a meta-memory operation, \texttt{updateSchema}, which allows agents to modify the structure or metadata schema of stored entries. While this functionality is implemented at the memory management layer, schema updates were \textbf{rarely invoked} in our experiments, as evidenced by empty schema update logs across all runs. This suggests that agents did not extensively engage in meta-memory reasoning under the current task setup, though the capability remains available for future studies exploring schema evolution.
+In addition to \texttt{store} and \texttt{retrieve}, our memory systems expose a meta-memory operation, \texttt{updateSchema}, which allows agents to modify the structure or metadata schema of stored entries. While this functionality is implemented at the memory management layer, schema updates were \textbf{rarely invoked} in our experiments, as evidenced by empty schema update logs across all runs. This suggests that agents did not extensively engage in meta-memory reasoning under the current task setup, though the capability remains available for future studies exploring schema evolution.\\
 
 \section{Results}
 
@@ -170,19 +183,19 @@ In addition to \texttt{store} and \texttt{retrieve}, our memory systems expose a
 Our hypotheses derive from two key design factors: the differing retrieval mechanisms of GraphMemory and VectorMemory, and the agents' contrasting objectives (win-maximizing vs. token-efficient). These considerations lead to the following hypotheses:
 
 \begin{description}[itemsep=0.5em, parsep=0.5em]
-\item[\textbf{H1.1}] \textit{VectorMemory supports better scalability than GraphMemory in large state spaces.} \\
+\item[\textbf{H1.1}] \textit{VectorMemory supports better scalability than GraphMemory in large state spaces.} 
 Because VectorMemory retrieves based on similarity in embedding space, it can generalize across loosely structured states, whereas GraphMemory's reliance on relational transitions may struggle as the number of possible paths grows exponentially.
 
-\item[\textbf{H1.2}] \textit{Memory usage frequency grows with task complexity, but the growth pattern differs across memory types.} \\
+\item[\textbf{H1.2}] \textit{Memory usage frequency grows with task complexity, but the growth pattern differs across memory types.} 
 As the board size increases, agents are expected to rely more on memory to manage expanded state spaces. However, the degree of reliance should differ: GraphMemory's structural overhead may cap its usage, while VectorMemory's fuzzy retrieval allows more scalable engagement.
 
-\item[\textbf{H2.1}] \textit{Win-maximizing agents (Agent A) will engage memory more aggressively than token-efficient agents (Agent B).} \\
+\item[\textbf{H2.1}] \textit{Win-maximizing agents (Agent A) will engage memory more aggressively than token-efficient agents (Agent B).} 
 Without cost constraints, Agent A should prioritize performance at any token cost, leading to more frequent memory calls. In contrast, Agent B's cost sensitivity should curb unnecessary memory usage.
 
-\item[\textbf{H2.2}] \textit{Token-efficient agents (Agent B) will maintain higher win-rate-to-token ratios, reflecting more disciplined memory use.} \\
+\item[\textbf{H2.2}] \textit{Token-efficient agents (Agent B) will maintain higher win-rate-to-token ratios, reflecting more disciplined memory use.} 
 Even if raw win rates are lower, Agent B is expected to achieve better efficiency, optimizing for a balance between success and resource expenditure.
 
-\item[\textbf{H3}] \textit{Adaptive agents will learn to prioritize VectorMemory over GraphMemory in complex environments.} \\
+\item[\textbf{H3}] \textit{Adaptive agents will learn to prioritize VectorMemory over GraphMemory in complex environments.} 
 Given the scalability challenges of GraphMemory in large state spaces, we hypothesize that adaptive agents—when given a choice—will shift toward VectorMemory as task complexity grows.
 \end{description}
 
@@ -232,7 +245,7 @@ These findings underscore a critical insight: \textbf{memory augmentation alone 
 These findings establish two key points: 
 \begin{enumerate}[leftmargin=*,nosep]
     \item Token-conscious prompting (Agent B) incurs a performance penalty in simple settings but demonstrates more scalable reasoning patterns in complex environments, though not always outperforming baseline agents without memory.
-    \item External memory is critical for supporting reasoning at scale, but its effectiveness depends on architecture selection and alignment with agent strategies.
+    \item External memory is critical for supporting reasoning at scale, but its effectiveness depends on architecture selection and alignment with agent strategies. \\\\\\
 \end{enumerate}
 
 \subsection{Constrained Memory Experiments}
